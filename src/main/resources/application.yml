@@ -1,12 +1,14 @@
 server:
-  port: 80
+  port: 9527
 
 spring:
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/db_djk?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/db_djk?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+      username: root
+      password: 123456
 
 mybatis-plus:
   configuration:
@@ -16,3 +18,4 @@ mybatis-plus:
   global-config:
     db-config:
       id-type: auto
+  mapper-locations: classpath:/mapper/**.xml

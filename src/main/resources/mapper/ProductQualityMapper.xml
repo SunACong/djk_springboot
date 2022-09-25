@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.ProductQualityMapper">
+
+    <insert id="batchInsertOrUpdate" parameterType="java.util.List">
+        INSERT INTO product_quality(
+            batch_num, single_straightness, is_quality
+        )VALUES
+            <foreach collection="list" item="item" index="index" separator="," >
+                (#{item.batchNum}, #{item.singleStraightness}, #{item.isQuality})
+            </foreach>
+        ON DUPLICATE KEY UPDATE
+        batch_num = values(batch_num),
+        single_straightness = values(single_straightness),
+        is_quality = values(is_quality)
+    </insert>
+
+</mapper>

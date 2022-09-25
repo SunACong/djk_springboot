@@ -1,6 +1,8 @@
 package com.szj.djk.utils;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.szj.djk.entity.ProductQuality;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -8,7 +10,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +51,7 @@ public class MyHttp{
      * @param sql
      * @return
      */
-    public static Object GetDataInfo(String sql){
+    public static JSONObject GetDataInfo(String sql){
         RestTemplate restTemplate = new RestTemplate();
 
         String url = "http://route.weexx.cn:20045/bus/v1.0/ExecuteSql";
@@ -71,7 +72,6 @@ public class MyHttp{
 
         ResponseEntity<String> response = restTemplate.postForEntity( url, request , String.class );
         JSONObject jsonObject =(JSONObject) JSONObject.parseObject(response.getBody()).get("ResponseParam");
-        Object result = jsonObject.get("Result");
-        return result;
+        return jsonObject;
     }
 }
