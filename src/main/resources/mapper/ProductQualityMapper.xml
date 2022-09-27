@@ -6,15 +6,31 @@
 
     <insert id="batchInsertOrUpdate" parameterType="java.util.List">
         INSERT INTO product_quality(
-            batch_num, single_straightness, is_quality
+            batch_num, ts, consumer,  single_straightness, single_medium_convexity, finished_thickness,
+            finished_width, finished_roll_diameter, finished_weight, surface_quality_remark, correct_strength,
+            correct_extension, plate_type, size_deviation, mechanical_properties, surface_quality, appearance_quality,
+            quality_judgment, remark
         )VALUES
             <foreach collection="list" item="item" index="index" separator="," >
-                (#{item.batchNum}, #{item.singleStraightness}, #{item.isQuality})
+                (#{item.batchNum}, #{item.ts}, #{item.consumer},  #{item.singleStraightness}, #{item.singleMediumConvexity},
+                #{item.finishedThickness}, #{item.finishedWidth}, #{item.finishedRollDiameter}, #{item.finishedWeight}, #{item.surfaceQualityRemark},
+                 #{item.correctStrength}, #{item.correctExtension}, #{item.plateType}, #{item.sizeDeviation}, #{item.mechanicalProperties},
+                 #{item.surfaceQuality}, #{item.appearanceQuality}, #{item.qualityJudgment}, #{item.remark})
             </foreach>
         ON DUPLICATE KEY UPDATE
-        batch_num = values(batch_num),
-        single_straightness = values(single_straightness),
-        is_quality = values(is_quality)
+        batch_num = values(batch_num), ts = values(ts), consumer = values(consumer), single_straightness = values(single_straightness),
+        single_medium_convexity = values(single_medium_convexity), finished_width = values(finished_width), finished_roll_diameter = values(finished_roll_diameter),
+        finished_weight = values(finished_weight),
+        surface_quality_remark = values(surface_quality_remark),
+        correct_strength = values(correct_strength),
+        correct_extension = values(correct_extension),
+        plate_type = values(plate_type),
+        size_deviation = values(size_deviation),
+        mechanical_properties = values(mechanical_properties),
+        surface_quality = values(surface_quality),
+        appearance_quality = values(appearance_quality),
+        quality_judgment = values(quality_judgment),
+        remark = values(remark)
     </insert>
 
 </mapper>

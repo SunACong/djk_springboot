@@ -1,6 +1,7 @@
 package com.szj.djk.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.szj.djk.common.R;
 import com.szj.djk.entity.ProductQuality;
 import com.szj.djk.service.ProductQualityService;
@@ -31,4 +32,19 @@ public class ProductQualityController {
         return R.success(list);
     }
 
+    @GetMapping("pageList")
+    public R<Page> page(int currentPage, int pageSize, ProductQuality productQuality){
+        System.out.println(productQuality.getBatchNum());
+        Page<ProductQuality> pageInfo = new Page<>(currentPage, pageSize);
+
+        LambdaQueryWrapper<ProductQuality> queryWrapper = new LambdaQueryWrapper<>();
+        if (productQuality.getBatchNum() != null && !"".equals(productQuality.getBatchNum())){
+            queryWrapper.eq(ProductQuality::getBatchNum, productQuality.getBatchNum());
+        }
+        if(productQuality.getStartDateTime() != null && productQuality.getEndDateTime() != null){
+            queryWrapper.between(ProductQuality::getTs, productQuality.getStartDateTime(), productQuality.getEndDateTime());
+        }
+        Page<ProductQuality> page = productQualityService.page(pageInfo, queryWrapper);
+        return R.success(page);
+    }
 }
