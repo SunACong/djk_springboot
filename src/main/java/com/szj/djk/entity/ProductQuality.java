@@ -2,7 +2,6 @@ package com.szj.djk.entity;
 
 import lombok.Data;
 
-import java.math.BigDecimal;
 
 /**
  * @ClassName ProductQuality
