@@ -38,4 +38,13 @@ public class ProductQualityTest {
         int i = productQualityMapper.batchInsertOrUpdate(productQualities);
         System.out.println(i);
     }
+
+    public static void main(String[] args) {
+        int num = 2020;
+        for (int i = 1; i <= num; i++) {
+            for (int j = 1; j <= j; j++) {
+
+            }
+        }
+    }
 }

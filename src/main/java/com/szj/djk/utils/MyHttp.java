@@ -49,7 +49,7 @@ public class MyHttp{
     /**
      * 根据sql语句查询想要的数据
      * @param sql
-     * @return
+     * @return 返回JSONObject
      */
     public static JSONObject GetDataInfo(String sql){
         RestTemplate restTemplate = new RestTemplate();
