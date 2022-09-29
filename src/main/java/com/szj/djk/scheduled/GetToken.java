@@ -131,6 +131,8 @@ public class GetToken {
     private void qualityJudgment(ProductQuality productQuality){
         if (productQuality.getPlateType() == 1 && productQuality.getSizeDeviation() == 1 && productQuality.getMechanicalProperties() == 1 && productQuality.getSurfaceQuality() == 1 && productQuality.getAppearanceQuality() == 1){
             productQuality.setQualityJudgment(1);
+        }else if(productQuality.getPlateType() == 0 || productQuality.getSizeDeviation() == 0 || productQuality.getMechanicalProperties() == 0 || productQuality.getSurfaceQuality() == 0 || productQuality.getAppearanceQuality() == 0){
+            productQuality.setQualityJudgment(0);
         }else {
             productQuality.setQualityJudgment(2);
         }
