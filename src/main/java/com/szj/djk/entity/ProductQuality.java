@@ -24,7 +24,8 @@ public class ProductQuality {
             pattern = "yyyy-MM-dd",
             timezone = "GMT+8"
     )
-    private Timestamp ts;
+    private Timestamp lqciTs;
+    private Timestamp lqcmrTs;
 
     private String consumer;
 

@@ -41,9 +41,9 @@ public class ProductQualityController {
         if (productQuality.getBatchNum() != null && !"".equals(productQuality.getBatchNum())){
             queryWrapper.eq(ProductQuality::getBatchNum, productQuality.getBatchNum());
         }
-        if(productQuality.getStartDateTime() != null && productQuality.getEndDateTime() != null){
-            queryWrapper.between(ProductQuality::getTs, productQuality.getStartDateTime(), productQuality.getEndDateTime());
-        }
+        //if(productQuality.getStartDateTime() != null && productQuality.getEndDateTime() != null){
+        //    queryWrapper.between(ProductQuality::getTs, productQuality.getStartDateTime(), productQuality.getEndDateTime());
+        //}
         Page<ProductQuality> page = productQualityService.page(pageInfo, queryWrapper);
         return R.success(page);
     }

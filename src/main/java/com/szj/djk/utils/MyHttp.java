@@ -29,10 +29,10 @@ public class MyHttp{
      */
     public static void GetToken(){
         RestTemplate restTemplate = new RestTemplate();
+
         String token = "";
-        System.out.println("开始系统获取【token】");
-        long startTime = System.currentTimeMillis();
         String url = "http://route.weexx.cn:20046/api/v1.0/auth/gettoken";
+
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         JSONObject json = new JSONObject();

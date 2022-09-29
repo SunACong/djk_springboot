@@ -4,21 +4,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.szj.djk.mapper.ProductQualityMapper">
 
+    <!--批量插入 存在更新 不存在更新-->
     <insert id="batchInsertOrUpdate" parameterType="java.util.List">
         INSERT INTO product_quality(
-            batch_num, ts, consumer,  single_straightness, single_medium_convexity, finished_thickness,
+            batch_num, lqci_ts, lqcmr_ts, consumer,  single_straightness, single_medium_convexity, finished_thickness,
             finished_width, finished_roll_diameter, finished_weight, surface_quality_remark, correct_strength,
             correct_extension, plate_type, size_deviation, mechanical_properties, surface_quality, appearance_quality,
             quality_judgment, remark
         )VALUES
             <foreach collection="list" item="item" index="index" separator="," >
-                (#{item.batchNum}, #{item.ts}, #{item.consumer},  #{item.singleStraightness}, #{item.singleMediumConvexity},
+                (#{item.batchNum}, #{item.lqciTs}, #{item.lqcmrTs}, #{item.consumer},  #{item.singleStraightness}, #{item.singleMediumConvexity},
                 #{item.finishedThickness}, #{item.finishedWidth}, #{item.finishedRollDiameter}, #{item.finishedWeight}, #{item.surfaceQualityRemark},
                  #{item.correctStrength}, #{item.correctExtension}, #{item.plateType}, #{item.sizeDeviation}, #{item.mechanicalProperties},
                  #{item.surfaceQuality}, #{item.appearanceQuality}, #{item.qualityJudgment}, #{item.remark})
             </foreach>
         ON DUPLICATE KEY UPDATE
-        batch_num = values(batch_num), ts = values(ts), consumer = values(consumer), single_straightness = values(single_straightness),
+        batch_num = values(batch_num),
+        lqci_ts = values(lqci_ts),
+        lqcmr_ts = values(lqcmr_ts),
+        consumer = values(consumer), single_straightness = values(single_straightness),
         single_medium_convexity = values(single_medium_convexity), finished_width = values(finished_width), finished_roll_diameter = values(finished_roll_diameter),
         finished_weight = values(finished_weight),
         surface_quality_remark = values(surface_quality_remark),
@@ -32,5 +36,15 @@
         quality_judgment = values(quality_judgment),
         remark = values(remark)
     </insert>
+
+    <!--查询表中数据最近的更新时间-->
+    <select id="selectMaxDate" resultType="java.lang.String">
+        SELECT GREATEST(lqci_ts , lqcmr_ts) from product_quality where lqcmr_ts >
+        (
+            SELECT LEAST(lqci_ts , lqcmr_ts) endTime from
+            (SELECT max(lqci_ts) lqci_ts  from product_quality) a,
+            (SELECT max(lqcmr_ts) lqcmr_ts from product_quality) b
+        )
+    </select>
 
 </mapper>

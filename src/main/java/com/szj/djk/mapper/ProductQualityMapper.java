@@ -17,4 +17,6 @@ import java.util.List;
 public interface ProductQualityMapper extends BaseMapper<ProductQuality> {
 
     public int batchInsertOrUpdate(List<ProductQuality> list);
+
+    public String selectMaxDate();
 }
