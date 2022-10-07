@@ -32,6 +32,10 @@
              select="mySelectById"/>
     </resultMap>
 
+    <sql id="selectProductQuality">
+        select id, batch_num, lqci_ts, lqcmr_ts, consumer, single_straightness, single_medium_convexity, finished_thickness, finished_width, finished_roll_diameter, finished_weight, surface_quality_remark, correct_strength, correct_extension, plate_type, size_deviation, mechanical_properties, surface_quality, appearance_quality, quality_judgment, remark from product_quality
+    </sql>
+
     <!--批量插入 存在更新 不存在更新-->
     <insert id="batchInsertOrUpdate" parameterType="java.util.List">
         INSERT INTO product_quality(
@@ -75,8 +79,29 @@
         )
     </select>
 
-    <select id="selectProductQualityAndStandard" resultMap="ProductQualityAndProcessStandardResult">
-        SELECT * FROM product_quality
+    <select id="selectProductQualityAndStandard" parameterType="com.szj.djk.entity.ProductQuality" resultMap="ProductQualityAndProcessStandardResult">
+        <include refid="selectProductQuality"/>
+        <where>
+            <if test="productQuality.batchNum != null  and productQuality.batchNum != ''"> and batch_num = #{productQuality.batchNum}</if>
+            <if test="productQuality.lqciTs != null "> and lqci_ts = #{lqciTs}</if>
+            <if test="productQuality.lqcmrTs != null "> and lqcmr_ts = #{lqcmrTs}</if>
+            <if test="productQuality.consumer != null  and productQuality.consumer != ''"> and consumer = #{productQuality.consumer}</if>
+            <if test="productQuality.singleStraightness != null "> and single_straightness = #{productQuality.singleStraightness}</if>
+            <if test="productQuality.singleMediumConvexity != null "> and single_medium_convexity = #{productQuality.singleMediumConvexity}</if>
+            <if test="productQuality.finishedThickness != null "> and finished_thickness = #{productQuality.finishedThickness}</if>
+            <if test="productQuality.finishedWidth != null "> and finished_width = #{productQuality.finishedWidth}</if>
+            <if test="productQuality.finishedRollDiameter != null "> and finished_roll_diameter = #{productQuality.finishedRollDiameter}</if>
+            <if test="productQuality.finishedWeight != null "> and finished_weight = #{productQuality.finishedWeight}</if>
+            <if test="productQuality.surfaceQualityRemark != null  and productQuality.surfaceQualityRemark != ''"> and surface_quality_remark = #{productQuality.surfaceQualityRemark}</if>
+            <if test="productQuality.correctStrength != null "> and correct_strength = #{productQuality.correctStrength}</if>
+            <if test="productQuality.correctExtension != null "> and correct_extension = #{productQuality.correctExtension}</if>
+            <if test="productQuality.plateType != null "> and plate_type = #{productQuality.plateType}</if>
+            <if test="productQuality.sizeDeviation != null "> and size_deviation = #{productQuality.sizeDeviation}</if>
+            <if test="productQuality.mechanicalProperties != null "> and mechanical_properties = #{productQuality.mechanicalProperties}</if>
+            <if test="productQuality.surfaceQuality != null "> and surface_quality = #{productQuality.surfaceQuality}</if>
+            <if test="productQuality.appearanceQuality != null "> and appearance_quality = #{productQuality.appearanceQuality}</if>
+            <if test="productQuality.qualityJudgment != null "> and quality_judgment = #{productQuality.qualityJudgment}</if>
+        </where>
     </select>
 
     <select id="mySelectById" resultType="com.szj.djk.entity.ProcessStandard">

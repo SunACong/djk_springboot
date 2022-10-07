@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.szj.djk.common.R;
 import com.szj.djk.entity.ProductQuality;
 import com.szj.djk.service.ProductQualityService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +52,8 @@ public class ProductQualityController {
     }
 
     @GetMapping("pageVOList")
-    public R<IPage> test(int currentPage, int pageSize, ProductQuality productQuality) {
+    public R<IPage> test(int currentPage, int pageSize, @Param("productQuality") ProductQuality productQuality) {
+        System.out.println(productQuality);
         QueryWrapper<ProductQuality> queryWrapper = new QueryWrapper<>();
         Page<ProductQuality> page = new Page<ProductQuality>(currentPage, pageSize);
         IPage<ProductQuality> productQualityIPage = productQualityService.selectProductQualityAndStandard(page, queryWrapper, productQuality);

@@ -23,5 +23,5 @@ public interface ProductQualityMapper extends BaseMapper<ProductQuality> {
 
     public String selectMaxDate();
 
-    public IPage<ProductQuality> selectProductQualityAndStandard(Page<ProductQuality> page, QueryWrapper<ProductQuality> queryWrapper, ProductQuality productQuality);
+    public IPage<ProductQuality> selectProductQualityAndStandard(Page<ProductQuality> page, QueryWrapper<ProductQuality> queryWrapper,@Param("productQuality") ProductQuality productQuality);
 }
