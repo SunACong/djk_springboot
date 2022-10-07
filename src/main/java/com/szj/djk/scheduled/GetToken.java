@@ -2,8 +2,11 @@ package com.szj.djk.scheduled;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.szj.djk.entity.ProcessStandard;
 import com.szj.djk.entity.ProductQuality;
 import com.szj.djk.mapper.ProductQualityMapper;
+import com.szj.djk.service.ProcessStandardService;
+import com.szj.djk.service.ProductQualityService;
 import com.szj.djk.utils.MyHttp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +30,17 @@ public class GetToken {
 
     @Autowired
     private ProductQualityMapper productQualityMapper;
+    @Autowired
+    private ProductQualityService productQualityService;
 
-    @PostConstruct
-    public void init() {
+    @Autowired
+    private ProcessStandardService processStandardService;
+
+    private ProcessStandard processStandard;
+
+    //@PostConstruct
+    public void init1() {
+        System.out.println("111111");
         /**
          * 拼接sql语句
          * 第一次启动的话，把时间调整到 1970-01-01 00:00:00
@@ -70,6 +81,28 @@ public class GetToken {
         }
     }
 
+    public void init() {
+        processStandard = processStandardService.getById(1);
+        /**
+         * 获取数据，返回JsonObject
+         * 接着转换为我们需要的实体类
+         */
+        List<ProductQuality> productQualities = productQualityService.list();
+        // 如果最近没有更新数据就不去执行插入操作
+        if (productQualities.size() != 0){
+            List<ProductQuality> collect = productQualities.stream().map(item -> {
+                plateTypeJudgment(item);
+                sizeDeviationJudgment(item);
+                mechanicalPropertiesJudgment(item);
+                appearanceQualityJudgment(item);
+                surfaceQualityJudgment(item);
+                qualityJudgment(item);
+                return item;
+            }).collect(Collectors.toList());
+            productQualityMapper.batchInsertOrUpdate(productQualities);
+        }
+    }
+
     @PreDestroy
     public void destroy() {
         //系统运行结束
@@ -95,7 +128,13 @@ public class GetToken {
      */
     private void plateTypeJudgment(ProductQuality productQuality){
         if (productQuality.getSingleStraightness() != null && productQuality.getSingleMediumConvexity() != null){
-            productQuality.setPlateType(1);
+            if(productQuality.getSingleStraightness() <= processStandard.getStraightness()){
+                if (productQuality.getSingleMediumConvexity() >= processStandard.getMediumConvexityLow() && productQuality.getSingleMediumConvexity() <= processStandard.getMediumConvexityHigh()){
+                    productQuality.setPlateType(1);
+                    return;
+                }
+                productQuality.setPlateType(0);
+            }
         }else {
             productQuality.setPlateType(2);
         }
@@ -109,7 +148,13 @@ public class GetToken {
     }
     private void mechanicalPropertiesJudgment(ProductQuality productQuality){
         if (productQuality.getCorrectExtension() != null && productQuality.getCorrectStrength() != null){
-            productQuality.setMechanicalProperties(1);
+            if(productQuality.getCorrectExtension()>=processStandard.getElongation()){
+                if (productQuality.getCorrectStrength()<=processStandard.getTensileStrengthHigh() && productQuality.getCorrectStrength()>=processStandard.getTensileStrengthLow()){
+                    productQuality.setMechanicalProperties(1);
+                    return;
+                }
+            }
+            productQuality.setMechanicalProperties(0);
         }else {
             productQuality.setMechanicalProperties(2);
         }
@@ -122,8 +167,14 @@ public class GetToken {
         }
     }
     private void appearanceQualityJudgment(ProductQuality productQuality){
-        if (productQuality.getFinishedRollDiameter() != null && productQuality.getFinishedWidth() != null){
-            productQuality.setAppearanceQuality(1);
+        if (productQuality.getFinishedRollDiameter() != null && productQuality.getFinishedWeight() != null){
+            if(productQuality.getFinishedRollDiameter()<=processStandard.getRollDiameterHigh() && productQuality.getFinishedRollDiameter()>=processStandard.getRollDiameterLow()){
+                if(productQuality.getFinishedWeight()<=processStandard.getRollWeightHigh() && productQuality.getFinishedWeight()>=processStandard.getRollWeightLow()){
+                    productQuality.setAppearanceQuality(1);
+                    return;
+                }
+            }
+            productQuality.setAppearanceQuality(0);
         }else {
             productQuality.setAppearanceQuality(2);
         }

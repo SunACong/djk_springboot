@@ -1,6 +1,8 @@
 package com.szj.djk.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.szj.djk.common.R;
 import com.szj.djk.entity.ProductQuality;
@@ -33,7 +35,7 @@ public class ProductQualityController {
     }
 
     @GetMapping("pageList")
-    public R<Page> page(int currentPage, int pageSize, ProductQuality productQuality){
+    public R<Page> pageList(int currentPage, int pageSize, ProductQuality productQuality){
         System.out.println(productQuality.getBatchNum());
         Page<ProductQuality> pageInfo = new Page<>(currentPage, pageSize);
 
@@ -46,5 +48,13 @@ public class ProductQualityController {
         //}
         Page<ProductQuality> page = productQualityService.page(pageInfo, queryWrapper);
         return R.success(page);
+    }
+
+    @GetMapping("pageVOList")
+    public R<IPage> test(int currentPage, int pageSize, ProductQuality productQuality) {
+        QueryWrapper<ProductQuality> queryWrapper = new QueryWrapper<>();
+        Page<ProductQuality> page = new Page<ProductQuality>(currentPage, pageSize);
+        IPage<ProductQuality> productQualityIPage = productQualityService.selectProductQualityAndStandard(page, queryWrapper, productQuality);
+        return R.success(productQualityIPage);
     }
 }

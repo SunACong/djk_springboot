@@ -44,4 +44,6 @@ public class ProductQualityTest {
         String s = productQualityMapper.selectMaxDate();
         System.out.println(s);
     }
+
+
 }
