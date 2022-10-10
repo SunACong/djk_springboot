@@ -2,9 +2,11 @@ package com.szj.djk.scheduled;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.szj.djk.entity.Lqci;
 import com.szj.djk.entity.ProcessStandard;
 import com.szj.djk.entity.ProductQuality;
 import com.szj.djk.mapper.ProductQualityMapper;
+import com.szj.djk.service.LqciService;
 import com.szj.djk.service.ProcessStandardService;
 import com.szj.djk.service.ProductQualityService;
 import com.szj.djk.utils.MyHttp;
@@ -15,6 +17,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,13 +35,17 @@ public class GetToken {
 
     @Autowired
     private ProductQualityMapper productQualityMapper;
+
     @Autowired
     private ProductQualityService productQualityService;
 
     @Autowired
     private ProcessStandardService processStandardService;
 
-    private ProcessStandard processStandard;
+    @Autowired
+    private LqciService lqciService;
+
+    private List<ProcessStandard> processStandards;
 
     //@PostConstruct
     public void init1() {
@@ -45,35 +54,38 @@ public class GetToken {
          * 拼接sql语句
          * 第一次启动的话，把时间调整到 1970-01-01 00:00:00
          */
-        String maxDate = productQualityMapper.selectMaxDate();
-        if (maxDate == null){
+        Date date = productQualityMapper.selectMaxDate();
+        String maxDate = "";
+        if (date == null){
             maxDate = "1970-01-01 00:00:00";
+        }else {
+            SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            maxDate = format.format(date);
         }
         log.info("查询起始日期:{}",maxDate);
         String sql = "SELECT batch_num batchNum, lqci.ts lqciTs, lqcmr.ts lqcmrTs ,consumer," +
                 " single_straightness singleStraightness, single_medium_convexity singleMediumConvexity, finished_thickness finishedThickness, finished_width finishedWidth, finished_roll_diameter finishedRollDiameter, finished_weight finishedWeight, surface_quality surfaceQualityRemark, correct_strength correctStrength, correct_extension correctExtension" +
                 " FROM lmdp_qc_cold_inspect lqci, lmdp_qc_cold_mechanics_report lqcmr" +
                 " where lqci.batch_num = lqcmr.batch_num and lqci.ts > '" + maxDate + "' and lqcmr.ts > '" + maxDate + "'";
-        /**
-         * 获取token
-         * 全局获取token值 MyHttp.tokenMap
-         */
+
+        // 获取token
+        // 全局获取token值 MyHttp.tokenMap
         MyHttp.GetToken();
         log.info("token:{}",MyHttp.tokenMap);
-        /**
-         * 获取数据，返回JsonObject
-         * 接着转换为我们需要的实体类
-         */
+
+
+        // 获取数据，返回JsonObject 接着转换为我们需要的实体类
         JSONObject jsonObject = MyHttp.GetDataInfo(sql);
         List<ProductQuality> productQualities = JSON.parseArray(jsonObject.getString("Result"), ProductQuality.class);
         // 如果最近没有更新数据就不去执行插入操作
         if (productQualities.size() != 0){
             List<ProductQuality> collect = productQualities.stream().map(item -> {
-                plateTypeJudgment(item);
-                sizeDeviationJudgment(item);
-                mechanicalPropertiesJudgment(item);
-                appearanceQualityJudgment(item);
-                surfaceQualityJudgment(item);
+                ProcessStandard processStandard = processStandards.get(Integer.parseInt(item.getConsumer()));
+                plateTypeJudgment(item, processStandard);
+                sizeDeviationJudgment(item, processStandard);
+                mechanicalPropertiesJudgment(item, processStandard);
+                appearanceQualityJudgment(item, processStandard);
+                surfaceQualityJudgment(item, processStandard);
                 qualityJudgment(item);
                 return item;
             }).collect(Collectors.toList());
@@ -82,20 +94,26 @@ public class GetToken {
     }
 
     public void init() {
-        processStandard = processStandardService.getById(1);
-        /**
-         * 获取数据，返回JsonObject
-         * 接着转换为我们需要的实体类
-         */
-        List<ProductQuality> productQualities = productQualityService.list();
+        // 获取标准，标准较少直接全部获取，对应的直接获取对应位置的标准即可，少了数据库查询语句
+        // 最好是根据id来，但是目前是根据对应元素来实现
+        processStandards = processStandardService.list();
+
+        // 获取从最后时间段到此时的数据
+        Date startTime = productQualityMapper.selectMaxDate();
+        List<Lqci> lqcis = lqciService.selectLqciAndLqcmr(startTime);
+
+        // 获取数据，返回JsonObject 接着转换为我们需要的实体类
+        List<ProductQuality> productQualities = productQualityMapper.selectLqciAndLqcmrToProductQuality(startTime);
+        log.info("productQualities:{}",productQualities);
         // 如果最近没有更新数据就不去执行插入操作
         if (productQualities.size() != 0){
             List<ProductQuality> collect = productQualities.stream().map(item -> {
-                plateTypeJudgment(item);
-                sizeDeviationJudgment(item);
-                mechanicalPropertiesJudgment(item);
-                appearanceQualityJudgment(item);
-                surfaceQualityJudgment(item);
+                ProcessStandard processStandard = processStandards.get(Integer.parseInt(item.getConsumer()));
+                plateTypeJudgment(item, processStandard);
+                sizeDeviationJudgment(item, processStandard);
+                mechanicalPropertiesJudgment(item, processStandard);
+                appearanceQualityJudgment(item, processStandard);
+                surfaceQualityJudgment(item, processStandard);
                 qualityJudgment(item);
                 return item;
             }).collect(Collectors.toList());
@@ -113,7 +131,7 @@ public class GetToken {
      * 可以根据token有效时长进行更新
      * @return
      */
-    @Scheduled(cron = "0 0 0/1 * * ? ")
+    @Scheduled(cron = "0 0/1 * * * ? ")
     public void start() {
         init();
     }
@@ -126,7 +144,7 @@ public class GetToken {
      * @param productQuality
      * @return
      */
-    private void plateTypeJudgment(ProductQuality productQuality){
+    private void plateTypeJudgment(ProductQuality productQuality, ProcessStandard processStandard){
         if (productQuality.getSingleStraightness() != null && productQuality.getSingleMediumConvexity() != null){
             if(productQuality.getSingleStraightness() <= processStandard.getStraightness()){
                 if (productQuality.getSingleMediumConvexity() >= processStandard.getMediumConvexityLow() && productQuality.getSingleMediumConvexity() <= processStandard.getMediumConvexityHigh()){
@@ -139,14 +157,14 @@ public class GetToken {
             productQuality.setPlateType(2);
         }
     }
-    private void sizeDeviationJudgment(ProductQuality productQuality){
+    private void sizeDeviationJudgment(ProductQuality productQuality, ProcessStandard processStandard){
         if (productQuality.getFinishedThickness() != null && productQuality.getFinishedWidth() != null){
             productQuality.setSizeDeviation(1);
         }else {
             productQuality.setSizeDeviation(2);
         }
     }
-    private void mechanicalPropertiesJudgment(ProductQuality productQuality){
+    private void mechanicalPropertiesJudgment(ProductQuality productQuality, ProcessStandard processStandard){
         if (productQuality.getCorrectExtension() != null && productQuality.getCorrectStrength() != null){
             if(productQuality.getCorrectExtension()>=processStandard.getElongation()){
                 if (productQuality.getCorrectStrength()<=processStandard.getTensileStrengthHigh() && productQuality.getCorrectStrength()>=processStandard.getTensileStrengthLow()){
@@ -159,14 +177,14 @@ public class GetToken {
             productQuality.setMechanicalProperties(2);
         }
     }
-    private void surfaceQualityJudgment(ProductQuality productQuality){
+    private void surfaceQualityJudgment(ProductQuality productQuality, ProcessStandard processStandard){
         if (productQuality.getSurfaceQualityRemark() != null){
             productQuality.setSurfaceQuality(1);
         }else {
             productQuality.setSurfaceQuality(2);
         }
     }
-    private void appearanceQualityJudgment(ProductQuality productQuality){
+    private void appearanceQualityJudgment(ProductQuality productQuality, ProcessStandard processStandard){
         if (productQuality.getFinishedRollDiameter() != null && productQuality.getFinishedWeight() != null){
             if(productQuality.getFinishedRollDiameter()<=processStandard.getRollDiameterHigh() && productQuality.getFinishedRollDiameter()>=processStandard.getRollDiameterLow()){
                 if(productQuality.getFinishedWeight()<=processStandard.getRollWeightHigh() && productQuality.getFinishedWeight()>=processStandard.getRollWeightLow()){

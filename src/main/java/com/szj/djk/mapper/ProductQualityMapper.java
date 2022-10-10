@@ -8,6 +8,7 @@ import com.szj.djk.entity.ProductQuality;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,7 +22,9 @@ public interface ProductQualityMapper extends BaseMapper<ProductQuality> {
 
     public int batchInsertOrUpdate(List<ProductQuality> list);
 
-    public String selectMaxDate();
+    public Date selectMaxDate();
 
     public IPage<ProductQuality> selectProductQualityAndStandard(Page<ProductQuality> page, QueryWrapper<ProductQuality> queryWrapper,@Param("productQuality") ProductQuality productQuality);
+
+    public List<ProductQuality> selectLqciAndLqcmrToProductQuality(Date startTime);
 }
