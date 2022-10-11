@@ -47,13 +47,9 @@ public class GetToken {
 
     private List<ProcessStandard> processStandards;
 
-    //@PostConstruct
+/*    @PostConstruct
     public void init1() {
-        System.out.println("111111");
-        /**
-         * 拼接sql语句
-         * 第一次启动的话，把时间调整到 1970-01-01 00:00:00
-         */
+        // 构造日期查询条件
         Date date = productQualityMapper.selectMaxDate();
         String maxDate = "";
         if (date == null){
@@ -63,22 +59,28 @@ public class GetToken {
             maxDate = format.format(date);
         }
         log.info("查询起始日期:{}",maxDate);
+
+        // 修改了sql语句但是未测试，根据自己数据库测试的sql语句
         String sql = "SELECT batch_num batchNum, lqci.ts lqciTs, lqcmr.ts lqcmrTs ,consumer," +
                 " single_straightness singleStraightness, single_medium_convexity singleMediumConvexity, finished_thickness finishedThickness, finished_width finishedWidth, finished_roll_diameter finishedRollDiameter, finished_weight finishedWeight, surface_quality surfaceQualityRemark, correct_strength correctStrength, correct_extension correctExtension" +
-                " FROM lmdp_qc_cold_inspect lqci, lmdp_qc_cold_mechanics_report lqcmr" +
-                " where lqci.batch_num = lqcmr.batch_num and lqci.ts > '" + maxDate + "' and lqcmr.ts > '" + maxDate + "'";
+                " FROM lmdp_qc_cold_inspect lqci left join lmdp_qc_cold_mechanics_report lqcmr" +
+                " on lqci.batch_num = lqcmr.batch_num where lqci.ts > '" + maxDate + "' or lqcmr.ts > '" + maxDate + "'";
 
         // 获取token
         // 全局获取token值 MyHttp.tokenMap
         MyHttp.GetToken();
         log.info("token:{}",MyHttp.tokenMap);
 
-
         // 获取数据，返回JsonObject 接着转换为我们需要的实体类
         JSONObject jsonObject = MyHttp.GetDataInfo(sql);
         List<ProductQuality> productQualities = JSON.parseArray(jsonObject.getString("Result"), ProductQuality.class);
         // 如果最近没有更新数据就不去执行插入操作
         if (productQualities.size() != 0){
+            // 获取标准，标准较少直接全部获取，对应的直接获取对应位置的标准即可，少了数据库查询语句
+            // 最好是根据id来，但是目前是根据对应元素来实现
+            processStandards = processStandardService.list();
+
+            // 判断各大板块是否合格
             List<ProductQuality> collect = productQualities.stream().map(item -> {
                 ProcessStandard processStandard = processStandards.get(Integer.parseInt(item.getConsumer()));
                 plateTypeJudgment(item, processStandard);
@@ -89,15 +91,13 @@ public class GetToken {
                 qualityJudgment(item);
                 return item;
             }).collect(Collectors.toList());
+
+            // 批量插入和更新
             productQualityMapper.batchInsertOrUpdate(productQualities);
         }
-    }
+    }*/
 
     public void init() {
-        // 获取标准，标准较少直接全部获取，对应的直接获取对应位置的标准即可，少了数据库查询语句
-        // 最好是根据id来，但是目前是根据对应元素来实现
-        processStandards = processStandardService.list();
-
         // 获取从最后时间段到此时的数据
         Date startTime = productQualityMapper.selectMaxDate();
         List<Lqci> lqcis = lqciService.selectLqciAndLqcmr(startTime);
@@ -107,8 +107,14 @@ public class GetToken {
         log.info("productQualities:{}",productQualities);
         // 如果最近没有更新数据就不去执行插入操作
         if (productQualities.size() != 0){
+            // 获取标准，标准较少直接全部获取，对应的直接获取对应位置的标准即可，少了数据库查询语句
+            // 最好是根据id来，但是目前是根据对应元素来实现
+            processStandards = processStandardService.list();
+
+            // 判断各大板块是否合格
             List<ProductQuality> collect = productQualities.stream().map(item -> {
-                ProcessStandard processStandard = processStandards.get(Integer.parseInt(item.getConsumer()));
+                ProcessStandard processStandard = processStandards.get(Integer.parseInt(item.getConsumer())-1);
+                log.info("标准{}",processStandard);
                 plateTypeJudgment(item, processStandard);
                 sizeDeviationJudgment(item, processStandard);
                 mechanicalPropertiesJudgment(item, processStandard);
@@ -117,6 +123,7 @@ public class GetToken {
                 qualityJudgment(item);
                 return item;
             }).collect(Collectors.toList());
+            // 批量插入和更新
             productQualityMapper.batchInsertOrUpdate(productQualities);
         }
     }
@@ -146,11 +153,10 @@ public class GetToken {
      */
     private void plateTypeJudgment(ProductQuality productQuality, ProcessStandard processStandard){
         if (productQuality.getSingleStraightness() != null && productQuality.getSingleMediumConvexity() != null){
-            if(productQuality.getSingleStraightness() <= processStandard.getStraightness()){
-                if (productQuality.getSingleMediumConvexity() >= processStandard.getMediumConvexityLow() && productQuality.getSingleMediumConvexity() <= processStandard.getMediumConvexityHigh()){
-                    productQuality.setPlateType(1);
-                    return;
-                }
+            if(productQuality.getSingleStraightness() <= processStandard.getStraightness() && productQuality.getSingleMediumConvexity() >= processStandard.getMediumConvexityLow() && productQuality.getSingleMediumConvexity() <= processStandard.getMediumConvexityHigh()){
+                productQuality.setPlateType(1);
+                return;
+            }else {
                 productQuality.setPlateType(0);
             }
         }else {
@@ -166,13 +172,12 @@ public class GetToken {
     }
     private void mechanicalPropertiesJudgment(ProductQuality productQuality, ProcessStandard processStandard){
         if (productQuality.getCorrectExtension() != null && productQuality.getCorrectStrength() != null){
-            if(productQuality.getCorrectExtension()>=processStandard.getElongation()){
-                if (productQuality.getCorrectStrength()<=processStandard.getTensileStrengthHigh() && productQuality.getCorrectStrength()>=processStandard.getTensileStrengthLow()){
-                    productQuality.setMechanicalProperties(1);
-                    return;
-                }
+            if(productQuality.getCorrectExtension()>=processStandard.getElongation() && productQuality.getCorrectStrength()<=processStandard.getTensileStrengthHigh() && productQuality.getCorrectStrength()>=processStandard.getTensileStrengthLow()){
+                productQuality.setMechanicalProperties(1);
+                return;
+            }else {
+                productQuality.setMechanicalProperties(0);
             }
-            productQuality.setMechanicalProperties(0);
         }else {
             productQuality.setMechanicalProperties(2);
         }
@@ -186,13 +191,12 @@ public class GetToken {
     }
     private void appearanceQualityJudgment(ProductQuality productQuality, ProcessStandard processStandard){
         if (productQuality.getFinishedRollDiameter() != null && productQuality.getFinishedWeight() != null){
-            if(productQuality.getFinishedRollDiameter()<=processStandard.getRollDiameterHigh() && productQuality.getFinishedRollDiameter()>=processStandard.getRollDiameterLow()){
-                if(productQuality.getFinishedWeight()<=processStandard.getRollWeightHigh() && productQuality.getFinishedWeight()>=processStandard.getRollWeightLow()){
-                    productQuality.setAppearanceQuality(1);
-                    return;
-                }
+            if(productQuality.getFinishedRollDiameter()<=processStandard.getRollDiameterHigh() && productQuality.getFinishedRollDiameter()>=processStandard.getRollDiameterLow() && productQuality.getFinishedWeight()<=processStandard.getRollWeightHigh() && productQuality.getFinishedWeight()>=processStandard.getRollWeightLow()){
+                productQuality.setAppearanceQuality(1);
+                return;
+            }else {
+                productQuality.setAppearanceQuality(0);
             }
-            productQuality.setAppearanceQuality(0);
         }else {
             productQuality.setAppearanceQuality(2);
         }
