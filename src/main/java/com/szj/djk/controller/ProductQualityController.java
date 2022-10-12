@@ -1,10 +1,13 @@
 package com.szj.djk.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.szj.djk.common.R;
 import com.szj.djk.entity.ProductQuality;
 import com.szj.djk.service.ProductQualityService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +36,7 @@ public class ProductQualityController {
     }
 
     @GetMapping("pageList")
-    public R<Page> page(int currentPage, int pageSize, ProductQuality productQuality){
+    public R<Page> pageList(int currentPage, int pageSize, ProductQuality productQuality){
         System.out.println(productQuality.getBatchNum());
         Page<ProductQuality> pageInfo = new Page<>(currentPage, pageSize);
 
@@ -41,10 +44,19 @@ public class ProductQualityController {
         if (productQuality.getBatchNum() != null && !"".equals(productQuality.getBatchNum())){
             queryWrapper.eq(ProductQuality::getBatchNum, productQuality.getBatchNum());
         }
-        if(productQuality.getStartDateTime() != null && productQuality.getEndDateTime() != null){
-            queryWrapper.between(ProductQuality::getTs, productQuality.getStartDateTime(), productQuality.getEndDateTime());
-        }
+        //if(productQuality.getStartDateTime() != null && productQuality.getEndDateTime() != null){
+        //    queryWrapper.between(ProductQuality::getTs, productQuality.getStartDateTime(), productQuality.getEndDateTime());
+        //}
         Page<ProductQuality> page = productQualityService.page(pageInfo, queryWrapper);
         return R.success(page);
+    }
+
+    @GetMapping("pageVOList")
+    public R<IPage> test(int currentPage, int pageSize, @Param("productQuality") ProductQuality productQuality) {
+        System.out.println(productQuality);
+        QueryWrapper<ProductQuality> queryWrapper = new QueryWrapper<>();
+        Page<ProductQuality> page = new Page<ProductQuality>(currentPage, pageSize);
+        IPage<ProductQuality> productQualityIPage = productQualityService.selectProductQualityAndStandard(page, queryWrapper, productQuality);
+        return R.success(productQualityIPage);
     }
 }

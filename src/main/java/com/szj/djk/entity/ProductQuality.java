@@ -24,7 +24,8 @@ public class ProductQuality {
             pattern = "yyyy-MM-dd",
             timezone = "GMT+8"
     )
-    private Timestamp ts;
+    private Timestamp lqciTs;
+    private Timestamp lqcmrTs;
 
     private String consumer;
 
@@ -42,9 +43,9 @@ public class ProductQuality {
 
     private String surfaceQualityRemark;
 
-    private String correctStrength;
+    private Double correctStrength;
 
-    private String correctExtension;
+    private Double correctExtension;
 
     private Integer plateType;
 
@@ -59,6 +60,9 @@ public class ProductQuality {
     private Integer qualityJudgment;
 
     private String remark;
+
+    @TableField(exist = false)
+    private ProcessStandard processStandard;
 
     /** 查询开始时间 */
     @TableField(exist = false)

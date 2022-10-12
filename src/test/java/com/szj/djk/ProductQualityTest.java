@@ -9,7 +9,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,12 +42,25 @@ public class ProductQualityTest {
         System.out.println(i);
     }
 
-    public static void main(String[] args) {
-        int num = 2020;
-        for (int i = 1; i <= num; i++) {
-            for (int j = 1; j <= j; j++) {
-
-            }
-        }
+    @Test
+    public void selectMaxDateTest(){
+        //String s = productQualityMapper.selectMaxDate();
+        //System.out.println(s);
     }
+
+    @Test
+    public void selectLqciAndLqcmrToProductQualityTest(){
+        String time = "1970-01-01 18:30:34";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date parse = null;
+        try {
+            parse = format.parse(time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        List<ProductQuality> productQualities = productQualityMapper.selectLqciAndLqcmrToProductQuality(parse);
+        System.out.println(productQualities);
+    }
+
+
 }
