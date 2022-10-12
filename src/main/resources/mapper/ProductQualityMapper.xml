@@ -96,6 +96,7 @@
             <if test="productQuality.surfaceQuality != null "> and surface_quality = #{productQuality.surfaceQuality}</if>
             <if test="productQuality.appearanceQuality != null "> and appearance_quality = #{productQuality.appearanceQuality}</if>
             <if test="productQuality.qualityJudgment != null "> and quality_judgment = #{productQuality.qualityJudgment}</if>
+            <if test="productQuality.startDateTime != null and productQuality.endDateTime != null"> and lqci_ts between #{productQuality.startDateTime} and #{productQuality.endDateTime}</if>
         </where>
     </select>
 
