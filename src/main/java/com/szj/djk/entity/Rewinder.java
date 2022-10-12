@@ -24,14 +24,17 @@ public class Rewinder {
     /** 数值 */
     private String value;
 
-    /** 最小数值 */
-    private String minValue;
-
-    /** 最大数值 */
-    private String maxValue;
+//    /** 最小数值 */
+//    private String minValue;
+//
+//    /** 最大数值 */
+//    private String maxValue;
 
     /** 数值产生时间 */
     @JsonFormat(pattern = "yyyy-MM-dd :hh:mm:ss")
     private Date produceTime;
+
+    /**设备号*/
+    private Long deviceId;
 
 }

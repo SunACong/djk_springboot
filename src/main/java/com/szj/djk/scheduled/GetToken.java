@@ -28,7 +28,7 @@ public class GetToken {
     @Autowired
     private ProductQualityMapper productQualityMapper;
 
-    @PostConstruct
+//    @PostConstruct
     public void init() {
         //String sql = "SELECT single_straightness, single_medium_convexity, finished_thickness, finished_width, lqci.finished_roll_diameter, finished_weight, surface_quality, surface_quality_remark, appearance_quality, appearance_quality_remark, correct_strength, correct_extension FROM lmdp_qc_cold_inspect lqci, lmdp_qc_cold_mechanics_report lqcmr where lqci.batch_num = lqcmr.batch_num";
         String sql = "SELECT batch_num batchNum, ts, consumer, single_straightness singleStraightness, single_medium_convexity singleMediumConvexity, finished_thickness finishedThickness, finished_width finishedWidth, finished_roll_diameter finishedRollDiameter, finished_weight finishedWeight, surface_quality surfaceQualityRemark, correct_strength correctStrength, correct_extension correctExtension FROM lmdp_qc_cold_inspect lqci, lmdp_qc_cold_mechanics_report lqcmr where lqci.batch_num = lqcmr.batch_num";
@@ -72,6 +72,6 @@ public class GetToken {
      */
     @Scheduled(cron = "0 0 0/1 * * ? ")
     public void start() {
-        init();
+//        init();
     }
 }
