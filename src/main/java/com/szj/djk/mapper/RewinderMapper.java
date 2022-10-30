@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.szj.djk.entity.Rewinder;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
  * @ClassName RewinderMapper
  * @Author 张高义
@@ -11,4 +13,6 @@ import org.apache.ibatis.annotations.Mapper;
  */
 @Mapper
 public interface RewinderMapper extends BaseMapper<Rewinder> {
+    /**查询前十条数据*/
+    public List<Rewinder> selectRewinderTen(Rewinder rewinder);
 }

@@ -14,5 +14,6 @@ public class Avaluate {
     private String danWei; //单位
     private Double minValue; //最小值
     private Double maxValue; //最大值
+    private String deviceId; //设备号
 
 }

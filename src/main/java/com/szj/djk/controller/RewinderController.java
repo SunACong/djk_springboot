@@ -23,14 +23,27 @@ public class RewinderController {
 
     @Autowired
     private RewinderService rewinderService;
-
+    /**
+     * 查询重卷机列表
+     */
     @GetMapping("list")
     public R<List<Rewinder>> list(){
         LambdaQueryWrapper<Rewinder> queryWrapper = new LambdaQueryWrapper<>();
         List<Rewinder> list = rewinderService.list(queryWrapper);
         return R.success(list);
     }
-    
+    /**
+     * 查询重卷机前十条列表
+     */
+    @GetMapping("listTen")
+    public R<List<Rewinder>> listTen(Rewinder rewinder){
+        List<Rewinder> listten = rewinderService.selectRewinderTen(rewinder);
+        return R.success(listten);
+    }
+
+    /**
+     * 新增重卷机列表
+     */
     @PostMapping
     public R<String> add(@RequestBody Rewinder rewinder){
         Date date = new Date();
