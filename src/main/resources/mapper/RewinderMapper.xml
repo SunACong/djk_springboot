@@ -21,6 +21,9 @@
             <if test="produceTime != null and produceTime !='' "> and produce_time = #{produceTime}</if>
             <if test="deviceId != null and deviceId !='' "> and device_id = #{deviceId}</if>
         </where>
-        order by produce_time desc limit 10) aa order by produce_time
+        order by produce_time desc limit 20) aa order by produce_time
+    </select>
+    <select id = "selectSpecial" resultType="com.szj.djk.entity.Rewinder" resultMap="RewinderResult">
+       select * from rewinder where indicator_name=#{rewinder.indicatorName} and produce_time between #{before} and #{after}
     </select>
 </mapper>

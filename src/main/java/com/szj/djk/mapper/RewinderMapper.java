@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.szj.djk.entity.Rewinder;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -13,6 +14,9 @@ import java.util.List;
  */
 @Mapper
 public interface RewinderMapper extends BaseMapper<Rewinder> {
-    /**查询前十条数据*/
+    /**查询前20条数据*/
     public List<Rewinder> selectRewinderTen(Rewinder rewinder);
+
+    /**查询特定警告数据时间前后的数据*/
+    public List<Rewinder> selectSpecial(Rewinder rewinder, Date before,Date after);
 }

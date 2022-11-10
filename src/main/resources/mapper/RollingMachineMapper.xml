@@ -23,7 +23,7 @@
             <if test="rollingProduceTime != null and rollingProduceTime !='' "> and rolling_produce_time = #{rollingProduceTime}</if>
             <if test="rollingDeviceId != null and rollingDeviceId !='' "> and rolling_device_id = #{rollingDeviceId}</if>
         </where>
-        order by rolling_produce_time desc limit 10) aa order by rolling_produce_time
+        order by rolling_produce_time desc limit 20) aa order by rolling_produce_time
     </select>
     <select id="selectWarnData" resultType="com.szj.djk.entity.RollingMachine">
         <include refid="selectRollingMachineVo"/>

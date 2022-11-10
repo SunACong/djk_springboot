@@ -8,6 +8,7 @@ import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,5 +25,10 @@ public class RewinderServiceImpl extends ServiceImpl<RewinderMapper, Rewinder> i
     @Override
     public List<Rewinder> selectRewinderTen(Rewinder rewinder) {
         return rewinderMapper.selectRewinderTen(rewinder);
+    }
+
+    @Override
+    public List<Rewinder> selectSpecial(Rewinder rewinder, Date before, Date after) {
+        return rewinderMapper.selectSpecial(rewinder,before,after);
     }
 }

@@ -7,6 +7,7 @@ import com.szj.djk.service.RewinderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -42,12 +43,34 @@ public class RewinderController {
     }
 
     /**
+     * 查询特定警告数据时间前后的数据
+     */
+    @GetMapping("listSpecial")
+    public R<List<Rewinder>> listSpecial(Rewinder rewinder) throws ParseException {
+        int amount = 10000;
+        Date produceTime = rewinder.getProduceTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(produceTime.getTime());
+        String beforeTime = sdf.format(produceTime.getTime() - amount);
+        String afterTime = sdf.format(produceTime.getTime() + amount);
+        Date before = sdf.parse(beforeTime);
+        Date after = sdf.parse(afterTime);
+//        Date before = new Date();
+//        Date after = new Date();
+//        System.out.println(produceTime);
+//        System.out.println(before);
+//        System.out.println(after);
+        List<Rewinder> specialList = rewinderService.selectSpecial(rewinder,before,after);
+        return R.success(specialList);
+    }
+
+    /**
      * 新增重卷机列表
      */
     @PostMapping
     public R<String> add(@RequestBody Rewinder rewinder){
         Date date = new Date();
-        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :hh:mm:ss");
+        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         System.out.println(dateFormat.format(date));
         rewinder.setProduceTime(date);
 
