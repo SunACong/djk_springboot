@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
  */
 
 @Slf4j
-@Component
+//@Component
 public class GetToken {
 
     @Autowired
@@ -91,7 +91,6 @@ public class GetToken {
                 qualityJudgment(item);
                 return item;
             }).collect(Collectors.toList());
-
             // 批量插入和更新
             productQualityMapper.batchInsertOrUpdate(productQualities);
         }
@@ -140,7 +139,7 @@ public class GetToken {
      */
     @Scheduled(cron = "0 0/1 * * * ? ")
     public void start() {
-//        init();
+        init();
     }
 
     /**

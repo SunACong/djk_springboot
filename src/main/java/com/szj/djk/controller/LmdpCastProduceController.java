@@ -33,5 +33,4 @@ public class LmdpCastProduceController
         List<LmdpCastProduce> list = lmdpCastProduceService.list(queryWrapper);
         return R.success(list);
     }
-
 }

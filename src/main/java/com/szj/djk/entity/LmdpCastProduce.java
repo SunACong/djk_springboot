@@ -2,10 +2,12 @@ package com.szj.djk.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 /**
  * 铸轧对象 lmdp_cast_produce
@@ -49,7 +51,12 @@ public class LmdpCastProduce implements Serializable
 
     /** $column.columnComment */
 
-    private String procUpperTime;
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm:ss",
+            //pattern = "yyyy-MM-dd",
+            timezone = "GMT+8"
+    )
+    private Timestamp procUpperTime;
 
     /** $column.columnComment */
 
@@ -69,7 +76,12 @@ public class LmdpCastProduce implements Serializable
 
     /** $column.columnComment */
 
-    private String procLowerRemoveTime;
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm:ss",
+            //pattern = "yyyy-MM-dd",
+            timezone = "GMT+8"
+    )
+    private Timestamp procLowerRemoveTime;
 
     /** $column.columnComment */
 
@@ -86,5 +98,13 @@ public class LmdpCastProduce implements Serializable
     /** $column.columnComment */
 
     private String ts;
+
+    /** 查询开始时间 */
+    @TableField(exist = false)
+    private String startDateTime;
+
+    /** 查询截止时间 */
+    @TableField(exist = false)
+    private String endDateTime;
 
 }
