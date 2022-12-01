@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.LmdpCastHoldingFurnaceMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpCastHoldingFurnace">
+            <result property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="smeltTimes" column="smelt_times" jdbcType="VARCHAR"/>
+            <result property="brand" column="brand" jdbcType="VARCHAR"/>
+            <result property="turndownBeforeBeginTime" column="turndown_before_begin_time" jdbcType="VARCHAR"/>
+            <result property="turndownBeforeGroupId" column="turndown_before_group_id" jdbcType="VARCHAR"/>
+            <result property="turndownBeforeTemp" column="turndown_before_temp" jdbcType="VARCHAR"/>
+            <result property="turndownBeforeRemainingHeight" column="turndown_before_remaining_height" jdbcType="VARCHAR"/>
+            <result property="turndownAfterTopTemp" column="turndown_after_top_temp" jdbcType="VARCHAR"/>
+            <result property="turndownAfterTemp" column="turndown_after_temp" jdbcType="VARCHAR"/>
+            <result property="turndownAfterEndTime" column="turndown_after_end_time" jdbcType="VARCHAR"/>
+            <result property="turndownAfterPeriodTime" column="turndown_after_period_time" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,smelt_times,brand,
+        turndown_before_begin_time,turndown_before_group_id,turndown_before_temp,
+        turndown_before_remaining_height,turndown_after_top_temp,turndown_after_temp,
+        turndown_after_end_time,turndown_after_period_time
+    </sql>
+</mapper>

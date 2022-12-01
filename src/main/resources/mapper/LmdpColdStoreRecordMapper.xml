@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.LmdpColdStoreRecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpColdStoreRecord">
+            <result property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="area" column="area" jdbcType="VARCHAR"/>
+            <result property="shelves" column="shelves" jdbcType="VARCHAR"/>
+            <result property="reelNum" column="reel_num" jdbcType="VARCHAR"/>
+            <result property="brand" column="brand" jdbcType="VARCHAR"/>
+            <result property="weight" column="weight" jdbcType="VARCHAR"/>
+            <result property="plateCut" column="plate_cut" jdbcType="VARCHAR"/>
+            <result property="productUse" column="product_use" jdbcType="VARCHAR"/>
+            <result property="consumerName" column="consumer_name" jdbcType="VARCHAR"/>
+            <result property="storerId" column="storer_id" jdbcType="VARCHAR"/>
+            <result property="storageTime" column="storage_time" jdbcType="VARCHAR"/>
+            <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="VARCHAR"/>
+            <result property="ts" column="ts" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,area,shelves,
+        reel_num,brand,weight,
+        plate_cut,product_use,consumer_name,
+        storer_id,storage_time,creator_id,
+        create_time,ts
+    </sql>
+</mapper>

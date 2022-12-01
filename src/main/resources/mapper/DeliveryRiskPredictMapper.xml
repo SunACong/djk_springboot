@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.DeliveryRiskPredictMapper">
+
+    <resultMap type="com.szj.djk.entity.DeliveryRiskPredict" id="BaseResultMap">
+        <result property="id"    column="id"    />
+        <result property="orderNumber"    column="order_number"    />
+        <result property="progress"    column="progress"    />
+        <result property="leftTime"    column="left_time"    />
+    </resultMap>
+
+    <sql id="selectDeliveryRiskPredictVo">
+        select id, order_number, progress, left_time from delivery_risk_predict
+    </sql>
+
+
+</mapper>

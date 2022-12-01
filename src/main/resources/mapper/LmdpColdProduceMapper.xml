@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.LmdpColdProduceMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpColdProduce">
+            <result property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="planId" column="plan_id" jdbcType="VARCHAR"/>
+            <result property="consumerName" column="consumer_name" jdbcType="VARCHAR"/>
+            <result property="reelNum" column="reel_num" jdbcType="VARCHAR"/>
+            <result property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
+            <result property="brand" column="brand" jdbcType="VARCHAR"/>
+            <result property="productUse" column="product_use" jdbcType="VARCHAR"/>
+            <result property="blankSize" column="blank_size" jdbcType="VARCHAR"/>
+            <result property="blankWeight" column="blank_weight" jdbcType="VARCHAR"/>
+            <result property="deliveryDate" column="delivery_date" jdbcType="VARCHAR"/>
+            <result property="productThick" column="product_thick" jdbcType="VARCHAR"/>
+            <result property="productWidth" column="product_width" jdbcType="VARCHAR"/>
+            <result property="productStatus" column="product_status" jdbcType="VARCHAR"/>
+            <result property="annealingThick" column="annealing_thick" jdbcType="VARCHAR"/>
+            <result property="coggingTime" column="cogging_time" jdbcType="VARCHAR"/>
+            <result property="coggingGroupId" column="cogging_group_id" jdbcType="VARCHAR"/>
+            <result property="coggingGroupName" column="cogging_group_name" jdbcType="VARCHAR"/>
+            <result property="coggingWorkShift" column="cogging_work_shift" jdbcType="VARCHAR"/>
+            <result property="coggingOrder" column="cogging_order" jdbcType="VARCHAR"/>
+            <result property="midRollTime" column="mid_roll_time" jdbcType="VARCHAR"/>
+            <result property="midRollGroupId" column="mid_roll_group_id" jdbcType="VARCHAR"/>
+            <result property="midRollGroupName" column="mid_roll_group_name" jdbcType="VARCHAR"/>
+            <result property="midRollWorkShift" column="mid_roll_work_shift" jdbcType="VARCHAR"/>
+            <result property="midRollOrder" column="mid_roll_order" jdbcType="VARCHAR"/>
+            <result property="midRollWeight" column="mid_roll_weight" jdbcType="VARCHAR"/>
+            <result property="planishTime" column="planish_time" jdbcType="VARCHAR"/>
+            <result property="planishGroupId" column="planish_group_id" jdbcType="VARCHAR"/>
+            <result property="planishGroupName" column="planish_group_name" jdbcType="VARCHAR"/>
+            <result property="planishWorkShift" column="planish_work_shift" jdbcType="VARCHAR"/>
+            <result property="planishOrder" column="planish_order" jdbcType="VARCHAR"/>
+            <result property="coldProductWeight" column="cold_product_weight" jdbcType="VARCHAR"/>
+            <result property="plateCut" column="plate_cut" jdbcType="VARCHAR"/>
+            <result property="coldTailing26" column="cold_tailing26" jdbcType="VARCHAR"/>
+            <result property="coldTailing6" column="cold_tailing6" jdbcType="VARCHAR"/>
+            <result property="cutSpeed" column="cut_speed" jdbcType="VARCHAR"/>
+            <result property="cutTime" column="cut_time" jdbcType="VARCHAR"/>
+            <result property="cutWorkShift" column="cut_work_shift" jdbcType="VARCHAR"/>
+            <result property="cutGroupId" column="cut_group_id" jdbcType="VARCHAR"/>
+            <result property="cutGroupName" column="cut_group_name" jdbcType="VARCHAR"/>
+            <result property="cutSizeH" column="cut_size_h" jdbcType="VARCHAR"/>
+            <result property="cutSizeW" column="cut_size_w" jdbcType="VARCHAR"/>
+            <result property="recoilingWeight" column="recoiling_weight" jdbcType="VARCHAR"/>
+            <result property="modelDesc" column="model_desc" jdbcType="VARCHAR"/>
+            <result property="produceStatus" column="produce_status" jdbcType="VARCHAR"/>
+            <result property="storageInTime" column="storage_in_time" jdbcType="VARCHAR"/>
+            <result property="storageInWeight" column="storage_in_weight" jdbcType="VARCHAR"/>
+            <result property="reformPlanNum" column="reform_plan_num" jdbcType="VARCHAR"/>
+            <result property="coldYield" column="cold_yield" jdbcType="VARCHAR"/>
+            <result property="rereelYield" column="rereel_yield" jdbcType="VARCHAR"/>
+            <result property="offLineYield" column="off_line_yield" jdbcType="VARCHAR"/>
+            <result property="storageInYield" column="storage_in_yield" jdbcType="VARCHAR"/>
+            <result property="rereelHeading" column="rereel_heading" jdbcType="VARCHAR"/>
+            <result property="rereelTailing" column="rereel_tailing" jdbcType="VARCHAR"/>
+            <result property="heading" column="heading" jdbcType="VARCHAR"/>
+            <result property="headingReason" column="heading_reason" jdbcType="VARCHAR"/>
+            <result property="tailing" column="tailing" jdbcType="VARCHAR"/>
+            <result property="tailingReason" column="tailing_reason" jdbcType="VARCHAR"/>
+            <result property="headingWeight" column="heading_weight" jdbcType="VARCHAR"/>
+            <result property="tailingWeight" column="tailing_weight" jdbcType="VARCHAR"/>
+            <result property="qcDesc" column="qc_desc" jdbcType="VARCHAR"/>
+            <result property="qcId" column="qc_id" jdbcType="VARCHAR"/>
+            <result property="qcName" column="qc_name" jdbcType="VARCHAR"/>
+            <result property="sleeve" column="sleeve" jdbcType="VARCHAR"/>
+            <result property="hotRoll" column="hot_roll" jdbcType="VARCHAR"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
+            <result property="reviserId" column="reviser_id" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="VARCHAR"/>
+            <result property="ts" column="ts" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,plan_id,consumer_name,
+        reel_num,batch_num,brand,
+        product_use,blank_size,blank_weight,
+        delivery_date,product_thick,product_width,
+        product_status,annealing_thick,cogging_time,
+        cogging_group_id,cogging_group_name,cogging_work_shift,
+        cogging_order,mid_roll_time,mid_roll_group_id,
+        mid_roll_group_name,mid_roll_work_shift,mid_roll_order,
+        mid_roll_weight,planish_time,planish_group_id,
+        planish_group_name,planish_work_shift,planish_order,
+        cold_product_weight,plate_cut,cold_tailing26,
+        cold_tailing6,cut_speed,cut_time,
+        cut_work_shift,cut_group_id,cut_group_name,
+        cut_size_h,cut_size_w,recoiling_weight,
+        model_desc,produce_status,storage_in_time,
+        storage_in_weight,reform_plan_num,cold_yield,
+        rereel_yield,off_line_yield,storage_in_yield,
+        rereel_heading,rereel_tailing,heading,
+        heading_reason,tailing,tailing_reason,
+        heading_weight,tailing_weight,qc_desc,
+        qc_id,qc_name,sleeve,
+        hot_roll,remark,creator_id,
+        reviser_id,create_time,ts
+    </sql>
+</mapper>
