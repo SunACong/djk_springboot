@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.RollingMachineMapper">
+    <resultMap type="com.szj.djk.entity.RollingMachine" id="RollingMachineResult">
+        <result property="rollingId"    column="rolling_id"    />
+        <result property="rollingName"    column="rolling_name"    />
+        <result property="rollingValue"    column="rolling_value"    />
+        <result property="rollingProduceTime"    column="rolling_produce_time"    />
+        <result property="rollingDeviceId"    column="rolling_device_id"    />
+    </resultMap>
+
+    <sql id="selectRollingMachineVo">
+        select * from rolling_machine
+    </sql>
+
+    <select id="selectrollingMachineTen" resultType="com.szj.djk.entity.RollingMachine" resultMap="RollingMachineResult">
+        SELECT * from(<include refid="selectRollingMachineVo"/>
+        <where>
+            <if test="rollingName != null  and rollingName != ''"> and rolling_name like concat('%', #{rollingName}, '%')</if>
+            <if test="rollingValue != null  and rollingValue != ''"> and rolling_value = #{rollingValue}</if>
+            <if test="rollingProduceTime != null and rollingProduceTime !='' "> and rolling_produce_time = #{rollingProduceTime}</if>
+            <if test="rollingDeviceId != null and rollingDeviceId !='' "> and rolling_device_id = #{rollingDeviceId}</if>
+        </where>
+        order by rolling_produce_time desc limit 20) aa order by rolling_produce_time
+    </select>
+    <select id="selectWarnData" resultType="com.szj.djk.entity.RollingMachine">
+        <include refid="selectRollingMachineVo"/>
+        where rolling_name = #{rollingName} and rolling_value > #{maxValue}
+    </select>
+
+</mapper>

@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 
-@EnableScheduling
+@EnableScheduling //开启定时器功能
 @SpringBootApplication
 public class DjkSpringbootApplication {
 
