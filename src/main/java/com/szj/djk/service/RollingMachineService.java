@@ -12,7 +12,6 @@ import java.util.List;
 * @Create 2022/10/20 0020 上午 11:07
 */
 
-@Service
 public interface RollingMachineService extends IService<RollingMachine> {
     /**
      * 查询相应指标的十条最新数据

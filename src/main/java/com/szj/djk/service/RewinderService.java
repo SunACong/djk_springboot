@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 
-@Service
 public interface RewinderService extends IService<Rewinder> {
     /**查询前十条数据*/
     public List<Rewinder> selectRewinderTen(Rewinder rewinder);

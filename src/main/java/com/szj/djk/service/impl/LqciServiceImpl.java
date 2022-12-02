@@ -27,12 +27,6 @@ public class LqciServiceImpl extends ServiceImpl<LqciMapper, Lqci> implements Lq
         return list;
     }
 
-    //
-    //@Override
-    //public List<Lqci> selectLqciAndLqcmr() {
-    //    List<Lqci> list =  lqciMapper.selectLqciAndLqcmr(Date startTIme, Date endTime);
-    //    return list;
-    //}
 }
 
 

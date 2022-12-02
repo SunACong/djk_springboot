@@ -14,7 +14,7 @@ import lombok.Data;
  */
 @TableName(value ="lmdp_avg_time")
 @Data
-public class LmdpAvgTime  {
+public class LmdpAvgTime implements Serializable {
     /**
      * id
      */

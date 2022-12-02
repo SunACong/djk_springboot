@@ -10,8 +10,6 @@ import com.szj.djk.entity.ProductQuality;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import java.util.List;
-
 @Mapper
 public interface AvaluateMapper extends BaseMapper<Avaluate> {
     public IPage<Avaluate> selectAvaluateAndStandard(Page<Avaluate> page, QueryWrapper<Avaluate> queryWrapper, @Param("avaluate") Avaluate avaluate);
