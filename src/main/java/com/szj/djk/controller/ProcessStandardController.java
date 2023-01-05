@@ -9,10 +9,7 @@ import com.szj.djk.entity.ProcessStandard;
 import com.szj.djk.entity.ProcessStandard;
 import com.szj.djk.service.ProcessStandardService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -51,5 +48,11 @@ public class ProcessStandardController {
     public R<ProcessStandard> getStandardbyId(@PathVariable("id") int id){
         ProcessStandard processStandard = processStandardService.getById(id);
         return R.success(processStandard);
+    }
+
+    @PutMapping
+    public R<String> edit(@RequestBody ProcessStandard processStandard){
+        boolean b = processStandardService.updateById(processStandard);
+        return b? R.success("修改成功"):R.success("修改失败");
     }
 }
