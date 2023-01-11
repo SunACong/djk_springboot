@@ -1,12 +1,14 @@
 package com.szj.djk.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.szj.djk.entity.Rewinder;
 import com.szj.djk.entity.RollingMachine;
 import com.szj.djk.mapper.RollingMachineMapper;
 import com.szj.djk.service.RollingMachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -38,5 +40,10 @@ public class RollingMachineServiceImpl extends ServiceImpl<RollingMachineMapper,
     @Override
     public List<RollingMachine> selectWarnData(String rollingName,Integer maxValue) {
         return rollingMachineMapper.selectWarnData(rollingName,maxValue);
+    }
+
+    @Override
+    public List<RollingMachine> selectSpecial(RollingMachine rollingMachine, Date before, Date after) {
+        return rollingMachineMapper.selectSpecial(rollingMachine,before,after);
     }
 }

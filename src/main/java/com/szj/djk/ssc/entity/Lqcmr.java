@@ -1,12 +1,10 @@
-package com.szj.djk.entity;
+package com.szj.djk.ssc.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import java.io.Serializable;
-import java.util.Date;
+import com.baomidou.mybatisplus.annotation.*;
+import com.szj.djk.common.BaseEntity;
 import lombok.Data;
+
+import java.util.Date;
 
 /**
  *
@@ -14,7 +12,7 @@ import lombok.Data;
  */
 @TableName(value ="lqcmr")
 @Data
-public class Lqcmr implements Serializable {
+public class Lqcmr extends BaseEntity {
     /**
      * 主键
      */
@@ -24,11 +22,13 @@ public class Lqcmr implements Serializable {
     /**
      * 卷号
      */
+    @TableField(value = "batch_num", condition = SqlCondition.LIKE)
     private String batchNum;
 
     /**
      * 更新时间
      */
+    @TableField(value = "lqcmr_ts", fill = FieldFill.INSERT_UPDATE)
     private Date lqcmrTs;
 
     /**

@@ -1,12 +1,10 @@
-package com.szj.djk.entity;
+package com.szj.djk.ssc.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  *
@@ -24,11 +22,14 @@ public class Lqci implements Serializable {
     /**
      * 卷号
      */
+    @TableField(value = "batch_num", condition = SqlCondition.LIKE)
     private String batchNum;
+
 
     /**
      * 更新时间
      */
+    @TableField(value = "lqci_ts", fill = FieldFill.INSERT_UPDATE)
     private Date lqciTs;
 
     /**
@@ -70,11 +71,6 @@ public class Lqci implements Serializable {
      * 表面质量
      */
     private String surfaceQualityRemark;
-
-    /**
-     * 力学性能
-     */
-    private Lqcmr lqcmr;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

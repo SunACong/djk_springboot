@@ -30,4 +30,8 @@
         where rolling_name = #{rollingName} and rolling_value > #{maxValue}
     </select>
 
+    <select id = "selectSpecial" resultType="com.szj.djk.entity.RollingMachine" resultMap="RollingMachineResult">
+        select * from rolling_machine where rolling_name=#{rollingMachine.rollingName} and rolling_produce_time between #{before} and #{after}
+    </select>
+
 </mapper>

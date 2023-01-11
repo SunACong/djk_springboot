@@ -1,9 +1,11 @@
 package com.szj.djk.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.szj.djk.entity.Rewinder;
 import com.szj.djk.entity.RollingMachine;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -12,6 +14,7 @@ import java.util.List;
 * @Create 2022/10/20 0020 上午 11:07
 */
 
+@Service
 public interface RollingMachineService extends IService<RollingMachine> {
     /**
      * 查询相应指标的十条最新数据
@@ -27,5 +30,8 @@ public interface RollingMachineService extends IService<RollingMachine> {
      * @return
      */
    public List<RollingMachine> selectWarnData(String rollingName,Integer maxValue);
+
+    /**查询特定警告数据时间前后的数据*/
+    public List<RollingMachine> selectSpecial(RollingMachine rollingMachine, Date before, Date after);
 
 }
