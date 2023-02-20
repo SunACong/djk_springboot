@@ -1,7 +1,7 @@
 package com.szj.djk.common;
 
 /**
- * @ClassName CustomException
+ * @ClassName CustomException 自定义异常
  * @Authoc 孙少聪
  * @Date 2022/8/22 11:11:12
  */

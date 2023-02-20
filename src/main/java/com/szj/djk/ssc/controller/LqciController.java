@@ -11,8 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.Resource;
 
 /**
- * @ClassName LqciController
- * @Authoc 孙少聪
+ * @author 孙少聪
  * @Date 2023/1/11 11:10:04
  */
 @RestController
@@ -23,7 +22,7 @@ public class LqciController {
     private LqciService lqciService;
 
     @RequestMapping("/list")
-    public R<Page> list(int pageNum, int pageSize, Lqci lqci) {
+    public R<Page<Lqci>> list(int pageNum, int pageSize, Lqci lqci) {
         Page<Lqci> pageInfo = new Page<>(pageNum, pageSize);
         LambdaQueryWrapper<Lqci> queryWrapper = new LambdaQueryWrapper<>(lqci);
         Page<Lqci> page = lqciService.page(pageInfo, queryWrapper);

@@ -12,8 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * @author 孙少聪
  * @ClassName MyHttp
- * @Authoc 孙少聪
  * @Date 2022/9/24 19:06:42
  */
 @Slf4j
