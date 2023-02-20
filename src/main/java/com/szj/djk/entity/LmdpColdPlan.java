@@ -5,56 +5,20 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 
 /**
- * 
+ * 冷轧生产计划表
  * @TableName lmdp_cold_plan
  */
 @TableName(value ="lmdp_cold_plan")
 @Data
 public class LmdpColdPlan implements Serializable {
     /**
-     * id
+     * 主键
      */
     @TableId(type = IdType.AUTO)
-    private Integer id;
-
-    /**
-     * 数据来源
-     */
-    private String datasourceOrgcode;
-
-    /**
-     * 数据时间
-     */
-    private Date datatime;
-
-    /**
-     * 数据类型
-     */
-    private String datatype;
-
-    /**
-     * 冷轧带材生产计划数据字典id
-     */
-    private Integer dataId;
-
-    /**
-     * 入库时间
-     */
-    private Date enterTime;
-
-    /**
-     * 上传区域
-     */
-    private String uploadAreacode;
-
-    /**
-     * 冷轧带材计划主键
-     */
-    private String coldreductionstripId;
+    private Integer coldreductionstripId;
 
     /**
      * 冷轧带材计划编号
@@ -79,7 +43,7 @@ public class LmdpColdPlan implements Serializable {
     /**
      * 指定日期
      */
-    private Date drawupTime;
+    private String drawupTime;
 
     /**
      * 软删除标识
@@ -89,7 +53,7 @@ public class LmdpColdPlan implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private String createTime;
 
     /**
      * 创建人
@@ -99,7 +63,7 @@ public class LmdpColdPlan implements Serializable {
     /**
      * 最后修改时间
      */
-    private Date lastmodifyTime;
+    private String lastmodifyTime;
 
     /**
      * 最后修改人
@@ -124,17 +88,17 @@ public class LmdpColdPlan implements Serializable {
     /**
      * 交货日期A2
      */
-    private Date deliveredTimeA2;
+    private String deliveredTimeA2;
 
     /**
      * 交货日期B2
      */
-    private Date deliveredTimeB2;
+    private String deliveredTimeB2;
 
     /**
      * 所属产品需求
      */
-    private String productneedsId;
+    private Integer productneedsId;
 
     /**
      * 来料规格
@@ -239,12 +203,12 @@ public class LmdpColdPlan implements Serializable {
     /**
      * 计划类型
      */
-    private String type;
+    private Integer type;
 
     /**
      * 计划完成状态
      */
-    private String finished;
+    private Integer finished;
 
     /**
      * 套筒长度
@@ -302,14 +266,19 @@ public class LmdpColdPlan implements Serializable {
     private String dataName;
 
     /**
-     * 包装完成日期
+     * 冷轧带材生产计划数据字典id
      */
-    private Date packing;
+    private Integer dataId;
 
     /**
-     * 关联来料信息
+     * 包装完成日期
      */
-    private String cardids;
+    private String packing;
+
+    /**
+     * 生产随行卡id
+     */
+    private String cardIds;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

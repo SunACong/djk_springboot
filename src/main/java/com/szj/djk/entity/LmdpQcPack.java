@@ -5,51 +5,22 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
 
 /**
- * 
+ * 包装检验记录表
  * @TableName lmdp_qc_pack
  */
 @TableName(value ="lmdp_qc_pack")
 @Data
 public class LmdpQcPack implements Serializable {
     /**
-     * ID
+     * 主键
      */
     @TableId
-    private Integer id;
-
-    /**
-     * 数据来源
-     */
-    private String datasourceOrgcode;
-
-    /**
-     * 数据时间
-     */
-    private Date datatime;
-
-    /**
-     * 数据类型
-     */
-    private String datatype;
-
-    /**
-     * 数据ID
-     */
-    private String dataId;
-
-    /**
-     * 入库时间
-     */
-    private Date enterTime;
-
-    /**
-     * 上传区域
-     */
-    private String uploadAreacode;
+    private String id;
 
     /**
      * 创建时间
@@ -57,7 +28,7 @@ public class LmdpQcPack implements Serializable {
     private Date createTime;
 
     /**
-     * 修改时间
+     * 
      */
     private Date ts;
 
@@ -84,17 +55,17 @@ public class LmdpQcPack implements Serializable {
     /**
      * 卷径Φ
      */
-    private String rollDiameter;
+    private BigDecimal rollDiameter;
 
     /**
      * 重量（t）
      */
-    private Double weight;
+    private BigDecimal weight;
 
     /**
      * 随卷试样
      */
-    private Double sample;
+    private String sample;
 
     /**
      * 合格证

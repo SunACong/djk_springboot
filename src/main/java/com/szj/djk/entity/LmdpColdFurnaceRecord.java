@@ -5,54 +5,25 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
 
 /**
- * 
+ * 退火生产原始记录
  * @TableName lmdp_cold_furnace_record
  */
 @TableName(value ="lmdp_cold_furnace_record")
 @Data
 public class LmdpColdFurnaceRecord implements Serializable {
     /**
-     * id
+     * 主键
      */
     @TableId
-    private Integer id;
+    private String id;
 
     /**
-     * 数据来源
-     */
-    private String datasourceOrgcode;
-
-    /**
-     * 数据时间
-     */
-    private Date datatime;
-
-    /**
-     * 数据类型
-     */
-    private String datatype;
-
-    /**
-     * 数据ID
-     */
-    private Integer dataId;
-
-    /**
-     * 入库时间
-     */
-    private Date enterTime;
-
-    /**
-     * 上传区域
-     */
-    private String uploadAreacode;
-
-    /**
-     * 时间戳
+     * 
      */
     private Date ts;
 
@@ -67,14 +38,14 @@ public class LmdpColdFurnaceRecord implements Serializable {
     private Date createTime;
 
     /**
-     * 冷轧卷号
+     * 卷号
      */
     private String batchNum;
 
     /**
      * 退火日期
      */
-    private String recordDate;
+    private Date recordDate;
 
     /**
      * 退火炉号
@@ -92,69 +63,69 @@ public class LmdpColdFurnaceRecord implements Serializable {
     private Date endTime;
 
     /**
-     * 记录日期
+     * 单条退火记录时间
      */
-    private Date recordTime;
+    private String totalTime;
 
     /**
      * 炉气温度(℃)Ⅰ区
      */
-    private Double gasTemperature1;
+    private BigDecimal gasTemperature1;
 
     /**
      * 炉气温度(℃)Ⅱ区
      */
-    private Double gasTemperature2;
+    private BigDecimal gasTemperature2;
 
     /**
      * 炉气温度(℃)Ⅲ区
      */
-    private Double gasTemperature3;
+    private BigDecimal gasTemperature3;
 
     /**
      * 料温(℃)1
      */
-    private Double materialTemperature1;
+    private BigDecimal materialTemperature1;
 
     /**
      * 料温(℃)2
      */
-    private Double materialTemperature2;
+    private BigDecimal materialTemperature2;
 
     /**
      * 水压MPa
      */
-    private Double hydraulicPressure;
+    private BigDecimal hydraulicPressure;
 
     /**
      * 气压MPa
      */
-    private Double gasPressure;
+    private BigDecimal gasPressure;
 
     /**
      * 进风风机轴承温度℃
      */
-    private Double intakeFanTemperature;
+    private BigDecimal intakeFanTemperature;
 
     /**
      * 排烟风机轴承温度℃
      */
-    private Double exhaustFanTemperature;
+    private BigDecimal exhaustFanTemperature;
 
     /**
      * 循环风机轴承温度(℃)Ⅰ区
      */
-    private Double cycleFanTemperature1;
+    private BigDecimal cycleFanTemperature1;
 
     /**
      * 循环风机轴承温度(℃)Ⅱ区
      */
-    private Double cycleFanTemperature2;
+    private BigDecimal cycleFanTemperature2;
 
     /**
      * 循环风机轴承温度(℃)Ⅲ区
      */
-    private Double cycleFanTemperature3;
+    private BigDecimal cycleFanTemperature3;
 
     /**
      * 备注
@@ -165,6 +136,76 @@ public class LmdpColdFurnaceRecord implements Serializable {
      * 操作手
      */
     private String operator;
+
+    /**
+     * 退火厚度（mm）
+     */
+    private BigDecimal annealingThick;
+
+    /**
+     * 退火工艺卡编号
+     */
+    private String furnaceCardNumber;
+
+    /**
+     * 合金
+     */
+    private String brand;
+
+    /**
+     * 卷数（个）
+     */
+    private Integer rollNum;
+
+    /**
+     * 装炉总量（t）
+     */
+    private BigDecimal furnaceTotal;
+
+    /**
+     * 装炉位置
+     */
+    private String furnacePosition;
+
+    /**
+     * 装炉人员
+     */
+    private String furnaceOperator1;
+
+    /**
+     * 出炉人员
+     */
+    private String furnaceOperator2;
+
+    /**
+     * 料温控制/炉气控制
+     */
+    private String tempPowerControl;
+
+    /**
+     * 起始电量（kw.h）
+     */
+    private BigDecimal powerBefore;
+
+    /**
+     * 终止电量（kw.h）
+     */
+    private BigDecimal powerAfter;
+
+    /**
+     * 运行时长
+     */
+    private String runningDuring;
+
+    /**
+     * 本炉电耗（kw.h）
+     */
+    private BigDecimal powerLoss;
+
+    /**
+     * 吨电耗（kw.h/t）
+     */
+    private BigDecimal perPowerLoss;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

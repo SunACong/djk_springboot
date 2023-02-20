@@ -6,6 +6,7 @@ import com.szj.djk.entity.LmdpAvgTime;
 import com.szj.djk.mapper.LmdpAvgTimeMapper;
 import com.szj.djk.service.LmdpAvgTimeService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
  * @date 2022-11-22
  */
 @Service
+@Transactional
 public class LmdpAvgTimeServiceImpl extends ServiceImpl<LmdpAvgTimeMapper, LmdpAvgTime> implements LmdpAvgTimeService {
     @Resource
     private LmdpAvgTimeMapper lmdpAvgTime;

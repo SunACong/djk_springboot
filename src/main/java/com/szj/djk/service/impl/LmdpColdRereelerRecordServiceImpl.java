@@ -5,6 +5,7 @@ import com.szj.djk.entity.LmdpColdRereelerRecord;
 import com.szj.djk.service.LmdpColdRereelerRecordService;
 import com.szj.djk.mapper.LmdpColdRereelerRecordMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
 * @author JH-Sparrow
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 * @createDate 2022-10-18 16:19:09
 */
 @Service
+@Transactional
 public class LmdpColdRereelerRecordServiceImpl extends ServiceImpl<LmdpColdRereelerRecordMapper, LmdpColdRereelerRecord>
     implements LmdpColdRereelerRecordService{
 

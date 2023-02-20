@@ -5,6 +5,7 @@ import com.szj.djk.entity.LmdpFifthConcise;
 import com.szj.djk.service.LmdpFifthConciseService;
 import com.szj.djk.mapper.LmdpFifthConciseMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
 * @author JH-Sparrow
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 * @createDate 2022-10-18 16:19:09
 */
 @Service
+@Transactional
 public class LmdpFifthConciseServiceImpl extends ServiceImpl<LmdpFifthConciseMapper, LmdpFifthConcise>
     implements LmdpFifthConciseService{
 

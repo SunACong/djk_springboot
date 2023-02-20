@@ -5,51 +5,22 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
 
 /**
- * 
+ * 冷轧卷质检报告
  * @TableName lmdp_qc_cold_reel_report
  */
 @TableName(value ="lmdp_qc_cold_reel_report")
 @Data
 public class LmdpQcColdReelReport implements Serializable {
     /**
-     * ID
+     * 主键
      */
     @TableId
     private String id;
-
-    /**
-     * 数据来源
-     */
-    private String datasourceOrgcode;
-
-    /**
-     * 数据时间
-     */
-    private Date datatime;
-
-    /**
-     * 数据类型
-     */
-    private String datatype;
-
-    /**
-     * 数据ID
-     */
-    private String dataId;
-
-    /**
-     * 入库时间
-     */
-    private Date enterTime;
-
-    /**
-     * 上传区域
-     */
-    private String uploadAreacode;
 
     /**
      * 创建时间
@@ -57,7 +28,7 @@ public class LmdpQcColdReelReport implements Serializable {
     private Date createTime;
 
     /**
-     * 修改时间
+     * 
      */
     private Date ts;
 
@@ -69,7 +40,7 @@ public class LmdpQcColdReelReport implements Serializable {
     /**
      * 序号
      */
-    private String sortOrder;
+    private Integer sortOrder;
 
     /**
      * 客户名称
@@ -84,17 +55,17 @@ public class LmdpQcColdReelReport implements Serializable {
     /**
      * 厚度
      */
-    private Double thickness;
+    private BigDecimal thickness;
 
     /**
      * 宽度
      */
-    private Double width;
+    private BigDecimal width;
 
     /**
      * 卷径
      */
-    private Double rollDiameter;
+    private BigDecimal rollDiameter;
 
     /**
      * 合金牌号
@@ -109,7 +80,7 @@ public class LmdpQcColdReelReport implements Serializable {
     /**
      * 重量
      */
-    private Double weight;
+    private BigDecimal weight;
 
     /**
      * 板形质量
@@ -175,6 +146,81 @@ public class LmdpQcColdReelReport implements Serializable {
      * 处理意见
      */
     private String advise;
+
+    /**
+     * 冷轧日期
+     */
+    private Date coldDate;
+
+    /**
+     * 氢含量
+     */
+    private String hydrogenContent;
+
+    /**
+     * 产品类型
+     */
+    private String productType;
+
+    /**
+     * 中凸度%
+     */
+    private BigDecimal singleConvexity;
+
+    /**
+     * 楔形率%
+     */
+    private BigDecimal wedgeRate;
+
+    /**
+     * 厚度#称重法（mm）
+     */
+    private BigDecimal weighingThickness;
+
+    /**
+     * 中凸度#称重法%
+     */
+    private BigDecimal weighingConvexity;
+
+    /**
+     * 粗糙度（μm）
+     */
+    private BigDecimal roughness;
+
+    /**
+     * 板形质量备注
+     */
+    private String shapeQcRemark;
+
+    /**
+     * 尺寸偏差备注
+     */
+    private String dimensionalDeviationRemark;
+
+    /**
+     * 力学性能备注
+     */
+    private String mechanicalPropertyRemark;
+
+    /**
+     * 表面质量备注
+     */
+    private String surfaceQcRemark;
+
+    /**
+     * 外观质量备注
+     */
+    private String facadeQcRemark;
+
+    /**
+     * 晶粒度备注
+     */
+    private String sampleLevelRemark;
+
+    /**
+     * 发评审建议
+     */
+    private String reviewAdvice;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

@@ -5,51 +5,22 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
 
 /**
- * 
+ * 熔炼工序
  * @TableName lmdp_cast_smelt_hold
  */
 @TableName(value ="lmdp_cast_smelt_hold")
 @Data
 public class LmdpCastSmeltHold implements Serializable {
     /**
-     * id
+     * 主键
      */
     @TableId
     private String id;
-
-    /**
-     * 数据来源
-     */
-    private String datasourceOrgcode;
-
-    /**
-     * 数据时间
-     */
-    private Date datatime;
-
-    /**
-     * 数据类型
-     */
-    private String datatype;
-
-    /**
-     * 数据ID
-     */
-    private Integer dataId;
-
-    /**
-     * 入库时间
-     */
-    private Date enterTime;
-
-    /**
-     * 上传区域
-     */
-    private String uploadAreacode;
 
     /**
      * 关联计划ID
@@ -89,48 +60,47 @@ public class LmdpCastSmeltHold implements Serializable {
     /**
      * 燃气表显示值
      */
-    private Double gasPrepValue;
+    private Integer gasPrepValue;
 
     /**
-     * 铝锭99.70％(kg)
-
+     * 铝锭99.70％
      */
-    private Double stuffAlPig;
+    private BigDecimal stuffAlPig;
 
     /**
      * 铸轧卷
      */
-    private String stuffCastReel;
+    private BigDecimal stuffCastReel;
 
     /**
      * 大块料
      */
-    private String stuffBig;
+    private BigDecimal stuffBig;
 
     /**
      * 冷轧厚料≥0.6mm
      */
-    private String stuffColdThick;
+    private BigDecimal stuffColdThick;
 
     /**
      * 冷轧薄料＜0.6mm
      */
-    private String stuffColdThin;
+    private BigDecimal stuffColdThin;
+
+    /**
+     * 炼渣铝块
+     */
+    private BigDecimal stuffAlSlag;
 
     /**
      * 样板板头料跑渣料
      */
-    private String stuffAlSlag;
-
-    /**
-     * 样板板头料跑渣料
-     */
-    private Double stuffSampleSlag;
+    private BigDecimal stuffSampleSlag;
 
     /**
      * 切边料
      */
-    private String stuffTrim;
+    private BigDecimal stuffTrim;
 
     /**
      * 其他废料#名称
@@ -140,7 +110,37 @@ public class LmdpCastSmeltHold implements Serializable {
     /**
      * 其他废料#重量
      */
-    private String stuffOtherWeight;
+    private BigDecimal stuffOtherWeight;
+
+    /**
+     * 其他废料#名称
+     */
+    private String stuffOtherName1;
+
+    /**
+     * 其他废料#重量
+     */
+    private BigDecimal stuffOtherWeight1;
+
+    /**
+     * 其他废料#名称
+     */
+    private String stuffOtherName2;
+
+    /**
+     * 其他废料#重量
+     */
+    private BigDecimal stuffOtherWeight2;
+
+    /**
+     * 其他废料#名称
+     */
+    private String stuffOtherName3;
+
+    /**
+     * 其他废料#重量
+     */
+    private BigDecimal stuffOtherWeight3;
 
     /**
      * 电解原铝#灌铝班组ID
@@ -155,17 +155,17 @@ public class LmdpCastSmeltHold implements Serializable {
     /**
      * 电解原铝#累计重量
      */
-    private Double stuffAlWeight;
+    private BigDecimal stuffAlWeight;
 
     /**
      * 总装炉量
      */
-    private Double stuffTotalWeight;
+    private BigDecimal stuffTotalWeight;
 
     /**
      * 固液比
      */
-    private Double stuffStlRatio;
+    private BigDecimal stuffStlRatio;
 
     /**
      * 点火时间
@@ -208,6 +208,46 @@ public class LmdpCastSmeltHold implements Serializable {
     private String forkliftDriverName;
 
     /**
+     * 叉车搅拌#班组ID2
+     */
+    private String forkliftGroupId2;
+
+    /**
+     * 叉车搅拌#班组名称2
+     */
+    private String forkliftGroupName2;
+
+    /**
+     * 叉车搅拌#叉车工ID2
+     */
+    private String forkliftDriverId2;
+
+    /**
+     * 叉车搅拌#叉车工名称2
+     */
+    private String forkliftDriverName2;
+
+    /**
+     * 叉车搅拌#班组ID3
+     */
+    private String forkliftGroupId3;
+
+    /**
+     * 叉车搅拌#班组名称3
+     */
+    private String forkliftGroupName3;
+
+    /**
+     * 叉车搅拌#叉车工ID3
+     */
+    private String forkliftDriverId3;
+
+    /**
+     * 叉车搅拌#叉车工名称3
+     */
+    private String forkliftDriverName3;
+
+    /**
      * 预扒渣#时间
      */
     private Date drossingTime;
@@ -215,7 +255,7 @@ public class LmdpCastSmeltHold implements Serializable {
     /**
      * 预扒渣#温度
      */
-    private Double drossingTemp;
+    private BigDecimal drossingTemp;
 
     /**
      * 配比前取样#时间
@@ -225,7 +265,17 @@ public class LmdpCastSmeltHold implements Serializable {
     /**
      * 配比前取样#温度
      */
-    private Double prepSamplingTemp;
+    private BigDecimal prepSamplingTemp;
+
+    /**
+     * 配比前取样复查#时间
+     */
+    private Date prepSamplingTimeRe;
+
+    /**
+     * 配比前取样复查#温度
+     */
+    private BigDecimal prepSamplingTempRe;
 
     /**
      * 合金添加时间
@@ -233,34 +283,39 @@ public class LmdpCastSmeltHold implements Serializable {
     private Date alloyRefine1AddTime;
 
     /**
-     * 铁剂
+     * 东盛铁剂
      */
-    private String alloyRefine1Fe;
+    private BigDecimal alloyRefine1Fe;
+
+    /**
+     * 西盛铁剂
+     */
+    private BigDecimal alloyRefine1FeWest;
 
     /**
      * 速溶硅
      */
-    private String alloyRefine1Si;
+    private BigDecimal alloyRefine1Si;
 
     /**
      * 铝硅合金
      */
-    private String alloyRefine1AlSi;
+    private BigDecimal alloyRefine1AlSi;
 
     /**
-     * 东盛铜剂
+     * 铜剂
      */
-    private String alloyRefine1Cu;
+    private BigDecimal alloyRefine1Cu;
 
     /**
-     * 东盛锰剂
+     * 锰剂
      */
-    private String alloyRefine1Mn;
+    private BigDecimal alloyRefine1Mn;
 
     /**
      * 铝钛合金
      */
-    private String alloyRefine1AlTi;
+    private BigDecimal alloyRefine1AlTi;
 
     /**
      * 其他合金名称#合金名称
@@ -270,7 +325,7 @@ public class LmdpCastSmeltHold implements Serializable {
     /**
      * 其他合金名称#添加量
      */
-    private String alloyRefine1OtherDose;
+    private BigDecimal alloyRefine1OtherDose;
 
     /**
      * 添加量复核#班组ID
@@ -305,7 +360,7 @@ public class LmdpCastSmeltHold implements Serializable {
     /**
      * 喷粉精炼#温度
      */
-    private Double mimRefine1Temp;
+    private BigDecimal mimRefine1Temp;
 
     /**
      * 喷粉精炼#精炼剂#介质
@@ -315,7 +370,7 @@ public class LmdpCastSmeltHold implements Serializable {
     /**
      * 喷粉精炼#精炼剂#用量
      */
-    private Double mimRefine1Dose;
+    private BigDecimal mimRefine1Dose;
 
     /**
      * 喷粉精炼#班组ID
@@ -345,7 +400,7 @@ public class LmdpCastSmeltHold implements Serializable {
     /**
      * 取样温度
      */
-    private Double refine1SamplingTemp;
+    private BigDecimal refine1SamplingTemp;
 
     /**
      * 配比班组id
@@ -358,39 +413,54 @@ public class LmdpCastSmeltHold implements Serializable {
     private String refine1RatioGroupName;
 
     /**
+     * 配比后取样复查#取样时间
+     */
+    private Date refine1SamplingTimeRe;
+
+    /**
+     * 配比后取样复查#取样温度
+     */
+    private BigDecimal refine1SamplingTempRe;
+
+    /**
      * 合金添加时间
      */
     private Date alloyRefine2AddTime;
 
     /**
-     * 铁剂
+     * 东盛铁剂
      */
-    private String alloyRefine2Fe;
+    private BigDecimal alloyRefine2Fe;
+
+    /**
+     * 西盛铁剂
+     */
+    private BigDecimal alloyRefine2FeWest;
 
     /**
      * 速溶硅
      */
-    private String alloyRefine2Si;
+    private BigDecimal alloyRefine2Si;
 
     /**
      * 铝硅合金
      */
-    private String alloyRefine2AlSi;
+    private BigDecimal alloyRefine2AlSi;
 
     /**
-     * 东盛铜剂
+     * 铜剂
      */
-    private String alloyRefine2Cu;
+    private BigDecimal alloyRefine2Cu;
 
     /**
-     * 东盛锰剂
+     * 锰剂
      */
-    private String alloyRefine2Mn;
+    private BigDecimal alloyRefine2Mn;
 
     /**
      * 铝钛合金
      */
-    private String alloyRefine2AlTi;
+    private BigDecimal alloyRefine2AlTi;
 
     /**
      * 其他合金名称#合金名称
@@ -400,7 +470,7 @@ public class LmdpCastSmeltHold implements Serializable {
     /**
      * 其他合金名称#添加量
      */
-    private Double alloyRefine2OtherDose;
+    private BigDecimal alloyRefine2OtherDose;
 
     /**
      * 添加量复核#班组ID
@@ -435,7 +505,7 @@ public class LmdpCastSmeltHold implements Serializable {
     /**
      * 温度
      */
-    private String grainRefine1Temp;
+    private BigDecimal grainRefine1Temp;
 
     /**
      * 精炼剂#介质
@@ -445,7 +515,7 @@ public class LmdpCastSmeltHold implements Serializable {
     /**
      * 精炼剂#用量
      */
-    private String grainRefine1Dose;
+    private BigDecimal grainRefine1Dose;
 
     /**
      * 班组ID
@@ -478,7 +548,7 @@ public class LmdpCastSmeltHold implements Serializable {
     private String grainRefine1OperatorName;
 
     /**
-     * 扒渣工组ID
+     * 扒渣班组ID
      */
     private String grainRefine1DrossingGroupId;
 
@@ -500,7 +570,7 @@ public class LmdpCastSmeltHold implements Serializable {
     /**
      * 温度
      */
-    private String grainRefine2Temp;
+    private BigDecimal grainRefine2Temp;
 
     /**
      * 精炼剂#介质
@@ -510,7 +580,7 @@ public class LmdpCastSmeltHold implements Serializable {
     /**
      * 精炼剂#用量
      */
-    private String grainRefine2Dose;
+    private BigDecimal grainRefine2Dose;
 
     /**
      * 班组ID
@@ -548,19 +618,19 @@ public class LmdpCastSmeltHold implements Serializable {
     private String grainRefine2DrossingGroupId;
 
     /**
-     * 扒渣班组名称(字段不对应grain_refine2_drossing_group )
+     * 扒渣班组名称
      */
     private String grainRefine2DrossingGroupName;
 
     /**
      * 取样时间
      */
-    private String prepTurndownSamplingTime;
+    private Date prepTurndownSamplingTime;
 
     /**
      * 取样温度
      */
-    private String prepTurndownSamplingTemp;
+    private BigDecimal prepTurndownSamplingTemp;
 
     /**
      * 倒炉班组
@@ -575,7 +645,7 @@ public class LmdpCastSmeltHold implements Serializable {
     /**
      * 熔炼炉#温度
      */
-    private String turndownTemp;
+    private BigDecimal turndownTemp;
 
     /**
      * 倒炉作业#开始时间
@@ -590,7 +660,7 @@ public class LmdpCastSmeltHold implements Serializable {
     /**
      * 倒炉作业#燃气抄表
      */
-    private String gasPostValue;
+    private BigDecimal gasPostValue;
 
     /**
      * 清炉工ID
@@ -628,9 +698,119 @@ public class LmdpCastSmeltHold implements Serializable {
     private Date createTime;
 
     /**
-     * 修改时间
+     * 
      */
     private Date ts;
+
+    /**
+     * 预扒渣温度测量时间
+     */
+    private Date drossingTempTime;
+
+    /**
+     * 喷粉精炼温度测量时间
+     */
+    private Date mimRefine1TempTime;
+
+    /**
+     * 液体、颗粒精炼温度测量时间
+     */
+    private Date grainRefine1TempTime;
+
+    /**
+     * 二次液体、颗粒精炼温度测量时间
+     */
+    private Date grainRefine2TempTime;
+
+    /**
+     * 倒炉温度测量时间
+     */
+    private Date turndownTempTime;
+
+    /**
+     * 天然气单耗
+     */
+    private BigDecimal gasUnitConsumption;
+
+    /**
+     * 装炉前燃气抄表#炉料装炉前造渣剂加入量
+     */
+    private BigDecimal makingSlagAgentAddAmount;
+
+    /**
+     * 预扒渣#预扒渣前造渣剂加入量
+     */
+    private BigDecimal makingPreSlagAgentAddAmount;
+
+    /**
+     * 单熔次燃气用量
+     */
+    private BigDecimal singleGasConsumption;
+
+    /**
+     * 倒炉前取样复查#取样时间
+     */
+    private Date prepTurndownSamplingTimeRe;
+
+    /**
+     * 倒炉前取样复查#取样温度
+     */
+    private BigDecimal prepTurndownSamplingTempRe;
+
+    /**
+     * 清炉班组id
+     */
+    private String clearGroupId;
+
+    /**
+     * 抬包电解槽号1
+     */
+    private String liningPotNum1;
+
+    /**
+     * 抬包电解槽号2
+     */
+    private String liningPotNum2;
+
+    /**
+     * 抬包电解槽号3
+     */
+    private String liningPotNum3;
+
+    /**
+     * 抬包净重1
+     */
+    private BigDecimal liningWeight1;
+
+    /**
+     * 抬包净重2
+     */
+    private BigDecimal liningWeight2;
+
+    /**
+     * 抬包净重3
+     */
+    private BigDecimal liningWeight3;
+
+    /**
+     * 品位1
+     */
+    private String qualityPosition1;
+
+    /**
+     * 品位2
+     */
+    private String qualityPosition2;
+
+    /**
+     * 品位3
+     */
+    private String qualityPosition3;
+
+    /**
+     * 工艺卡编号
+     */
+    private String castCardNumber;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

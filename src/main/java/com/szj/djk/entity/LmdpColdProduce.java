@@ -5,51 +5,22 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
 
 /**
- * 
+ * 冷轧工序
  * @TableName lmdp_cold_produce
  */
 @TableName(value ="lmdp_cold_produce")
 @Data
 public class LmdpColdProduce implements Serializable {
     /**
-     * id
+     * 主键
      */
     @TableId
     private String id;
-
-    /**
-     * 数据来源
-     */
-    private String datasourceOrgcode;
-
-    /**
-     * 数据时间
-     */
-    private Date datatime;
-
-    /**
-     * 数据类型
-     */
-    private String datatype;
-
-    /**
-     * 数据ID
-     */
-    private String dataId;
-
-    /**
-     * 入库时间
-     */
-    private Date enterTime;
-
-    /**
-     * 上传区域
-     */
-    private String uploadAreacode;
 
     /**
      * 计划id
@@ -87,9 +58,9 @@ public class LmdpColdProduce implements Serializable {
     private String blankSize;
 
     /**
-     * 坯料重量(kg)
+     * 坯料重量
      */
-    private String blankWeight;
+    private BigDecimal blankWeight;
 
     /**
      * 预定交货日期
@@ -99,12 +70,12 @@ public class LmdpColdProduce implements Serializable {
     /**
      * 成品厚度
      */
-    private Double productThick;
+    private BigDecimal productThick;
 
     /**
      * 成品宽度
      */
-    private Double productWidth;
+    private BigDecimal productWidth;
 
     /**
      * 成品状态
@@ -112,9 +83,9 @@ public class LmdpColdProduce implements Serializable {
     private String productStatus;
 
     /**
-     * 退火厚度mm
+     * 退火厚度
      */
-    private Double annealingThick;
+    private BigDecimal annealingThick;
 
     /**
      * 开坯时间
@@ -167,9 +138,9 @@ public class LmdpColdProduce implements Serializable {
     private Integer midRollOrder;
 
     /**
-     * 中轧重量kg
+     * 中轧重量
      */
-    private Double midRollWeight;
+    private BigDecimal midRollWeight;
 
     /**
      * 精轧时间
@@ -194,12 +165,12 @@ public class LmdpColdProduce implements Serializable {
     /**
      * 顺序
      */
-    private Double planishOrder;
+    private Integer planishOrder;
 
     /**
      * 冷轧成品重量
      */
-    private Double coldProductWeight;
+    private BigDecimal coldProductWeight;
 
     /**
      * 板型情况
@@ -207,14 +178,14 @@ public class LmdpColdProduce implements Serializable {
     private String plateCut;
 
     /**
-     * 冷轧0.26尾料kg
+     * 冷轧0.26尾料
      */
-    private Double coldTailing26;
+    private BigDecimal coldTailing26;
 
     /**
-     * 冷轧0.6尾料kg
+     * 冷轧0.6尾料
      */
-    private Double coldTailing6;
+    private BigDecimal coldTailing6;
 
     /**
      * 剪切速度
@@ -244,17 +215,17 @@ public class LmdpColdProduce implements Serializable {
     /**
      * 成品切边厚度(mm)
      */
-    private Double cutSizeH;
+    private BigDecimal cutSizeH;
 
     /**
      * 成品切边宽度(mm)
      */
-    private Double cutSizeW;
+    private BigDecimal cutSizeW;
 
     /**
-     * 重卷成品重量(kg)
+     * 重卷成品重量
      */
-    private Double recoilingWeight;
+    private BigDecimal recoilingWeight;
 
     /**
      * 版型情况
@@ -274,7 +245,7 @@ public class LmdpColdProduce implements Serializable {
     /**
      * 入库重量
      */
-    private String storageInWeight;
+    private BigDecimal storageInWeight;
 
     /**
      * 改制计划号
@@ -302,19 +273,19 @@ public class LmdpColdProduce implements Serializable {
     private String storageInYield;
 
     /**
-     * 重卷头料kg
+     * 重卷头料
      */
-    private Double rereelHeading;
+    private BigDecimal rereelHeading;
 
     /**
-     * 重卷尾料kg
+     * 重卷尾料
      */
-    private Double rereelTailing;
+    private BigDecimal rereelTailing;
 
     /**
-     * 头料Mkg
+     * 头料M
      */
-    private Double heading;
+    private BigDecimal heading;
 
     /**
      * 甩除原因
@@ -322,9 +293,9 @@ public class LmdpColdProduce implements Serializable {
     private String headingReason;
 
     /**
-     * 尾料Mkg
+     * 尾料M
      */
-    private String tailing;
+    private BigDecimal tailing;
 
     /**
      * 甩除原因
@@ -332,14 +303,14 @@ public class LmdpColdProduce implements Serializable {
     private String tailingReason;
 
     /**
-     * 头料总重kg
+     * 头料总重
      */
-    private String headingWeight;
+    private BigDecimal headingWeight;
 
     /**
-     * 尾料总重kg
+     * 尾料总重
      */
-    private String tailingWeight;
+    private BigDecimal tailingWeight;
 
     /**
      * 整卷质量情况
@@ -377,9 +348,19 @@ public class LmdpColdProduce implements Serializable {
     private String creatorId;
 
     /**
+     * 创建人名称
+     */
+    private String creatorName;
+
+    /**
      * 修改人id
      */
     private String reviserId;
+
+    /**
+     * 逻辑删除，是否删除 :0、未删除；1、删除
+     */
+    private Integer deleteFlag;
 
     /**
      * 创建时间

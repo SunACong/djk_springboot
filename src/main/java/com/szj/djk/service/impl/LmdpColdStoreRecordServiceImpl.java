@@ -5,6 +5,7 @@ import com.szj.djk.entity.LmdpColdStoreRecord;
 import com.szj.djk.service.LmdpColdStoreRecordService;
 import com.szj.djk.mapper.LmdpColdStoreRecordMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
 * @author JH-Sparrow
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 * @createDate 2022-10-18 16:19:09
 */
 @Service
+@Transactional
 public class LmdpColdStoreRecordServiceImpl extends ServiceImpl<LmdpColdStoreRecordMapper, LmdpColdStoreRecord>
     implements LmdpColdStoreRecordService{
 

@@ -5,66 +5,36 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
-import java.util.Date;
 import lombok.Data;
 
 /**
- * 
+ * 铸轧生产计划表
  * @TableName lmdp_cast_plan
  */
 @TableName(value ="lmdp_cast_plan")
 @Data
 public class LmdpCastPlan implements Serializable {
     /**
-     * id
+     * 主键
      */
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+    @TableId
+    private String id;
 
     /**
-     * 数据来源
+     * 主键
      */
-    private String datasourceOrgcode;
-
-    /**
-     * 数据时间
-     */
-    private Date datatime;
-
-    /**
-     * 数据类型
-     */
-    private String datatype;
-
-    /**
-     * 铸轧坏材料生产计划数据字典id
-     */
-    private Integer dataId;
-
-    /**
-     * 入库时间
-     */
-    private Date enterTime;
-
-    /**
-     * 上传区域
-     */
-    private String uploadAreacode;
-
-    /**
-     * 计划主键
-     */
-    private String planId;
+//    @TableId(type = IdType.AUTO)
+    private Integer planId;
 
     /**
      * 逻辑删除
      */
-    private String deleteFlag;
+    private Integer deleteFlag;
 
     /**
      * 创建时间
      */
-    private Date createTime;
+    private String createTime;
 
     /**
      * 创建人
@@ -74,7 +44,7 @@ public class LmdpCastPlan implements Serializable {
     /**
      * 最后修改时间
      */
-    private Date lastmodifyTime;
+    private String lastmodifyTime;
 
     /**
      * 最后修改人
@@ -239,7 +209,7 @@ public class LmdpCastPlan implements Serializable {
     /**
      * 计划类型
      */
-    private String type;
+    private Integer type;
 
     /**
      * 客户名称
@@ -304,10 +274,10 @@ public class LmdpCastPlan implements Serializable {
     /**
      * 所属产品需求
      */
-    private String productneedsId;
+    private Integer productneedsId;
 
     /**
-     * 其他
+     * 待确认
      */
     private String other;
 
@@ -319,7 +289,7 @@ public class LmdpCastPlan implements Serializable {
     /**
      * 计划完成状态
      */
-    private String finished;
+    private Integer finished;
 
     /**
      * 套筒长度
@@ -347,17 +317,22 @@ public class LmdpCastPlan implements Serializable {
     private String dataName;
 
     /**
-     * 
+     * 铸轧坯料生产计划数据字典id
+     */
+    private Integer dataId;
+
+    /**
+     * 待确认
      */
     private Integer castflowId;
 
     /**
-     * 
+     * 待确认
      */
     private String castflowName;
 
     /**
-     * 
+     * 订单评审编号
      */
     private String reviewNumber;
 

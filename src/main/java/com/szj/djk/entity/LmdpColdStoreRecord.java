@@ -5,51 +5,22 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Data;
 
 /**
- * 
+ * 冷轧卷入库记录
  * @TableName lmdp_cold_store_record
  */
 @TableName(value ="lmdp_cold_store_record")
 @Data
 public class LmdpColdStoreRecord implements Serializable {
     /**
-     * ID
+     * 主键
      */
     @TableId
     private String id;
-
-    /**
-     * 数据来源
-     */
-    private String datasourceOrgcode;
-
-    /**
-     * 数据时间
-     */
-    private Date datatime;
-
-    /**
-     * 数据类型
-     */
-    private String datatype;
-
-    /**
-     * 数据ID
-     */
-    private String dataId;
-
-    /**
-     * 入库时间
-     */
-    private Date enterTime;
-
-    /**
-     * 上传区域
-     */
-    private String uploadAreacode;
 
     /**
      * 库位区域
@@ -72,9 +43,9 @@ public class LmdpColdStoreRecord implements Serializable {
     private String brand;
 
     /**
-     * 重量kg
+     * 重量
      */
-    private String weight;
+    private BigDecimal weight;
 
     /**
      * 板型情况
@@ -112,9 +83,14 @@ public class LmdpColdStoreRecord implements Serializable {
     private Date createTime;
 
     /**
-     * 修改时间
+     * 
      */
     private Date ts;
+
+    /**
+     * 产品类型：成品、在制品
+     */
+    private String productType;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

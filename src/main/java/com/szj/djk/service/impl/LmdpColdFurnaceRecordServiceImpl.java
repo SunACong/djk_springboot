@@ -5,6 +5,7 @@ import com.szj.djk.entity.LmdpColdFurnaceRecord;
 import com.szj.djk.service.LmdpColdFurnaceRecordService;
 import com.szj.djk.mapper.LmdpColdFurnaceRecordMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
 * @author JH-Sparrow
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 * @createDate 2022-10-18 16:19:08
 */
 @Service
+@Transactional
 public class LmdpColdFurnaceRecordServiceImpl extends ServiceImpl<LmdpColdFurnaceRecordMapper, LmdpColdFurnaceRecord>
     implements LmdpColdFurnaceRecordService{
 
