@@ -1,8 +1,6 @@
 package com.szj.djk.utils;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.szj.djk.entity.ProductQuality;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -11,12 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
+ * @author 孙少聪
  * @ClassName MyHttp
- * @Authoc 孙少聪
  * @Date 2022/9/24 19:06:42
  */
 @Slf4j

@@ -1,9 +1,10 @@
-package com.szj.djk.entity;
+package com.szj.djk.ssc.entity;
 
+import com.baomidou.mybatisplus.annotation.SqlCondition;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.szj.djk.common.BaseEntity;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Timestamp;
 
@@ -14,17 +15,22 @@ import java.sql.Timestamp;
         */
 
 @Data
-public class ProductQuality {
+public class ProductQuality extends BaseEntity {
 
-    private Integer id;
+    @TableField(value = "batch_num" , condition = SqlCondition.LIKE)
     private String batchNum;
 
     @JsonFormat(
-            //pattern = "yyyy-MM-dd HH:mm:ss",
-            pattern = "yyyy-MM-dd",
+            pattern = "yyyy-MM-dd HH:mm:ss",
+            //pattern = "yyyy-MM-dd",
             timezone = "GMT+8"
     )
     private Timestamp lqciTs;
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm:ss",
+            //pattern = "yyyy-MM-dd",
+            timezone = "GMT+8"
+    )
     private Timestamp lqcmrTs;
 
     private String consumer;
@@ -64,11 +70,7 @@ public class ProductQuality {
     @TableField(exist = false)
     private ProcessStandard processStandard;
 
-    /** 查询开始时间 */
+    /** 是否立马判定*/
     @TableField(exist = false)
-    private String startDateTime;
-
-    /** 查询截止时间 */
-    @TableField(exist = false)
-    private String endDateTime;
+    private Integer isDecision;
 }

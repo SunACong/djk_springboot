@@ -1,7 +1,7 @@
 package com.szj.djk;
 
-import com.szj.djk.entity.Lqci;
-import com.szj.djk.service.LqciService;
+import com.szj.djk.ssc.entity.Lqci;
+import com.szj.djk.ssc.service.LqciService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

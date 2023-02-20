@@ -1,9 +1,11 @@
 package com.szj.djk.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.szj.djk.entity.Rewinder;
 import com.szj.djk.entity.RollingMachine;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,4 +25,7 @@ public interface RollingMachineMapper extends BaseMapper<RollingMachine> {
      * 查询报警的数据
      */
     public List<RollingMachine> selectWarnData(String rollingName,Integer maxValue);
+
+    /**查询特定警告数据时间前后的数据*/
+    public List<RollingMachine> selectSpecial(RollingMachine rollingMachine, Date before, Date after);
 }

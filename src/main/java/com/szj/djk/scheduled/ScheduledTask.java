@@ -1,13 +1,11 @@
 package com.szj.djk.scheduled;
 
-import com.szj.djk.controller.RewinderController;
 import com.szj.djk.entity.Rewinder;
 import com.szj.djk.entity.RollingMachine;
 import com.szj.djk.service.RewinderService;
 import com.szj.djk.service.RollingMachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

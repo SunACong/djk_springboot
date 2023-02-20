@@ -1,7 +1,7 @@
-package com.szj.djk.mapper;
+package com.szj.djk.ssc.mapper;
 
-import com.szj.djk.entity.Lqci;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.szj.djk.ssc.entity.Lqci;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;
@@ -11,7 +11,7 @@ import java.util.List;
 * @author Admin
 * @description 针对表【lqci】的数据库操作Mapper
 * @createDate 2022-10-10 16:48:20
-* @Entity com.szj.djk.entity.Lqci
+* @Entity com.szj.djk.ssc.entity.Lqci
 */
 @Mapper
 public interface LqciMapper extends BaseMapper<Lqci> {

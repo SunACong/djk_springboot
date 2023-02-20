@@ -1,6 +1,9 @@
 package com.szj.djk.entity;
 
 import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -16,6 +19,7 @@ public class Rewinder {
     private static final long serialVersionUID = 1L;
 
     /** id */
+    @TableId(type = IdType.AUTO)
     private Long rewinderId;
 
     /** 指标名称 */
@@ -38,5 +42,5 @@ public class Rewinder {
 
     /**设备号*/
     private Long deviceId;
-
+ 
 }

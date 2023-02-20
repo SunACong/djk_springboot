@@ -1,22 +1,13 @@
 package com.szj.djk.scheduled;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.szj.djk.entity.LmdpQcPack;
 import com.szj.djk.service.LmdpQcPackService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
-
-import java.util.Date;
 import java.util.List;
 
-/**
- * @ClassName GetProcessMonitor
- * @Authoc 孙少聪
- * @Date 2022/11/11 11:03:13
- */
 
 @Slf4j
 //@Component
