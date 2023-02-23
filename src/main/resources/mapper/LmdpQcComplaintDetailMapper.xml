@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.LmdpQcComplaintDetailMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpQcComplaintDetail">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="ts" column="ts" jdbcType="TIMESTAMP"/>
+            <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
+            <result property="complaintTime" column="complaint_time" jdbcType="TIMESTAMP"/>
+            <result property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
+            <result property="castDate" column="cast_date" jdbcType="TIMESTAMP"/>
+            <result property="coldDate" column="cold_date" jdbcType="TIMESTAMP"/>
+            <result property="castModel" column="cast_model" jdbcType="VARCHAR"/>
+            <result property="coldModel" column="cold_model" jdbcType="VARCHAR"/>
+            <result property="brand" column="brand" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="VARCHAR"/>
+            <result property="weight" column="weight" jdbcType="DECIMAL"/>
+            <result property="hydrogenContent" column="hydrogen_content" jdbcType="DECIMAL"/>
+            <result property="productType" column="product_type" jdbcType="VARCHAR"/>
+            <result property="complaintDesc" column="complaint_desc" jdbcType="VARCHAR"/>
+            <result property="complaintWeight" column="complaint_weight" jdbcType="DECIMAL"/>
+            <result property="scrapWeight" column="scrap_weight" jdbcType="DECIMAL"/>
+            <result property="demotionWeight" column="demotion_weight" jdbcType="DECIMAL"/>
+            <result property="castWeight" column="cast_weight" jdbcType="DECIMAL"/>
+            <result property="coldWeight" column="cold_weight" jdbcType="DECIMAL"/>
+            <result property="alPrice" column="al_price" jdbcType="DECIMAL"/>
+            <result property="managerId" column="manager_id" jdbcType="VARCHAR"/>
+            <result property="managerName" column="manager_name" jdbcType="VARCHAR"/>
+            <result property="chargeId" column="charge_id" jdbcType="VARCHAR"/>
+            <result property="chargeName" column="charge_name" jdbcType="VARCHAR"/>
+            <result property="directorId" column="director_id" jdbcType="VARCHAR"/>
+            <result property="directorName" column="director_name" jdbcType="VARCHAR"/>
+            <result property="totalLossAmount" column="total_loss_amount" jdbcType="DECIMAL"/>
+            <result property="managerPunishAmount" column="manager_punish_amount" jdbcType="DECIMAL"/>
+            <result property="chargePunishAmount" column="charge_punish_amount" jdbcType="DECIMAL"/>
+            <result property="directorPunishAmount" column="director_punish_amount" jdbcType="DECIMAL"/>
+            <result property="complaintReport" column="complaint_report" jdbcType="VARCHAR"/>
+            <result property="castInspectDescription" column="cast_inspect_description" jdbcType="VARCHAR"/>
+            <result property="coldInspectDescription" column="cold_inspect_description" jdbcType="VARCHAR"/>
+            <result property="customer" column="customer" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,create_time,ts,
+        creator_id,complaint_time,batch_num,
+        cast_date,cold_date,cast_model,
+        cold_model,brand,status,
+        weight,hydrogen_content,product_type,
+        complaint_desc,complaint_weight,scrap_weight,
+        demotion_weight,cast_weight,cold_weight,
+        al_price,manager_id,manager_name,
+        charge_id,charge_name,director_id,
+        director_name,total_loss_amount,manager_punish_amount,
+        charge_punish_amount,director_punish_amount,complaint_report,
+        cast_inspect_description,cold_inspect_description,customer
+    </sql>
+</mapper>
