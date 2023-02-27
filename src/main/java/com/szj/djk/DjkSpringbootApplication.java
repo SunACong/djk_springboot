@@ -6,7 +6,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
-@EnableScheduling //开启定时器功能
+@EnableScheduling
 @SpringBootApplication
 @EnableTransactionManagement
 public class DjkSpringbootApplication {
