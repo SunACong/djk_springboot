@@ -24,12 +24,21 @@ public class PeriodComputeServiceImpl extends ServiceImpl<PeriodComputeMapper, P
     private PeriodComputeMapper periodComputeMapper;
 
     /**
-     * 查询平均时间
+     * 查询总体平均时间
      * @return
      */
     @Override
     public List<Map<String, Object>> selectAVGTimeList(){
         return periodComputeMapper.selectAVGTimeList();
+    }
+
+    /**
+     * 查询最近平均时间
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> selectNewAVGTimeList(){
+        return periodComputeMapper.selectNewAVGTimeList();
     }
 }
 

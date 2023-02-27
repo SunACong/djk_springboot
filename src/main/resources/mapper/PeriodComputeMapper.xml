@@ -41,7 +41,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select id, reel_num,jihua_create_time, feed_time, turndown_end_time, hold_refine1_begin_time, hold_refine1_end_time, hold_refine2_begin_time, hold_refine2_end_time, hold_refine3_begin_time, hold_refine3_end_time, hold_refine4_begin_time, hold_refine4_end_time, hold_refine5_begin_time, hold_refine5_end_time, zhuzha_create_time, proc_upper_time, proc_lower_remove_time, zhijian_create_time, next_reel_time, lzjihua_create_time, lenzha_create_time, start_time, end_time, lzzhijian_create_time, chongjuan_create_time, storage_time, package_create_time, package_time, note from period_compute
     </sql>
 
-<!--    查询平均时间-->
+<!--    查询总体平均时间-->
 <select id="selectAVGTimeList" resultType="hashMap">
     SELECT
         AVG( DATEDIFF( feed_time, jihua_create_time ) ) castplan,
@@ -65,5 +65,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         period_compute
 </select>
 
-
+<!--    查询最近生产平均时间-->
+<select id="selectNewAVGTimeList" resultType="hashMap">
+    SELECT
+        DATEDIFF( feed_time, jihua_create_time ) castplanNew,
+        DATEDIFF( turndown_end_time, feed_time ) smeltholdNew,
+        DATEDIFF( hold_refine1_begin_time, turndown_end_time )  baowenNew,
+        DATEDIFF( hold_refine1_end_time, hold_refine1_begin_time) baowen1New,
+        DATEDIFF( hold_refine2_end_time, hold_refine2_begin_time) baowen2New,
+        DATEDIFF( hold_refine3_end_time, hold_refine3_begin_time) baowen3New,
+        DATEDIFF( hold_refine4_end_time, hold_refine4_begin_time) baowen4New,
+        DATEDIFF( hold_refine5_end_time, hold_refine5_begin_time) baowen5New,
+        DATEDIFF( zhuzha_create_time, hold_refine5_end_time) castproNew,
+        DATEDIFF( next_reel_time, zhijian_create_time) castreelNew,
+        DATEDIFF( lenzha_create_time, lzjihua_create_time) coldplanNew,
+        DATEDIFF( start_time, lenzha_create_time) coldproduceNew,
+        DATEDIFF( end_time, start_time) furnaceNew,
+        DATEDIFF( chongjuan_create_time, lzzhijian_create_time) reelreportNew,
+        DATEDIFF( storage_time, chongjuan_create_time) rereelerNew,
+        DATEDIFF( package_create_time, storage_time) storeNew,
+        DATEDIFF( package_time, package_create_time )  packageNew
+    FROM
+        period_compute
+    ORDER BY id desc limit 0,1
+</select>
 </mapper>

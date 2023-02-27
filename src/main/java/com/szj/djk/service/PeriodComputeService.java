@@ -17,10 +17,16 @@ import java.util.Map;
 public interface PeriodComputeService extends IService<PeriodCompute>{
 
     /**
-     * 查询平均时间
+     * 查询总体平均时间
      * @return
      */
     public List<Map<String, Object>> selectAVGTimeList();
+
+    /**
+     * 查询最近平均时间
+     * @return
+     */
+    public List<Map<String, Object>> selectNewAVGTimeList();
 
 }
 

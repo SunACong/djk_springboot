@@ -17,6 +17,10 @@ import java.util.Map;
 @Mapper
 public interface PeriodComputeMapper extends BaseMapper<PeriodCompute>{
 
+    // 查询总体平均时间
     public List<Map<String, Object>> selectAVGTimeList();
+
+    // 查询最近平均时间
+    public List<Map<String, Object>> selectNewAVGTimeList();
 
 }

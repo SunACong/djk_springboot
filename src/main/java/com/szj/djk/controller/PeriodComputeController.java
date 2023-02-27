@@ -35,12 +35,21 @@ public class PeriodComputeController
     }
 
     /**
-     * 查询平均时间
+     * 查询总体平均时间
      * @return
      */
    @GetMapping(value = "selectAVGTimeList")
     public R<List<Map<String, Object>>> selectAVGTimeList(){
        List<Map<String, Object>> maps = periodComputeService.selectAVGTimeList();
+       return R.success(maps);
+
+   } /**
+     * 查询最近平均时间
+     * @return
+     */
+   @GetMapping(value = "selectNewAVGTimeList")
+    public R<List<Map<String, Object>>> selectNewAVGTimeList(){
+       List<Map<String, Object>> maps = periodComputeService.selectNewAVGTimeList();
        return R.success(maps);
    }
 }
