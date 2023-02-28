@@ -4,8 +4,12 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.szj.djk.entity.LmdpCastProduce;
 import com.szj.djk.service.LmdpCastProduceService;
 import com.szj.djk.mapper.LmdpCastProduceMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Map;
 
 /**
 * @author JH-Sparrow
@@ -14,8 +18,16 @@ import org.springframework.transaction.annotation.Transactional;
 */
 @Service
 @Transactional
-public class LmdpCastProduceServiceImpl extends ServiceImpl<LmdpCastProduceMapper, LmdpCastProduce>
-    implements LmdpCastProduceService{
+public class LmdpCastProduceServiceImpl extends ServiceImpl<LmdpCastProduceMapper, LmdpCastProduce>    implements LmdpCastProduceService{
+
+    @Autowired
+    private LmdpCastProduceMapper lmdpCastProduceMapper;
+    /**
+     * 查询铸轧生产时间
+     * @return
+     */
+    @Override
+    public List<Map<String, Object>> selectZhuzhaTimeList(){ return lmdpCastProduceMapper.selectZhuzhaTimeList();   }
 
 }
 

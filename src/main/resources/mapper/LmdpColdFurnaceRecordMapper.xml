@@ -41,4 +41,9 @@
         exhaust_fan_temperature,cycle_fan_temperature1,cycle_fan_temperature2,
         cycle_fan_temperature3,remark,operator
     </sql>
+
+    <!--    查询铸轧生产时间-->
+    <select id="selectLenzhaTimeList" resultType="hashMap">
+        SELECT gas_temperature1,create_time FROM `lmdp_cold_furnace_record`
+    </select>
 </mapper>

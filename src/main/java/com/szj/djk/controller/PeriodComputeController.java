@@ -42,8 +42,8 @@ public class PeriodComputeController
     public R<List<Map<String, Object>>> selectAVGTimeList(){
        List<Map<String, Object>> maps = periodComputeService.selectAVGTimeList();
        return R.success(maps);
-
-   } /**
+   }
+   /**
      * 查询最近平均时间
      * @return
      */

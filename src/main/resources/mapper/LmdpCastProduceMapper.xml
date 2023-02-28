@@ -20,14 +20,17 @@
             <result property="procLowerDutyWeight" column="proc_lower_duty_weight" jdbcType="VARCHAR"/>
             <result property="procLowerRemoveTime" column="proc_lower_remove_time" jdbcType="VARCHAR"/>
             <result property="procLowerRollDiameter" column="proc_lower_roll_diameter" jdbcType="VARCHAR"/>
-
             <result property="qtfhTurndownTime" column="qtfh_turndown_time" jdbcType="VARCHAR"/>
             <result property="qtfhTurndownSmeltNum" column="qtfh_turndown_smelt_num" jdbcType="VARCHAR"/>
-
             <result property="ts" column="ts" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id, plan_id, smelt_times, reel_num, brand, customer, thick, width, proc_upper_time, proc_upper_shift_tthick, proc_upper_shift_tweight, proc_lower_location_num, proc_lower_duty_weight, proc_lower_remove_time, proc_lower_roll_diameter, qtfh_turndown_time, qtfh_turndown_smelt_num, create_time, ts
     </sql>
+
+    <!--    查询铸轧生产时间-->
+    <select id="selectZhuzhaTimeList" resultType="hashMap">
+        SELECT create_time,  param_degasser FROM lmdp_cast_produce WHERE create_time BETWEEN '1999-01-01 ' and '2100-01-01 '
+    </select>
 </mapper>

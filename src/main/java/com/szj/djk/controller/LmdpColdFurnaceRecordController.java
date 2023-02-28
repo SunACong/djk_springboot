@@ -1,6 +1,7 @@
 package com.szj.djk.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.szj.djk.common.R;
@@ -31,5 +32,15 @@ public class LmdpColdFurnaceRecordController
         queryWrapper.setEntity(lmdpColdFurnaceRecord);
         List<LmdpColdFurnaceRecord> list = lmdpColdFurnaceRecordService.list(queryWrapper);
         return R.success(list);
+    }
+
+    /**
+     * 查询冷轧生产时间
+     * @return
+     */
+    @GetMapping(value = "selectLenzhaTimeList")
+    public R<List<Map<String, Object>>> selectLenzhaTimeList(){
+        List<Map<String, Object>> maps = lmdpColdFurnaceRecordService.selectLenzhaTimeList();
+        return R.success(maps);
     }
 }
