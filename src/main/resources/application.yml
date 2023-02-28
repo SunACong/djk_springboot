@@ -36,7 +36,6 @@ spring:
       # 连接保持空闲而不被驱逐的最小时间
       min-evictable-idle-time-millis: 60000
 
-
 mybatis-plus:
   configuration:
     #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
