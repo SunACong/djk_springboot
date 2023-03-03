@@ -1,7 +1,9 @@
-package com.szj.djk.ssc.service;
+package com.szj.djk.service;
 
-import com.szj.djk.ssc.entity.LmdpQcColdInspect;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.szj.djk.entity.LmdpQcColdInspect;
+
+import java.util.List;
 
 /**
 * @author Admin
@@ -9,5 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2023-02-16 14:25:11
 */
 public interface LmdpQcColdInspectService extends IService<LmdpQcColdInspect> {
-
+    public List<LmdpQcColdInspect> selectTest();
 }

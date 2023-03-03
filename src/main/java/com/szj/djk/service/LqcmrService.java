@@ -1,6 +1,6 @@
-package com.szj.djk.ssc.service;
+package com.szj.djk.service;
 
-import com.szj.djk.ssc.entity.Lqcmr;
+import com.szj.djk.entity.Lqcmr;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**

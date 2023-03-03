@@ -1,11 +1,11 @@
-package com.szj.djk.ssc.controller;
+package com.szj.djk.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.szj.djk.common.CustomException;
 import com.szj.djk.common.R;
-import com.szj.djk.ssc.entity.Lqci;
-import com.szj.djk.ssc.service.LqciService;
+import com.szj.djk.entity.Lqci;
+import com.szj.djk.service.LqciService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;

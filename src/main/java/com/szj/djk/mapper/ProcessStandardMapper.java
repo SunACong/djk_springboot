@@ -1,7 +1,7 @@
-package com.szj.djk.ssc.mapper;
+package com.szj.djk.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.szj.djk.ssc.entity.ProcessStandard;
+import com.szj.djk.entity.ProcessStandard;
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper

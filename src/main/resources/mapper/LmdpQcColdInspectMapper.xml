@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.szj.djk.ssc.mapper.LmdpQcColdInspectMapper">
+<mapper namespace="com.szj.djk.mapper.LmdpQcColdInspectMapper">
 
-    <resultMap id="BaseResultMap" type="com.szj.djk.ssc.entity.LmdpQcColdInspect">
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpQcColdInspect">
             <id property="id" column="id" jdbcType="VARCHAR"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="ts" column="ts" jdbcType="TIMESTAMP"/>

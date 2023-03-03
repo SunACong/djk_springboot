@@ -1,9 +1,9 @@
-package com.szj.djk.ssc.service.impl;
+package com.szj.djk.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.szj.djk.ssc.entity.Lqcmr;
-import com.szj.djk.ssc.service.LqcmrService;
-import com.szj.djk.ssc.mapper.LqcmrMapper;
+import com.szj.djk.entity.Lqcmr;
+import com.szj.djk.service.LqcmrService;
+import com.szj.djk.mapper.LqcmrMapper;
 import org.springframework.stereotype.Service;
 
 /**

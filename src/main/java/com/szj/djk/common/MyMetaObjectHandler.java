@@ -1,8 +1,8 @@
 package com.szj.djk.common;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.szj.djk.ssc.entity.Lqci;
-import com.szj.djk.ssc.entity.Lqcmr;
+import com.szj.djk.entity.Lqci;
+import com.szj.djk.entity.Lqcmr;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;

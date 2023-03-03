@@ -2,8 +2,8 @@ package com.szj.djk.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.szj.djk.common.R;
-import com.szj.djk.ssc.entity.LmdpQcColdInspect;
-import com.szj.djk.ssc.service.LmdpQcColdInspectService;
+import com.szj.djk.entity.LmdpQcColdInspect;
+import com.szj.djk.service.LmdpQcColdInspectService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +23,12 @@ public class LmdpQcColdInspectController {
         LambdaQueryWrapper<LmdpQcColdInspect> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.setEntity(lmdpQcColdInspect);
         List<LmdpQcColdInspect> list = lmdpQcColdInspectService.list(queryWrapper);
+        return R.success(list);
+    }
+
+    @GetMapping("test")
+    public R<List<LmdpQcColdInspect>> test(){
+        List<LmdpQcColdInspect> list = lmdpQcColdInspectService.selectTest();
         return R.success(list);
     }
 }

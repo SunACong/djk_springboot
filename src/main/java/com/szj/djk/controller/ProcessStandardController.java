@@ -1,10 +1,10 @@
-package com.szj.djk.ssc.controller;
+package com.szj.djk.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.szj.djk.common.R;
-import com.szj.djk.ssc.entity.ProcessStandard;
-import com.szj.djk.ssc.service.ProcessStandardService;
+import com.szj.djk.entity.ProcessStandard;
+import com.szj.djk.service.ProcessStandardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

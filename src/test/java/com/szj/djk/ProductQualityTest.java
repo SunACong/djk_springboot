@@ -1,7 +1,7 @@
 package com.szj.djk;
 
-import com.szj.djk.ssc.entity.ProductQuality;
-import com.szj.djk.ssc.mapper.ProductQualityMapper;
+import com.szj.djk.entity.ProductQuality;
+import com.szj.djk.mapper.ProductQualityMapper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

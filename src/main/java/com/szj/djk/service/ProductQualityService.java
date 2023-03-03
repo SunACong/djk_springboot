@@ -1,10 +1,10 @@
-package com.szj.djk.ssc.service;
+package com.szj.djk.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.szj.djk.ssc.entity.ProductQuality;
+import com.szj.djk.entity.ProductQuality;
 
 import java.util.Date;
 

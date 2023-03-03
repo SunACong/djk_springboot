@@ -1,4 +1,4 @@
-package com.szj.djk.ssc.controller;
+package com.szj.djk.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.szj.djk.common.R;
 import com.szj.djk.scheduled.GetToken;
-import com.szj.djk.ssc.entity.ProductQuality;
-import com.szj.djk.ssc.service.ProductQualityService;
+import com.szj.djk.entity.ProductQuality;
+import com.szj.djk.service.ProductQualityService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;

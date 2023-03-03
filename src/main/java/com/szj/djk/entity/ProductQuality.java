@@ -1,4 +1,4 @@
-package com.szj.djk.ssc.entity;
+package com.szj.djk.entity;
 
 import com.baomidou.mybatisplus.annotation.SqlCondition;
 import com.baomidou.mybatisplus.annotation.TableField;

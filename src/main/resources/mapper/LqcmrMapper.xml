@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.szj.djk.ssc.mapper.LqcmrMapper">
+<mapper namespace="com.szj.djk.mapper.LqcmrMapper">
 
-    <resultMap id="BaseResultMap" type="com.szj.djk.ssc.entity.Lqcmr">
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.Lqcmr">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
             <result property="lqcmrTs" column="lqcmr_ts" jdbcType="TIMESTAMP"/>

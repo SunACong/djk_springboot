@@ -1,9 +1,9 @@
-package com.szj.djk.ssc.service.impl;
+package com.szj.djk.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.szj.djk.ssc.entity.ProcessStandard;
-import com.szj.djk.ssc.mapper.ProcessStandardMapper;
-import com.szj.djk.ssc.service.ProcessStandardService;
+import com.szj.djk.entity.ProcessStandard;
+import com.szj.djk.mapper.ProcessStandardMapper;
+import com.szj.djk.service.ProcessStandardService;
 import org.springframework.stereotype.Service;
 
 @Service

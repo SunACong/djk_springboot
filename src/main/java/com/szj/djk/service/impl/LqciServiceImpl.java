@@ -1,9 +1,9 @@
-package com.szj.djk.ssc.service.impl;
+package com.szj.djk.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.szj.djk.ssc.entity.Lqci;
-import com.szj.djk.ssc.mapper.LqciMapper;
-import com.szj.djk.ssc.service.LqciService;
+import com.szj.djk.entity.Lqci;
+import com.szj.djk.mapper.LqciMapper;
+import com.szj.djk.service.LqciService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

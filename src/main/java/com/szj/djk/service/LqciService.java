@@ -1,7 +1,7 @@
-package com.szj.djk.ssc.service;
+package com.szj.djk.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.szj.djk.ssc.entity.Lqci;
+import com.szj.djk.entity.Lqci;
 
 import java.util.Date;
 import java.util.List;

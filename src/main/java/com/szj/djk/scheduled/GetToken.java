@@ -1,13 +1,13 @@
 package com.szj.djk.scheduled;
 
 
-import com.szj.djk.ssc.entity.Lqci;
-import com.szj.djk.ssc.entity.ProcessStandard;
-import com.szj.djk.ssc.entity.ProductQuality;
-import com.szj.djk.ssc.mapper.ProductQualityMapper;
-import com.szj.djk.ssc.service.LqciService;
-import com.szj.djk.ssc.service.ProcessStandardService;
-import com.szj.djk.ssc.service.ProductQualityService;
+import com.szj.djk.entity.Lqci;
+import com.szj.djk.entity.ProcessStandard;
+import com.szj.djk.entity.ProductQuality;
+import com.szj.djk.mapper.ProductQualityMapper;
+import com.szj.djk.service.LqciService;
+import com.szj.djk.service.ProcessStandardService;
+import com.szj.djk.service.ProductQualityService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;

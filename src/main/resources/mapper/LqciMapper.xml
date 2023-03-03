@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.szj.djk.ssc.mapper.LqciMapper">
+<mapper namespace="com.szj.djk.mapper.LqciMapper">
 
-    <resultMap id="BaseResultMap" type="com.szj.djk.ssc.entity.Lqci">
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.Lqci">
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
         <result property="lqciTs" column="lqci_ts" jdbcType="TIMESTAMP"/>
@@ -17,7 +17,7 @@
         <result property="finishedWeight" column="finished_weight" jdbcType="DOUBLE"/>
         <result property="surfaceQualityRemark" column="surface_quality_remark" jdbcType="VARCHAR"/>
     </resultMap>
-    <resultMap id="LqciAndLqcmr" type="com.szj.djk.ssc.entity.Lqci">
+    <resultMap id="LqciAndLqcmr" type="com.szj.djk.entity.Lqci">
         <id property="id" column="id" jdbcType="INTEGER"/>
         <result property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
         <result property="lqciTs" column="lqci_ts" jdbcType="TIMESTAMP"/>

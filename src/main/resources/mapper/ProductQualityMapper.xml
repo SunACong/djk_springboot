@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.szj.djk.ssc.mapper.ProductQualityMapper">
+<mapper namespace="com.szj.djk.mapper.ProductQualityMapper">
 
-    <resultMap type="com.szj.djk.ssc.entity.ProductQuality" id="ProductQualityAndProcessStandardResult">
+    <resultMap type="com.szj.djk.entity.ProductQuality" id="ProductQualityAndProcessStandardResult">
         <result property="id"    column="id"    />
         <result property="batchNum"    column="batch_num"    />
         <result property="lqciTs"    column="lqci_ts"    />
@@ -28,7 +28,7 @@
         <result property="remark"    column="remark"    />
         <association property="processStandard"
              column="consumer"
-             javaType="com.szj.djk.ssc.entity.ProcessStandard"
+             javaType="com.szj.djk.entity.ProcessStandard"
              select="mySelectById"/>
     </resultMap>
 
@@ -74,7 +74,7 @@
         SELECT GREATEST((SELECT max(lqci_ts) lqci_ts  from product_quality), (SELECT max(lqcmr_ts) lqcmr_ts from product_quality))
     </select>
 
-    <select id="selectProductQualityAndStandard" parameterType="com.szj.djk.ssc.entity.ProductQuality" resultMap="ProductQualityAndProcessStandardResult">
+    <select id="selectProductQualityAndStandard" parameterType="com.szj.djk.entity.ProductQuality" resultMap="ProductQualityAndProcessStandardResult">
         <include refid="selectProductQuality"/>
         <where>
             <if test="productQuality.batchNum != null  and productQuality.batchNum != ''"> and batch_num like CONCAT('%',#{productQuality.batchNum},'%')</if>
@@ -100,11 +100,11 @@
         </where>
     </select>
 
-    <select id="mySelectById" resultType="com.szj.djk.ssc.entity.ProcessStandard">
+    <select id="mySelectById" resultType="com.szj.djk.entity.ProcessStandard">
         SELECT * FROM process_standard WHERE id = #{id}
     </select>
 
-    <select id="selectLqciAndLqcmrToProductQuality" resultType="com.szj.djk.ssc.entity.ProductQuality">
+    <select id="selectLqciAndLqcmrToProductQuality" resultType="com.szj.djk.entity.ProductQuality">
         SELECT lqci.batch_num , lqci_ts, consumer, single_straightness, single_medium_convexity, finished_thickness, finished_width, finished_roll_diameter, finished_weight, surface_quality_remark, lqcmr_ts, correct_strength, correct_extension
         FROM lqci LEFT join lqcmr on lqci.batch_num = lqcmr.batch_num
         where lqci_ts > #{param1}
