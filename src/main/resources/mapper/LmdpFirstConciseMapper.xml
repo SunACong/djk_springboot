@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.LmdpFirstConciseMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpFirstConcise">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="holdRefine1BeginTime" column="hold_refine1_begin_time" jdbcType="VARCHAR"/>
+            <result property="holdRefine1EndTime" column="hold_refine1_end_time" jdbcType="VARCHAR"/>
+            <result property="holdRefine1Duration" column="hold_refine1_duration" jdbcType="VARCHAR"/>
+            <result property="holdRefine1Temp" column="hold_refine1_temp" jdbcType="VARCHAR"/>
+            <result property="holdRefine1Medium" column="hold_refine1_medium" jdbcType="VARCHAR"/>
+            <result property="holdRefine1Dose" column="hold_refine1_dose" jdbcType="VARCHAR"/>
+            <result property="holdRefine1ColdStuffDose" column="hold_refine1_cold_stuff_dose" jdbcType="VARCHAR"/>
+            <result property="holdRefine1GroupId" column="hold_refine1_group_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine1GroupName" column="hold_refine1_group_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine1CasterId" column="hold_refine1_caster_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine1CasterName" column="hold_refine1_caster_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine1SmelterId" column="hold_refine1_smelter_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine1SmelterName" column="hold_refine1_smelter_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine1SamplingTime" column="hold_refine1_sampling_time" jdbcType="VARCHAR"/>
+            <result property="holdRefine1SamplingTemp" column="hold_refine1_sampling_temp" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,hold_refine1_begin_time,hold_refine1_end_time,
+        hold_refine1_duration,hold_refine1_temp,hold_refine1_medium,
+        hold_refine1_dose,hold_refine1_cold_stuff_dose,hold_refine1_group_id,
+        hold_refine1_group_name,hold_refine1_caster_id,hold_refine1_caster_name,
+        hold_refine1_smelter_id,hold_refine1_smelter_name,hold_refine1_sampling_time,
+        hold_refine1_sampling_temp
+    </sql>
+</mapper>

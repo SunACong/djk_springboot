@@ -1,7 +1,7 @@
 package com.szj.djk.mapper;
 
-import com.szj.djk.entity.Lqci;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.szj.djk.entity.Lqci;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.Date;

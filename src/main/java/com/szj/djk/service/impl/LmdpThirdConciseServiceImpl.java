@@ -5,6 +5,7 @@ import com.szj.djk.entity.LmdpThirdConcise;
 import com.szj.djk.service.LmdpThirdConciseService;
 import com.szj.djk.mapper.LmdpThirdConciseMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
 * @author JH-Sparrow
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 * @createDate 2022-10-18 16:19:09
 */
 @Service
+@Transactional
 public class LmdpThirdConciseServiceImpl extends ServiceImpl<LmdpThirdConciseMapper, LmdpThirdConcise>
     implements LmdpThirdConciseService{
 

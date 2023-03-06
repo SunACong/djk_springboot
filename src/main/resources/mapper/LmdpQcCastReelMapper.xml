@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.LmdpQcCastReelMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpQcCastReel">
+            <result property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="VARCHAR"/>
+            <result property="ts" column="ts" jdbcType="VARCHAR"/>
+            <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
+            <result property="reelNum" column="reel_num" jdbcType="VARCHAR"/>
+            <result property="model" column="model" jdbcType="VARCHAR"/>
+            <result property="brand" column="brand" jdbcType="VARCHAR"/>
+            <result property="weight" column="weight" jdbcType="VARCHAR"/>
+            <result property="wt" column="wt" jdbcType="VARCHAR"/>
+            <result property="hdaf" column="hdaf" jdbcType="VARCHAR"/>
+            <result property="lpsSize" column="lps_size" jdbcType="VARCHAR"/>
+            <result property="sampleLevel" column="sample_level" jdbcType="VARCHAR"/>
+            <result property="hpsSize" column="hps_size" jdbcType="VARCHAR"/>
+            <result property="hpsPicture" column="hps_picture" jdbcType="VARCHAR"/>
+            <result property="shapeQc" column="shape_qc" jdbcType="VARCHAR"/>
+            <result property="thickness" column="thickness" jdbcType="VARCHAR"/>
+            <result property="width" column="width" jdbcType="VARCHAR"/>
+            <result property="surfaceQc" column="surface_qc" jdbcType="VARCHAR"/>
+            <result property="facadeQc" column="facade_qc" jdbcType="VARCHAR"/>
+            <result property="judgeResult" column="judge_result" jdbcType="VARCHAR"/>
+            <result property="judgeReamrk" column="judge_reamrk" jdbcType="VARCHAR"/>
+            <result property="hostSpeed" column="host_speed" jdbcType="VARCHAR"/>
+            <result property="tiWireBrand" column="ti_wire_brand" jdbcType="VARCHAR"/>
+            <result property="tiWireSpeed" column="ti_wire_speed" jdbcType="VARCHAR"/>
+            <result property="nextReelTime" column="next_reel_time" jdbcType="VARCHAR"/>
+            <result property="advise" column="advise" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,create_time,ts,
+        creator_id,reel_num,model,
+        brand,weight,wt,
+        hdaf,lps_size,sample_level,
+        hps_size,hps_picture,shape_qc,
+        thickness,width,surface_qc,
+        facade_qc,judge_result,judge_reamrk,
+        host_speed,ti_wire_brand,ti_wire_speed,
+        next_reel_time,advise
+    </sql>
+</mapper>

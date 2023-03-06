@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.szj.djk.common.R;
 import com.szj.djk.entity.Avaluate;
-import com.szj.djk.entity.ProductQuality;
 import com.szj.djk.service.AvaluateService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 
 
 /**
  * 【请填写功能名称】Controller
  *
- * @author ruoyi
+ * @author JH-Sparrow
  * @date 2022-10-17
  */
 @RestController
 @RequestMapping("/system/castProduce")
-public class LmdpCastProduceController
-{
+public class LmdpCastProduceController{
     @Autowired
     private LmdpCastProduceService lmdpCastProduceService;
 
@@ -32,6 +32,16 @@ public class LmdpCastProduceController
         queryWrapper.setEntity(lmdpCastProduce);
         List<LmdpCastProduce> list = lmdpCastProduceService.list(queryWrapper);
         return R.success(list);
+    }
+
+    /**
+     * 查询铸轧生产时间
+     * @return
+     */
+    @GetMapping(value = "selectZhuzhaTimeList")
+    public R<List<Map<String, Object>>> selectZhuzhaTimeList(){
+        List<Map<String, Object>> maps = lmdpCastProduceService.selectZhuzhaTimeList();
+        return R.success(maps);
     }
 
 }

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.LmdpAvgTimeMapper">
+
+    <resultMap type="com.szj.djk.entity.LmdpAvgTime" id="BaseResultMap">
+        <result property="id"    column="id"    />
+        <result property="updateTime"    column="update_time"    />
+        <result property="castplan"    column="castplan"    />
+        <result property="smelthold"    column="smelthold"    />
+        <result property="baowen"    column="baowen"    />
+        <result property="baowen1"    column="baowen1"    />
+        <result property="baowen2"    column="baowen2"    />
+        <result property="baowen3"    column="baowen3"    />
+        <result property="baowen4"    column="baowen4"    />
+        <result property="baowen5"    column="baowen5"    />
+        <result property="castpro"    column="castpro"    />
+        <result property="castreel"    column="castreel"    />
+        <result property="coldplan"    column="coldplan"    />
+        <result property="coldproduce"    column="coldproduce"    />
+        <result property="furnace"    column="furnace"    />
+        <result property="reelreport"    column="reelreport"    />
+        <result property="rereeler"    column="rereeler"    />
+        <result property="store"    column="store"    />
+        <result property="packageTime"    column="packageTime"    />
+        <result property="note"    column="note"    />
+    </resultMap>
+
+    <sql id="selectLmdpAvgTimeVo">
+        select id, update_time, castplan, smelthold, baowen, baowen1, baowen2, baowen3, baowen4, baowen5, castpro, castreel, coldplan, coldproduce, furnace, reelreport, rereeler, store, package_time, note from lmdp_avg_time
+    </sql>
+
+<!--    <select id="selectLmdpAvgTimeList" parameterType="LmdpAvgTime" resultMap="LmdpAvgTimeResult">-->
+<!--        <include refid="selectLmdpAvgTimeVo"/>-->
+<!--        <where>  -->
+<!--            <if test="castplan != null "> and castplan = #{castplan}</if>-->
+<!--            <if test="smelthold != null "> and smelthold = #{smelthold}</if>-->
+<!--            <if test="baowen != null "> and baowen = #{baowen}</if>-->
+<!--            <if test="baowen1 != null "> and baowen1 = #{baowen1}</if>-->
+<!--            <if test="baowen2 != null "> and baowen2 = #{baowen2}</if>-->
+<!--            <if test="baowen3 != null "> and baowen3 = #{baowen3}</if>-->
+<!--            <if test="baowen4 != null "> and baowen4 = #{baowen4}</if>-->
+<!--            <if test="baowen5 != null "> and baowen5 = #{baowen5}</if>-->
+<!--            <if test="castpro != null "> and castpro = #{castpro}</if>-->
+<!--            <if test="castreel != null "> and castreel = #{castreel}</if>-->
+<!--            <if test="coldplan != null "> and coldplan = #{coldplan}</if>-->
+<!--            <if test="coldproduce != null "> and coldproduce = #{coldproduce}</if>-->
+<!--            <if test="furnace != null "> and furnace = #{furnace}</if>-->
+<!--            <if test="reelreport != null "> and reelreport = #{reelreport}</if>-->
+<!--            <if test="rereeler != null "> and rereeler = #{rereeler}</if>-->
+<!--            <if test="store != null "> and store = #{store}</if>-->
+<!--            <if test="package != null "> and package = #{package}</if>-->
+<!--            <if test="note != null  and note != ''"> and note = #{note}</if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+<!--    <select id="selectLmdpAvgTimeById" parameterType="Long" resultMap="LmdpAvgTimeResult">-->
+<!--        <include refid="selectLmdpAvgTimeVo"/>-->
+<!--        where id = #{id}-->
+<!--    </select>-->
+<!--        -->
+<!--    <insert id="insertLmdpAvgTime" parameterType="LmdpAvgTime" useGeneratedKeys="true" keyProperty="id">-->
+<!--        insert into lmdp_avg_time-->
+<!--        <trim prefix="(" suffix=")" suffixOverrides=",">-->
+<!--            <if test="updateTime != null">update_time,</if>-->
+<!--            <if test="castplan != null">castplan,</if>-->
+<!--            <if test="smelthold != null">smelthold,</if>-->
+<!--            <if test="baowen != null">baowen,</if>-->
+<!--            <if test="baowen1 != null">baowen1,</if>-->
+<!--            <if test="baowen2 != null">baowen2,</if>-->
+<!--            <if test="baowen3 != null">baowen3,</if>-->
+<!--            <if test="baowen4 != null">baowen4,</if>-->
+<!--            <if test="baowen5 != null">baowen5,</if>-->
+<!--            <if test="castpro != null">castpro,</if>-->
+<!--            <if test="castreel != null">castreel,</if>-->
+<!--            <if test="coldplan != null">coldplan,</if>-->
+<!--            <if test="coldproduce != null">coldproduce,</if>-->
+<!--            <if test="furnace != null">furnace,</if>-->
+<!--            <if test="reelreport != null">reelreport,</if>-->
+<!--            <if test="rereeler != null">rereeler,</if>-->
+<!--            <if test="store != null">store,</if>-->
+<!--            <if test="package != null">package,</if>-->
+<!--            <if test="note != null">note,</if>-->
+<!--         </trim>-->
+<!--        <trim prefix="values (" suffix=")" suffixOverrides=",">-->
+<!--            <if test="updateTime != null">#{updateTime},</if>-->
+<!--            <if test="castplan != null">#{castplan},</if>-->
+<!--            <if test="smelthold != null">#{smelthold},</if>-->
+<!--            <if test="baowen != null">#{baowen},</if>-->
+<!--            <if test="baowen1 != null">#{baowen1},</if>-->
+<!--            <if test="baowen2 != null">#{baowen2},</if>-->
+<!--            <if test="baowen3 != null">#{baowen3},</if>-->
+<!--            <if test="baowen4 != null">#{baowen4},</if>-->
+<!--            <if test="baowen5 != null">#{baowen5},</if>-->
+<!--            <if test="castpro != null">#{castpro},</if>-->
+<!--            <if test="castreel != null">#{castreel},</if>-->
+<!--            <if test="coldplan != null">#{coldplan},</if>-->
+<!--            <if test="coldproduce != null">#{coldproduce},</if>-->
+<!--            <if test="furnace != null">#{furnace},</if>-->
+<!--            <if test="reelreport != null">#{reelreport},</if>-->
+<!--            <if test="rereeler != null">#{rereeler},</if>-->
+<!--            <if test="store != null">#{store},</if>-->
+<!--            <if test="package != null">#{package},</if>-->
+<!--            <if test="note != null">#{note},</if>-->
+<!--         </trim>-->
+<!--    </insert>-->
+
+    <update id="updateLmdpAvgTime"  >
+        update lmdp_avg_time
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="castplan != null">castplan = #{castplan},</if>
+            <if test="smelthold != null">smelthold = #{smelthold},</if>
+            <if test="baowen != null">baowen = #{baowen},</if>
+            <if test="baowen1 != null">baowen1 = #{baowen1},</if>
+            <if test="baowen2 != null">baowen2 = #{baowen2},</if>
+            <if test="baowen3 != null">baowen3 = #{baowen3},</if>
+            <if test="baowen4 != null">baowen4 = #{baowen4},</if>
+            <if test="baowen5 != null">baowen5 = #{baowen5},</if>
+            <if test="castpro != null">castpro = #{castpro},</if>
+            <if test="castreel != null">castreel = #{castreel},</if>
+            <if test="coldplan != null">coldplan = #{coldplan},</if>
+            <if test="coldproduce != null">coldproduce = #{coldproduce},</if>
+            <if test="furnace != null">furnace = #{furnace},</if>
+            <if test="reelreport != null">reelreport = #{reelreport},</if>
+            <if test="rereeler != null">rereeler = #{rereeler},</if>
+            <if test="store != null">store = #{store},</if>
+            <if test="packageTime != null">package_time = #{packageTime},</if>
+            <if test="note != null">note = #{note},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+<!--    <delete id="deleteLmdpAvgTimeById" parameterType="Long">-->
+<!--        delete from lmdp_avg_time where id = #{id}-->
+<!--    </delete>-->
+
+<!--    <delete id="deleteLmdpAvgTimeByIds" parameterType="String">-->
+<!--        delete from lmdp_avg_time where id in -->
+<!--        <foreach item="id" collection="array" open="(" separator="," close=")">-->
+<!--            #{id}-->
+<!--        </foreach>-->
+<!--    </delete>-->
+</mapper>

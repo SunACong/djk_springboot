@@ -5,6 +5,7 @@ import com.szj.djk.entity.LmdpColdProduce;
 import com.szj.djk.service.LmdpColdProduceService;
 import com.szj.djk.mapper.LmdpColdProduceMapper;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
 * @author JH-Sparrow
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 * @createDate 2022-10-18 16:19:09
 */
 @Service
+@Transactional
 public class LmdpColdProduceServiceImpl extends ServiceImpl<LmdpColdProduceMapper, LmdpColdProduce>
     implements LmdpColdProduceService{
 

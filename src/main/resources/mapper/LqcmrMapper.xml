@@ -7,13 +7,13 @@
     <resultMap id="BaseResultMap" type="com.szj.djk.entity.Lqcmr">
             <id property="id" column="id" jdbcType="INTEGER"/>
             <result property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
-            <result property="ts" column="ts" jdbcType="TIMESTAMP"/>
+            <result property="lqcmrTs" column="lqcmr_ts" jdbcType="TIMESTAMP"/>
             <result property="correctStrength" column="correct_strength" jdbcType="DOUBLE"/>
             <result property="correctExtension" column="correct_extension" jdbcType="DOUBLE"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id,batch_num,ts,
+        id,batch_num,lqcmr_ts,
         correct_strength,correct_extension
     </sql>
 </mapper>

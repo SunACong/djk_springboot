@@ -9,10 +9,11 @@ import org.springframework.stereotype.Service;
 /**
 * @author Admin
 * @description 针对表【lqcmr】的数据库操作Service实现
-* @createDate 2022-10-10 17:09:25
+* @createDate 2023-01-11 15:41:44
 */
 @Service
-public class LqcmrServiceImpl extends ServiceImpl<LqcmrMapper, Lqcmr> implements LqcmrService{
+public class LqcmrServiceImpl extends ServiceImpl<LqcmrMapper, Lqcmr>
+    implements LqcmrService{
 
 }
 

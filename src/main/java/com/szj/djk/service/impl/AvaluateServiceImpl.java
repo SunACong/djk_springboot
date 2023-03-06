@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.szj.djk.entity.Avaluate;
-import com.szj.djk.entity.ProductQuality;
 import com.szj.djk.mapper.AvaluateMapper;
 import com.szj.djk.service.AvaluateService;
 import org.springframework.beans.factory.annotation.Autowired;

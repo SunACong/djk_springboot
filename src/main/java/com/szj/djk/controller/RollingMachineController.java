@@ -1,5 +1,6 @@
 package com.szj.djk.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.szj.djk.common.R;
 import com.szj.djk.entity.Rewinder;
 import com.szj.djk.entity.RollingMachine;
@@ -69,6 +70,16 @@ public class RollingMachineController {
     @GetMapping("/listWarnData")
     public R<List<RollingMachine>> listWarnData(String rollingName, Integer maxValue){
         return R.success(rollingMachineService.selectWarnData(rollingName,maxValue));
+    }
+
+    @GetMapping("/getHistoryList")
+    public R<List<RollingMachine>> list(String deviceId, String startDateTime, String endDateTime){
+        LambdaQueryWrapper<RollingMachine> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(RollingMachine::getRollingDeviceId, deviceId);
+        queryWrapper.between(RollingMachine::getRollingProduceTime, startDateTime, endDateTime);
+        queryWrapper.orderByDesc(RollingMachine::getRollingName);
+        List<RollingMachine> list = rollingMachineService.list(queryWrapper);
+        return R.success(list);
     }
 
     /**

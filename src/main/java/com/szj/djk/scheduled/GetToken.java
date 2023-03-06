@@ -1,7 +1,6 @@
 package com.szj.djk.scheduled;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
+
 import com.szj.djk.entity.Lqci;
 import com.szj.djk.entity.ProcessStandard;
 import com.szj.djk.entity.ProductQuality;
@@ -9,16 +8,12 @@ import com.szj.djk.mapper.ProductQualityMapper;
 import com.szj.djk.service.LqciService;
 import com.szj.djk.service.ProcessStandardService;
 import com.szj.djk.service.ProductQualityService;
-import com.szj.djk.utils.MyHttp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -91,7 +86,6 @@ public class GetToken {
                 qualityJudgment(item);
                 return item;
             }).collect(Collectors.toList());
-
             // 批量插入和更新
             productQualityMapper.batchInsertOrUpdate(productQualities);
         }
@@ -138,9 +132,9 @@ public class GetToken {
      * 可以根据token有效时长进行更新
      * @return
      */
-    @Scheduled(cron = "0 0/1 * * * ? ")
+    @Scheduled(cron = "0 0 0/1 * * ? ")
     public void start() {
-//        init();
+        init();
     }
 
     /**
@@ -148,8 +142,14 @@ public class GetToken {
      * 0 不合格
      * 1 合格
      * 2 暂时不能评定
-     * @param productQuality
-     * @return
+     */
+
+    /**
+     * 版型判定
+     * SingleStraightness 平直度
+     * SingleMediumConvexity 中凸度
+     * @param productQuality 质量参数
+     * @param processStandard 判定标准
      */
     private void plateTypeJudgment(ProductQuality productQuality, ProcessStandard processStandard){
         if (productQuality.getSingleStraightness() != null && productQuality.getSingleMediumConvexity() != null){
@@ -163,6 +163,14 @@ public class GetToken {
             productQuality.setPlateType(2);
         }
     }
+
+    /**
+     * 尺寸偏差判定
+     * FinishedThickness 厚度
+     * FinishedWidth 宽度
+     * @param productQuality 质量参数
+     * @param processStandard 判定标准
+     */
     private void sizeDeviationJudgment(ProductQuality productQuality, ProcessStandard processStandard){
         if (productQuality.getFinishedThickness() != null && productQuality.getFinishedWidth() != null){
             productQuality.setSizeDeviation(1);
@@ -170,6 +178,14 @@ public class GetToken {
             productQuality.setSizeDeviation(2);
         }
     }
+
+    /**
+     * 力学性能判定
+     * CorrectExtension 伸长率
+     * CorrectStrength 抗拉强度
+     * @param productQuality 质量参数
+     * @param processStandard 判定标准
+     */
     private void mechanicalPropertiesJudgment(ProductQuality productQuality, ProcessStandard processStandard){
         if (productQuality.getCorrectExtension() != null && productQuality.getCorrectStrength() != null){
             if(productQuality.getCorrectExtension()>=processStandard.getElongation() && productQuality.getCorrectStrength()<=processStandard.getTensileStrengthHigh() && productQuality.getCorrectStrength()>=processStandard.getTensileStrengthLow()){

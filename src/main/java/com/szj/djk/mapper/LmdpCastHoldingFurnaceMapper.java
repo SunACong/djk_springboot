@@ -1,7 +1,7 @@
 package com.szj.djk.mapper;
 
-import com.szj.djk.entity.LmdpCastHoldingFurnace;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.szj.djk.entity.LmdpCastHoldingFurnace;
 import org.apache.ibatis.annotations.Mapper;
 
 /**

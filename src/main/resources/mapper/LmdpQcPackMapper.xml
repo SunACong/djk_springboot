@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.LmdpQcPackMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpQcPack">
+            <result property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="VARCHAR"/>
+            <result property="ts" column="ts" jdbcType="VARCHAR"/>
+            <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
+            <result property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
+            <result property="model" column="model" jdbcType="VARCHAR"/>
+            <result property="alloyStatus" column="alloy_status" jdbcType="VARCHAR"/>
+            <result property="rollDiameter" column="roll_diameter" jdbcType="VARCHAR"/>
+            <result property="weight" column="weight" jdbcType="VARCHAR"/>
+            <result property="sample" column="sample" jdbcType="VARCHAR"/>
+            <result property="cert" column="cert" jdbcType="VARCHAR"/>
+            <result property="productCcie" column="product_ccie" jdbcType="VARCHAR"/>
+            <result property="packageQc" column="package_qc" jdbcType="VARCHAR"/>
+            <result property="outerLabel" column="outer_label" jdbcType="VARCHAR"/>
+            <result property="packageTime" column="package_time" jdbcType="VARCHAR"/>
+            <result property="inspectorId" column="inspector_id" jdbcType="VARCHAR"/>
+            <result property="reportTime" column="report_time" jdbcType="VARCHAR"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,create_time,ts,
+        creator_id,batch_num,model,
+        alloy_status,roll_diameter,weight,
+        sample,cert,product_ccie,
+        package_qc,outer_label,package_time,
+        inspector_id,report_time,remark
+    </sql>
+</mapper>

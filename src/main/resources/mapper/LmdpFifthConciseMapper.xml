@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.LmdpFifthConciseMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpFifthConcise">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="holdRefine5FollowTime" column="hold_refine5_follow_time" jdbcType="VARCHAR"/>
+            <result property="holdRefine5BeginTime" column="hold_refine5_begin_time" jdbcType="VARCHAR"/>
+            <result property="holdRefine5EndTime" column="hold_refine5_end_time" jdbcType="VARCHAR"/>
+            <result property="holdRefine5Duration" column="hold_refine5_duration" jdbcType="VARCHAR"/>
+            <result property="holdRefine5Temp" column="hold_refine5_temp" jdbcType="VARCHAR"/>
+            <result property="holdRefine5Medium" column="hold_refine5_medium" jdbcType="VARCHAR"/>
+            <result property="holdRefine5Dose" column="hold_refine5_dose" jdbcType="VARCHAR"/>
+            <result property="holdRefine5ColdStuffDose" column="hold_refine5_cold_stuff_dose" jdbcType="VARCHAR"/>
+            <result property="holdRefine5GroupId" column="hold_refine5_group_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine5GroupName" column="hold_refine5_group_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine5CasterId" column="hold_refine5_caster_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine5CasterName" column="hold_refine5_caster_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine5SmelterId" column="hold_refine5_smelter_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine5SmelterName" column="hold_refine5_smelter_name" jdbcType="VARCHAR"/>
+            <result property="holdRemark" column="hold_remark" jdbcType="VARCHAR"/>
+            <result property="holdApprove" column="hold_approve" jdbcType="VARCHAR"/>
+            <result property="deleteFlag" column="delete_flag" jdbcType="VARCHAR"/>
+            <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
+            <result property="creatorName" column="creator_name" jdbcType="VARCHAR"/>
+            <result property="reviserId" column="reviser_id" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="VARCHAR"/>
+            <result property="ts" column="ts" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,hold_refine5_follow_time,hold_refine5_begin_time,
+        hold_refine5_end_time,hold_refine5_duration,hold_refine5_temp,
+        hold_refine5_medium,hold_refine5_dose,hold_refine5_cold_stuff_dose,
+        hold_refine5_group_id,hold_refine5_group_name,hold_refine5_caster_id,
+        hold_refine5_caster_name,hold_refine5_smelter_id,hold_refine5_smelter_name,
+        hold_remark,hold_approve,delete_flag,
+        creator_id,creator_name,reviser_id,
+        create_time,ts
+    </sql>
+</mapper>

@@ -7,15 +7,11 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.szj.djk.entity.ProductQuality;
 import com.szj.djk.mapper.ProductQualityMapper;
 import com.szj.djk.service.ProductQualityService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * @ClassName ProductQualityServiceImpl
- * @Authoc 孙少聪
- * @Date 2022/9/25 10:16:14
- */
+import java.util.Date;
+
 
 @Service
 public class ProductQualityServiceImpl extends ServiceImpl<ProductQualityMapper, ProductQuality> implements ProductQualityService {
@@ -27,5 +23,10 @@ public class ProductQualityServiceImpl extends ServiceImpl<ProductQualityMapper,
     public IPage<ProductQuality> selectProductQualityAndStandard(Page<ProductQuality> page, QueryWrapper<ProductQuality> queryWrapper,ProductQuality productQuality) {
         IPage<ProductQuality> productQualityIPage = productQualityMapper.selectProductQualityAndStandard(page, queryWrapper, productQuality);
         return productQualityIPage;
+    }
+
+    @Override
+    public Date selectMaxDate() {
+        return productQualityMapper.selectMaxDate();
     }
 }

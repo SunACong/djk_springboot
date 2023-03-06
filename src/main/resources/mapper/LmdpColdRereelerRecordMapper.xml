@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.LmdpColdRereelerRecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpColdRereelerRecord">
+            <result property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="ts" column="ts" jdbcType="VARCHAR"/>
+            <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
+            <result property="mainOperator" column="main_operator" jdbcType="VARCHAR"/>
+            <result property="assistantOperator" column="assistant_operator" jdbcType="VARCHAR"/>
+            <result property="workShift" column="work_shift" jdbcType="VARCHAR"/>
+            <result property="recordDate" column="record_date" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="VARCHAR"/>
+            <result property="brand" column="brand" jdbcType="VARCHAR"/>
+            <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+            <result property="reelNum" column="reel_num" jdbcType="VARCHAR"/>
+            <result property="originRegular" column="origin_regular" jdbcType="VARCHAR"/>
+            <result property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
+            <result property="processedRegular" column="processed_regular" jdbcType="VARCHAR"/>
+            <result property="machineSpeed" column="machine_speed" jdbcType="VARCHAR"/>
+            <result property="reelingTensileStress" column="reeling_tensile_stress" jdbcType="VARCHAR"/>
+            <result property="knifeGap" column="knife_gap" jdbcType="VARCHAR"/>
+            <result property="originWeight" column="origin_weight" jdbcType="VARCHAR"/>
+            <result property="processedWeight" column="processed_weight" jdbcType="VARCHAR"/>
+            <result property="wasteMaterialHead" column="waste_material_head" jdbcType="VARCHAR"/>
+            <result property="wasteMaterialTail" column="waste_material_tail" jdbcType="VARCHAR"/>
+            <result property="wasteMaterialElse" column="waste_material_else" jdbcType="VARCHAR"/>
+            <result property="quality" column="quality" jdbcType="VARCHAR"/>
+            <result property="result" column="result" jdbcType="VARCHAR"/>
+            <result property="confirmer" column="confirmer" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,ts,creator_id,
+        main_operator,assistant_operator,work_shift,
+        record_date,create_time,brand,
+        product_name,reel_num,origin_regular,
+        batch_num,processed_regular,machine_speed,
+        reeling_tensile_stress,knife_gap,origin_weight,
+        processed_weight,waste_material_head,waste_material_tail,
+        waste_material_else,quality,result,
+        confirmer
+    </sql>
+</mapper>

@@ -77,7 +77,7 @@
     <select id="selectProductQualityAndStandard" parameterType="com.szj.djk.entity.ProductQuality" resultMap="ProductQualityAndProcessStandardResult">
         <include refid="selectProductQuality"/>
         <where>
-            <if test="productQuality.batchNum != null  and productQuality.batchNum != ''"> and batch_num = #{productQuality.batchNum}</if>
+            <if test="productQuality.batchNum != null  and productQuality.batchNum != ''"> and batch_num like CONCAT('%',#{productQuality.batchNum},'%')</if>
             <if test="productQuality.lqciTs != null "> and lqci_ts = #{lqciTs}</if>
             <if test="productQuality.lqcmrTs != null "> and lqcmr_ts = #{lqcmrTs}</if>
             <if test="productQuality.consumer != null  and productQuality.consumer != ''"> and consumer = #{productQuality.consumer}</if>

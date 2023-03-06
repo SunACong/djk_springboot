@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 /**
 * @author Admin
 * @description 针对表【lqcmr】的数据库操作Mapper
-* @createDate 2022-10-10 17:09:25
+* @createDate 2023-01-11 15:41:44
 * @Entity com.szj.djk.entity.Lqcmr
 */
 @Mapper
