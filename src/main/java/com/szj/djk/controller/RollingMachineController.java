@@ -1,11 +1,13 @@
 package com.szj.djk.controller;
 
 import com.szj.djk.common.R;
+import com.szj.djk.entity.Rewinder;
 import com.szj.djk.entity.RollingMachine;
 import com.szj.djk.service.RollingMachineService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -40,11 +42,45 @@ public class RollingMachineController {
      */
     @GetMapping("/listInfo")
     public R<List<RollingMachine>> listInfo(RollingMachine rollingMachine){
+        List<RollingMachine> rollingMachines = rollingMachineService.selectRollingMachineTen(rollingMachine);
+//        System.out.println("这是拿到的数据");
+//        System.out.println(rollingMachines);
         return  R.success(rollingMachineService.selectRollingMachineTen(rollingMachine));
     }
+
+    /**
+     * 查询铸轧机特定时间前后的警告数据
+     */
+    @GetMapping("listSpecial")
+    public R<List<RollingMachine>> listSpecial(RollingMachine rollingMachine) throws ParseException {
+        int amount = 10000;
+        Date rollingProduceTime = rollingMachine.getRollingProduceTime();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        System.out.println(rollingProduceTime.getTime());
+        String beforeTime = sdf.format(rollingProduceTime.getTime() - amount);
+        String afterTime = sdf.format(rollingProduceTime.getTime() + amount);
+        Date before = sdf.parse(beforeTime);
+        Date after = sdf.parse(afterTime);
+        List<RollingMachine> specialList = rollingMachineService.selectSpecial(rollingMachine,before,after);
+        return R.success(specialList);
+    }
+
 
     @GetMapping("/listWarnData")
     public R<List<RollingMachine>> listWarnData(String rollingName, Integer maxValue){
         return R.success(rollingMachineService.selectWarnData(rollingName,maxValue));
+    }
+
+    /**
+     * 查询铸轧机一段时间内的警告数据
+     */
+    @GetMapping("listDuringData")
+    public R<List<RollingMachine>> listDuringData(RollingMachine rollingMachine,String begin,String end) throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date beginDate = sdf.parse(begin);
+        Date endDate = sdf.parse(end);
+        List<RollingMachine> DuringDataList = rollingMachineService.selectDuringData(rollingMachine,beginDate,endDate);
+        return R.success(DuringDataList);
     }
 }

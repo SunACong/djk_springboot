@@ -13,7 +13,7 @@
 
 
     <sql id="selectAvaluateVo">
-        select id, name, dan_wei, min_value, max_value from avaluate
+        select id, name, dan_wei, min_value, max_value ,device_id from avaluate
     </sql>
     <select id="selectAvaluateAndStandard" parameterType="com.szj.djk.entity.Avaluate" resultMap="AvaluateResult">
         <include refid="selectAvaluateVo"/>
@@ -22,6 +22,7 @@
             <if test="avaluate.danWei != null  and avaluate.danWei != ''"> and dan_wei = #{avaluate.danWei}</if>
             <if test="avaluate.minValue != null and avaluate.minValue != ''"> and min_value = #{avaluate.minValue}</if>
             <if test="avaluate.maxValue != null and avaluate.maxValue != ''"> and max_value = #{avaluate.maxValue}</if>
+            <if test="avaluate.deviceId!= null  and avaluate.deviceId != ''"> and device_id like concat('%', #{avaluate.deviceId}, '%')</if>
         </where>
     </select>
 </mapper>
