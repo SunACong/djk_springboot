@@ -42,8 +42,32 @@ public class RollingMachineServiceImpl extends ServiceImpl<RollingMachineMapper,
         return rollingMachineMapper.selectWarnData(rollingName,maxValue);
     }
 
+    /**
+     * 查询特定警告数据时间前后的数据
+     * @param rollingMachine
+     * @param before
+     * @param after
+     * @return
+     */
     @Override
     public List<RollingMachine> selectSpecial(RollingMachine rollingMachine, Date before, Date after) {
         return rollingMachineMapper.selectSpecial(rollingMachine,before,after);
+    }
+
+    /**
+     * 查询一段时间内的报警数据
+     * @param rollingMachine
+     * @param beginDate
+     * @param endDate
+     * @return
+     */
+    @Override
+    public List<RollingMachine> selectDuringData(RollingMachine rollingMachine, Date beginDate, Date endDate) {
+        return rollingMachineMapper.selectDuringData(rollingMachine,beginDate,endDate);
+    }
+
+    @Override
+    public int saveData(RollingMachine rollingMachine) {
+        return rollingMachineMapper.saveData(rollingMachine);
     }
 }

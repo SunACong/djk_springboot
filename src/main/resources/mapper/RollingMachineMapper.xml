@@ -14,6 +14,14 @@
     <sql id="selectRollingMachineVo">
         select * from rolling_machine
     </sql>
+    <insert id="saveData" parameterType="com.szj.djk.entity.RollingMachine">
+        insert ignore into rolling_machine(rolling_name,rolling_value,rolling_produce_time,rolling_device_id) values (#{rollingMachine.rollingName},#{rollingMachine.rollingValue},#{rollingMachine.rollingProduceTime},#{rollingMachine.rollingDeviceId});
+--         insert into  rolling_machine(rolling_name,rolling_value,rolling_produce_time,rolling_device_id)
+--         values
+--             (#{rollingName},#{rollingValue},#{rollingProduceTime},#{rollingDeviceId})
+--         ON DUPLICATE key update
+--             rolling_produce_time=values(rolling_produce_time)
+    </insert>
 
     <select id="selectrollingMachineTen" resultType="com.szj.djk.entity.RollingMachine" resultMap="RollingMachineResult">
         SELECT * from(<include refid="selectRollingMachineVo"/>
@@ -33,5 +41,9 @@
     <select id = "selectSpecial" resultType="com.szj.djk.entity.RollingMachine" resultMap="RollingMachineResult">
         select * from rolling_machine where rolling_name=#{rollingMachine.rollingName} and rolling_produce_time between #{before} and #{after}
     </select>
+    <select id="selectDuringData" resultType="com.szj.djk.entity.RollingMachine" resultMap="RollingMachineResult">
+        select * from rolling_machine where rolling_device_id=#{rollingMachine.rollingDeviceId} and rolling_name=#{rollingMachine.rollingName} and rolling_produce_time between #{beginDate} and #{endDate}
+    </select>
+    <select id="selectAllWarnData" resultType="com.szj.djk.entity.RollingMachine"></select>
 
 </mapper>

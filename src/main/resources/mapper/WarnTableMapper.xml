@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.WarnTableMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.WarnTable">
+            <id property="idNumber" column="id_number" jdbcType="INTEGER"/>
+            <result property="rollingName" column="rolling_name" jdbcType="VARCHAR"/>
+            <result property="rollingProduceTime" column="rolling_produce_time" jdbcType="TIMESTAMP"/>
+            <result property="rollingValue" column="rolling_value" jdbcType="INTEGER"/>
+            <result property="rollingDeviceNumber" column="rolling_device_number" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id_number,rolling_name,rolling_produce_time,
+        rolling_value,rolling_device_number
+    </sql>
+    <sql id="selectWarnTableVo">
+        select * from warn_table
+    </sql>
+    <select id="selectWarnTableNewData" resultType="com.szj.djk.entity.WarnTable" resultMap="BaseResultMap">
+        SELECT * from(<include refid="selectWarnTableVo"/> where rolling_device_number=#{rollingDeviceNumber}
+        order by rolling_produce_time desc limit 20) aa order by rolling_produce_time
+    </select>
+    <select id="selectWarnTableHistoryData" resultType="com.szj.djk.entity.WarnTable" resultMap="BaseResultMap">
+        SELECT * from(<include refid="selectWarnTableVo"/> where rolling_device_number=#{rollingDeviceNumber}
+        order by rolling_produce_time desc limit 50) aa order by rolling_produce_time
+    </select>
+    <select id="selectDuringWarnData" resultType="com.szj.djk.entity.WarnTable" resultMap="BaseResultMap">
+        select * from warn_table where rolling_device_number=#{warnTable.rollingDeviceNumber} and rolling_name=#{warnTable.rollingName} and rolling_produce_time between #{beginDate} and #{endDate}
+    </select>
+</mapper>

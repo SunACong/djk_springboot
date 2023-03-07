@@ -43,7 +43,7 @@ public class RewinderController {
     }
 
     /**
-     * 查询特定警告数据时间前后的数据
+     * 查询铸轧机特定时间前后的警告数据
      */
     @GetMapping("listSpecial")
     public R<List<Rewinder>> listSpecial(Rewinder rewinder) throws ParseException {
@@ -55,11 +55,6 @@ public class RewinderController {
         String afterTime = sdf.format(produceTime.getTime() + amount);
         Date before = sdf.parse(beforeTime);
         Date after = sdf.parse(afterTime);
-//        Date before = new Date();
-//        Date after = new Date();
-//        System.out.println(produceTime);
-//        System.out.println(before);
-//        System.out.println(after);
         List<Rewinder> specialList = rewinderService.selectSpecial(rewinder,before,after);
         return R.success(specialList);
     }

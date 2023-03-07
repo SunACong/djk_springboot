@@ -43,6 +43,9 @@ public class RollingMachineController {
      */
     @GetMapping("/listInfo")
     public R<List<RollingMachine>> listInfo(RollingMachine rollingMachine){
+        List<RollingMachine> rollingMachines = rollingMachineService.selectRollingMachineTen(rollingMachine);
+//        System.out.println("这是拿到的数据");
+//        System.out.println(rollingMachines);
         return  R.success(rollingMachineService.selectRollingMachineTen(rollingMachine));
     }
 
@@ -77,5 +80,18 @@ public class RollingMachineController {
         queryWrapper.orderByDesc(RollingMachine::getRollingName);
         List<RollingMachine> list = rollingMachineService.list(queryWrapper);
         return R.success(list);
+    }
+
+    /**
+     * 查询铸轧机一段时间内的警告数据
+     */
+    @GetMapping("listDuringData")
+    public R<List<RollingMachine>> listDuringData(RollingMachine rollingMachine,String begin,String end) throws ParseException {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date beginDate = sdf.parse(begin);
+        Date endDate = sdf.parse(end);
+        List<RollingMachine> DuringDataList = rollingMachineService.selectDuringData(rollingMachine,beginDate,endDate);
+        return R.success(DuringDataList);
     }
 }
