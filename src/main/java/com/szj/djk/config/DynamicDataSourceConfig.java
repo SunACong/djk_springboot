@@ -47,9 +47,6 @@ public class DynamicDataSourceConfig {
         Map<Object, Object> targetDataSources = new HashMap<>(2);
         targetDataSources.put(DataSourceNames.MASTER, oneDataSource);
         targetDataSources.put(DataSourceNames.SLAVE, twoDataSource);
-        // 如果还有其他数据源,可以按照数据源one和two这种方法去进行配置，然后在targetDataSources中继续添加
-        System.out.println("加载的数据源DataSources:" + targetDataSources);
-
         //DynamicDataSource（默认数据源,所有数据源） 第一个指定默认数据库
         return new DynamicDataSource(oneDataSource, targetDataSources);
     }

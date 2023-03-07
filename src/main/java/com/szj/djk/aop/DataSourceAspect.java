@@ -37,8 +37,7 @@ public class DataSourceAspect implements Ordered {
         DataSource ds = method.getAnnotation(DataSource.class);
         // 通过判断 DataSource 中的值来判断当前方法应用哪个数据源
         DynamicDataSource.setDataSource(ds.value());
-        log.info("AOP切换数据源成功，数据源为: " + ds.value());
-        log.info("set datasource is " + ds.value());
+        log.info("datasource: " + ds.value());
         try {
             return point.proceed();
         } finally {
