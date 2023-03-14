@@ -1,6 +1,5 @@
 package com.szj.djk.service.impl;
 
-import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.szj.djk.mapper.PlanAndInspectMapper;
 import com.szj.djk.service.PlanAndInspectService;
@@ -15,7 +14,6 @@ import javax.annotation.Resource;
 * @createDate 2023-03-14 15:20:29
 */
 @Service
-@DS("master")
 public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper, PlanAndInspect>
     implements PlanAndInspectService{
 
@@ -24,6 +22,7 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
 
     @Override
     public String getRecentTs() {
+
         String ts = "1970-01-01 00:00:00";
         if (planAndInspectMapper.getRecentTs() != null) {
             return planAndInspectMapper.getRecentTs();

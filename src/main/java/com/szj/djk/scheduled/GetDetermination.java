@@ -1,5 +1,7 @@
 package com.szj.djk.scheduled;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
+import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.szj.djk.entity.LmdpColdPlan;
 import com.szj.djk.entity.LmdpQcColdInspect;
@@ -36,6 +38,7 @@ public class GetDetermination {
      * @return
      */
     @Scheduled(cron = "*/1 * * * * ?")
+    @DS("master")
     public Boolean doDetermination(){
         String ts = getRecentTsFromPlanAndInspect();
         List<LmdpQcColdInspect> list = getLmdpQcColdInspectList(ts);
@@ -54,7 +57,9 @@ public class GetDetermination {
      * @return
      */
     public String getRecentTsFromPlanAndInspect(){
-        return planAndInspectService.getRecentTs();
+        String ts = planAndInspectService.getRecentTs();
+        DynamicDataSourceContextHolder.poll();
+        return ts;
     }
 
     /**
@@ -63,9 +68,11 @@ public class GetDetermination {
      * @return
      */
     public List<LmdpQcColdInspect> getLmdpQcColdInspectList(String ts){
+        DynamicDataSourceContextHolder.push("slave");
         LambdaQueryWrapper<LmdpQcColdInspect> wrapper = new LambdaQueryWrapper<>();
         wrapper.gt(LmdpQcColdInspect::getTs, ts);
         List<LmdpQcColdInspect> list = lmdpQcColdInspectService.list(wrapper);
+        DynamicDataSourceContextHolder.poll();
         return list;
     }
 
@@ -75,9 +82,11 @@ public class GetDetermination {
      * @return
      */
     public LmdpColdPlan getLmdpColdPlanByBatchNum(String coldreductionstripNum){
+        DynamicDataSourceContextHolder.push("slave");
         LambdaQueryWrapper<LmdpColdPlan> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(LmdpColdPlan::getColdreductionstripNum, coldreductionstripNum);
         LmdpColdPlan lmdpColdPlan = lmdpColdPlanService.getOne(wrapper);
+        DynamicDataSourceContextHolder.poll();
         return lmdpColdPlan;
     }
 

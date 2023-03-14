@@ -1,9 +1,7 @@
 package com.szj.djk.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.szj.djk.common.DataSourceNames;
 import com.szj.djk.common.R;
-import com.szj.djk.config.DataSource;
 import com.szj.djk.entity.LmdpQcColdInspect;
 import com.szj.djk.service.LmdpQcColdInspectService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +19,6 @@ public class LmdpQcColdInspectController {
     private LmdpQcColdInspectService lmdpQcColdInspectService;
 
     @GetMapping("list")
-    @DataSource(DataSourceNames.SLAVE)
     public R<List<LmdpQcColdInspect>> list(LmdpQcColdInspect lmdpQcColdInspect){
         LambdaQueryWrapper<LmdpQcColdInspect> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.setEntity(lmdpQcColdInspect);
