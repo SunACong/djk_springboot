@@ -1,9 +1,7 @@
 package com.szj.djk.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.szj.djk.common.DataSourceNames;
-import com.szj.djk.config.DataSource;
 import com.szj.djk.entity.LmdpQcColdInspect;
 import com.szj.djk.mapper.LmdpQcColdInspectMapper;
 import com.szj.djk.service.LmdpQcColdInspectService;
@@ -18,6 +16,7 @@ import java.util.List;
 * @createDate 2023-02-16 14:25:11
 */
 @Service
+@DS("master")
 public class LmdpQcColdInspectServiceImpl extends ServiceImpl<LmdpQcColdInspectMapper, LmdpQcColdInspect>
     implements LmdpQcColdInspectService{
 
@@ -25,12 +24,8 @@ public class LmdpQcColdInspectServiceImpl extends ServiceImpl<LmdpQcColdInspectM
     private LmdpQcColdInspectMapper lmdpQcColdInspectMapper;
 
     @Override
-    @DataSource(DataSourceNames.SLAVE)
-    public List<LmdpQcColdInspect> selectTest() {
-        LambdaQueryWrapper<LmdpQcColdInspect> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(LmdpQcColdInspect::getId, "3754cbaea4f24f06933fffecd2d997dc");
-        List<LmdpQcColdInspect> list = lmdpQcColdInspectMapper.selectList(queryWrapper);
-        list.forEach(System.out::println);
+    public List<LmdpQcColdInspect> test() {
+        List<LmdpQcColdInspect> list = lmdpQcColdInspectMapper.selectList(null);
         return list;
     }
 }

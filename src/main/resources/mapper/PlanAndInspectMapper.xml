@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.PlanAndInspectMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.vo.PlanAndInspect">
+            <id property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
+            <result property="planNum" column="plan_num" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="ts" column="ts" jdbcType="TIMESTAMP"/>
+            <result property="plateTypeDetermination" column="plate_type_determination" jdbcType="INTEGER"/>
+            <result property="mechanicalPropertiesDetermination" column="mechanical_properties_determination" jdbcType="INTEGER"/>
+            <result property="dimensionalDeviationDetermination" column="dimensional_deviation_determination" jdbcType="INTEGER"/>
+            <result property="surfaceQualityDetermination" column="surface_quality_determination" jdbcType="INTEGER"/>
+            <result property="appearanceQualityDetermination" column="appearance_quality_determination" jdbcType="INTEGER"/>
+            <result property="determinationCreateTime" column="determination_create_time" jdbcType="TIMESTAMP"/>
+            <result property="determinationUpdateTime" column="determination_update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        batch_num,plan_num,create_time,
+        ts,plate_type_determination,mechanical_properties_determination,
+        dimensional_deviation_determination,surface_quality_determination,appearance_quality_determination,
+        determination_create_time,determination_update_time
+    </sql>
+
+    <select id="getRecentTs" resultType="java.lang.String">
+        select ts from plan_and_inspect order by ts desc limit 1
+    </select>
+</mapper>

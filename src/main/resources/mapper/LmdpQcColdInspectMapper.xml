@@ -208,4 +208,8 @@
         tail_abnormal_reject_picture,tail_abnormal_reject_vedio,outer_abnormal_reject_picture,
         weighing_thickness,weighing_convexity
     </sql>
+
+    <select id="getRecentTime" resultType="java.lang.String">
+        select max(ts) from lmdp_qc_cold_inspect;
+    </select>
 </mapper>

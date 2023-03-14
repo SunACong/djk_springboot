@@ -2,18 +2,28 @@ server:
   port: 9527
 
 spring:
+  autoconfigure:
+    # 去掉Druid 配置
+    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+  # 自动配置，例外处理
   datasource:
+    # 配置数据源类型
     type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.cj.jdbc.Driver
+    dynamic:
+      primary: master # 设置默认的数据源或者数据源组,默认值即为mysql1
+      strict: false # 严格匹配数据源,默认false. true未匹配到指定数据源时抛异常,false使用默认数据源
+      datasource:
+        master:
+          driverClassName: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/db_djk?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+          username: root
+          password: 123456
+        slave:
+          driver-class-name: com.mysql.cj.jdbc.Driver
+          url: jdbc:mysql://localhost:3306/djk-datasheet?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+          username: root
+          password: 123456
     druid:
-      master:
-        url: jdbc:mysql://localhost:3306/db_djk?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
-        username: root
-        password: 123456
-      slave:
-        url: jdbc:mysql://localhost:3306/djk-datasheet?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
-        username: root
-        password: 123456
       # 初始连接数
       initialSize: 5
       # 最小连接池数量
@@ -64,16 +74,8 @@ mybatis-plus:
       id-type: auto
   mapper-locations: classpath:mapper/*.xml
 
-#pagehelper:
-#  auto-dialect: mysql
-#  reasonable: true
-#  support-methods-arguments: true
-#  page-size-zero: true
-#  params: count=countSql
-
 logging:
   level:
     com.szj.djk.ssc.mapper: debug
     com.szj.djk.zgy.mapper: info
     com.szj.djk.zjh.mapper: info
-

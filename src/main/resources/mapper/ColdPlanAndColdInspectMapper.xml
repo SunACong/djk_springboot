@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.ColdPlanAndColdInspectMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.ColdPlanAndColdInspect">
+            <id property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
+            <result property="planNum" column="plan_num" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="ts" column="ts" jdbcType="TIMESTAMP"/>
+            <result property="consumer" column="consumer" jdbcType="VARCHAR"/>
+            <result property="productUse" column="product_use" jdbcType="VARCHAR"/>
+            <result property="model" column="model" jdbcType="VARCHAR"/>
+            <result property="rollDiameter" column="roll_diameter" jdbcType="VARCHAR"/>
+            <result property="reelNum" column="reel_num" jdbcType="VARCHAR"/>
+            <result property="singleHeight" column="single_height" jdbcType="DOUBLE"/>
+            <result property="singleWidth" column="single_width" jdbcType="DOUBLE"/>
+            <result property="singleMediumConvexity" column="single_medium_convexity" jdbcType="DOUBLE"/>
+            <result property="singleStraightness" column="single_straightness" jdbcType="DOUBLE"/>
+            <result property="singleStrength" column="single_strength" jdbcType="DOUBLE"/>
+            <result property="singleExtension" column="single_extension" jdbcType="DOUBLE"/>
+            <result property="singleGrainSize" column="single_grain_size" jdbcType="VARCHAR"/>
+            <result property="singleRoughness" column="single_roughness" jdbcType="VARCHAR"/>
+            <result property="surfaceQuality" column="surface_quality" jdbcType="VARCHAR"/>
+            <result property="surfaceQualityRemark" column="surface_quality_remark" jdbcType="VARCHAR"/>
+            <result property="appearanceQuality" column="appearance_quality" jdbcType="VARCHAR"/>
+            <result property="appearanceQualityRemark" column="appearance_quality_remark" jdbcType="VARCHAR"/>
+            <result property="finishedThickness" column="finished_thickness" jdbcType="DOUBLE"/>
+            <result property="finishedWidth" column="finished_width" jdbcType="DOUBLE"/>
+            <result property="finishedRollDiameter" column="finished_roll_diameter" jdbcType="DOUBLE"/>
+            <result property="finishedWeight" column="finished_weight" jdbcType="DOUBLE"/>
+            <result property="finishedTransverseThickness" column="finished_transverse_thickness" jdbcType="DOUBLE"/>
+            <result property="finishedLongitudinalThickness" column="finished_longitudinal_thickness" jdbcType="DOUBLE"/>
+            <result property="finishedThicknessDifference" column="finished_thickness_difference" jdbcType="VARCHAR"/>
+            <result property="accountUnqualifiedFact" column="account_unqualified_fact" jdbcType="VARCHAR"/>
+            <result property="accountUnqualifiedReview" column="account_unqualified_review" jdbcType="VARCHAR"/>
+            <result property="finishedFullbandLength" column="finished_fullband_length" jdbcType="DOUBLE"/>
+            <result property="singleRollDiameter" column="single_roll_diameter" jdbcType="DOUBLE"/>
+            <result property="singleRollWeight" column="single_roll_weight" jdbcType="DOUBLE"/>
+            <result property="singleWedgeRatio" column="single_wedge_ratio" jdbcType="DOUBLE"/>
+            <result property="stripType" column="strip_type" jdbcType="VARCHAR"/>
+            <result property="singleStrengthRe" column="single_strength_re" jdbcType="DOUBLE"/>
+            <result property="singleExtensionRe" column="single_extension_re" jdbcType="DOUBLE"/>
+            <result property="bendingPerformanceRequirements" column="bending_performance_requirements" jdbcType="VARCHAR"/>
+            <result property="bendingPerformanceRe" column="bending_performance_re" jdbcType="VARCHAR"/>
+            <result property="mechanicalMeasureReview" column="mechanical_measure_review" jdbcType="VARCHAR"/>
+            <result property="productQuality" column="product_quality" jdbcType="VARCHAR"/>
+            <result property="productArea" column="product_area" jdbcType="VARCHAR"/>
+            <result property="sSingleHeight" column="s_single_height" jdbcType="VARCHAR"/>
+            <result property="tensileStrength" column="tensile_strength" jdbcType="VARCHAR"/>
+            <result property="elongation" column="elongation" jdbcType="VARCHAR"/>
+            <result property="bendingPerformance" column="bending_performance" jdbcType="VARCHAR"/>
+            <result property="endwiseHeight" column="endwise_height" jdbcType="VARCHAR"/>
+            <result property="warpWidth" column="warp_width" jdbcType="VARCHAR"/>
+            <result property="convexRate" column="convex_rate" jdbcType="VARCHAR"/>
+            <result property="appearanceReq" column="appearance_req" jdbcType="VARCHAR"/>
+            <result property="flatness" column="flatness" jdbcType="VARCHAR"/>
+            <result property="wedge" column="wedge" jdbcType="VARCHAR"/>
+            <result property="same" column="same" jdbcType="VARCHAR"/>
+            <result property="roughness" column="roughness" jdbcType="VARCHAR"/>
+            <result property="stringLayer" column="string_layer" jdbcType="VARCHAR"/>
+            <result property="dagoba" column="dagoba" jdbcType="VARCHAR"/>
+            <result property="otherrequirement" column="otherrequirement" jdbcType="VARCHAR"/>
+            <result property="dataName" column="data_name" jdbcType="VARCHAR"/>
+            <result property="plateTypeDetermination" column="plate_type_determination" jdbcType="INTEGER"/>
+            <result property="mechanicalPropertiesDetermination" column="mechanical_properties_determination" jdbcType="INTEGER"/>
+            <result property="dimensionalDeviationDetermination" column="dimensional_deviation_determination" jdbcType="INTEGER"/>
+            <result property="surfaceQualityDetermination" column="surface_quality_determination" jdbcType="INTEGER"/>
+            <result property="appearanceQualityDetermination" column="appearance_quality_determination" jdbcType="INTEGER"/>
+            <result property="determinationCreateTime" column="determination_create_time" jdbcType="TIMESTAMP"/>
+            <result property="determinationUpdateTime" column="determination_update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        batch_num,plan_num,create_time,
+        ts,consumer,product_use,
+        model,roll_diameter,reel_num,
+        single_height,single_width,single_medium_convexity,
+        single_straightness,single_strength,single_extension,
+        single_grain_size,single_roughness,surface_quality,
+        surface_quality_remark,appearance_quality,appearance_quality_remark,
+        finished_thickness,finished_width,finished_roll_diameter,
+        finished_weight,finished_transverse_thickness,finished_longitudinal_thickness,
+        finished_thickness_difference,account_unqualified_fact,account_unqualified_review,
+        finished_fullband_length,single_roll_diameter,single_roll_weight,
+        single_wedge_ratio,strip_type,single_strength_re,
+        single_extension_re,bending_performance_requirements,bending_performance_re,
+        mechanical_measure_review,product_quality,product_area,
+        s_single_height,tensile_strength,elongation,
+        bending_performance,endwise_height,warp_width,
+        convex_rate,appearance_req,flatness,
+        wedge,same,roughness,
+        string_layer,dagoba,otherrequirement,
+        data_name,plate_type_determination,mechanical_properties_determination,
+        dimensional_deviation_determination,surface_quality_determination,appearance_quality_determination,
+        determination_create_time,determination_update_time
+    </sql>
+</mapper>

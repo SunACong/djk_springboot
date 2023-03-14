@@ -2,6 +2,7 @@ package com.szj.djk.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
- * 
+ *
  * @TableName two_castroll
  */
 @Data
@@ -21,6 +22,7 @@ public class TwoCastroll implements Serializable {
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "GMT+8")
+    @TableId
     private Date ts;
 
     /**
