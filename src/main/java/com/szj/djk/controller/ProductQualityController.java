@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.szj.djk.common.R;
-import com.szj.djk.scheduled.GetToken;
 import com.szj.djk.entity.ProductQuality;
 import com.szj.djk.service.ProductQualityService;
 import org.apache.ibatis.annotations.Param;
@@ -26,8 +25,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/productQuality")
 public class ProductQualityController {
-    @Autowired
-    private GetToken getToken;
 
     @Autowired
     private ProductQualityService productQualityService;
@@ -59,7 +56,6 @@ public class ProductQualityController {
     @GetMapping("pageVOList")
     public R<IPage> test(int pageNum, int pageSize, @Param("productQuality") ProductQuality productQuality) {
         if(productQuality.getIsDecision() != null){
-            getToken.start();
             System.out.println("判定成功");
         }
         QueryWrapper<ProductQuality> queryWrapper = new QueryWrapper<>(productQuality);

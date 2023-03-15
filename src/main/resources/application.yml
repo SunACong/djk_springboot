@@ -2,9 +2,9 @@ server:
   port: 9527
 
 spring:
-  autoconfigure:
-    # 去掉Druid 配置
-    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
+#  autoconfigure:
+#    # 去掉Druid 配置
+#    exclude: com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure
   # 自动配置，例外处理
   datasource:
     # 配置数据源类型

@@ -1,8 +1,6 @@
 package com.szj.djk.common;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.szj.djk.entity.Lqci;
-import com.szj.djk.entity.Lqcmr;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
@@ -20,11 +18,34 @@ import java.util.Date;
 @Slf4j
 @Component
 public class MyMetaObjectHandler implements MetaObjectHandler {
+
     /**
      * 插入操作自动填充
      * @param metaObject
      */
     @Override
+    public void insertFill(MetaObject metaObject) {
+        log.info("createTime自动填充");
+        Date nowTime = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        // MetaObject类获取拦截类型
+        metaObject.setValue("createTime", LocalDateTime.now());
+        metaObject.setValue("updateTime", LocalDateTime.now());
+    }
+
+    /**
+     * 更新操作自动填充
+     * @param metaObject
+     */
+    @Override
+    public void updateFill(MetaObject metaObject) {
+        log.info("updateTime自动更新");
+        Date nowTime = Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant());
+        metaObject.setValue("updateTime", LocalDateTime.now());
+    }
+
+
+
+/*    @Override
     public void insertFill(MetaObject metaObject) {
         log.info("公共字段自动填充");
         log.info("{}",metaObject.toString());
@@ -39,12 +60,12 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
             metaObject.setValue("updateTime", LocalDateTime.now());
         }
 
-    }
+    }*/
 
-    /**
+/*    *//**
      * 更新操作自动填充
      * @param metaObject
-     */
+     *//*
     @Override
     public void updateFill(MetaObject metaObject) {
         log.info("公共字段自动更新");
@@ -58,5 +79,5 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         }else{
             metaObject.setValue("updateTime", LocalDateTime.now());
         }
-    }
+    }*/
 }

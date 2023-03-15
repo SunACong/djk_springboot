@@ -7,23 +7,44 @@
     <resultMap id="BaseResultMap" type="com.szj.djk.vo.PlanAndInspect">
             <id property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
             <result property="planNum" column="plan_num" jdbcType="VARCHAR"/>
-            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="inspectCreateTime" column="inspect_create_time" jdbcType="TIMESTAMP"/>
             <result property="ts" column="ts" jdbcType="TIMESTAMP"/>
             <result property="plateTypeDetermination" column="plate_type_determination" jdbcType="INTEGER"/>
             <result property="mechanicalPropertiesDetermination" column="mechanical_properties_determination" jdbcType="INTEGER"/>
             <result property="dimensionalDeviationDetermination" column="dimensional_deviation_determination" jdbcType="INTEGER"/>
             <result property="surfaceQualityDetermination" column="surface_quality_determination" jdbcType="INTEGER"/>
             <result property="appearanceQualityDetermination" column="appearance_quality_determination" jdbcType="INTEGER"/>
-            <result property="determinationCreateTime" column="determination_create_time" jdbcType="TIMESTAMP"/>
-            <result property="determinationUpdateTime" column="determination_update_time" jdbcType="TIMESTAMP"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        batch_num,plan_num,create_time,
+        batch_num,plan_num,inspect_create_time,
         ts,plate_type_determination,mechanical_properties_determination,
         dimensional_deviation_determination,surface_quality_determination,appearance_quality_determination,
-        determination_create_time,determination_update_time
+        create_time,update_time
     </sql>
+    <insert id="saveBatchOrUpdate">
+        insert into plan_and_inspect (<include refid="Base_Column_List" />)
+        VALUES
+            <foreach collection="list" item="item" index="index" separator=",">
+                (#{item.batchNum},#{item.planNum},#{item.inspectCreateTime},
+                #{item.ts},#{item.plateTypeDetermination},#{item.mechanicalPropertiesDetermination},
+                #{item.dimensionalDeviationDetermination},#{item.surfaceQualityDetermination},#{item.appearanceQualityDetermination},
+                #{item.createTime},#{item.updateTime})
+            </foreach>
+        on duplicate key update
+            plan_num=values(plan_num),
+            inspect_create_time=values(inspect_create_time),
+            ts=values(ts),
+            plate_type_determination=values(plate_type_determination),
+            mechanical_properties_determination=values(mechanical_properties_determination),
+            dimensional_deviation_determination=values(dimensional_deviation_determination),
+            surface_quality_determination=values(surface_quality_determination),
+            appearance_quality_determination=values(appearance_quality_determination),
+            create_time=values(create_time),
+            update_time=values(update_time)
+    </insert>
 
     <select id="getRecentTs" resultType="java.lang.String">
         select ts from plan_and_inspect order by ts desc limit 1

@@ -1,7 +1,8 @@
 package com.szj.djk.service;
 
-import com.szj.djk.vo.PlanAndInspect;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.szj.djk.vo.PlanAndInspect;
 
 /**
 * @author Admin
@@ -10,4 +11,8 @@ import com.baomidou.mybatisplus.extension.service.IService;
 */
 public interface PlanAndInspectService extends IService<PlanAndInspect> {
     String getRecentTs();
+
+    String saveBatchOrUpdate();
+
+    Page<PlanAndInspect> pageList(Page<PlanAndInspect> pageInfo, PlanAndInspect planAndInspect);
 }

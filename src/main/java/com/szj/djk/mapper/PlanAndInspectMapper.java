@@ -4,6 +4,8 @@ import com.szj.djk.vo.PlanAndInspect;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
 * @author Admin
 * @description 针对表【plan_and_inspect】的数据库操作Mapper
@@ -13,6 +15,8 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface PlanAndInspectMapper extends BaseMapper<PlanAndInspect> {
     String getRecentTs();
+
+    Boolean saveBatchOrUpdate(List<PlanAndInspect> list);
 }
 
 

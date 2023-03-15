@@ -5,11 +5,11 @@ import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.szj.djk.entity.LmdpColdPlan;
 import com.szj.djk.entity.LmdpQcColdInspect;
-import com.szj.djk.service.LmdpColdPlanService;
+import com.szj.djk.entity.SlaveErpPlanColdreductionstrip;
 import com.szj.djk.service.LmdpQcColdInspectService;
 import com.szj.djk.service.PlanAndInspectService;
+import com.szj.djk.service.SlaveErpPlanColdreductionstripService;
 import com.szj.djk.vo.PlanAndInspect;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -28,7 +28,7 @@ public class GetDetermination {
     private LmdpQcColdInspectService lmdpQcColdInspectService;
 
     @Resource
-    private LmdpColdPlanService lmdpColdPlanService;
+    private SlaveErpPlanColdreductionstripService slaveErpPlanColdreductionstripService;
 
     @Resource
     private PlanAndInspectService planAndInspectService;
@@ -37,28 +37,32 @@ public class GetDetermination {
      * 质量判定流程
      * @return
      */
-    @Scheduled(cron = "*/1 * * * * ?")
+    //@Scheduled(cron = "*/1 * * * * ?")
     @DS("master")
-    public Boolean doDetermination(){
+    public List<PlanAndInspect> doDetermination(){
         String ts = getRecentTsFromPlanAndInspect();
         List<LmdpQcColdInspect> list = getLmdpQcColdInspectList(ts);
+        System.out.println(ts);
         List<PlanAndInspect> list1 = new ArrayList<>();
         list.forEach(lmdpQcColdInspect ->{
-            LmdpColdPlan lmdpColdPlan = getLmdpColdPlanByBatchNum(lmdpQcColdInspect.getPlanNum());
-            PlanAndInspect planAndInspect = mergePlanAndInspect(lmdpColdPlan, lmdpQcColdInspect);
+            SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip = getSlaveErpPlanColdreductionstripByPlanNum(lmdpQcColdInspect.getPlanNum());
+            PlanAndInspect planAndInspect = mergePlanAndInspect(slaveErpPlanColdreductionstrip, lmdpQcColdInspect);
             list1.add(planAndInspect);
         });
-        System.out.println(list1.size());
-        return false;
+        list1.forEach(
+                item ->{
+                    System.out.println(item.getBatchNum());
+                }
+        );
+        return list1;
     }
 
     /**
      * 获取最近一次巡检表更新时间 主库 planandinspect
      * @return
      */
-    public String getRecentTsFromPlanAndInspect(){
+    private String getRecentTsFromPlanAndInspect(){
         String ts = planAndInspectService.getRecentTs();
-        DynamicDataSourceContextHolder.poll();
         return ts;
     }
 
@@ -67,7 +71,7 @@ public class GetDetermination {
      * @param ts
      * @return
      */
-    public List<LmdpQcColdInspect> getLmdpQcColdInspectList(String ts){
+    private List<LmdpQcColdInspect> getLmdpQcColdInspectList(String ts){
         DynamicDataSourceContextHolder.push("slave");
         LambdaQueryWrapper<LmdpQcColdInspect> wrapper = new LambdaQueryWrapper<>();
         wrapper.gt(LmdpQcColdInspect::getTs, ts);
@@ -81,23 +85,64 @@ public class GetDetermination {
      * @param coldreductionstripNum
      * @return
      */
-    public LmdpColdPlan getLmdpColdPlanByBatchNum(String coldreductionstripNum){
+    private SlaveErpPlanColdreductionstrip getSlaveErpPlanColdreductionstripByPlanNum(String coldreductionstripNum){
         DynamicDataSourceContextHolder.push("slave");
-        LambdaQueryWrapper<LmdpColdPlan> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(LmdpColdPlan::getColdreductionstripNum, coldreductionstripNum);
-        LmdpColdPlan lmdpColdPlan = lmdpColdPlanService.getOne(wrapper);
+        LambdaQueryWrapper<SlaveErpPlanColdreductionstrip> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(SlaveErpPlanColdreductionstrip::getColdreductionstripNum, coldreductionstripNum);
+        SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip = slaveErpPlanColdreductionstripService.getOne(wrapper);
         DynamicDataSourceContextHolder.poll();
-        return lmdpColdPlan;
+        return slaveErpPlanColdreductionstrip;
     }
 
-    public static PlanAndInspect mergePlanAndInspect(LmdpColdPlan lmdpColdPlan, LmdpQcColdInspect lmdpQcColdInspect){
+    public static PlanAndInspect mergePlanAndInspect(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
         PlanAndInspect planAndInspect = new PlanAndInspect();
         planAndInspect.setBatchNum(lmdpQcColdInspect.getBatchNum());
         planAndInspect.setPlanNum(lmdpQcColdInspect.getPlanNum());
-        planAndInspect.setCreateTime(lmdpQcColdInspect.getCreateTime());
+        planAndInspect.setInspectCreateTime(lmdpQcColdInspect.getCreateTime());
         planAndInspect.setTs(lmdpQcColdInspect.getTs());
-        planAndInspect.setLmdpColdPlan(lmdpColdPlan);
+        planAndInspect.setSlaveErpPlanColdreductionstrip(slaveErpPlanColdreductionstrip);
         planAndInspect.setLmdpQcColdInspect(lmdpQcColdInspect);
         return planAndInspect;
+    }
+
+    /**
+     * 板型判定
+     * @return
+     */
+    public static int doPlateTypeDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
+
+        return 1;
+    }
+
+    /**
+     * 力学性能判定
+     * @return
+     */
+    public static int doMechanicalPropertiesDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
+        return 1;
+    }
+
+    /**
+     * 尺寸偏差判定
+     * @return
+     */
+    public static int doDimensionalDeviationDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
+        return 1;
+    }
+
+    /**
+     * 表面质量判定
+     * @return
+     */
+    public static int doSurfaceQualityDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
+        return 1;
+    }
+
+    /**
+     * 外观质量判定
+     * @return
+     */
+    public static int doAppearanceQualityDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
+        return 1;
     }
 }
