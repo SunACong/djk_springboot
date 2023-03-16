@@ -50,6 +50,7 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
     @Override
     @DS("master")
     public String saveBatchOrUpdate() {
+        System.out.println("更新");
         // 获取主数据库plan_and_inspect最近一次的时间戳
         String ts = getRecentTs();
         // 切换数据源
@@ -67,14 +68,8 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
             LambdaQueryWrapper<SlaveErpPlanColdreductionstrip> wrapper1 = new LambdaQueryWrapper<>();
             wrapper1.eq(SlaveErpPlanColdreductionstrip::getColdreductionstripNum, lmdpQcColdInspect.getPlanNum());
             SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip = slaveErpPlanColdreductionstripService.getOne(wrapper1);
-            // 合并一并塞进新的对象中去
-            PlanAndInspect planAndInspect = GetDetermination.mergePlanAndInspect(slaveErpPlanColdreductionstrip, lmdpQcColdInspect);
-            // 五项判定
-            planAndInspect.setPlateTypeDetermination(GetDetermination.doPlateTypeDetermination(slaveErpPlanColdreductionstrip, lmdpQcColdInspect));
-            planAndInspect.setMechanicalPropertiesDetermination(GetDetermination.doMechanicalPropertiesDetermination(slaveErpPlanColdreductionstrip, lmdpQcColdInspect));
-            planAndInspect.setSurfaceQualityDetermination(GetDetermination.doSurfaceQualityDetermination(slaveErpPlanColdreductionstrip, lmdpQcColdInspect));
-            planAndInspect.setDimensionalDeviationDetermination(GetDetermination.doDimensionalDeviationDetermination(slaveErpPlanColdreductionstrip, lmdpQcColdInspect));
-            planAndInspect.setAppearanceQualityDetermination(GetDetermination.doAppearanceQualityDetermination(slaveErpPlanColdreductionstrip, lmdpQcColdInspect));
+            // 判定
+            PlanAndInspect planAndInspect = GetDetermination.doAllDetermination(slaveErpPlanColdreductionstrip, lmdpQcColdInspect);
             list1.add(planAndInspect);
         });
         DynamicDataSourceContextHolder.poll();

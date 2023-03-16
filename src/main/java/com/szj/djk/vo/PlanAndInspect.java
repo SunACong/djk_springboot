@@ -74,6 +74,16 @@ public class PlanAndInspect implements Serializable {
     private Integer appearanceQualityDetermination;
 
     /**
+     * 总判定
+     */
+    private Integer allDetermination;
+
+    /**
+     * 备注
+     */
+    private String remark;
+
+    /**
      * 开始判定日期
      */
     @TableField(fill = FieldFill.INSERT)

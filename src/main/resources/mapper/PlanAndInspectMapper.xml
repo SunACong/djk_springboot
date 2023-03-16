@@ -14,6 +14,8 @@
             <result property="dimensionalDeviationDetermination" column="dimensional_deviation_determination" jdbcType="INTEGER"/>
             <result property="surfaceQualityDetermination" column="surface_quality_determination" jdbcType="INTEGER"/>
             <result property="appearanceQualityDetermination" column="appearance_quality_determination" jdbcType="INTEGER"/>
+            <result property="allDetermination" column="all_determination" jdbcType="INTEGER"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
     </resultMap>
@@ -21,7 +23,7 @@
     <sql id="Base_Column_List">
         batch_num,plan_num,inspect_create_time,
         ts,plate_type_determination,mechanical_properties_determination,
-        dimensional_deviation_determination,surface_quality_determination,appearance_quality_determination,
+        dimensional_deviation_determination,surface_quality_determination,appearance_quality_determination,all_determination,remark,
         create_time,update_time
     </sql>
     <insert id="saveBatchOrUpdate">
@@ -31,7 +33,8 @@
                 (#{item.batchNum},#{item.planNum},#{item.inspectCreateTime},
                 #{item.ts},#{item.plateTypeDetermination},#{item.mechanicalPropertiesDetermination},
                 #{item.dimensionalDeviationDetermination},#{item.surfaceQualityDetermination},#{item.appearanceQualityDetermination},
-                #{item.createTime},#{item.updateTime})
+                #{item.allDetermination},#{item.remark},
+                 #{item.createTime},#{item.updateTime})
             </foreach>
         on duplicate key update
             plan_num=values(plan_num),
@@ -42,6 +45,8 @@
             dimensional_deviation_determination=values(dimensional_deviation_determination),
             surface_quality_determination=values(surface_quality_determination),
             appearance_quality_determination=values(appearance_quality_determination),
+            all_determination=values(all_determination),
+            remark=values(remark),
             create_time=values(create_time),
             update_time=values(update_time)
     </insert>
