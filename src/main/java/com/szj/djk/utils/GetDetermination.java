@@ -1,4 +1,4 @@
-package com.szj.djk.scheduled;
+package com.szj.djk.utils;
 
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
@@ -119,7 +119,7 @@ public class GetDetermination {
         // 计划表平直度 暂时废弃
         String flatness = slaveErpPlanColdreductionstrip.getFlatness();
 
-        return 2;
+        return 1;
     }
 
     /**

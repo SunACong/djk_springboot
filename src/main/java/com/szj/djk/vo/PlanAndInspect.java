@@ -1,7 +1,11 @@
 package com.szj.djk.vo;
 
-import com.baomidou.mybatisplus.annotation.*;
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.SqlCondition;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.szj.djk.common.BaseEntity;
 import com.szj.djk.entity.LmdpQcColdInspect;
 import com.szj.djk.entity.SlaveErpPlanColdreductionstrip;
 import lombok.Data;
@@ -16,12 +20,11 @@ import java.util.Date;
  */
 @TableName(value ="plan_and_inspect")
 @Data
-public class PlanAndInspect implements Serializable {
+public class PlanAndInspect extends BaseEntity implements Serializable {
     /**
      * 冷轧卷号
      */
-    @TableId
-    @TableField(condition = SqlCondition.LIKE)
+    @TableField(value = "batch_num", condition = SqlCondition.LIKE)
     private String batchNum;
 
     /**

@@ -54,4 +54,15 @@
     <select id="getRecentTs" resultType="java.lang.String">
         select ts from plan_and_inspect order by ts desc limit 1
     </select>
+
+    <select id="getEveryDayInfo" resultType="java.util.Map">
+        select DATE_FORMAT( inspect_create_time, '%Y-%m-%d' ) inspectCreateTime, sum(all_determination=1) qualified, sum(all_determination=0) noQualified, sum(all_determination=2) tentativ from plan_and_inspect
+        where inspect_create_time BETWEEN #{startTime} and date_add(#{endTime},interval 1 day) GROUP BY inspect_create_time order by inspect_create_time
+    </select>
+
+    <select id="getRangeDayInfo" resultType="java.util.Map">
+        select sum(all_determination=1) qualified, sum(all_determination=0) noQualified, sum(all_determination=2) tentative from plan_and_inspect
+        where inspect_create_time BETWEEN #{startTime} and date_add(#{endTime},interval 1 day)
+    </select>
+
 </mapper>
