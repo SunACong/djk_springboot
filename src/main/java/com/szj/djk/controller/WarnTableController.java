@@ -34,7 +34,7 @@ public class WarnTableController {
     }
 
     @GetMapping("/listWarnHistoryData")
-    public R<List<WarnTable>> listWarnHistoryData(@Param("rollingDeviceNumber") String rollingDeviceNumber){
+    public R<List<WarnTable>> listWarnHistoryData(@Param("rollingDeviceNumber"+"rollingName") String rollingDeviceNumber){
 
         List<WarnTable> historyWarnData = warnTableService.selectWarnTableHistoryData(rollingDeviceNumber);
         return R.success(historyWarnData);

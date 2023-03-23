@@ -31,7 +31,7 @@ public class ScheduledTask {
     @Scheduled(cron = "0/2 * * * * ?")
     public void addRollingMachine1(){
         OneCastroll oneCastroll = new OneCastroll();
-        Date date = new Date();
+        LocalDateTime date = LocalDateTime.now();
         oneCastroll.setTs(date);
         int shangDD = (int) (Math.random() * (80-30)+30);//70
         oneCastroll.setUpRollMontorA(shangDD);

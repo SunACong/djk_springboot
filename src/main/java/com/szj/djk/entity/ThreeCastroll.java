@@ -23,7 +23,7 @@ public class ThreeCastroll implements Serializable {
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "GMT+8")
     @TableId
-    private Date ts;
+    private LocalDateTime ts;
 
     /**
      * 上辊电机电流

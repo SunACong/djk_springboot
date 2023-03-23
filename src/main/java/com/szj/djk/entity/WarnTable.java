@@ -28,7 +28,6 @@ public class WarnTable {
     /**时间*/
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "GMT+8")
-    @TableField(fill = FieldFill.INSERT)
     private LocalDateTime rollingProduceTime;
 
     /**数值*/

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.RewindRollMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.RewindRoll">
+            <id property="ts" column="ts" jdbcType="TIMESTAMP"/>
+            <result property="machineColsV" column="machine_cols_v" jdbcType="DOUBLE"/>
+            <result property="openScrollD" column="open_scroll_d" jdbcType="DOUBLE"/>
+            <result property="rollWindD" column="roll_wind_d" jdbcType="DOUBLE"/>
+            <result property="unitTension" column="unit_tension" jdbcType="DOUBLE"/>
+            <result property="actualTension" column="actual_tension" jdbcType="DOUBLE"/>
+            <result property="openRollA" column="open_roll_a" jdbcType="DOUBLE"/>
+            <result property="rollWindA" column="roll_wind_a" jdbcType="DOUBLE"/>
+            <result property="stripL" column="strip_l" jdbcType="DOUBLE"/>
+            <result property="stripW" column="strip_w" jdbcType="DOUBLE"/>
+            <result property="pressureStatonT" column="pressure_staton_t" jdbcType="DOUBLE"/>
+            <result property="materialWidth" column="material_width" jdbcType="DOUBLE"/>
+            <result property="meteriaThicness" column="meteria_thicness" jdbcType="DOUBLE"/>
+            <result property="discShearOperatingSideA" column="disc_shear_operating_side_a" jdbcType="DOUBLE"/>
+            <result property="discShearDriveSideA" column="disc_shear_drive_side_a" jdbcType="DOUBLE"/>
+            <result property="crusherOperatingSideA" column="crusher_operating_side_a" jdbcType="DOUBLE"/>
+            <result property="driveSideCrusherA" column="drive_side_crusher_a" jdbcType="DOUBLE"/>
+            <result property="openRollThinOilT" column="open_roll_thin_oil_t" jdbcType="DOUBLE"/>
+            <result property="rollOutThinOilT" column="roll_out_thin_oil_t" jdbcType="DOUBLE"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ts,machine_cols_v,open_scroll_d,
+        roll_wind_d,unit_tension,actual_tension,
+        open_roll_a,roll_wind_a,strip_l,
+        strip_w,pressure_staton_t,material_width,
+        meteria_thicness,disc_shear_operating_side_a,disc_shear_drive_side_a,
+        crusher_operating_side_a,drive_side_crusher_a,open_roll_thin_oil_t,
+        roll_out_thin_oil_t,create_time
+    </sql>
+    <select id = "selectSpecial" resultType="com.szj.djk.entity.RewindRoll" >
+        select * from rewind_roll where ts between #{before} and #{after}
+    </select>
+</mapper>
