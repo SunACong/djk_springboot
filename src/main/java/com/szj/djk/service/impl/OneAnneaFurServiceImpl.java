@@ -90,7 +90,7 @@ public class OneAnneaFurServiceImpl extends ServiceImpl<OneAnneaFurMapper, OneAn
                     break;
             }
         });
-        System.out.println("这是警告数据"+warnTables);
+//        System.out.println("这是警告数据"+warnTables);
         return warnTables;
     }
 

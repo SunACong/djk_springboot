@@ -6,7 +6,8 @@ import com.szj.djk.common.R;
 import com.szj.djk.entity.*;
 import com.szj.djk.mapper.WarnTableMapper;
 import com.szj.djk.service.AvaluateService;
-import com.szj.djk.service.OneAnneaFurService;
+import com.szj.djk.service.FiveAnneaFurService;
+import com.szj.djk.service.FourAnneaFurService;
 import com.szj.djk.service.WarnTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -23,10 +24,10 @@ import java.util.List;
 
 @Component
 @RestController
-@RequestMapping("/anneaf1")
-public class OneAnneaFurController {
+@RequestMapping("/anneaf5")
+public class FiveAnneaFurController {
     @Autowired
-    OneAnneaFurService oneAnneaFurService;
+    FiveAnneaFurService fiveAnneaFurService;
     @Autowired
     private AvaluateService avaluateService;
     @Autowired
@@ -36,12 +37,12 @@ public class OneAnneaFurController {
 
 
     @GetMapping("/list")
-    public R<List<OneAnneaFur>> list(OneAnneaFur oneAnneaFur){
-        LambdaQueryWrapper<OneAnneaFur> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.setEntity(oneAnneaFur)
-                .orderByDesc(true,OneAnneaFur::getTs)
+    public R<List<FiveAnneaFur>> list(FiveAnneaFur fiveAnneaFur){
+        LambdaQueryWrapper<FiveAnneaFur> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.setEntity(fiveAnneaFur)
+                .orderByDesc(true,FiveAnneaFur::getTs)
                 .last("limit 20");
-        List<OneAnneaFur> list = oneAnneaFurService.list(queryWrapper);
+        List<FiveAnneaFur> list = fiveAnneaFurService.list(queryWrapper);
         return R.success(list);
     }
 
@@ -82,23 +83,23 @@ public class OneAnneaFurController {
         });
 //        System.out.println("打印++++" + valueRange.getXiaDD());
         WarnTable warnTable = new WarnTable();
-        OneAnneaFur oneAnneaFur = new OneAnneaFur();
-        LambdaQueryWrapper<OneAnneaFur> queryWrapperR = new LambdaQueryWrapper<>();
-                queryWrapperR.setEntity(oneAnneaFur)
-                .orderByDesc(true,OneAnneaFur::getTs)
+        FiveAnneaFur fiveAnneaFur = new FiveAnneaFur();
+        LambdaQueryWrapper<FiveAnneaFur> queryWrapperR = new LambdaQueryWrapper<>();
+                queryWrapperR.setEntity(fiveAnneaFur)
+                .orderByDesc(true,FiveAnneaFur::getTs)
                 .last("limit 20");
-                List<OneAnneaFur> newlist = oneAnneaFurService.list(queryWrapperR);
+                List<FiveAnneaFur> newlist = fiveAnneaFurService.list(queryWrapperR);
 //            System.out.println("新的数据"+ newlist);
         /**
          * 炉冷却水:ShangDD  炉压缩空气:XiaDD    金属料温温度曲线:ShangDS 一区炉气温度曲线:XiaDS
          * 二区炉气温度曲线:ZhuDD   三区炉气温度曲线:BeiDD  炉气设定温度:BeiDS
          */
-                newlist.forEach(i->{
+        newlist.forEach(i->{
             if(i.getCoolWaterUpLimit()>valueRange.getShangDD()){
                 warnTable.setRollingName("炉冷却水");
                 warnTable.setRollingValue(i.getCoolWaterUpLimit());
                 warnTable.setRollingProduceTime(i.getTs());
-                warnTable.setRollingDeviceNumber("退火炉1#");
+                warnTable.setRollingDeviceNumber("退火炉4#");
                 warnTableService.save(warnTable);
             }
 //            if(i.getCompressedAirOneLowPressure()>valueRange.getXiaDD()){
@@ -112,7 +113,7 @@ public class OneAnneaFurController {
                 warnTable.setRollingName("金属料温温度曲线");
                 warnTable.setRollingValue(i.getMeterialT());
                 warnTable.setRollingProduceTime(i.getTs());
-                warnTable.setRollingDeviceNumber("退火炉1#");
+                warnTable.setRollingDeviceNumber("退火炉5#");
                 warnTableService.save(warnTable);
             }
 
@@ -120,7 +121,7 @@ public class OneAnneaFurController {
                 warnTable.setRollingName("一区炉气温度曲线");
                 warnTable.setRollingValue(i.getZoneOneT());
                 warnTable.setRollingProduceTime(i.getTs());
-                warnTable.setRollingDeviceNumber("退火炉1#");
+                warnTable.setRollingDeviceNumber("退火炉5#");
                 warnTableService.save(warnTable);
             }
 
@@ -128,7 +129,7 @@ public class OneAnneaFurController {
                 warnTable.setRollingName("二区炉气温度曲线");
                 warnTable.setRollingValue(i.getZoneTwoT());
                 warnTable.setRollingProduceTime(i.getTs());
-                warnTable.setRollingDeviceNumber("退火炉1#");
+                warnTable.setRollingDeviceNumber("退火炉5#");
                 warnTableService.save(warnTable);
             }
 
@@ -136,34 +137,33 @@ public class OneAnneaFurController {
                 warnTable.setRollingName("三区炉气温度曲线");
                 warnTable.setRollingValue(i.getZoneThreeT());
                 warnTable.setRollingProduceTime(i.getTs());
-                warnTable.setRollingDeviceNumber("退火炉1#");
+                warnTable.setRollingDeviceNumber("退火炉5#");
                 warnTableService.save(warnTable);
             }
                     if(i.getSetT()>valueRange.getBeiDD()){
                         warnTable.setRollingName("炉气设定温度");
                         warnTable.setRollingValue(i.getSetT());
                         warnTable.setRollingProduceTime(i.getTs());
-                        warnTable.setRollingDeviceNumber("退火炉1#");
+                        warnTable.setRollingDeviceNumber("退火炉5#");
                         warnTableService.save(warnTable);
                     }
         });
         return  R.success(valueRange);
     }
 
-
     /**
      * 查询重卷机特定时间前后的警告数据
      */
     @GetMapping("listSpecial")
-    public R<List<WarnTable>> listSpecial(OneAnneaFur oneAnneaFur, String rollingName)  {
+    public R<List<WarnTable>> listSpecial(FiveAnneaFur fiveAnneaFur, String rollingName)  {
 //        System.out.println("触发了+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         int amount = 10000;
-        LocalDateTime ts = oneAnneaFur.getTs();
+        LocalDateTime ts = fiveAnneaFur.getTs();
         long beforeTime = Timestamp.valueOf(ts).getTime()-amount;
         long afterTime = Timestamp.valueOf(ts).getTime()+amount;
         LocalDateTime before = new Date(beforeTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
         LocalDateTime after = new Date(afterTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
-        List<WarnTable> specialList = oneAnneaFurService.selectSpecial(before,after,rollingName);
+        List<WarnTable> specialList = fiveAnneaFurService.selectSpecial(before,after,rollingName);
         return R.success(specialList);
     }
 

@@ -5,8 +5,12 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * 
@@ -18,28 +22,30 @@ public class ThreeAnneaFur implements Serializable {
     /**
      * 采集时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "GMT+8")
     @TableId
-    private Date ts;
+    private LocalDateTime ts;
 
     /**
      * 一区温度
      */
-    private Double zoneOneT;
+    private Integer zoneOneT;
 
     /**
      * 二区温度
      */
-    private Double zoneTwoT;
+    private Integer zoneTwoT;
 
     /**
      * 三区温度
      */
-    private Double zoneThreeT;
+    private Integer zoneThreeT;
 
     /**
      * 料温
      */
-    private Double meterialT;
+    private Integer meterialT;
 
     /**
      * 一区加热输出
@@ -59,7 +65,7 @@ public class ThreeAnneaFur implements Serializable {
     /**
      * 设定温度
      */
-    private Double setT;
+    private Integer setT;
 
     /**
      * 期望温度
@@ -75,7 +81,6 @@ public class ThreeAnneaFur implements Serializable {
      * 进风风机频率设定值
      */
     private Double inFanSetF;
-
     /**
      * 控制类型
      */
