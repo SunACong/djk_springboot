@@ -5,32 +5,156 @@
 <mapper namespace="com.szj.djk.mapper.LmdpCastProduceMapper">
 
     <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpCastProduce">
-            <result property="id" column="id" jdbcType="VARCHAR"/>
+            <id property="id" column="id" jdbcType="VARCHAR"/>
             <result property="planId" column="plan_id" jdbcType="VARCHAR"/>
             <result property="smeltTimes" column="smelt_times" jdbcType="VARCHAR"/>
             <result property="reelNum" column="reel_num" jdbcType="VARCHAR"/>
             <result property="brand" column="brand" jdbcType="VARCHAR"/>
             <result property="customer" column="customer" jdbcType="VARCHAR"/>
-            <result property="thick" column="thick" jdbcType="VARCHAR"/>
-            <result property="width" column="width" jdbcType="VARCHAR"/>
-            <result property="procUpperTime" column="proc_upper_time" jdbcType="VARCHAR"/>
-            <result property="procUpperShiftTthick" column="proc_upper_shift_tthick" jdbcType="VARCHAR"/>
-            <result property="procUpperShiftTweight" column="proc_upper_shift_tweight" jdbcType="VARCHAR"/>
+            <result property="thick" column="thick" jdbcType="DECIMAL"/>
+            <result property="width" column="width" jdbcType="DECIMAL"/>
+            <result property="orderReelNum" column="order_reel_num" jdbcType="VARCHAR"/>
+            <result property="riserReelNum" column="riser_reel_num" jdbcType="VARCHAR"/>
+            <result property="paramDegasserGasTemp" column="param_degasser_gas_temp" jdbcType="DECIMAL"/>
+            <result property="paramDegasserAlTemp" column="param_degasser_al_temp" jdbcType="DECIMAL"/>
+            <result property="paramDegasserArgonPress" column="param_degasser_argon_press" jdbcType="DECIMAL"/>
+            <result property="paramDegasserFlow" column="param_degasser_flow" jdbcType="DECIMAL"/>
+            <result property="paramDegasserRpm" column="param_degasser_rpm" jdbcType="DECIMAL"/>
+            <result property="paramDegasser" column="param_degasser_" jdbcType="DECIMAL"/>
+            <result property="paramFilterAlTemp" column="param_filter_al_temp" jdbcType="DECIMAL"/>
+            <result property="paramFilterHTime" column="param_filter_h_time" jdbcType="TIMESTAMP"/>
+            <result property="paramFilterHTemp" column="param_filter_h_temp" jdbcType="DECIMAL"/>
+            <result property="paramFilterHdaf" column="param_filter_hdaf" jdbcType="DECIMAL"/>
+            <result property="paramFrontAlTemp" column="param_front_al_temp" jdbcType="DECIMAL"/>
+            <result property="paramFrontEnvTemp1" column="param_front_env_temp1" jdbcType="DECIMAL"/>
+            <result property="paramFrontEnvTemp2" column="param_front_env_temp2" jdbcType="DECIMAL"/>
+            <result property="paramWaterSetTemp" column="param_water_set_temp" jdbcType="DECIMAL"/>
+            <result property="paramWaterInTemp" column="param_water_in_temp" jdbcType="DECIMAL"/>
+            <result property="paramWaterOutTr" column="param_water_out_tr" jdbcType="DECIMAL"/>
+            <result property="paramWaterOutLr" column="param_water_out_lr" jdbcType="DECIMAL"/>
+            <result property="paramWaterSetFreq" column="param_water_set_freq" jdbcType="DECIMAL"/>
+            <result property="paramWaterFlowTr" column="param_water_flow_tr" jdbcType="DECIMAL"/>
+            <result property="paramWaterFlowLr" column="param_water_flow_lr" jdbcType="DECIMAL"/>
+            <result property="paramWaterPressIn" column="param_water_press_in" jdbcType="DECIMAL"/>
+            <result property="paramWaterPressOutTr" column="param_water_press_out_tr" jdbcType="DECIMAL"/>
+            <result property="paramWaterPressOutLr" column="param_water_press_out_lr" jdbcType="DECIMAL"/>
+            <result property="paramCastGap" column="param_cast_gap" jdbcType="DECIMAL"/>
+            <result property="paramCastOpen" column="param_cast_open" jdbcType="DECIMAL"/>
+            <result property="paramCastArea" column="param_cast_area" jdbcType="DECIMAL"/>
+            <result property="paramCastSpeedHost" column="param_cast_speed_host" jdbcType="DECIMAL"/>
+            <result property="paramCastSpeedStuff" column="param_cast_speed_stuff" jdbcType="DECIMAL"/>
+            <result property="paramCastCurTr" column="param_cast_cur_tr" jdbcType="DECIMAL"/>
+            <result property="paramCastCurLr" column="param_cast_cur_lr" jdbcType="DECIMAL"/>
+            <result property="paramCastPrestressWs" column="param_cast_prestress_ws" jdbcType="DECIMAL"/>
+            <result property="paramCastPrestressDs" column="param_cast_prestress_ds" jdbcType="DECIMAL"/>
+            <result property="paramCastCrimpingTension" column="param_cast_crimping_tension" jdbcType="DECIMAL"/>
+            <result property="paramCastCur" column="param_cast_cur" jdbcType="DECIMAL"/>
+            <result property="paramCastThick" column="param_cast_thick" jdbcType="DECIMAL"/>
+            <result property="paramCastWidth" column="param_cast_width" jdbcType="DECIMAL"/>
+            <result property="paramCastTiBrand" column="param_cast_ti_brand" jdbcType="VARCHAR"/>
+            <result property="paramCastTiSpeed" column="param_cast_ti_speed" jdbcType="DECIMAL"/>
+            <result property="procUpperGroupId" column="proc_upper_group_id" jdbcType="VARCHAR"/>
+            <result property="procUpperGroupName" column="proc_upper_group_name" jdbcType="VARCHAR"/>
+            <result property="procUpperCasterId" column="proc_upper_caster_id" jdbcType="VARCHAR"/>
+            <result property="procUpperCasterName" column="proc_upper_caster_name" jdbcType="VARCHAR"/>
+            <result property="procUpperTime" column="proc_upper_time" jdbcType="TIMESTAMP"/>
+            <result property="procUpperShiftTthick" column="proc_upper_shift_tthick" jdbcType="DECIMAL"/>
+            <result property="procUpperShiftTweight" column="proc_upper_shift_tweight" jdbcType="DECIMAL"/>
+            <result property="procBigGroupId" column="proc_big_group_id" jdbcType="VARCHAR"/>
+            <result property="procBigGroupName" column="proc_big_group_name" jdbcType="VARCHAR"/>
+            <result property="procBigCasterId" column="proc_big_caster_id" jdbcType="VARCHAR"/>
+            <result property="procBigCasterName" column="proc_big_caster_name" jdbcType="VARCHAR"/>
+            <result property="procBigShiftThick" column="proc_big_shift_thick" jdbcType="DECIMAL"/>
+            <result property="procBigShiftWeight" column="proc_big_shift_weight" jdbcType="DECIMAL"/>
+            <result property="procBigDutyWeight" column="proc_big_duty_weight" jdbcType="DECIMAL"/>
+            <result property="procLowerGroupId" column="proc_lower_group_id" jdbcType="VARCHAR"/>
+            <result property="procLowerGroupName" column="proc_lower_group_name" jdbcType="VARCHAR"/>
+            <result property="procLowerCasterId" column="proc_lower_caster_id" jdbcType="VARCHAR"/>
+            <result property="procLowerCasterName" column="proc_lower_caster_name" jdbcType="VARCHAR"/>
             <result property="procLowerLocationNum" column="proc_lower_location_num" jdbcType="VARCHAR"/>
-            <result property="procLowerDutyWeight" column="proc_lower_duty_weight" jdbcType="VARCHAR"/>
-            <result property="procLowerRemoveTime" column="proc_lower_remove_time" jdbcType="VARCHAR"/>
-            <result property="procLowerRollDiameter" column="proc_lower_roll_diameter" jdbcType="VARCHAR"/>
-            <result property="qtfhTurndownTime" column="qtfh_turndown_time" jdbcType="VARCHAR"/>
+            <result property="procLowerDutyWeight" column="proc_lower_duty_weight" jdbcType="DECIMAL"/>
+            <result property="procLowerRemoveTime" column="proc_lower_remove_time" jdbcType="TIMESTAMP"/>
+            <result property="procLowerRollDiameter" column="proc_lower_roll_diameter" jdbcType="DECIMAL"/>
+            <result property="procLowerRealWeight" column="proc_lower_real_weight" jdbcType="DECIMAL"/>
+            <result property="procLowerTheoryWeight" column="proc_lower_theory_weight" jdbcType="DECIMAL"/>
+            <result property="procLowerWeightDev" column="proc_lower_weight_dev" jdbcType="DECIMAL"/>
+            <result property="procBeforeStabilizerCheck" column="proc_before_stabilizer_check" jdbcType="VARCHAR"/>
+            <result property="procMinSpeed" column="proc_min_speed" jdbcType="DECIMAL"/>
+            <result property="procAfterStabilizerCheck" column="proc_after_stabilizer_check" jdbcType="VARCHAR"/>
+            <result property="procStabilizerStatus" column="proc_stabilizer_status" jdbcType="VARCHAR"/>
+            <result property="procRemark" column="proc_remark" jdbcType="VARCHAR"/>
+            <result property="procOperationTime" column="proc_operation_time" jdbcType="TIMESTAMP"/>
+            <result property="procOperatorId" column="proc_operator_id" jdbcType="VARCHAR"/>
+            <result property="procOperatorName" column="proc_operator_name" jdbcType="VARCHAR"/>
+            <result property="processQcSolution" column="process_qc_solution" jdbcType="VARCHAR"/>
+            <result property="processQcDutyGroupId" column="process_qc_duty_group_id" jdbcType="VARCHAR"/>
+            <result property="processQcDutyGroupName" column="process_qc_duty_group_name" jdbcType="VARCHAR"/>
+            <result property="processQcScrapWeight" column="process_qc_scrap_weight" jdbcType="DECIMAL"/>
+            <result property="qtfhTurndownTime" column="qtfh_turndown_time" jdbcType="TIMESTAMP"/>
             <result property="qtfhTurndownSmeltNum" column="qtfh_turndown_smelt_num" jdbcType="VARCHAR"/>
-            <result property="ts" column="ts" jdbcType="VARCHAR"/>
+            <result property="qtfhPrepTemp" column="qtfh_prep_temp" jdbcType="DECIMAL"/>
+            <result property="qtfhChangeTime" column="qtfh_change_time" jdbcType="TIMESTAMP"/>
+            <result property="qtfhLowTemp" column="qtfh_low_temp" jdbcType="DECIMAL"/>
+            <result property="casterRemark" column="caster_remark" jdbcType="VARCHAR"/>
+            <result property="casterCount" column="caster_count" jdbcType="DECIMAL"/>
+            <result property="casterDuration" column="caster_duration" jdbcType="DECIMAL"/>
+            <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
+            <result property="creatorName" column="creator_name" jdbcType="VARCHAR"/>
+            <result property="reviserId" column="reviser_id" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="ts" column="ts" jdbcType="TIMESTAMP"/>
+            <result property="actualDegasserGasTemp" column="actual_degasser_gas_temp" jdbcType="DECIMAL"/>
+            <result property="actualDegasserAlTemp" column="actual_degasser_al_temp" jdbcType="DECIMAL"/>
+            <result property="actualDegasserArgonPress" column="actual_degasser_argon_press" jdbcType="DECIMAL"/>
+            <result property="actualDegasserFlow" column="actual_degasser_flow" jdbcType="DECIMAL"/>
+            <result property="actualDegasserRpm" column="actual_degasser_rpm" jdbcType="DECIMAL"/>
+            <result property="degasserTempSet" column="degasser_temp_set" jdbcType="DECIMAL"/>
+            <result property="filterAlTempSet" column="filter_al_temp_set" jdbcType="DECIMAL"/>
+            <result property="heatNum" column="heat_num" jdbcType="VARCHAR"/>
+            <result property="rollDiameter" column="roll_diameter" jdbcType="DECIMAL"/>
+            <result property="castStartTime" column="cast_start_time" jdbcType="TIMESTAMP"/>
+            <result property="produceStatus" column="produce_status" jdbcType="VARCHAR"/>
+            <result property="rollNumber" column="roll_number" jdbcType="VARCHAR"/>
+            <result property="convexity" column="convexity" jdbcType="DECIMAL"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, plan_id, smelt_times, reel_num, brand, customer, thick, width, proc_upper_time, proc_upper_shift_tthick, proc_upper_shift_tweight, proc_lower_location_num, proc_lower_duty_weight, proc_lower_remove_time, proc_lower_roll_diameter, qtfh_turndown_time, qtfh_turndown_smelt_num, create_time, ts
+        id,plan_id,smelt_times,
+        reel_num,brand,customer,
+        thick,width,order_reel_num,
+        riser_reel_num,param_degasser_gas_temp,param_degasser_al_temp,
+        param_degasser_argon_press,param_degasser_flow,param_degasser_rpm,
+        param_degasser_,param_filter_al_temp,param_filter_h_time,
+        param_filter_h_temp,param_filter_hdaf,param_front_al_temp,
+        param_front_env_temp1,param_front_env_temp2,param_water_set_temp,
+        param_water_in_temp,param_water_out_tr,param_water_out_lr,
+        param_water_set_freq,param_water_flow_tr,param_water_flow_lr,
+        param_water_press_in,param_water_press_out_tr,param_water_press_out_lr,
+        param_cast_gap,param_cast_open,param_cast_area,
+        param_cast_speed_host,param_cast_speed_stuff,param_cast_cur_tr,
+        param_cast_cur_lr,param_cast_prestress_ws,param_cast_prestress_ds,
+        param_cast_crimping_tension,param_cast_cur,param_cast_thick,
+        param_cast_width,param_cast_ti_brand,param_cast_ti_speed,
+        proc_upper_group_id,proc_upper_group_name,proc_upper_caster_id,
+        proc_upper_caster_name,proc_upper_time,proc_upper_shift_tthick,
+        proc_upper_shift_tweight,proc_big_group_id,proc_big_group_name,
+        proc_big_caster_id,proc_big_caster_name,proc_big_shift_thick,
+        proc_big_shift_weight,proc_big_duty_weight,proc_lower_group_id,
+        proc_lower_group_name,proc_lower_caster_id,proc_lower_caster_name,
+        proc_lower_location_num,proc_lower_duty_weight,proc_lower_remove_time,
+        proc_lower_roll_diameter,proc_lower_real_weight,proc_lower_theory_weight,
+        proc_lower_weight_dev,proc_before_stabilizer_check,proc_min_speed,
+        proc_after_stabilizer_check,proc_stabilizer_status,proc_remark,
+        proc_operation_time,proc_operator_id,proc_operator_name,
+        process_qc_solution,process_qc_duty_group_id,process_qc_duty_group_name,
+        process_qc_scrap_weight,qtfh_turndown_time,qtfh_turndown_smelt_num,
+        qtfh_prep_temp,qtfh_change_time,qtfh_low_temp,
+        caster_remark,caster_count,caster_duration,
+        creator_id,creator_name,reviser_id,
+        create_time,ts,actual_degasser_gas_temp,
+        actual_degasser_al_temp,actual_degasser_argon_press,actual_degasser_flow,
+        actual_degasser_rpm,degasser_temp_set,filter_al_temp_set,
+        heat_num,roll_diameter,cast_start_time,
+        produce_status,roll_number,convexity
     </sql>
-
-    <!--    查询铸轧生产时间-->
-    <select id="selectZhuzhaTimeList" resultType="hashMap">
-        SELECT create_time,  param_degasser FROM lmdp_cast_produce WHERE create_time BETWEEN '1999-01-01 ' and '2100-01-01 '
-    </select>
 </mapper>
