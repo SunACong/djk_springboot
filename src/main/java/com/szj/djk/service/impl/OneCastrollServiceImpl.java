@@ -119,4 +119,6 @@ public class OneCastrollServiceImpl extends ServiceImpl<OneCastrollMapper, OneCa
         System.out.println("这是警告数据"+warnTables);
         return warnTables;
     }
+
+
 }

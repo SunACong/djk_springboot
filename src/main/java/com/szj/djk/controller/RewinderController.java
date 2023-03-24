@@ -43,7 +43,7 @@ public class RewinderController {
     }
 
     /**
-     * 查询铸轧机特定时间前后的警告数据
+     * 查询重卷机特定时间前后的警告数据
      */
     @GetMapping("listSpecial")
     public R<List<Rewinder>> listSpecial(Rewinder rewinder) throws ParseException {

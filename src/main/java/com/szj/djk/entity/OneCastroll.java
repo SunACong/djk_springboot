@@ -3,6 +3,7 @@ package com.szj.djk.entity;
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,19 +13,18 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
- * @author 张高义
+ * @author 张高义,he
  * @TableName one_castroll
  */
 @Data
 public class OneCastroll implements Serializable {
-
     /**
      * ts
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss.SSS", timezone = "GMT+8")
     @TableId
-    private Date ts;
+    private LocalDateTime ts;
 
     /**
      * 上辊电机电流
