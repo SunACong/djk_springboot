@@ -29,19 +29,15 @@ public class OneCastrollServiceImpl extends ServiceImpl<OneCastrollMapper, OneCa
     @Override
     public List<WarnTable> selectSpecial(LocalDateTime before, LocalDateTime after,String rollingName) {
         List<OneCastroll> oneCastrolls = oneCastrollMapper.selectSpecial(before, after);
-//        System.out.println("这是拿到的special数据"+oneCastrolls);
         ArrayList<WarnTable> warnTables = new ArrayList<>();
         oneCastrolls.forEach(item ->{
             WarnTable warnTable = new WarnTable();
-            System.out.println("这是拿到的special数据"+item);
             switch (rollingName){
                 case "上辊电机电流":
                     warnTable.setRollingName(rollingName);
                     warnTable.setRollingValue(item.getUpRollMontorA());
                     warnTable.setRollingProduceTime(item.getCreateTime());
-                    System.out.println("这是一条报警数据"+warnTable);
                     warnTables.add(warnTable);
-                    System.out.println("这是拿到的列表"+warnTables);
                     break;
                 case "下辊电机电流":
                     warnTable.setRollingName(rollingName);
@@ -116,7 +112,6 @@ public class OneCastrollServiceImpl extends ServiceImpl<OneCastrollMapper, OneCa
                     break;
             }
         });
-        System.out.println("这是警告数据"+warnTables);
         return warnTables;
     }
 

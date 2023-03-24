@@ -31,19 +31,15 @@ public class FiveCastrollServiceImpl extends ServiceImpl<FiveCastrollMapper, Fiv
     @Override
     public List<WarnTable> selectSpecial(LocalDateTime before, LocalDateTime after, String rollingName) {
         List<FiveCastroll> fiveCastrolls = fiveCastrollMapper.selectSpecial(before, after);
-//        System.out.println("这是拿到的special数据"+fiveCastrolls);
         ArrayList<WarnTable> WarnTables = new ArrayList<>();
         fiveCastrolls.forEach(item ->{
             WarnTable warnTable = new WarnTable();
-            System.out.println("这是拿到的special数据"+item);
             switch (rollingName){
                 case "上辊电机电流":
                     warnTable.setRollingName(rollingName);
                     warnTable.setRollingValue(item.getUpRollMontorA());
                     warnTable.setRollingProduceTime(item.getCreateTime());
-                    System.out.println("这是一条报警数据"+warnTable);
                     WarnTables.add(warnTable);
-                    System.out.println("这是拿到的列表"+WarnTables);
                     break;
                 case "下辊电机电流":
                     warnTable.setRollingName(rollingName);
@@ -118,7 +114,6 @@ public class FiveCastrollServiceImpl extends ServiceImpl<FiveCastrollMapper, Fiv
                     break;
             }
         });
-        System.out.println("这是警告数据"+WarnTables);
         return WarnTables;
     }
 }

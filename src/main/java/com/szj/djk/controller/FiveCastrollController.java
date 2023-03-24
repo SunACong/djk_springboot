@@ -40,7 +40,6 @@ public class FiveCastrollController {
     @GetMapping("/listNewData")
     public R<List<FiveCastroll>> ListNewData(){
         List<FiveCastroll> rollingMachines = fiveCastrollService.selectRollingNewData();
-//        System.out.println("这是铸轧机最新数据"+rollingMachines);
         return  R.success(rollingMachines);
     }
     /**
@@ -120,7 +119,6 @@ public class FiveCastrollController {
                     break;
             }
         });
-//        System.out.println("5号铸轧机异常存储数据");
         WarnTable warnTable = new WarnTable();
         FiveCastroll fiveCastroll = new FiveCastroll();
         LambdaQueryWrapper<FiveCastroll> queryWrapperR = new LambdaQueryWrapper<>();

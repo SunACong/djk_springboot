@@ -38,7 +38,6 @@ public class ProductQualityController {
 
     @GetMapping("pageList")
     public R<Page> pageList(int pageNum, int pageSize, ProductQuality productQuality){
-        System.out.println(productQuality.getBatchNum());
         Page<ProductQuality> pageInfo = new Page<>(pageNum, pageSize);
 
         LambdaQueryWrapper<ProductQuality> queryWrapper = new LambdaQueryWrapper<>();

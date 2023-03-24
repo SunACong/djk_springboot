@@ -2,7 +2,6 @@ package com.szj.djk.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.szj.djk.common.R;
-import com.szj.djk.entity.Rewinder;
 import com.szj.djk.entity.RollingMachine;
 import com.szj.djk.service.RollingMachineService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,6 @@ public class RollingMachineController {
     public R<String> addRollingMachine(@RequestBody RollingMachine rollingMachine){
         Date date = new Date();
         SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd :hh:mm:ss");
-        System.out.println(dateFormat.format(date));
         rollingMachine.setRollingProduceTime(date);
         boolean save = rollingMachineService.save(rollingMachine);
         return R.success("新增成功");
@@ -44,8 +42,6 @@ public class RollingMachineController {
     @GetMapping("/listInfo")
     public R<List<RollingMachine>> listInfo(RollingMachine rollingMachine){
         List<RollingMachine> rollingMachines = rollingMachineService.selectRollingMachineTen(rollingMachine);
-//        System.out.println("这是拿到的数据");
-//        System.out.println(rollingMachines);
         return  R.success(rollingMachineService.selectRollingMachineTen(rollingMachine));
     }
 
@@ -57,7 +53,6 @@ public class RollingMachineController {
         int amount = 10000;
         Date rollingProduceTime = rollingMachine.getRollingProduceTime();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println(rollingProduceTime.getTime());
         String beforeTime = sdf.format(rollingProduceTime.getTime() - amount);
         String afterTime = sdf.format(rollingProduceTime.getTime() + amount);
         Date before = sdf.parse(beforeTime);

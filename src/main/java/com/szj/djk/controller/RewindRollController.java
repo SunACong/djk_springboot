@@ -3,12 +3,13 @@ package com.szj.djk.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.szj.djk.common.R;
-import com.szj.djk.entity.*;
+import com.szj.djk.entity.Avaluate;
+import com.szj.djk.entity.RewindRoll;
+import com.szj.djk.entity.ValueRange;
+import com.szj.djk.entity.WarnTable;
 import com.szj.djk.mapper.WarnTableMapper;
-import com.szj.djk.service.WarnTableService;
 import com.szj.djk.service.AvaluateService;
 import com.szj.djk.service.RewindRollService;
-import com.szj.djk.service.RewinderService;
 import com.szj.djk.service.WarnTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -54,7 +55,6 @@ public class RewindRollController {
      */
     @GetMapping("listSpecial")
     public R<List<WarnTable>> listSpecial(RewindRoll rewindRoll, String rollingName)  {
-        System.out.println("触发了+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         int amount = 10000;
         LocalDateTime ts = rewindRoll.getTs();
         long beforeTime = Timestamp.valueOf(ts).getTime()-amount;
@@ -102,7 +102,6 @@ public class RewindRollController {
                     break;
             }
         });
-//        System.out.println("打印++++" + valueRange);
         WarnTable warnTable = new WarnTable();
         RewindRoll rewindRoll = new RewindRoll();
         LambdaQueryWrapper<RewindRoll> queryWrapperR = new LambdaQueryWrapper<>();
@@ -110,7 +109,6 @@ public class RewindRollController {
                 .orderByDesc(true,RewindRoll::getTs)
                 .last("limit 20");
         List<RewindRoll> newlist = rewindRollService.list(queryWrapperR);
-//            System.out.println("新的数据"+ newlist.size());
 /**
  * 开卷机电流曲线:setShangDD  卷取机电流曲线:setXiaDD    机列速度:setShangDS 卷取卷径:setXiaDS
  * 实际张力:setZhuDD   带材长度:setBeiDD

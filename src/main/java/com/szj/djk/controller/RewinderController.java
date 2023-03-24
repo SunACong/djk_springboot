@@ -50,7 +50,6 @@ public class RewinderController {
         int amount = 10000;
         Date produceTime = rewinder.getProduceTime();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        System.out.println(produceTime.getTime());
         String beforeTime = sdf.format(produceTime.getTime() - amount);
         String afterTime = sdf.format(produceTime.getTime() + amount);
         Date before = sdf.parse(beforeTime);
@@ -66,7 +65,6 @@ public class RewinderController {
     public R<String> add(@RequestBody Rewinder rewinder){
         Date date = new Date();
         SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-        System.out.println(dateFormat.format(date));
         rewinder.setProduceTime(date);
 
         boolean save = rewinderService.save(rewinder);

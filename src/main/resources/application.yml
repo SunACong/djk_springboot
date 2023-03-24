@@ -80,4 +80,4 @@ mybatis-plus:
 
 logging:
   level:
-    com.szj.djk.mapper: debug
+    com.szj.djk.mapper: info

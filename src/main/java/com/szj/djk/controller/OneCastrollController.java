@@ -47,7 +47,6 @@ public class OneCastrollController {
     @GetMapping("/listNewData")
     public R<List<OneCastroll>> ListNewData(){
         List<OneCastroll> rollingMachines = oneCastrollService.selectRollingNewData();
-//        System.out.println("这是铸轧机最新数据"+rollingMachines);
         return  R.success(rollingMachines);
     }
     /**
@@ -126,7 +125,6 @@ public class OneCastrollController {
                     break;
             }
         });
-//        System.out.println("1号铸轧机异常数据存储");
         WarnTable warnTable = new WarnTable();
         OneCastroll oneCastroll = new OneCastroll();
         LambdaQueryWrapper<OneCastroll> queryWrapperR = new LambdaQueryWrapper<>();

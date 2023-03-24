@@ -40,7 +40,6 @@ public class AvaluateController {
      */
     @GetMapping("pageVOList")
     public R<IPage> test(int currentPage, int pageSize, @Param("avaluate") Avaluate avaluate) {
-        System.out.println(avaluate);
         QueryWrapper<Avaluate> queryWrapper = new QueryWrapper<>();
         Page<Avaluate> page = new Page<Avaluate>(currentPage, pageSize);
         IPage<Avaluate> avaluateIPage = avaluateService.selectAvaluateAndStandard(page,queryWrapper,avaluate);
@@ -51,8 +50,6 @@ public class AvaluateController {
      */
     @GetMapping("/{id}")
     public  R<Avaluate> getinfo(@PathVariable("id") Long id){
-//        LambdaQueryWrapper<Object> getId = new LambdaQueryWrapper<>();
-        System.out.println(avaluateService.getById(id));
         return R.success(avaluateService.getById(id));
     }
     /**
@@ -60,7 +57,6 @@ public class AvaluateController {
      */
     @PutMapping
     public R<String> update(@RequestBody Avaluate avaluate){
-        System.out.println(avaluate);
         LambdaUpdateWrapper<Avaluate> updateWrapper = new LambdaUpdateWrapper<>();
         updateWrapper.eq(Avaluate::getId, avaluate.getId());
         boolean update = avaluateService.update(avaluate, updateWrapper);

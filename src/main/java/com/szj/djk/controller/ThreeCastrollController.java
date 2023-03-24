@@ -1,19 +1,21 @@
 package com.szj.djk.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.szj.djk.common.R;
-import com.szj.djk.entity.*;
+import com.szj.djk.entity.Avaluate;
+import com.szj.djk.entity.ThreeCastroll;
+import com.szj.djk.entity.ValueRange;
+import com.szj.djk.entity.WarnTable;
 import com.szj.djk.mapper.WarnTableMapper;
 import com.szj.djk.service.AvaluateService;
 import com.szj.djk.service.ThreeCastrollService;
 import com.szj.djk.service.WarnTableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
@@ -123,7 +125,6 @@ public class ThreeCastrollController {
                     break;
             }
         });
-//        System.out.println("3号铸轧机异常存储数据");
         WarnTable warnTable = new WarnTable();
         ThreeCastroll threeCastroll = new ThreeCastroll();
         LambdaQueryWrapper<ThreeCastroll> queryWrapperR = new LambdaQueryWrapper<>();

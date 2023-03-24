@@ -6,15 +6,15 @@ import com.szj.djk.common.R;
 import com.szj.djk.entity.ProcessStandard;
 import com.szj.djk.service.ProcessStandardService;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 
 /**
+ * @author 孙少聪
  * @ClassName ProcessStandardController
- * @Authoc 孙少聪
  * @Date 2022/9/29 20:29:18
  */
 @Slf4j
@@ -22,7 +22,7 @@ import java.util.List;
 @RequestMapping("/processStandard")
 public class ProcessStandardController {
 
-    @Autowired
+    @Resource
     private ProcessStandardService processStandardService;
 
     @GetMapping("list")

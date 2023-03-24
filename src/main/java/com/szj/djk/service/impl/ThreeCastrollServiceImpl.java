@@ -31,7 +31,6 @@ public class ThreeCastrollServiceImpl extends ServiceImpl<ThreeCastrollMapper, T
     @Override
     public List<WarnTable> selectSpecial(LocalDateTime before, LocalDateTime after, String rollingName) {
         List<ThreeCastroll> threeCastrolls = threeCastrollMapper.selectSpecial(before, after);
-//        System.out.println("这是拿到的special数据"+threeCastrolls);
         ArrayList<WarnTable> WarnTables = new ArrayList<>();
         threeCastrolls.forEach(item ->{
             WarnTable warnTable = new WarnTable();

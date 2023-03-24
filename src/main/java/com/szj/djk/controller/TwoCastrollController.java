@@ -45,7 +45,6 @@ public class TwoCastrollController {
     @GetMapping("/listNewData")
     public R<List<TwoCastroll>> ListNewData(){
         List<TwoCastroll> rollingMachines = twoCastrollService.selectRollingNewData();
-//        System.out.println("这是铸轧机最新数据"+rollingMachines);
         return  R.success(rollingMachines);
     }
     /**
@@ -124,7 +123,6 @@ public class TwoCastrollController {
                     break;
             }
         });
-//        System.out.println("2号铸轧机异常存储数据");
         WarnTable warnTable = new WarnTable();
         TwoCastroll twoCastroll = new TwoCastroll();
         LambdaQueryWrapper<TwoCastroll> queryWrapperR = new LambdaQueryWrapper<>();

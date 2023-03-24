@@ -90,8 +90,6 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
 
     @Override
     public Page<PlanAndInspect> pageList(Page<PlanAndInspect> pageInfo, PlanAndInspect planAndInspect) {
-        System.out.println(planAndInspect.getStartDateTime());
-        System.out.println(planAndInspect.getEndDateTime());
         LambdaQueryWrapper<PlanAndInspect> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.setEntity(planAndInspect)
                 .between(planAndInspect.getStartDateTime()!=null && planAndInspect.getEndDateTime()!=null, PlanAndInspect::getInspectCreateTime, planAndInspect.getStartDateTime(), planAndInspect.getEndDateTime());
@@ -110,7 +108,6 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
             item.setSlaveErpPlanColdreductionstrip(slaveErpPlanColdreductionstrip);
             item.setLmdpQcColdInspect(lmdpQcColdInspect);
         });
-        System.out.println(page.getRecords().size());
         DynamicDataSourceContextHolder.poll();
         return page;
     }
