@@ -21,7 +21,6 @@ public class DjkSpringbootApplication {
                 " |_____/ \\____/|_|\\_\\\n");
     }
 
-    // 禁用Ping Method
     static {
         System.setProperty("druid.mysql.usePingMethod","false");
     }

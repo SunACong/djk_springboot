@@ -54,18 +54,13 @@ public class RewindRollController {
      */
     @GetMapping("listSpecial")
     public R<List<WarnTable>> listSpecial(RewindRoll rewindRoll, String rollingName)  {
-        System.out.println("触发了+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+//        System.out.println("触发了+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         int amount = 10000;
         LocalDateTime ts = rewindRoll.getTs();
         long beforeTime = Timestamp.valueOf(ts).getTime()-amount;
         long afterTime = Timestamp.valueOf(ts).getTime()+amount;
         LocalDateTime before = new Date(beforeTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
         LocalDateTime after = new Date(afterTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
-//        LambdaQueryWrapper<RewindRoll> queryWrapper = new LambdaQueryWrapper<>();
-//        queryWrapper.between(RewindRoll::getTs, before, after);
-//        List<RewindRoll> list = rewindRollService.list(queryWrapper);
-//        List<WarnTable> specialList = rewindRollService.selectSpecial(before,after,rollingName);
-//        return R.success(list);
         List<WarnTable> specialList = rewindRollService.selectSpecial(before,after,rollingName);
         return R.success(specialList);
     }
@@ -164,4 +159,6 @@ public class RewindRollController {
         });
         return  R.success(valueRange);
     }
+
+
 }
