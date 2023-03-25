@@ -56,9 +56,9 @@ public class OneCastrollController {
     @GetMapping("/listSpecial")
     public R<List<WarnTable>> listSpecial(OneCastroll oneCastroll, String rollingName)  {
         int amount = 10000;
-        LocalDateTime createTime = oneCastroll.getCreateTime();
-        long beforeTime = Timestamp.valueOf(createTime).getTime()-amount;
-        long afterTime = Timestamp.valueOf(createTime).getTime()+amount;
+        LocalDateTime ts = oneCastroll.getTs();
+        long beforeTime = Timestamp.valueOf(ts).getTime()-amount;
+        long afterTime = Timestamp.valueOf(ts).getTime()+amount;
         LocalDateTime before = new Date(beforeTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
         LocalDateTime after = new Date(afterTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
         List<WarnTable> specialList = oneCastrollService.selectSpecial(before,after,rollingName);
@@ -124,6 +124,9 @@ public class OneCastrollController {
                 case "传动侧预载力" :
                     valueRange.setDsDongY(i.getMaxValue());
                     break;
+//                case "卷曲电机速度" :
+//                    valueRange.setJqDianJ(i.getMaxValue());
+//                    break;
             }
         });
 //        System.out.println("1号铸轧机异常数据存储");

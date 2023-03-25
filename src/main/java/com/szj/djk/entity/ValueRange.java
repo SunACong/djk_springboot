@@ -47,6 +47,9 @@ public class ValueRange {
     private Double xiaLL;//下辊流量
     private Double caoZuoY; //WS操作侧预载力
     private Double dsDongY; //DS传动侧预载力
+//    private Double jqDianJ; //DS传动侧预载力
+//    private Double dsDongY; //DS传动侧预载力
+//    private Double dsDongY; //DS传动侧预载力
 
     public Double getShangDD() {
         return shangDD;

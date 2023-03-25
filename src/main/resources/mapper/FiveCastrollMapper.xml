@@ -46,9 +46,9 @@
     </sql>
     <select id="selectRollingNewData" resultType="com.szj.djk.entity.FiveCastroll" resultMap="BaseResultMap">
         SELECT * from(<include refid="selectRollingMachineVo"/>
-        order by create_time desc limit 20) aa order by create_time
+        order by ts desc limit 20) aa order by ts
     </select>
     <select id="selectSpecial" resultType="com.szj.djk.entity.FiveCastroll">
-        select * from five_castroll where  create_time between #{before} and #{after}
+        select * from five_castroll where  ts between #{before} and #{after}
     </select>
 </mapper>

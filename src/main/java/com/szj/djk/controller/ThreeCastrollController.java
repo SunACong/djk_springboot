@@ -52,9 +52,9 @@ public class ThreeCastrollController {
     @GetMapping("listSpecial")
     public R<List<WarnTable>> listSpecial(ThreeCastroll threeCastroll, String rollingName)  {
         int amount = 10000;
-        LocalDateTime createTime = threeCastroll.getCreateTime();
-        long beforeTime = Timestamp.valueOf(createTime).getTime()-amount;
-        long afterTime = Timestamp.valueOf(createTime).getTime()+amount;
+        LocalDateTime ts = threeCastroll.getTs();
+        long beforeTime = Timestamp.valueOf(ts).getTime()-amount;
+        long afterTime = Timestamp.valueOf(ts).getTime()+amount;
         LocalDateTime before = new Date(beforeTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
         LocalDateTime after = new Date(afterTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
         List<WarnTable> specialList = threeCastrollService.selectSpecial(before,after,rollingName);
@@ -203,6 +203,28 @@ public class ThreeCastrollController {
             if(i.getTransPreloadForce()>valueRange.getDsDongY()){
                 warnTable.setRollingName("传动侧预测力");
                 warnTable.setRollingValue(i.getTransPreloadForce());
+                warnTable.setRollingProduceTime(i.getTs());
+                warnTable.setRollingDeviceNumber("铸轧机3#");
+                warnTableService.save(warnTable);
+            }
+
+            if(i.getUpRollMontorLineV()>valueRange.getShangDS()){
+                warnTable.setRollingName("上辊电机速度");
+                warnTable.setRollingValue(i.getUpRollMontorLineV());
+                warnTable.setRollingProduceTime(i.getTs());
+                warnTable.setRollingDeviceNumber("铸轧机3#");
+                warnTableService.save(warnTable);
+            }
+            if(i.getDownRollMontorLineV()>valueRange.getXiaDS()){
+                warnTable.setRollingName("下辊电机速度");
+                warnTable.setRollingValue(i.getDownRollMontorLineV());
+                warnTable.setRollingProduceTime(i.getTs());
+                warnTable.setRollingDeviceNumber("铸轧机3#");
+                warnTableService.save(warnTable);
+            }
+            if(i.getRollV()>valueRange.getJuanDS()){
+                warnTable.setRollingName("卷取电机速度");
+                warnTable.setRollingValue(i.getRollA());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机3#");
                 warnTableService.save(warnTable);
