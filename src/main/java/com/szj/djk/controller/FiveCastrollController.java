@@ -48,9 +48,9 @@ public class FiveCastrollController {
     @GetMapping("listSpecial")
     public R<List<WarnTable>> listSpecial(FiveCastroll fiveCastroll, String rollingName)  {
         int amount = 10000;
-        LocalDateTime createTime = fiveCastroll.getCreateTime();
-        long beforeTime = Timestamp.valueOf(createTime).getTime()-amount;
-        long afterTime = Timestamp.valueOf(createTime).getTime()+amount;
+        LocalDateTime ts = fiveCastroll.getTs();
+        long beforeTime = Timestamp.valueOf(ts).getTime()-amount;
+        long afterTime = Timestamp.valueOf(ts).getTime()+amount;
         LocalDateTime before = new Date(beforeTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
         LocalDateTime after = new Date(afterTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
         List<WarnTable> specialList = fiveCastrollService.selectSpecial(before,after,rollingName);

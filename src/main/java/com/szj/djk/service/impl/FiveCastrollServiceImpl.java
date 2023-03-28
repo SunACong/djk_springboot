@@ -31,90 +31,109 @@ public class FiveCastrollServiceImpl extends ServiceImpl<FiveCastrollMapper, Fiv
     @Override
     public List<WarnTable> selectSpecial(LocalDateTime before, LocalDateTime after, String rollingName) {
         List<FiveCastroll> fiveCastrolls = fiveCastrollMapper.selectSpecial(before, after);
-        ArrayList<WarnTable> WarnTables = new ArrayList<>();
+        ArrayList<WarnTable> warnTables = new ArrayList<>();
         fiveCastrolls.forEach(item ->{
             WarnTable warnTable = new WarnTable();
             switch (rollingName){
                 case "上辊电机电流":
                     warnTable.setRollingName(rollingName);
                     warnTable.setRollingValue(item.getUpRollMontorA());
-                    warnTable.setRollingProduceTime(item.getCreateTime());
-                    WarnTables.add(warnTable);
+                    warnTable.setRollingProduceTime(item.getTs());
+                    warnTables.add(warnTable);
                     break;
                 case "下辊电机电流":
                     warnTable.setRollingName(rollingName);
                     warnTable.setRollingValue(item.getDownRollMontorA());
-                    warnTable.setRollingProduceTime(item.getCreateTime());
-                    WarnTables.add(warnTable);
+                    warnTable.setRollingProduceTime(item.getTs());
+                    warnTables.add(warnTable);
                     break;
                 case "主水泵电机电流":
                     warnTable.setRollingName(rollingName);
                     warnTable.setRollingValue(item.getDownRollMontorA());
-                    warnTable.setRollingProduceTime(item.getCreateTime());
-                    WarnTables.add(warnTable);
+                    warnTable.setRollingProduceTime(item.getTs());
+                    warnTables.add(warnTable);
                 case "备用水泵电机电流":
                     warnTable.setRollingName(rollingName);
                     warnTable.setRollingValue(item.getDownRollMontorA());
-                    warnTable.setRollingProduceTime(item.getCreateTime());
-                    WarnTables.add(warnTable);
+                    warnTable.setRollingProduceTime(item.getTs());
+                    warnTables.add(warnTable);
                     break;
                 case "卷取电机电流":
                     warnTable.setRollingName(rollingName);
                     warnTable.setRollingValue(item.getRollA());
-                    warnTable.setRollingProduceTime(item.getCreateTime());
-                    WarnTables.add(warnTable);
+                    warnTable.setRollingProduceTime(item.getTs());
+                    warnTables.add(warnTable);
                     break;
                 case "上辊水压":
                     warnTable.setRollingName(rollingName);
                     warnTable.setRollingValue(item.getUpRollWaterFn());
-                    warnTable.setRollingProduceTime(item.getCreateTime());
-                    WarnTables.add(warnTable);
+                    warnTable.setRollingProduceTime(item.getTs());
+                    warnTables.add(warnTable);
                     break;
                 case "下辊水压":
                     warnTable.setRollingName(rollingName);
                     warnTable.setRollingValue(item.getDownRollWaterFn());
-                    warnTable.setRollingProduceTime(item.getCreateTime());
-                    WarnTables.add(warnTable);
+                    warnTable.setRollingProduceTime(item.getTs());
+                    warnTables.add(warnTable);
                     break;
                 case "上辊水温":
                     warnTable.setRollingName(rollingName);
                     warnTable.setRollingValue(item.getUpRollWaterT());
-                    warnTable.setRollingProduceTime(item.getCreateTime());
-                    WarnTables.add(warnTable);
+                    warnTable.setRollingProduceTime(item.getTs());
+                    warnTables.add(warnTable);
                     break;
                 case "下辊水温":
                     warnTable.setRollingName(rollingName);
                     warnTable.setRollingValue(item.getDownRollWaterT());
-                    warnTable.setRollingProduceTime(item.getCreateTime());
-                    WarnTables.add(warnTable);
+                    warnTable.setRollingProduceTime(item.getTs());
+                    warnTables.add(warnTable);
                     break;
                 case "上辊流量":
                     warnTable.setRollingName(rollingName);
                     warnTable.setRollingValue(item.getUpRollFlow());
-                    warnTable.setRollingProduceTime(item.getCreateTime());
-                    WarnTables.add(warnTable);
+                    warnTable.setRollingProduceTime(item.getTs());
+                    warnTables.add(warnTable);
                     break;
                 case "下辊流量":
                     warnTable.setRollingName(rollingName);
                     warnTable.setRollingValue(item.getDownRollFlow());
-                    warnTable.setRollingProduceTime(item.getCreateTime());
-                    WarnTables.add(warnTable);
+                    warnTable.setRollingProduceTime(item.getTs());
+                    warnTables.add(warnTable);
                     break;
                 case "操作侧预载力":
                     warnTable.setRollingName(rollingName);
                     warnTable.setRollingValue(item.getOperationPreloadForce());
-                    warnTable.setRollingProduceTime(item.getCreateTime());
-                    WarnTables.add(warnTable);
+                    warnTable.setRollingProduceTime(item.getTs());
+                    warnTables.add(warnTable);
                     break;
                 case "传动侧预载力":
                     warnTable.setRollingName(rollingName);
                     warnTable.setRollingValue(item.getTransPreloadForce());
-                    warnTable.setRollingProduceTime(item.getCreateTime());
-                    WarnTables.add(warnTable);
+                    warnTable.setRollingProduceTime(item.getTs());
+                    warnTables.add(warnTable);
+                    break;
+                case "上辊电机速度":
+                    warnTable.setRollingName(rollingName);
+                    warnTable.setRollingValue(item.getUpRollMontorLineV());
+                    warnTable.setRollingProduceTime(item.getTs());
+                    warnTables.add(warnTable);
+                    break;
+                case "下辊电机速度":
+                    warnTable.setRollingName(rollingName);
+                    warnTable.setRollingValue(item.getDownRollMontorLineV());
+                    warnTable.setRollingProduceTime(item.getTs());
+                    warnTables.add(warnTable);
+                    break;
+                case "卷取电机速度":
+                    warnTable.setRollingName(rollingName);
+                    warnTable.setRollingValue(item.getRollV());
+                    warnTable.setRollingProduceTime(item.getTs());
+                    warnTables.add(warnTable);
                     break;
             }
         });
-        return WarnTables;
+//        System.out.println("这是警告数据"+WarnTables);
+        return warnTables;
     }
 }
 

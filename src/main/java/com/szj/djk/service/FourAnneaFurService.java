@@ -2,6 +2,10 @@ package com.szj.djk.service;
 
 import com.szj.djk.entity.FourAnneaFur;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.szj.djk.entity.WarnTable;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 /**
 * @author JIAJIA
@@ -9,5 +13,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2023-03-23 17:16:01
 */
 public interface FourAnneaFurService extends IService<FourAnneaFur> {
+
+    /**
+     * 查询特定警告数据时间前后的数据
+     */
+    public List<WarnTable> selectSpecial(LocalDateTime before, LocalDateTime after, String rollingName);
 
 }

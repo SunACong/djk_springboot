@@ -48,4 +48,8 @@
         down_t,annealing_end,purge_cool_value,
         smoke_exhaust_output_value,create_time
     </sql>
+
+    <select id = "selectSpecial" resultType="com.szj.djk.entity.FourAnneaFur" >
+        select * from four_annea_fur where ts between  #{before} and #{after}
+    </select>
 </mapper>
