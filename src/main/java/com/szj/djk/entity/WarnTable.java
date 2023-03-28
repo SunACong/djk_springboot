@@ -35,4 +35,10 @@ public class WarnTable {
 
     /**设备号*/
     private String rollingDeviceNumber;
+
+    /**
+     * 是否已读
+     */
+    private Integer yd;
+
 }
