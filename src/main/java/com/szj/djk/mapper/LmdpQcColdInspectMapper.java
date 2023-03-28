@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 /**
 * @author Admin
 * @description 针对表【lmdp_qc_cold_inspect(冷轧工序质量巡检记录)】的数据库操作Mapper
-* @createDate 2023-02-16 14:25:11
+* @createDate 2023-03-25 13:22:39
 * @Entity com.szj.djk.entity.LmdpQcColdInspect
 */
 @Mapper

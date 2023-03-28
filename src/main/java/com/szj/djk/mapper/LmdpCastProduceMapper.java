@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 /**
 * @author Admin
 * @description 针对表【lmdp_cast_produce(铸轧工序)】的数据库操作Mapper
-* @createDate 2023-03-22 18:55:57
+* @createDate 2023-03-25 13:22:39
 * @Entity com.szj.djk.entity.LmdpCastProduce
 */
 @Mapper

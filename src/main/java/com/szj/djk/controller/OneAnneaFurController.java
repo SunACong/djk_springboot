@@ -3,11 +3,15 @@ package com.szj.djk.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.szj.djk.common.R;
-import com.szj.djk.entity.*;
+import com.szj.djk.entity.Avaluate;
+import com.szj.djk.entity.OneAnneaFur;
+import com.szj.djk.entity.ValueRange;
+import com.szj.djk.entity.WarnTable;
 import com.szj.djk.mapper.WarnTableMapper;
 import com.szj.djk.service.AvaluateService;
 import com.szj.djk.service.OneAnneaFurService;
 import com.szj.djk.service.WarnTableService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -21,6 +25,7 @@ import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.List;
 
+@Slf4j
 @Component
 @RestController
 @RequestMapping("/anneaf1")
@@ -78,9 +83,10 @@ public class OneAnneaFurController {
                 case "炉气设定温度":
                     valueRange.setBeiDS(i.getMaxValue());
                     break;
+                default:
+                    break;
             }
         });
-//        System.out.println("打印++++" + valueRange);
         WarnTable warnTable = new WarnTable();
         OneAnneaFur oneAnneaFur = new OneAnneaFur();
         LambdaQueryWrapper<OneAnneaFur> queryWrapperR = new LambdaQueryWrapper<>();
@@ -88,22 +94,14 @@ public class OneAnneaFurController {
                 .orderByDesc(true,OneAnneaFur::getTs)
                 .last("limit 20");
                 List<OneAnneaFur> newlist = oneAnneaFurService.list(queryWrapperR);
-//            System.out.println("新的数据"+ newlist);
         /**
          * 炉冷却水:ShangDD  炉压缩空气:XiaDD    金属料温温度曲线:ShangDS 一区炉气温度曲线:XiaDS
          * 二区炉气温度曲线:ZhuDD   三区炉气温度曲线:BeiDD  炉气设定温度:BeiDS
          */
-                newlist.forEach(i->{
+        newlist.forEach(i->{
             if(i.getCoolWaterUpLimit()>valueRange.getShangDD()){
                 warnTable.setRollingName("炉冷却水");
                 warnTable.setRollingValue(i.getCoolWaterUpLimit());
-                warnTable.setRollingProduceTime(i.getTs());
-                warnTable.setRollingDeviceNumber("退火炉1#");
-                warnTableService.save(warnTable);
-            }
-            if(i.getCompressedAirOneLowPressure()>valueRange.getXiaDD()){
-                warnTable.setRollingName("炉压缩空气");
-                warnTable.setRollingValue(i.getCompressedAirOneLowPressure());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("退火炉1#");
                 warnTableService.save(warnTable);
@@ -115,7 +113,6 @@ public class OneAnneaFurController {
                 warnTable.setRollingDeviceNumber("退火炉1#");
                 warnTableService.save(warnTable);
             }
-
             if(i.getZoneOneT()>valueRange.getXiaDS()){
                 warnTable.setRollingName("一区炉气温度曲线");
                 warnTable.setRollingValue(i.getZoneOneT());
@@ -139,13 +136,13 @@ public class OneAnneaFurController {
                 warnTable.setRollingDeviceNumber("退火炉1#");
                 warnTableService.save(warnTable);
             }
-                    if(i.getSetT()>valueRange.getBeiDD()){
-                        warnTable.setRollingName("炉气设定温度");
-                        warnTable.setRollingValue(i.getSetT());
-                        warnTable.setRollingProduceTime(i.getTs());
-                        warnTable.setRollingDeviceNumber("退火炉1#");
-                        warnTableService.save(warnTable);
-                    }
+            if(i.getSetT()>valueRange.getBeiDD()){
+                warnTable.setRollingName("炉气设定温度");
+                warnTable.setRollingValue(i.getSetT());
+                warnTable.setRollingProduceTime(i.getTs());
+                warnTable.setRollingDeviceNumber("退火炉1#");
+                warnTableService.save(warnTable);
+            }
         });
         return  R.success(valueRange);
     }

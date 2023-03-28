@@ -1,5 +1,6 @@
 package com.szj.djk.controller;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.szj.djk.common.R;
 import com.szj.djk.entity.LmdpCastPlan;
@@ -20,8 +21,10 @@ import java.util.List;
  * @author ruoyi
  * @date 2022-10-17
  */
+//出入库记录铸轧工序
+@DS("slave")
 @RestController
-@RequestMapping("/system/castReelStoreRecord")
+@RequestMapping("/lmdpCastReelStoreRecord")
 public class LmdpCastReelStoreRecordController
 {
     @Autowired

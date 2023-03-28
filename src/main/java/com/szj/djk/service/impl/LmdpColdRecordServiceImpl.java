@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
 * @author Admin
 * @description 针对表【lmdp_cold_record(冷轧生产原始记录)】的数据库操作Service实现
-* @createDate 2023-03-23 17:33:32
+* @createDate 2023-03-25 13:22:39
 */
 @Service
 public class LmdpColdRecordServiceImpl extends ServiceImpl<LmdpColdRecordMapper, LmdpColdRecord>

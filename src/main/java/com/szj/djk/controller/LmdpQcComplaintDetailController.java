@@ -1,10 +1,9 @@
 package com.szj.djk.controller;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.szj.djk.common.R;
-import com.szj.djk.entity.LmdpCastPlan;
 import com.szj.djk.entity.LmdpQcComplaintDetail;
-import com.szj.djk.service.LmdpCastPlanService;
 import com.szj.djk.service.LmdpQcComplaintDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,8 +19,10 @@ import java.util.List;
  * @author JH-Sparrow
  * @date 2022-10-17
  */
+//投诉及处理信息
+@DS("slave")
 @RestController
-@RequestMapping("/qcComplaintDetail")
+@RequestMapping("/lmdpQcComplaintDetail")
 public class LmdpQcComplaintDetailController
 {
     @Autowired

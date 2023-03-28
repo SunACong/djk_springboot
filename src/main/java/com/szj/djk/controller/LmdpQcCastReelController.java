@@ -2,6 +2,7 @@ package com.szj.djk.controller;
 
 import java.util.List;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.szj.djk.common.R;
 import com.szj.djk.entity.LmdpQcCastReel;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ruoyi
  * @date 2022-10-17
  */
+//铸轧卷质检报告
+@DS("slave")
 @RestController
-@RequestMapping("/system/reel")
+@RequestMapping("/lmdpQcCastReel")
 public class LmdpQcCastReelController
 {
     @Autowired

@@ -1,5 +1,6 @@
 package com.szj.djk.controller;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.szj.djk.common.R;
 import com.szj.djk.entity.LmdpCastHoldingFurnace;
@@ -18,8 +19,9 @@ import java.util.List;
  * @author ruoyi
  * @date 2022-10-17
  */
+@DS("slave")
 @RestController
-@RequestMapping("/system/furnace")
+@RequestMapping("/lmdpCastHoldingFurnace")
 public class LmdpCastHoldingFurnaceController
 {
     @Autowired

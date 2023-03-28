@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 
@@ -20,10 +21,12 @@ import java.util.List;
  * @author JH-Sparrow
  * @date 2022-10-17
  */
+//铸轧工序
 @DS("slave")
 @RestController
 @RequestMapping("/lmdpCastProduce")
 public class LmdpCastProduceController{
+
     @Autowired
     private LmdpCastProduceService lmdpCastProduceService;
 
@@ -34,4 +37,5 @@ public class LmdpCastProduceController{
         List<LmdpCastProduce> list = lmdpCastProduceService.list(queryWrapper);
         return R.success(list);
     }
+
 }
