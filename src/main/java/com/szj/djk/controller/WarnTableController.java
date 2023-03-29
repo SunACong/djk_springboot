@@ -33,7 +33,7 @@ public class WarnTableController {
     @GetMapping("/addRead")
     public R<String> addRead(WarnTable warnTable){
         System.out.println("idnumber"+warnTable);
-        warnTable.setYd(1);
+        warnTable.setYd("已读");
         boolean b = warnTableService.saveOrUpdate(warnTable);
         return b?R.success("插入成功"):R.error("插入失败");
     }

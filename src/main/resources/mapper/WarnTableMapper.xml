@@ -10,7 +10,7 @@
             <result property="rollingProduceTime" column="rolling_produce_time" jdbcType="TIMESTAMP"/>
             <result property="rollingValue" column="rolling_value" jdbcType="INTEGER"/>
             <result property="rollingDeviceNumber" column="rolling_device_number" jdbcType="VARCHAR"/>
-            <result property="yd" column="yd" javaType="INTEGER"/>
+            <result property="yd" column="yd" jdbcType="VARCHAR"></result>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -31,17 +31,5 @@
     <select id="selectDuringWarnData" resultType="com.szj.djk.entity.WarnTable" resultMap="BaseResultMap">
         select * from warn_table where rolling_device_number=#{warnTable.rollingDeviceNumber} and rolling_name=#{warnTable.rollingName} and rolling_produce_time between #{beginDate} and #{endDate}
     </select>
-
-    <update id="updateWarnTableCopy1" parameterType="com.szj.djk.entity.WarnTable">
-        update warn_table_copy1
-        <trim prefix="SET" suffixOverrides=",">
-            <if test="rollingName != null">rolling_name = #{rollingName},</if>
-            <if test="rollingProduceTime != null">rolling_produce_time = #{rollingProduceTime},</if>
-            <if test="rollingValue != null">rolling_value = #{rollingValue},</if>
-            <if test="rollingDeviceNumber != null">rolling_device_number = #{rollingDeviceNumber},</if>
-            <if test="yd != null">yd = #{yd},</if>
-        </trim>
-        where id_number = #{idNumber}
-    </update>
 
 </mapper>

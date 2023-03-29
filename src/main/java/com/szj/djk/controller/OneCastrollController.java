@@ -200,14 +200,14 @@ public class OneCastrollController {
                 warnTableService.save(warnTable);
             }
             if(i.getOperationPreloadForce()>valueRange.getCaoZuoY()){
-                warnTable.setRollingName("操作侧预测力");
+                warnTable.setRollingName("操作侧预载力");
                 warnTable.setRollingValue(i.getOperationPreloadForce());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机1#");
                 warnTableService.save(warnTable);
             }
             if(i.getTransPreloadForce()>valueRange.getDsDongY()){
-                warnTable.setRollingName("传动侧预测力");
+                warnTable.setRollingName("传动侧预载力");
                 warnTable.setRollingValue(i.getTransPreloadForce());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机1#");

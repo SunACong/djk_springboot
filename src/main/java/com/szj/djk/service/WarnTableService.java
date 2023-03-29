@@ -23,12 +23,5 @@ public interface WarnTableService extends IService<WarnTable> {
      */
     public List<WarnTable> selectDuringWarnData(WarnTable warnTable, Date beginDate, Date endDate);
 
-    /**
-     * 修改报警记录增删改查
-     *
-     * @param warnTable 报警记录增删改查
-     * @return 结果
-     */
-    public int updateWarnTableCopy1(WarnTable warnTable);
 
 }

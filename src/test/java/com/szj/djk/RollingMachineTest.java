@@ -237,14 +237,14 @@ public class RollingMachineTest {
                 warnTableService.save(warnTable);
             }
             if(item.getOperationPreloadForce()>valueRange.getCaoZuoY()){
-                warnTable.setRollingName("操作侧预测力");
+                warnTable.setRollingName("操作侧预载力");
                 warnTable.setRollingValue(item.getOperationPreloadForce());
                 warnTable.setRollingProduceTime(item.getCreateTime());
                 warnTable.setRollingDeviceNumber("铸轧机5#");
                 warnTableService.save(warnTable);
             }
             if(item.getTransPreloadForce()>valueRange.getDsDongY()){
-                warnTable.setRollingName("传动侧预测力");
+                warnTable.setRollingName("传动侧预载力");
                 warnTable.setRollingValue(item.getTransPreloadForce());
                 warnTable.setRollingProduceTime(item.getCreateTime());
                 warnTable.setRollingDeviceNumber("铸轧机5#");
@@ -326,13 +326,13 @@ public class RollingMachineTest {
                 warnTableService.save(warnTable);
             }
             if(item.getOperationPreloadForce()>60){
-                warnTable.setRollingName("操作侧预测力");
+                warnTable.setRollingName("操作侧预载力");
                 warnTable.setRollingValue(item.getOperationPreloadForce());
                 warnTable.setRollingProduceTime(item.getCreateTime());
                 warnTableService.save(warnTable);
             }
             if(item.getTransPreloadForce()>60){
-                warnTable.setRollingName("传动侧预测力");
+                warnTable.setRollingName("传动侧预载力");
                 warnTable.setRollingValue(item.getTransPreloadForce());
                 warnTable.setRollingProduceTime(item.getCreateTime());
                 warnTableService.save(warnTable);

@@ -39,6 +39,6 @@ public class WarnTable {
     /**
      * 是否已读
      */
-    private Integer yd;
+    private String yd;
 
 }
