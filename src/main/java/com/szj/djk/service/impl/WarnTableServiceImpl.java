@@ -37,4 +37,17 @@ public class WarnTableServiceImpl extends ServiceImpl<WarnTableMapper, WarnTable
     public List<WarnTable> selectDuringWarnData(WarnTable warnTable, Date beginDate, Date endDate) {
         return warnTableMapper.selectDuringWarnData(warnTable,beginDate,endDate);
     }
+
+    /**
+     * 修改报警记录增删改查
+     *
+     * @param warnTable 报警记录增删改查
+     * @return 结果
+     */
+    @Override
+    public int updateWarnTableCopy1(WarnTable warnTable)
+    {
+        return warnTableMapper.updateWarnTableCopy1(warnTable);
+    }
+
 }

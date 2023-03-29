@@ -1,16 +1,15 @@
 package com.szj.djk.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.szj.djk.common.R;
+import com.szj.djk.entity.RewindRoll;
 import com.szj.djk.entity.RollingMachine;
 import com.szj.djk.entity.WarnTable;
 import com.szj.djk.service.WarnTableService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -27,6 +26,18 @@ import java.util.List;
 public class WarnTableController {
     @Autowired
     private WarnTableService warnTableService;
+
+    /**
+     * 将已读标记插入数据库
+     */
+    @GetMapping("/addRead")
+    public R<String> addRead(WarnTable warnTable){
+        System.out.println("idnumber"+warnTable);
+        warnTable.setYd(1);
+        boolean b = warnTableService.saveOrUpdate(warnTable);
+        return b?R.success("插入成功"):R.error("插入失败");
+    }
+
     @GetMapping("/listWarnNewData")
     public R<List<WarnTable>> listWarnNewData(@Param("rollingDeviceNumber") String rollingDeviceNumber){
         List<WarnTable> newWarnData = warnTableService.selectWarnTableNewData(rollingDeviceNumber);

@@ -136,6 +136,7 @@ public class OneCastroll implements Serializable {
      */
     private Integer withMaterialSpeed;
 
+
     /**
      * 插入时间
      */
