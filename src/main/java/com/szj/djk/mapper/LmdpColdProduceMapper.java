@@ -1,8 +1,11 @@
 package com.szj.djk.mapper;
 
-import com.szj.djk.entity.LmdpColdProduce;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.szj.djk.entity.LmdpColdProduce;
 import org.apache.ibatis.annotations.Mapper;
+
+import java.util.List;
+import java.util.Map;
 
 /**
 * @author JH-Sparrow
@@ -12,7 +15,7 @@ import org.apache.ibatis.annotations.Mapper;
 */
 @Mapper
 public interface LmdpColdProduceMapper extends BaseMapper<LmdpColdProduce> {
-
+    List<Map<String, String>> getALlBatchNum();
 }
 
 

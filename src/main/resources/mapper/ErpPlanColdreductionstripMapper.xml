@@ -95,4 +95,8 @@
         enter_time,datatime,_import_task_id,
         erp_data_id
     </sql>
+    <select id="getColdPlan" resultType="com.szj.djk.entity.ErpPlanColdreductionstrip">
+        select epc.*, CONCAT('1、产品外观质量：',epc.appearance_req,' 2、坯料粗糙度：', epc.roughness, ' 3、卷层端面串层：', epc.string_layer, ' 4、卷材端面塔形：', epc.dagoba, ' 5、卷端面其他要求：', epc.otherrequirement) as full_require
+        from erp_plan_coldreductionstrip epc,erp_casting_check_record eccr where FIND_IN_SET(eccr.card_id,epc.cardlds) !=0 and goods_reel = #{reelNum} limit 1
+    </select>
 </mapper>

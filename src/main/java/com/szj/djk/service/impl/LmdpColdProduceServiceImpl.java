@@ -2,10 +2,14 @@ package com.szj.djk.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.szj.djk.entity.LmdpColdProduce;
-import com.szj.djk.service.LmdpColdProduceService;
 import com.szj.djk.mapper.LmdpColdProduceMapper;
+import com.szj.djk.service.LmdpColdProduceService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 /**
 * @author JH-Sparrow
@@ -17,6 +21,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class LmdpColdProduceServiceImpl extends ServiceImpl<LmdpColdProduceMapper, LmdpColdProduce>
     implements LmdpColdProduceService{
 
+    @Resource
+    private LmdpColdProduceMapper lmdpColdProduceMapper;
+
+    @Override
+    public List<Map<String, String>> getALlBatchNum() {
+        List<Map<String, String>> allReelNum = lmdpColdProduceMapper.getALlBatchNum();
+        return allReelNum;
+    }
 }
 
 

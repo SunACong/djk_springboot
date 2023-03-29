@@ -13,6 +13,7 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface ErpPlanColdreductionstripMapper extends BaseMapper<ErpPlanColdreductionstrip> {
 
+    ErpPlanColdreductionstrip getColdPlan(String reelNum);
 }
 
 

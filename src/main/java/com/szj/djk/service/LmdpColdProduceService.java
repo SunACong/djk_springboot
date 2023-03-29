@@ -1,7 +1,10 @@
 package com.szj.djk.service;
 
-import com.szj.djk.entity.LmdpColdProduce;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.szj.djk.entity.LmdpColdProduce;
+
+import java.util.List;
+import java.util.Map;
 
 /**
 * @author JH-Sparrow
@@ -9,5 +12,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2022-10-18 16:19:09
 */
 public interface LmdpColdProduceService extends IService<LmdpColdProduce> {
-
+    List<Map<String, String>> getALlBatchNum();
 }
