@@ -225,6 +225,8 @@ public class FiveCastrollController {
                 warnTable.setRollingDeviceNumber("铸轧机5#");
                 warnTableService.save(warnTable);
             }
+
+
         });
         return  R.success(valueRange);
     }
