@@ -103,6 +103,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
 
             LmdpQcComplaintDetail lmdpQcComplaintDetail = getLmdpQcComplaintDetail(reelNum);
             processMonitor.setLmdpQcComplaintDetail(lmdpQcComplaintDetail);
+
         } catch (CustomException e) {
             log.error(e.getMessage());
             return processMonitor;
@@ -227,14 +228,12 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
      * 查询冷轧计划表
      */
     private ErpPlanColdreductionstrip getErpPlanColdreductionstrip(String reelNum) throws CustomException{
-        String batchNum = getBatchNum(reelNum);
-        LambdaQueryWrapper<ErpPlanColdreductionstrip> queryWrapper = new LambdaQueryWrapper<ErpPlanColdreductionstrip>();
-        queryWrapper.eq(ErpPlanColdreductionstrip::getColdreductionstripNum, batchNum);
-        List<ErpPlanColdreductionstrip> list = erpPlanColdreductionstripService.list(queryWrapper);
-        if (list.size() != 0 && list != null){
-            return list.get(0);
-        }
-        throw new CustomException("未找到冷轧计划表");
+        //ErpPlanColdreductionstrip coldPlan = erpPlanColdreductionstripService.getColdPlan(reelNum);
+        //if (coldPlan != null){
+        //    return coldPlan;
+        //}
+        //throw new CustomException("未找冷轧计划表");
+        return null;
     }
 
     /**

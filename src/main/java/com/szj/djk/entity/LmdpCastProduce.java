@@ -671,16 +671,40 @@ public class LmdpCastProduce implements Serializable {
     private String produceStatus;
 
     /**
-     * 铸轧辊编号
+     * 铸轧辊编号#上辊
      */
-    @TableField(value = "roll_number")
-    private String rollNumber;
+    @TableField(value = "roll1_number")
+    private String roll1Number;
 
     /**
-     * 轧辊凸度
+     * 铸轧辊凸度#上辊
      */
-    @TableField(value = "convexity")
-    private BigDecimal convexity;
+    @TableField(value = "convexity1")
+    private BigDecimal convexity1;
+
+    /**
+     * 铸轧辊编号#下辊
+     */
+    @TableField(value = "roll2_number")
+    private String roll2Number;
+
+    /**
+     * 铸轧辊凸度#下辊
+     */
+    @TableField(value = "convexity2")
+    private BigDecimal convexity2;
+
+    /**
+     * 铸轧辊辊径#上辊
+     */
+    @TableField(value = "roll1_diameter")
+    private BigDecimal roll1Diameter;
+
+    /**
+     * 铸轧辊辊径#下辊
+     */
+    @TableField(value = "roll2_diameter")
+    private BigDecimal roll2Diameter;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

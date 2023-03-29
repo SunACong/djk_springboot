@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -35,6 +35,12 @@ public class LmdpCastProduceController{
         LambdaQueryWrapper<LmdpCastProduce> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.setEntity(lmdpCastProduce);
         List<LmdpCastProduce> list = lmdpCastProduceService.list(queryWrapper);
+        return R.success(list);
+    }
+
+    @GetMapping("getALlReelNum")
+    public R<List<Map<String, String>>> getALlReelNum(){
+        List<Map<String, String>> list = lmdpCastProduceService.getALlReelNum();
         return R.success(list);
     }
 

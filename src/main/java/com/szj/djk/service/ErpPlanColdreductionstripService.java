@@ -9,5 +9,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2023-03-25 13:22:39
 */
 public interface ErpPlanColdreductionstripService extends IService<ErpPlanColdreductionstrip> {
-
+     ErpPlanColdreductionstrip getColdPlan(String reelNum);
 }

@@ -114,8 +114,12 @@
             <result property="rollDiameter" column="roll_diameter" jdbcType="DECIMAL"/>
             <result property="castStartTime" column="cast_start_time" jdbcType="TIMESTAMP"/>
             <result property="produceStatus" column="produce_status" jdbcType="VARCHAR"/>
-            <result property="rollNumber" column="roll_number" jdbcType="VARCHAR"/>
-            <result property="convexity" column="convexity" jdbcType="DECIMAL"/>
+            <result property="roll1Number" column="roll1_number" jdbcType="VARCHAR"/>
+            <result property="convexity1" column="convexity1" jdbcType="DECIMAL"/>
+            <result property="roll2Number" column="roll2_number" jdbcType="VARCHAR"/>
+            <result property="convexity2" column="convexity2" jdbcType="DECIMAL"/>
+            <result property="roll1Diameter" column="roll1_diameter" jdbcType="DECIMAL"/>
+            <result property="roll2Diameter" column="roll2_diameter" jdbcType="DECIMAL"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -155,6 +159,11 @@
         actual_degasser_al_temp,actual_degasser_argon_press,actual_degasser_flow,
         actual_degasser_rpm,degasser_temp_set,filter_al_temp_set,
         heat_num,roll_diameter,cast_start_time,
-        produce_status,roll_number,convexity
+        produce_status,roll1_number,convexity1,
+        roll2_number,convexity2,roll1_diameter,
+        roll2_diameter
     </sql>
+    <select id="getALlReelNum" resultType="java.util.Map">
+        select reel_num label, reel_num value from lmdp_cast_produce
+    </select>
 </mapper>

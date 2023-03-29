@@ -101,4 +101,7 @@
         hot_roll,remark,creator_id,
         reviser_id,create_time,ts
     </sql>
+    <select id="getALlBatchNum" resultType="java.util.Map">
+        select batch_num label, batch_num value from lmdp_cold_produce
+    </select>
 </mapper>
