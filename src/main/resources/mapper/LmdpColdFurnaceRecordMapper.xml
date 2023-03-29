@@ -5,45 +5,63 @@
 <mapper namespace="com.szj.djk.mapper.LmdpColdFurnaceRecordMapper">
 
     <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpColdFurnaceRecord">
-            <result property="id" column="id" jdbcType="VARCHAR"/>
-            <result property="ts" column="ts" jdbcType="VARCHAR"/>
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="ts" column="ts" jdbcType="TIMESTAMP"/>
             <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
-            <result property="createTime" column="create_time" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
             <result property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
-            <result property="recordDate" column="record_date" jdbcType="VARCHAR"/>
+            <result property="recordDate" column="record_date" jdbcType="TIMESTAMP"/>
             <result property="furnaceNum" column="furnace_num" jdbcType="VARCHAR"/>
-            <result property="startTime" column="start_time" jdbcType="VARCHAR"/>
-            <result property="endTime" column="end_time" jdbcType="VARCHAR"/>
-            <result property="recordTime" column="record_time" jdbcType="VARCHAR"/>
-            <result property="gasTemperature1" column="gas_temperature1" jdbcType="VARCHAR"/>
-            <result property="gasTemperature2" column="gas_temperature2" jdbcType="VARCHAR"/>
-            <result property="gasTemperature3" column="gas_temperature3" jdbcType="VARCHAR"/>
-            <result property="materialTemperature1" column="material_temperature1" jdbcType="VARCHAR"/>
-            <result property="materialTemperature2" column="material_temperature2" jdbcType="VARCHAR"/>
-            <result property="hydraulicPressure" column="hydraulic_pressure" jdbcType="VARCHAR"/>
-            <result property="gasPressure" column="gas_pressure" jdbcType="VARCHAR"/>
-            <result property="intakeFanTemperature" column="intake_fan_temperature" jdbcType="VARCHAR"/>
-            <result property="exhaustFanTemperature" column="exhaust_fan_temperature" jdbcType="VARCHAR"/>
-            <result property="cycleFanTemperature1" column="cycle_fan_temperature1" jdbcType="VARCHAR"/>
-            <result property="cycleFanTemperature2" column="cycle_fan_temperature2" jdbcType="VARCHAR"/>
-            <result property="cycleFanTemperature3" column="cycle_fan_temperature3" jdbcType="VARCHAR"/>
+            <result property="startTime" column="start_time" jdbcType="TIMESTAMP"/>
+            <result property="endTime" column="end_time" jdbcType="TIMESTAMP"/>
+            <result property="totalTime" column="total_time" jdbcType="VARCHAR"/>
+            <result property="gasTemperature1" column="gas_temperature1" jdbcType="DECIMAL"/>
+            <result property="gasTemperature2" column="gas_temperature2" jdbcType="DECIMAL"/>
+            <result property="gasTemperature3" column="gas_temperature3" jdbcType="DECIMAL"/>
+            <result property="materialTemperature1" column="material_temperature1" jdbcType="DECIMAL"/>
+            <result property="materialTemperature2" column="material_temperature2" jdbcType="DECIMAL"/>
+            <result property="hydraulicPressure" column="hydraulic_pressure" jdbcType="DECIMAL"/>
+            <result property="gasPressure" column="gas_pressure" jdbcType="DECIMAL"/>
+            <result property="intakeFanTemperature" column="intake_fan_temperature" jdbcType="DECIMAL"/>
+            <result property="exhaustFanTemperature" column="exhaust_fan_temperature" jdbcType="DECIMAL"/>
+            <result property="cycleFanTemperature1" column="cycle_fan_temperature1" jdbcType="DECIMAL"/>
+            <result property="cycleFanTemperature2" column="cycle_fan_temperature2" jdbcType="DECIMAL"/>
+            <result property="cycleFanTemperature3" column="cycle_fan_temperature3" jdbcType="DECIMAL"/>
             <result property="remark" column="remark" jdbcType="VARCHAR"/>
             <result property="operator" column="operator" jdbcType="VARCHAR"/>
+            <result property="annealingThick" column="annealing_thick" jdbcType="DECIMAL"/>
+            <result property="inspectorId" column="inspector_id" jdbcType="VARCHAR"/>
+            <result property="furnaceCardNumber" column="furnace_card_number" jdbcType="VARCHAR"/>
+            <result property="brand" column="brand" jdbcType="VARCHAR"/>
+            <result property="rollNum" column="roll_num" jdbcType="INTEGER"/>
+            <result property="furnaceTotal" column="furnace_total" jdbcType="DECIMAL"/>
+            <result property="furnacePosition" column="furnace_position" jdbcType="VARCHAR"/>
+            <result property="furnaceOperator1" column="furnace_operator1" jdbcType="VARCHAR"/>
+            <result property="furnaceOperator2" column="furnace_operator2" jdbcType="VARCHAR"/>
+            <result property="tempPowerControl" column="temp_power_control" jdbcType="VARCHAR"/>
+            <result property="powerBefore" column="power_before" jdbcType="DECIMAL"/>
+            <result property="powerAfter" column="power_after" jdbcType="DECIMAL"/>
+            <result property="runningDuring" column="running_during" jdbcType="VARCHAR"/>
+            <result property="powerLoss" column="power_loss" jdbcType="DECIMAL"/>
+            <result property="perPowerLoss" column="per_power_loss" jdbcType="DECIMAL"/>
+            <result property="furnaceOperator1Id" column="furnace_operator1_id" jdbcType="VARCHAR"/>
+            <result property="furnaceOperator2Id" column="furnace_operator2_id" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,ts,creator_id,
         create_time,batch_num,record_date,
         furnace_num,start_time,end_time,
-        record_time,gas_temperature1,gas_temperature2,
+        total_time,gas_temperature1,gas_temperature2,
         gas_temperature3,material_temperature1,material_temperature2,
         hydraulic_pressure,gas_pressure,intake_fan_temperature,
         exhaust_fan_temperature,cycle_fan_temperature1,cycle_fan_temperature2,
-        cycle_fan_temperature3,remark,operator
+        cycle_fan_temperature3,remark,operator,
+        annealing_thick,inspector_id,furnace_card_number,
+        brand,roll_num,furnace_total,
+        furnace_position,furnace_operator1,furnace_operator2,
+        temp_power_control,power_before,power_after,
+        running_during,power_loss,per_power_loss,
+        furnace_operator1_id,furnace_operator2_id
     </sql>
-
-    <!--    查询铸轧生产时间-->
-    <select id="selectLenzhaTimeList" resultType="hashMap">
-        SELECT gas_temperature1,create_time FROM `lmdp_cold_furnace_record`
-    </select>
 </mapper>

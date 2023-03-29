@@ -1,6 +1,7 @@
 package com.szj.djk.controller;
 
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.szj.djk.common.R;
 import com.szj.djk.entity.LmdpCastProduce;
@@ -10,8 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -20,9 +21,12 @@ import java.util.Map;
  * @author JH-Sparrow
  * @date 2022-10-17
  */
+//铸轧工序
+@DS("slave")
 @RestController
-@RequestMapping("/system/castProduce")
+@RequestMapping("/lmdpCastProduce")
 public class LmdpCastProduceController{
+
     @Autowired
     private LmdpCastProduceService lmdpCastProduceService;
 
@@ -32,16 +36,6 @@ public class LmdpCastProduceController{
         queryWrapper.setEntity(lmdpCastProduce);
         List<LmdpCastProduce> list = lmdpCastProduceService.list(queryWrapper);
         return R.success(list);
-    }
-
-    /**
-     * 查询铸轧生产时间
-     * @return
-     */
-    @GetMapping(value = "selectZhuzhaTimeList")
-    public R<List<Map<String, Object>>> selectZhuzhaTimeList(){
-        List<Map<String, Object>> maps = lmdpCastProduceService.selectZhuzhaTimeList();
-        return R.success(maps);
     }
 
 }

@@ -5,86 +5,86 @@
 <mapper namespace="com.szj.djk.mapper.LmdpCastSmeltHoldMapper">
 
     <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpCastSmeltHold">
-            <result property="id" column="id" jdbcType="VARCHAR"/>
+            <id property="id" column="id" jdbcType="VARCHAR"/>
             <result property="planId" column="plan_id" jdbcType="VARCHAR"/>
             <result property="smeltTimes" column="smelt_times" jdbcType="VARCHAR"/>
             <result property="heatNum" column="heat_num" jdbcType="VARCHAR"/>
             <result property="brand" column="brand" jdbcType="VARCHAR"/>
-            <result property="feedTime" column="feed_time" jdbcType="VARCHAR"/>
+            <result property="feedTime" column="feed_time" jdbcType="TIMESTAMP"/>
             <result property="feedGroupId" column="feed_group_id" jdbcType="VARCHAR"/>
             <result property="feedGroupName" column="feed_group_name" jdbcType="VARCHAR"/>
-            <result property="gasPrepValue" column="gas_prep_value" jdbcType="VARCHAR"/>
-            <result property="stuffAlPig" column="stuff_al_pig" jdbcType="VARCHAR"/>
-            <result property="stuffCastReel" column="stuff_cast_reel" jdbcType="VARCHAR"/>
-            <result property="stuffBig" column="stuff_big" jdbcType="VARCHAR"/>
-            <result property="stuffColdThick" column="stuff_cold_thick" jdbcType="VARCHAR"/>
-            <result property="stuffColdThin" column="stuff_cold_thin" jdbcType="VARCHAR"/>
-            <result property="stuffAlSlag" column="stuff_al_slag" jdbcType="VARCHAR"/>
-            <result property="stuffSampleSlag" column="stuff_sample_slag" jdbcType="VARCHAR"/>
-            <result property="stuffTrim" column="stuff_trim" jdbcType="VARCHAR"/>
+            <result property="gasPrepValue" column="gas_prep_value" jdbcType="DECIMAL"/>
+            <result property="stuffAlPig" column="stuff_al_pig" jdbcType="DECIMAL"/>
+            <result property="stuffCastReel" column="stuff_cast_reel" jdbcType="DECIMAL"/>
+            <result property="stuffBig" column="stuff_big" jdbcType="DECIMAL"/>
+            <result property="stuffColdThick" column="stuff_cold_thick" jdbcType="DECIMAL"/>
+            <result property="stuffColdThin" column="stuff_cold_thin" jdbcType="DECIMAL"/>
+            <result property="stuffAlSlag" column="stuff_al_slag" jdbcType="DECIMAL"/>
+            <result property="stuffSampleSlag" column="stuff_sample_slag" jdbcType="DECIMAL"/>
+            <result property="stuffTrim" column="stuff_trim" jdbcType="DECIMAL"/>
             <result property="stuffOtherName" column="stuff_other_name" jdbcType="VARCHAR"/>
-            <result property="stuffOtherWeight" column="stuff_other_weight" jdbcType="VARCHAR"/>
+            <result property="stuffOtherWeight" column="stuff_other_weight" jdbcType="DECIMAL"/>
             <result property="stuffAlGroupId" column="stuff_al_group_id" jdbcType="VARCHAR"/>
             <result property="stuffAlGroupName" column="stuff_al_group_name" jdbcType="VARCHAR"/>
-            <result property="stuffAlWeight" column="stuff_al_weight" jdbcType="VARCHAR"/>
-            <result property="stuffTotalWeight" column="stuff_total_weight" jdbcType="VARCHAR"/>
-            <result property="stuffStlRatio" column="stuff_stl_ratio" jdbcType="VARCHAR"/>
-            <result property="firingTime" column="firing_time" jdbcType="VARCHAR"/>
-            <result property="forkliftStirTime1" column="forklift_stir_time1" jdbcType="VARCHAR"/>
-            <result property="forkliftStirTime2" column="forklift_stir_time2" jdbcType="VARCHAR"/>
-            <result property="forkliftStirTime3" column="forklift_stir_time3" jdbcType="VARCHAR"/>
+            <result property="stuffAlWeight" column="stuff_al_weight" jdbcType="DECIMAL"/>
+            <result property="stuffTotalWeight" column="stuff_total_weight" jdbcType="DECIMAL"/>
+            <result property="stuffStlRatio" column="stuff_stl_ratio" jdbcType="DECIMAL"/>
+            <result property="firingTime" column="firing_time" jdbcType="TIMESTAMP"/>
+            <result property="forkliftStirTime1" column="forklift_stir_time1" jdbcType="TIMESTAMP"/>
+            <result property="forkliftStirTime2" column="forklift_stir_time2" jdbcType="TIMESTAMP"/>
+            <result property="forkliftStirTime3" column="forklift_stir_time3" jdbcType="TIMESTAMP"/>
             <result property="forkliftGroupId" column="forklift_group_id" jdbcType="VARCHAR"/>
             <result property="forkliftGroupName" column="forklift_group_name" jdbcType="VARCHAR"/>
             <result property="forkliftDriverId" column="forklift_driver_id" jdbcType="VARCHAR"/>
             <result property="forkliftDriverName" column="forklift_driver_name" jdbcType="VARCHAR"/>
-            <result property="drossingTime" column="drossing_time" jdbcType="VARCHAR"/>
-            <result property="drossingTemp" column="drossing_temp" jdbcType="VARCHAR"/>
-            <result property="prepSamplingTime" column="prep_sampling_time" jdbcType="VARCHAR"/>
-            <result property="prepSamplingTemp" column="prep_sampling_temp" jdbcType="VARCHAR"/>
-            <result property="alloyRefine1AddTime" column="alloy_refine1_add_time" jdbcType="VARCHAR"/>
-            <result property="alloyRefine1Fe" column="alloy_refine1_fe" jdbcType="VARCHAR"/>
-            <result property="alloyRefine1Si" column="alloy_refine1_si" jdbcType="VARCHAR"/>
-            <result property="alloyRefine1AlSi" column="alloy_refine1_al_si" jdbcType="VARCHAR"/>
-            <result property="alloyRefine1Cu" column="alloy_refine1_cu" jdbcType="VARCHAR"/>
-            <result property="alloyRefine1Mn" column="alloy_refine1_mn" jdbcType="VARCHAR"/>
-            <result property="alloyRefine1AlTi" column="alloy_refine1_al_ti" jdbcType="VARCHAR"/>
+            <result property="drossingTime" column="drossing_time" jdbcType="TIMESTAMP"/>
+            <result property="drossingTemp" column="drossing_temp" jdbcType="DECIMAL"/>
+            <result property="prepSamplingTime" column="prep_sampling_time" jdbcType="TIMESTAMP"/>
+            <result property="prepSamplingTemp" column="prep_sampling_temp" jdbcType="DECIMAL"/>
+            <result property="alloyRefine1AddTime" column="alloy_refine1_add_time" jdbcType="TIMESTAMP"/>
+            <result property="alloyRefine1Fe" column="alloy_refine1_fe" jdbcType="DECIMAL"/>
+            <result property="alloyRefine1Si" column="alloy_refine1_si" jdbcType="DECIMAL"/>
+            <result property="alloyRefine1AlSi" column="alloy_refine1_al_si" jdbcType="DECIMAL"/>
+            <result property="alloyRefine1Cu" column="alloy_refine1_cu" jdbcType="DECIMAL"/>
+            <result property="alloyRefine1Mn" column="alloy_refine1_mn" jdbcType="DECIMAL"/>
+            <result property="alloyRefine1AlTi" column="alloy_refine1_al_ti" jdbcType="DECIMAL"/>
             <result property="alloyRefine1OtherName" column="alloy_refine1_other_name" jdbcType="VARCHAR"/>
-            <result property="alloyRefine1OtherDose" column="alloy_refine1_other_dose" jdbcType="VARCHAR"/>
+            <result property="alloyRefine1OtherDose" column="alloy_refine1_other_dose" jdbcType="DECIMAL"/>
             <result property="alloyRefine1SmeltGroupId" column="alloy_refine1_smelt_group_id" jdbcType="VARCHAR"/>
             <result property="alloyRefine1SmeltGroupName" column="alloy_refine1_smelt_group_name" jdbcType="VARCHAR"/>
             <result property="alloyRefine1SmelterId" column="alloy_refine1_smelter_id" jdbcType="VARCHAR"/>
             <result property="alloyRefine1SmelterName" column="alloy_refine1_smelter_name" jdbcType="VARCHAR"/>
-            <result property="mimRefine1BeginTime" column="mim_refine1_begin_time" jdbcType="VARCHAR"/>
-            <result property="mimRefine1EndTime" column="mim_refine1_end_time" jdbcType="VARCHAR"/>
-            <result property="mimRefine1Temp" column="mim_refine1_temp" jdbcType="VARCHAR"/>
+            <result property="mimRefine1BeginTime" column="mim_refine1_begin_time" jdbcType="TIMESTAMP"/>
+            <result property="mimRefine1EndTime" column="mim_refine1_end_time" jdbcType="TIMESTAMP"/>
+            <result property="mimRefine1Temp" column="mim_refine1_temp" jdbcType="DECIMAL"/>
             <result property="mimRefine1Medium" column="mim_refine1_medium" jdbcType="VARCHAR"/>
-            <result property="mimRefine1Dose" column="mim_refine1_dose" jdbcType="VARCHAR"/>
+            <result property="mimRefine1Dose" column="mim_refine1_dose" jdbcType="DECIMAL"/>
             <result property="mimRefine1GroupId" column="mim_refine1_group_id" jdbcType="VARCHAR"/>
             <result property="mimRefine1GroupName" column="mim_refine1_group_name" jdbcType="VARCHAR"/>
             <result property="mimRefine1SmelterId" column="mim_refine1_smelter_id" jdbcType="VARCHAR"/>
             <result property="mimRefine1SmelterName" column="mim_refine1_smelter_name" jdbcType="VARCHAR"/>
-            <result property="refine1SamplingTime" column="refine1_sampling_time" jdbcType="VARCHAR"/>
+            <result property="refine1SamplingTime" column="refine1_sampling_time" jdbcType="TIMESTAMP"/>
             <result property="refine1SamplingTemp" column="refine1_sampling_temp" jdbcType="VARCHAR"/>
             <result property="refine1RatioGroupId" column="refine1_ratio_group_id" jdbcType="VARCHAR"/>
             <result property="refine1RatioGroupName" column="refine1_ratio_group_name" jdbcType="VARCHAR"/>
-            <result property="alloyRefine2AddTime" column="alloy_refine2_add_time" jdbcType="VARCHAR"/>
-            <result property="alloyRefine2Fe" column="alloy_refine2_fe" jdbcType="VARCHAR"/>
-            <result property="alloyRefine2Si" column="alloy_refine2_si" jdbcType="VARCHAR"/>
-            <result property="alloyRefine2AlSi" column="alloy_refine2_al_si" jdbcType="VARCHAR"/>
-            <result property="alloyRefine2Cu" column="alloy_refine2_cu" jdbcType="VARCHAR"/>
-            <result property="alloyRefine2Mn" column="alloy_refine2_mn" jdbcType="VARCHAR"/>
-            <result property="alloyRefine2AlTi" column="alloy_refine2_al_ti" jdbcType="VARCHAR"/>
+            <result property="alloyRefine2AddTime" column="alloy_refine2_add_time" jdbcType="TIMESTAMP"/>
+            <result property="alloyRefine2Fe" column="alloy_refine2_fe" jdbcType="DECIMAL"/>
+            <result property="alloyRefine2Si" column="alloy_refine2_si" jdbcType="DECIMAL"/>
+            <result property="alloyRefine2AlSi" column="alloy_refine2_al_si" jdbcType="DECIMAL"/>
+            <result property="alloyRefine2Cu" column="alloy_refine2_cu" jdbcType="DECIMAL"/>
+            <result property="alloyRefine2Mn" column="alloy_refine2_mn" jdbcType="DECIMAL"/>
+            <result property="alloyRefine2AlTi" column="alloy_refine2_al_ti" jdbcType="DECIMAL"/>
             <result property="alloyRefine2OtherName" column="alloy_refine2_other_name" jdbcType="VARCHAR"/>
-            <result property="alloyRefine2OtherDose" column="alloy_refine2_other_dose" jdbcType="VARCHAR"/>
+            <result property="alloyRefine2OtherDose" column="alloy_refine2_other_dose" jdbcType="DECIMAL"/>
             <result property="alloyRefine2GroupId" column="alloy_refine2_group_id" jdbcType="VARCHAR"/>
             <result property="alloyRefine2GroupName" column="alloy_refine2_group_name" jdbcType="VARCHAR"/>
             <result property="alloyRefine2SmelterId" column="alloy_refine2_smelter_id" jdbcType="VARCHAR"/>
             <result property="alloyRefine2SmelterName" column="alloy_refine2_smelter_name" jdbcType="VARCHAR"/>
-            <result property="grainRefine1BeginTime" column="grain_refine1_begin_time" jdbcType="VARCHAR"/>
-            <result property="grainRefine1EndTime" column="grain_refine1_end_time" jdbcType="VARCHAR"/>
-            <result property="grainRefine1Temp" column="grain_refine1_temp" jdbcType="VARCHAR"/>
+            <result property="grainRefine1BeginTime" column="grain_refine1_begin_time" jdbcType="TIMESTAMP"/>
+            <result property="grainRefine1EndTime" column="grain_refine1_end_time" jdbcType="TIMESTAMP"/>
+            <result property="grainRefine1Temp" column="grain_refine1_temp" jdbcType="DECIMAL"/>
             <result property="grainRefine1Medium" column="grain_refine1_medium" jdbcType="VARCHAR"/>
-            <result property="grainRefine1Dose" column="grain_refine1_dose" jdbcType="VARCHAR"/>
+            <result property="grainRefine1Dose" column="grain_refine1_dose" jdbcType="DECIMAL"/>
             <result property="grainRefine1SmeltGroupId" column="grain_refine1_smelt_group_id" jdbcType="VARCHAR"/>
             <result property="grainRefine1SmeltGroupName" column="grain_refine1_smelt_group_name" jdbcType="VARCHAR"/>
             <result property="grainRefine1SmelterId" column="grain_refine1_smelter_id" jdbcType="VARCHAR"/>
@@ -93,11 +93,11 @@
             <result property="grainRefine1OperatorName" column="grain_refine1_operator_name" jdbcType="VARCHAR"/>
             <result property="grainRefine1DrossingGroupId" column="grain_refine1_drossing_group_id" jdbcType="VARCHAR"/>
             <result property="grainRefine1DrossingGroupName" column="grain_refine1_drossing_group_name" jdbcType="VARCHAR"/>
-            <result property="grainRefine2BeginTime" column="grain_refine2_begin_time" jdbcType="VARCHAR"/>
-            <result property="grainRefine2EndTime" column="grain_refine2_end_time" jdbcType="VARCHAR"/>
-            <result property="grainRefine2Temp" column="grain_refine2_temp" jdbcType="VARCHAR"/>
+            <result property="grainRefine2BeginTime" column="grain_refine2_begin_time" jdbcType="TIMESTAMP"/>
+            <result property="grainRefine2EndTime" column="grain_refine2_end_time" jdbcType="TIMESTAMP"/>
+            <result property="grainRefine2Temp" column="grain_refine2_temp" jdbcType="DECIMAL"/>
             <result property="grainRefine2Medium" column="grain_refine2_medium" jdbcType="VARCHAR"/>
-            <result property="grainRefine2Dose" column="grain_refine2_dose" jdbcType="VARCHAR"/>
+            <result property="grainRefine2Dose" column="grain_refine2_dose" jdbcType="DECIMAL"/>
             <result property="grainRefine2SmeltGroupId" column="grain_refine2_smelt_group_id" jdbcType="VARCHAR"/>
             <result property="grainRefine2SmeltGroupName" column="grain_refine2_smelt_group_name" jdbcType="VARCHAR"/>
             <result property="grainRefine2SmelterId" column="grain_refine2_smelter_id" jdbcType="VARCHAR"/>
@@ -106,22 +106,69 @@
             <result property="grainRefine2OperatorName" column="grain_refine2_operator_name" jdbcType="VARCHAR"/>
             <result property="grainRefine2DrossingGroupId" column="grain_refine2_drossing_group_id" jdbcType="VARCHAR"/>
             <result property="grainRefine2DrossingGroupName" column="grain_refine2_drossing_group_name" jdbcType="VARCHAR"/>
-            <result property="prepTurndownSamplingTime" column="prep_turndown_sampling_time" jdbcType="VARCHAR"/>
-            <result property="prepTurndownSamplingTemp" column="prep_turndown_sampling_temp" jdbcType="VARCHAR"/>
+            <result property="prepTurndownSamplingTime" column="prep_turndown_sampling_time" jdbcType="TIMESTAMP"/>
+            <result property="prepTurndownSamplingTemp" column="prep_turndown_sampling_temp" jdbcType="DECIMAL"/>
             <result property="turndownGroupId" column="turndown_group_id" jdbcType="VARCHAR"/>
             <result property="turndownSmelterId" column="turndown_smelter_id" jdbcType="VARCHAR"/>
-            <result property="turndownTemp" column="turndown_temp" jdbcType="VARCHAR"/>
-            <result property="turndownBeginTime" column="turndown_begin_time" jdbcType="VARCHAR"/>
-            <result property="turndownEndTime" column="turndown_end_time" jdbcType="VARCHAR"/>
-            <result property="gasPostValue" column="gas_post_value" jdbcType="VARCHAR"/>
+            <result property="turndownTemp" column="turndown_temp" jdbcType="DECIMAL"/>
+            <result property="turndownBeginTime" column="turndown_begin_time" jdbcType="TIMESTAMP"/>
+            <result property="turndownEndTime" column="turndown_end_time" jdbcType="TIMESTAMP"/>
+            <result property="gasPostValue" column="gas_post_value" jdbcType="DECIMAL"/>
             <result property="turndownCleanerId" column="turndown_cleaner_id" jdbcType="VARCHAR"/>
             <result property="turndownCleanerName" column="turndown_cleaner_name" jdbcType="VARCHAR"/>
             <result property="smeltRemark" column="smelt_remark" jdbcType="VARCHAR"/>
             <result property="smeltApprove" column="smelt_approve" jdbcType="VARCHAR"/>
             <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
             <result property="reviserId" column="reviser_id" jdbcType="VARCHAR"/>
-            <result property="createTime" column="create_time" jdbcType="VARCHAR"/>
-            <result property="ts" column="ts" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="ts" column="ts" jdbcType="TIMESTAMP"/>
+            <result property="drossingTempTime" column="drossing_temp_time" jdbcType="TIMESTAMP"/>
+            <result property="mimRefine1TempTime" column="mim_refine1_temp_time" jdbcType="TIMESTAMP"/>
+            <result property="grainRefine1TempTime" column="grain_refine1_temp_time" jdbcType="TIMESTAMP"/>
+            <result property="grainRefine2TempTime" column="grain_refine2_temp_time" jdbcType="TIMESTAMP"/>
+            <result property="turndownTempTime" column="turndown_temp_time" jdbcType="TIMESTAMP"/>
+            <result property="singleGasConsumption" column="single_gas_consumption" jdbcType="DECIMAL"/>
+            <result property="makingSlagAgentAddAmount" column="making_slag_agent_add_amount" jdbcType="DECIMAL"/>
+            <result property="makingPreSlagAgentAddAmount" column="making_pre_slag_agent_add_amount" jdbcType="DECIMAL"/>
+            <result property="forkliftGroupId2" column="forklift_group_id2" jdbcType="VARCHAR"/>
+            <result property="forkliftGroupName2" column="forklift_group_name2" jdbcType="VARCHAR"/>
+            <result property="forkliftDriverId2" column="forklift_driver_id2" jdbcType="VARCHAR"/>
+            <result property="forkliftDriverName2" column="forklift_driver_name2" jdbcType="VARCHAR"/>
+            <result property="forkliftGroupId3" column="forklift_group_id3" jdbcType="VARCHAR"/>
+            <result property="forkliftGroupName3" column="forklift_group_name3" jdbcType="VARCHAR"/>
+            <result property="forkliftDriverId3" column="forklift_driver_id3" jdbcType="VARCHAR"/>
+            <result property="forkliftDriverName3" column="forklift_driver_name3" jdbcType="VARCHAR"/>
+            <result property="stuffOtherName1" column="stuff_other_name1" jdbcType="VARCHAR"/>
+            <result property="stuffOtherWeight1" column="stuff_other_weight1" jdbcType="DECIMAL"/>
+            <result property="stuffOtherName2" column="stuff_other_name2" jdbcType="VARCHAR"/>
+            <result property="stuffOtherWeight2" column="stuff_other_weight2" jdbcType="DECIMAL"/>
+            <result property="stuffOtherName3" column="stuff_other_name3" jdbcType="VARCHAR"/>
+            <result property="stuffOtherWeight3" column="stuff_other_weight3" jdbcType="DECIMAL"/>
+            <result property="prepSamplingReview" column="prep_sampling_review" jdbcType="VARCHAR"/>
+            <result property="afterSamplingReview" column="after_sampling_review" jdbcType="VARCHAR"/>
+            <result property="prepTurndownSamplingReview" column="prep_turndown_sampling_review" jdbcType="VARCHAR"/>
+            <result property="holdingFurnaceSamplingReview" column="holding_furnace_sampling_review" jdbcType="VARCHAR"/>
+            <result property="alloyRefine1FeWest" column="alloy_refine1_fe_west" jdbcType="DECIMAL"/>
+            <result property="alloyRefine2FeWest" column="alloy_refine2_fe_west" jdbcType="DECIMAL"/>
+            <result property="prepSamplingTimeRe" column="prep_sampling_time_re" jdbcType="TIMESTAMP"/>
+            <result property="prepSamplingTempRe" column="prep_sampling_temp_re" jdbcType="DECIMAL"/>
+            <result property="refine1SamplingTimeRe" column="refine1_sampling_time_re" jdbcType="TIMESTAMP"/>
+            <result property="refine1SamplingTempRe" column="refine1_sampling_temp_re" jdbcType="DECIMAL"/>
+            <result property="prepTurndownSamplingTimeRe" column="prep_turndown_sampling_time_re" jdbcType="TIMESTAMP"/>
+            <result property="prepTurndownSamplingTempRe" column="prep_turndown_sampling_temp_re" jdbcType="DECIMAL"/>
+            <result property="gasUnitConsumption" column="gas_unit_consumption" jdbcType="DECIMAL"/>
+            <result property="castCardNumber" column="cast_card_number" jdbcType="VARCHAR"/>
+            <result property="clearGroupId" column="clear_group_id" jdbcType="VARCHAR"/>
+            <result property="liningPotNum1" column="lining_pot_num1" jdbcType="VARCHAR"/>
+            <result property="liningPotNum2" column="lining_pot_num2" jdbcType="VARCHAR"/>
+            <result property="liningPotNum3" column="lining_pot_num3" jdbcType="VARCHAR"/>
+            <result property="liningWeight1" column="lining_weight1" jdbcType="DECIMAL"/>
+            <result property="liningWeight2" column="lining_weight2" jdbcType="DECIMAL"/>
+            <result property="liningWeight3" column="lining_weight3" jdbcType="DECIMAL"/>
+            <result property="qualityPosition1" column="quality_position1" jdbcType="VARCHAR"/>
+            <result property="qualityPosition2" column="quality_position2" jdbcType="VARCHAR"/>
+            <result property="qualityPosition3" column="quality_position3" jdbcType="VARCHAR"/>
+            <result property="produceStatus" column="produce_status" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -163,6 +210,22 @@
         turndown_temp,turndown_begin_time,turndown_end_time,
         gas_post_value,turndown_cleaner_id,turndown_cleaner_name,
         smelt_remark,smelt_approve,creator_id,
-        reviser_id,create_time,ts
+        reviser_id,create_time,ts,
+        drossing_temp_time,mim_refine1_temp_time,grain_refine1_temp_time,
+        grain_refine2_temp_time,turndown_temp_time,single_gas_consumption,
+        making_slag_agent_add_amount,making_pre_slag_agent_add_amount,forklift_group_id2,
+        forklift_group_name2,forklift_driver_id2,forklift_driver_name2,
+        forklift_group_id3,forklift_group_name3,forklift_driver_id3,
+        forklift_driver_name3,stuff_other_name1,stuff_other_weight1,
+        stuff_other_name2,stuff_other_weight2,stuff_other_name3,
+        stuff_other_weight3,prep_sampling_review,after_sampling_review,
+        prep_turndown_sampling_review,holding_furnace_sampling_review,alloy_refine1_fe_west,
+        alloy_refine2_fe_west,prep_sampling_time_re,prep_sampling_temp_re,
+        refine1_sampling_time_re,refine1_sampling_temp_re,prep_turndown_sampling_time_re,
+        prep_turndown_sampling_temp_re,gas_unit_consumption,cast_card_number,
+        clear_group_id,lining_pot_num1,lining_pot_num2,
+        lining_pot_num3,lining_weight1,lining_weight2,
+        lining_weight3,quality_position1,quality_position2,
+        quality_position3,produce_status
     </sql>
 </mapper>

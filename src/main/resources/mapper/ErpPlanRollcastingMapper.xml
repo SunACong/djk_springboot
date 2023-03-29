@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.ErpPlanRollcastingMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.ErpPlanRollcasting">
+            <id property="dataId" column="data_id" jdbcType="VARCHAR"/>
+            <result property="datatype" column="datatype" jdbcType="VARCHAR"/>
+            <result property="enterTime" column="enter_time" jdbcType="TIMESTAMP"/>
+            <result property="datatime" column="datatime" jdbcType="TIMESTAMP"/>
+            <result property="importTaskId" column="_import_task_id" jdbcType="VARCHAR"/>
+            <result property="erpDataId" column="erp_data_id" jdbcType="BIGINT"/>
+            <result property="qualityProject" column="quality_project" jdbcType="VARCHAR"/>
+            <result property="checker2" column="checker2" jdbcType="VARCHAR"/>
+            <result property="allweight" column="allweight" jdbcType="VARCHAR"/>
+            <result property="checker1" column="checker1" jdbcType="VARCHAR"/>
+            <result property="productionUnitB" column="production_unit_b" jdbcType="VARCHAR"/>
+            <result property="productionUnitA" column="production_unit_a" jdbcType="VARCHAR"/>
+            <result property="checker" column="checker" jdbcType="VARCHAR"/>
+            <result property="type" column="type" jdbcType="BIGINT"/>
+            <result property="inside" column="inside" jdbcType="VARCHAR"/>
+            <result property="palnningEngineer" column="palnning_engineer" jdbcType="VARCHAR"/>
+            <result property="cu" column="Cu" jdbcType="VARCHAR"/>
+            <result property="castflowId" column="castFlow_id" jdbcType="BIGINT"/>
+            <result property="alloyNumber" column="alloy_number" jdbcType="VARCHAR"/>
+            <result property="ti" column="Ti" jdbcType="VARCHAR"/>
+            <result property="otherTotal" column="other_total" jdbcType="VARCHAR"/>
+            <result property="state" column="state" jdbcType="VARCHAR"/>
+            <result property="deleteFlag" column="delete_flag" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="count" column="count" jdbcType="BIGINT"/>
+            <result property="ai" column="AI" jdbcType="VARCHAR"/>
+            <result property="weight" column="weight" jdbcType="VARCHAR"/>
+            <result property="sleevePath" column="sleeve_path" jdbcType="VARCHAR"/>
+            <result property="finished" column="finished" jdbcType="BIGINT"/>
+            <result property="cardId" column="card_id" jdbcType="BIGINT"/>
+            <result property="produceId" column="produce_id" jdbcType="VARCHAR"/>
+            <result property="lastmodifyUser" column="lastmodify_user" jdbcType="VARCHAR"/>
+            <result property="infeedPoint" column="infeed_point" jdbcType="VARCHAR"/>
+            <result property="deliveredTimeB2" column="delivered_time_b2" jdbcType="TIMESTAMP"/>
+            <result property="presentationQuality" column="presentation_quality" jdbcType="VARCHAR"/>
+            <result property="lastmodifyTime" column="lastmodify_time" jdbcType="TIMESTAMP"/>
+            <result property="mg" column="Mg" jdbcType="VARCHAR"/>
+            <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+            <result property="planningEngineer" column="planning_engineer" jdbcType="VARCHAR"/>
+            <result property="otherSingle" column="other_single" jdbcType="VARCHAR"/>
+            <result property="orderId" column="order_id" jdbcType="BIGINT"/>
+            <result property="otherDemand" column="other_demand" jdbcType="VARCHAR"/>
+            <result property="drawupTime" column="drawup_time" jdbcType="TIMESTAMP"/>
+            <result property="mn" column="Mn" jdbcType="VARCHAR"/>
+            <result property="other" column="other" jdbcType="VARCHAR"/>
+            <result property="finishRemark" column="finish_remark" jdbcType="VARCHAR"/>
+            <result property="productuse" column="productuse" jdbcType="VARCHAR"/>
+            <result property="doubleDev" column="double_dev" jdbcType="VARCHAR"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="endwiseThickness" column="endwise_thickness" jdbcType="VARCHAR"/>
+            <result property="convexity" column="convexity" jdbcType="VARCHAR"/>
+            <result property="result" column="result" jdbcType="VARCHAR"/>
+            <result property="insideQuality" column="inside_quality" jdbcType="VARCHAR"/>
+            <result property="sleeveWidth" column="sleeve_width" jdbcType="VARCHAR"/>
+            <result property="zn" column="Zn" jdbcType="VARCHAR"/>
+            <result property="dataName" column="data_name" jdbcType="VARCHAR"/>
+            <result property="rollspecification" column="rollspecification" jdbcType="VARCHAR"/>
+            <result property="scope" column="scope" jdbcType="VARCHAR"/>
+            <result property="zr" column="Zr" jdbcType="VARCHAR"/>
+            <result property="endwisePoint" column="endwise_point" jdbcType="VARCHAR"/>
+            <result property="client" column="client" jdbcType="VARCHAR"/>
+            <result property="ni" column="Ni" jdbcType="VARCHAR"/>
+            <result property="deliveredTimeA2" column="delivered_time_a2" jdbcType="TIMESTAMP"/>
+            <result property="fe" column="Fe" jdbcType="VARCHAR"/>
+            <result property="productneedsId" column="productneeds_id" jdbcType="BIGINT"/>
+            <result property="thicknessDev" column="thickness_dev" jdbcType="VARCHAR"/>
+            <result property="specification" column="specification" jdbcType="VARCHAR"/>
+            <result property="widthDev" column="width_dev" jdbcType="VARCHAR"/>
+            <result property="convexityAvg" column="convexity_avg" jdbcType="VARCHAR"/>
+            <result property="si" column="Si" jdbcType="VARCHAR"/>
+            <result property="deliveredTimeB" column="delivered_time_b" jdbcType="TIMESTAMP"/>
+            <result property="deliveredTimeA" column="delivered_time_a" jdbcType="TIMESTAMP"/>
+            <result property="castflowName" column="castFlow_name" jdbcType="VARCHAR"/>
+            <result property="planId" column="plan_id" jdbcType="BIGINT"/>
+            <result property="reviewNumber" column="review_number" jdbcType="VARCHAR"/>
+            <result property="cr" column="Cr" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        data_id,datatype,enter_time,
+        datatime,_import_task_id,erp_data_id,
+        quality_project,checker2,allweight,
+        checker1,production_unit_b,production_unit_a,
+        checker,type,inside,
+        palnning_engineer,Cu,castFlow_id,
+        alloy_number,Ti,other_total,
+        state,delete_flag,create_time,
+        count,AI,weight,
+        sleeve_path,finished,card_id,
+        produce_id,lastmodify_user,infeed_point,
+        delivered_time_b2,presentation_quality,lastmodify_time,
+        Mg,create_user,planning_engineer,
+        other_single,order_id,other_demand,
+        drawup_time,Mn,other,
+        finish_remark,productuse,double_dev,
+        remark,endwise_thickness,convexity,
+        result,inside_quality,sleeve_width,
+        Zn,data_name,rollspecification,
+        scope,Zr,endwise_point,
+        client,Ni,delivered_time_a2,
+        Fe,productneeds_id,thickness_dev,
+        specification,width_dev,convexity_avg,
+        Si,delivered_time_b,delivered_time_a,
+        castFlow_name,plan_id,review_number,
+        Cr
+    </sql>
+</mapper>

@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 /**
  * @ClassName ScheduledTask
@@ -80,8 +79,6 @@ public class ScheduledTask {
         LocalDateTime dateTime = LocalDateTime.now();
         oneCastroll.setCreateTime(dateTime);
         oneCastrollService.save(oneCastroll);
-        System.out.println("插入成功");
-
     }
 
     /**
@@ -189,13 +186,11 @@ public class ScheduledTask {
 //        a.setIndicatorName("开卷机电流");
 //        Date date = new Date();
 //        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-////        System.out.println(dateFormat.format(date));
 //        a.setProduceTime(date);
 //        a.setDeviceId(1L);
 //        int value = (int) (Math.random() * (830-100)+100);
 //        a.setValue(value);
 //        rewinderService.save(a);
-////        System.out.println(a);
 //
 //    }
 //
@@ -205,13 +200,11 @@ public class ScheduledTask {
 //        c.setIndicatorName("卷取机速度");
 //        Date date = new Date();
 //        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-////        System.out.println(dateFormat.format(date));
 //        c.setProduceTime(date);
 //        c.setDeviceId(1L);
 //        int value = (int) (Math.random() * (260-10)+10);
 //        c.setValue(value);
 //        rewinderService.save(c);
-////        System.out.println(c);
 //
 //    }
 //    @Scheduled(cron = "0/2 * * * * ?")
@@ -220,13 +213,11 @@ public class ScheduledTask {
 //        c.setIndicatorName("卷取机电流");
 //        Date date = new Date();
 //        SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-////        System.out.println(dateFormat.format(date));
 //        c.setProduceTime(date);
 //        c.setDeviceId(1L);
 //        int value = (int) (Math.random() * (950-200)+200);
 //        c.setValue(value);
 //        rewinderService.save(c);
-////        System.out.println(c);
 //
 //    }
 //

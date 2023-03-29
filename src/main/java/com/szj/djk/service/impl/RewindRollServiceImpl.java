@@ -82,7 +82,6 @@ public class RewindRollServiceImpl extends ServiceImpl<RewindRollMapper, RewindR
                     break;
             }
         });
-        System.out.println("这是警告数据"+warnTables);
         return warnTables;
     }
 

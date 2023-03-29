@@ -48,9 +48,9 @@
             <result property="cold5Picture" column="cold5_picture" jdbcType="VARCHAR"/>
             <result property="cold5Inspector" column="cold5_inspector" jdbcType="VARCHAR"/>
             <result property="cold5Time" column="cold5_time" jdbcType="TIMESTAMP"/>
-            <result property="annealing1Workmanship" column="annealing1_workmanship" jdbcType="VARCHAR"/>
-            <result property="annealing2Workmanship" column="annealing2_workmanship" jdbcType="VARCHAR"/>
-            <result property="annealing3Workmanship" column="annealing3_workmanship" jdbcType="VARCHAR"/>
+            <result property="processCompliance1" column="process_compliance1" jdbcType="VARCHAR"/>
+            <result property="processCompliance2" column="process_compliance2" jdbcType="VARCHAR"/>
+            <result property="processCompliance3" column="process_compliance3" jdbcType="VARCHAR"/>
             <result property="reelNum" column="reel_num" jdbcType="VARCHAR"/>
             <result property="thickness" column="thickness" jdbcType="DECIMAL"/>
             <result property="originWidth" column="origin_width" jdbcType="DECIMAL"/>
@@ -100,14 +100,14 @@
             <result property="grain" column="grain" jdbcType="VARCHAR"/>
             <result property="roughness" column="roughness" jdbcType="VARCHAR"/>
             <result property="finishedThicknessDifferencePicture" column="finished_thickness_difference_picture" jdbcType="VARCHAR"/>
+            <result property="castAbnormalInfo" column="cast_abnormal_info" jdbcType="VARCHAR"/>
+            <result property="rollPlan" column="roll_plan" jdbcType="VARCHAR"/>
             <result property="cold6ThickIn" column="cold6_thick_in" jdbcType="DECIMAL"/>
             <result property="cold6ThickOut" column="cold6_thick_out" jdbcType="DECIMAL"/>
             <result property="cold6Remark" column="cold6_remark" jdbcType="VARCHAR"/>
             <result property="cold6Picture" column="cold6_picture" jdbcType="VARCHAR"/>
             <result property="cold6Inspector" column="cold6_inspector" jdbcType="VARCHAR"/>
             <result property="cold6Time" column="cold6_time" jdbcType="TIMESTAMP"/>
-            <result property="castAbnormalInfo" column="cast_abnormal_info" jdbcType="VARCHAR"/>
-            <result property="rollPlan" column="roll_plan" jdbcType="VARCHAR"/>
             <result property="cold1DailyQcSituation" column="cold1_daily_qc_situation" jdbcType="VARCHAR"/>
             <result property="cold2DailyQcSituation" column="cold2_daily_qc_situation" jdbcType="VARCHAR"/>
             <result property="cold3DailyQcSituation" column="cold3_daily_qc_situation" jdbcType="VARCHAR"/>
@@ -124,7 +124,9 @@
             <result property="annealing1Thick" column="annealing1_thick" jdbcType="DECIMAL"/>
             <result property="annealing2Thick" column="annealing2_thick" jdbcType="DECIMAL"/>
             <result property="annealing3Thick" column="annealing3_thick" jdbcType="DECIMAL"/>
-            <result property="furnaceNum" column="furnace_num" jdbcType="VARCHAR"/>
+            <result property="annealing1Workmanship" column="annealing1_workmanship" jdbcType="VARCHAR"/>
+            <result property="annealing2Workmanship" column="annealing2_workmanship" jdbcType="VARCHAR"/>
+            <result property="annealing3Workmanship" column="annealing3_workmanship" jdbcType="VARCHAR"/>
             <result property="rollweightRequirements" column="rollweight_requirements" jdbcType="VARCHAR"/>
             <result property="originRollDiameter" column="origin_roll_diameter" jdbcType="DECIMAL"/>
             <result property="originAbnormalInformation" column="origin_abnormal_information" jdbcType="VARCHAR"/>
@@ -154,6 +156,7 @@
             <result property="outerAbnormalRejectPicture" column="outer_abnormal_reject_picture" jdbcType="VARCHAR"/>
             <result property="weighingThickness" column="weighing_thickness" jdbcType="DECIMAL"/>
             <result property="weighingConvexity" column="weighing_convexity" jdbcType="DECIMAL"/>
+            <result property="furnaceNum" column="furnace_num" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -171,8 +174,8 @@
         cold4_remark,cold4_picture,cold4_inspector,
         cold4_time,cold5_thick_in,cold5_thick_out,
         cold5_remark,cold5_picture,cold5_inspector,
-        cold5_time,annealing1_workmanship,annealing2_workmanship,
-        annealing3_workmanship,reel_num,thickness,
+        cold5_time,process_compliance1,process_compliance2,
+        process_compliance3,reel_num,thickness,
         origin_width,width,head_stock,
         head_reject_reason,tail_stock,tail_reject_reason,
         outer_remove,remove_reason,cut_weight,
@@ -188,28 +191,25 @@
         finished_longitudinal_thickness,finished_thickness_difference,endwise_height,
         warp_width,convex_rate,flatness,
         tensile_strength,elongation,grain,
-        roughness,finished_thickness_difference_picture,cold6_thick_in,
-        cold6_thick_out,cold6_remark,cold6_picture,
-        cold6_inspector,cold6_time,cast_abnormal_info,
-        roll_plan,cold1_daily_qc_situation,cold2_daily_qc_situation,
+        roughness,finished_thickness_difference_picture,cast_abnormal_info,
+        roll_plan,cold6_thick_in,cold6_thick_out,
+        cold6_remark,cold6_picture,cold6_inspector,
+        cold6_time,cold1_daily_qc_situation,cold2_daily_qc_situation,
         cold3_daily_qc_situation,cold4_daily_qc_situation,cold5_daily_qc_situation,
         cold6_daily_qc_situation,furnace1_daily_qc_situation,furnace2_daily_qc_situation,
         furnace3_daily_qc_situation,reeler_daily_qc_situation,annealing1_inspector,
         annealing2_inspector,annealing3_inspector,annealing1_thick,
-        annealing2_thick,annealing3_thick,furnace_num,
-        rollweight_requirements,origin_roll_diameter,origin_abnormal_information,
-        origin_disposal_requirements,annealing1_entrytime,annealing1_exittime,
-        annealing2_entrytime,annealing2_exittime,annealing3_entrytime,
-        annealing3_exittime,account_unqualified_fact,account_unqualified_review,
-        finished_fullband_length,single_roll_diameter,single_roll_weight,
-        single_wedge_ratio,strip_type,single_strength_re,
-        single_extension_re,bending_performance_requirements,bending_performance_re,
-        mechanical_measure_review,head_abnormal_reject_picture,head_abnormal_reject_vedio,
-        tail_abnormal_reject_picture,tail_abnormal_reject_vedio,outer_abnormal_reject_picture,
-        weighing_thickness,weighing_convexity
+        annealing2_thick,annealing3_thick,annealing1_workmanship,
+        annealing2_workmanship,annealing3_workmanship,rollweight_requirements,
+        origin_roll_diameter,origin_abnormal_information,origin_disposal_requirements,
+        annealing1_entrytime,annealing1_exittime,annealing2_entrytime,
+        annealing2_exittime,annealing3_entrytime,annealing3_exittime,
+        account_unqualified_fact,account_unqualified_review,finished_fullband_length,
+        single_roll_diameter,single_roll_weight,single_wedge_ratio,
+        strip_type,single_strength_re,single_extension_re,
+        bending_performance_requirements,bending_performance_re,mechanical_measure_review,
+        head_abnormal_reject_picture,head_abnormal_reject_vedio,tail_abnormal_reject_picture,
+        tail_abnormal_reject_vedio,outer_abnormal_reject_picture,weighing_thickness,
+        weighing_convexity,furnace_num
     </sql>
-
-    <select id="getRecentTime" resultType="java.lang.String">
-        select max(ts) from lmdp_qc_cold_inspect;
-    </select>
 </mapper>

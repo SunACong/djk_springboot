@@ -5,15 +5,13 @@ import com.szj.djk.entity.LmdpColdRereelerRecord;
 import com.szj.djk.service.LmdpColdRereelerRecordService;
 import com.szj.djk.mapper.LmdpColdRereelerRecordMapper;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
-* @author JH-Sparrow
-* @description 针对表【lmdp_cold_rereeler_record】的数据库操作Service实现
-* @createDate 2022-10-18 16:19:09
+* @author Admin
+* @description 针对表【lmdp_cold_rereeler_record(重卷生产原始记录)】的数据库操作Service实现
+* @createDate 2023-03-25 13:22:39
 */
 @Service
-@Transactional
 public class LmdpColdRereelerRecordServiceImpl extends ServiceImpl<LmdpColdRereelerRecordMapper, LmdpColdRereelerRecord>
     implements LmdpColdRereelerRecordService{
 

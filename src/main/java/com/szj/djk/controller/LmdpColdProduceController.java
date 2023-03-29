@@ -2,6 +2,7 @@ package com.szj.djk.controller;
 
 import java.util.List;
 
+import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.szj.djk.common.R;
 import com.szj.djk.entity.LmdpColdProduce;
@@ -18,8 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @author ruoyi
  * @date 2022-10-17
  */
+//冷轧工序
+@DS("slave")
 @RestController
-@RequestMapping("/system/coldProduce")
+@RequestMapping("/lmdpColdProduce")
 public class LmdpColdProduceController
 {
     @Autowired
