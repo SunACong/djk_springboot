@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 /**
  * @author 孙少聪
  * @Date 2023/3/14 11:28:19
- * @Description 质量判定流程
+ * @Description 质量判定流程，里面包含了所有质量判定流程的步骤，但是真正的判定是在PlanAndInspectServiceImpl中实现的
  */
 @Component
 public class GetDetermination {

@@ -12,7 +12,7 @@
 
     <groupId>com.szj</groupId>
     <artifactId>djk</artifactId>
-    <version>0.0.1-3.21-overQuality</version>
+    <version>0.0.2-3.30-fix-Quality</version>
     <name>djk_springboot</name>
 
     <properties>

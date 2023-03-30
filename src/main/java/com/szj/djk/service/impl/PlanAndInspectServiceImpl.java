@@ -16,6 +16,7 @@ import com.szj.djk.utils.GetDetermination;
 import com.szj.djk.vo.PlanAndInspect;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -53,7 +54,7 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
     }
 
     @Override
-    //@Scheduled(cron = "0/5 * * * * ?")
+    @Scheduled(cron = "0/5 * * * * ?")
     @DS("master")
     public String saveBatchOrUpdate() {
         // 获取主数据库plan_and_inspect最近一次的时间戳
@@ -92,7 +93,8 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
     public Page<PlanAndInspect> pageList(Page<PlanAndInspect> pageInfo, PlanAndInspect planAndInspect) {
         LambdaQueryWrapper<PlanAndInspect> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.setEntity(planAndInspect)
-                .between(planAndInspect.getStartDateTime()!=null && planAndInspect.getEndDateTime()!=null, PlanAndInspect::getInspectCreateTime, planAndInspect.getStartDateTime(), planAndInspect.getEndDateTime());
+                .between(planAndInspect.getStartDateTime()!=null && planAndInspect.getEndDateTime()!=null, PlanAndInspect::getInspectCreateTime, planAndInspect.getStartDateTime(), planAndInspect.getEndDateTime())
+                .orderByDesc(PlanAndInspect::getInspectCreateTime);
         Page<PlanAndInspect> page = planAndInspectMapper.selectPage(pageInfo, queryWrapper);
         DynamicDataSourceContextHolder.push("slave");
         page.getRecords().forEach( item -> {

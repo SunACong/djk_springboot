@@ -1,34 +1,33 @@
 package com.szj.djk.controller;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.szj.djk.common.R;
-import com.szj.djk.entity.*;
-import com.szj.djk.mapper.AvaluateMapper;
-import com.szj.djk.mapper.FiveCastrollMapper;
-import com.szj.djk.mapper.RollingMachineMapper;
+import com.szj.djk.entity.Avaluate;
+import com.szj.djk.entity.OneCastroll;
+import com.szj.djk.entity.ValueRange;
+import com.szj.djk.entity.WarnTable;
 import com.szj.djk.mapper.WarnTableMapper;
+import com.szj.djk.service.AvaluateService;
+import com.szj.djk.service.OneCastrollService;
 import com.szj.djk.service.WarnTableService;
-import com.szj.djk.service.*;
-import lombok.Data;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.util.Date;
 import java.util.List;
-import com.szj.djk.service.RollingMachineService;
 
 /**
  * @ClassName OneCastrollController
  * @Author 张高义
  * @Create 2022/10/21 0021 上午 11:03
  */
-@Component
+@Slf4j
 @RestController
 @RequestMapping("/oneCastroll")
 public class OneCastrollController {
@@ -69,6 +68,7 @@ public class OneCastrollController {
      */
     @Scheduled(fixedRate = 20000)
     public R<ValueRange> addwarndata(){
+        log.warn("存入报警数据");
         Avaluate avaluate = new Avaluate();
         ValueRange valueRange = new ValueRange();
         LambdaQueryWrapper<Avaluate> queryWrapper = new LambdaQueryWrapper<>();
