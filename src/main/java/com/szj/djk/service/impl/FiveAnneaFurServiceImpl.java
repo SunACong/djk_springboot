@@ -38,7 +38,6 @@ public class FiveAnneaFurServiceImpl extends ServiceImpl<FiveAnneaFurMapper, Fiv
                     warnTables.add(warnTable);
                     break;
             }
-
             switch (rollingName){
                 case "炉压缩空气":
                     warnTable.setRollingName(rollingName);
