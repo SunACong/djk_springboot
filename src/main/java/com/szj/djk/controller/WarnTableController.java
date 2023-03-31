@@ -1,15 +1,13 @@
 package com.szj.djk.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.szj.djk.common.R;
-import com.szj.djk.entity.RewindRoll;
-import com.szj.djk.entity.RollingMachine;
 import com.szj.djk.entity.WarnTable;
 import com.szj.djk.service.WarnTableService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -50,6 +48,7 @@ public class WarnTableController {
         List<WarnTable> historyWarnData = warnTableService.selectWarnTableHistoryData(rollingDeviceNumber);
         return R.success(historyWarnData);
     }
+
     @GetMapping("/listDuringWarnData")
     public R<List<WarnTable>> listDuringWarnData(WarnTable warnTable,String begin,String end) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
