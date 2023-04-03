@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.LmdpQcColdReelReportMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpQcColdReelReport">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="ts" column="ts" jdbcType="TIMESTAMP"/>
+            <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
+            <result property="sortOrder" column="sort_order" jdbcType="INTEGER"/>
+            <result property="consumer" column="consumer" jdbcType="VARCHAR"/>
+            <result property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
+            <result property="thickness" column="thickness" jdbcType="DECIMAL"/>
+            <result property="width" column="width" jdbcType="DECIMAL"/>
+            <result property="rollDiameter" column="roll_diameter" jdbcType="DECIMAL"/>
+            <result property="brand" column="brand" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="VARCHAR"/>
+            <result property="weight" column="weight" jdbcType="DECIMAL"/>
+            <result property="shapeQc" column="shape_qc" jdbcType="VARCHAR"/>
+            <result property="dimensionalDeviation" column="dimensional_deviation" jdbcType="VARCHAR"/>
+            <result property="mechanicalProperty" column="mechanical_property" jdbcType="VARCHAR"/>
+            <result property="surfaceQc" column="surface_qc" jdbcType="VARCHAR"/>
+            <result property="facadeQc" column="facade_qc" jdbcType="VARCHAR"/>
+            <result property="sampleLevel" column="sample_level" jdbcType="VARCHAR"/>
+            <result property="executiveStandard" column="executive_standard" jdbcType="VARCHAR"/>
+            <result property="judgeResult" column="judge_result" jdbcType="VARCHAR"/>
+            <result property="handleAdvice" column="handle_advice" jdbcType="VARCHAR"/>
+            <result property="inspector" column="inspector" jdbcType="VARCHAR"/>
+            <result property="monitor" column="monitor" jdbcType="VARCHAR"/>
+            <result property="reportTime" column="report_time" jdbcType="TIMESTAMP"/>
+            <result property="advise" column="advise" jdbcType="VARCHAR"/>
+            <result property="roughness" column="roughness" jdbcType="DECIMAL"/>
+            <result property="singleConvexity" column="single_convexity" jdbcType="DECIMAL"/>
+            <result property="wedgeRate" column="wedge_rate" jdbcType="DECIMAL"/>
+            <result property="weighingThickness" column="weighing_thickness" jdbcType="DECIMAL"/>
+            <result property="weighingConvexity" column="weighing_convexity" jdbcType="DECIMAL"/>
+            <result property="shapeQcRemark" column="shape_qc_remark" jdbcType="VARCHAR"/>
+            <result property="dimensionalDeviationRemark" column="dimensional_deviation_remark" jdbcType="VARCHAR"/>
+            <result property="mechanicalPropertyRemark" column="mechanical_property_remark" jdbcType="VARCHAR"/>
+            <result property="surfaceQcRemark" column="surface_qc_remark" jdbcType="VARCHAR"/>
+            <result property="facadeQcRemark" column="facade_qc_remark" jdbcType="VARCHAR"/>
+            <result property="sampleLevelRemark" column="sample_level_remark" jdbcType="VARCHAR"/>
+            <result property="reviewAdvice" column="review_advice" jdbcType="VARCHAR"/>
+            <result property="coldDate" column="cold_date" jdbcType="TIMESTAMP"/>
+            <result property="productType" column="product_type" jdbcType="VARCHAR"/>
+            <result property="hydrogenContent" column="hydrogen_content" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,create_time,ts,
+        creator_id,sort_order,consumer,
+        batch_num,thickness,width,
+        roll_diameter,brand,status,
+        weight,shape_qc,dimensional_deviation,
+        mechanical_property,surface_qc,facade_qc,
+        sample_level,executive_standard,judge_result,
+        handle_advice,inspector,monitor,
+        report_time,advise,roughness,
+        single_convexity,wedge_rate,weighing_thickness,
+        weighing_convexity,shape_qc_remark,dimensional_deviation_remark,
+        mechanical_property_remark,surface_qc_remark,facade_qc_remark,
+        sample_level_remark,review_advice,cold_date,
+        product_type,hydrogen_content
+    </sql>
+</mapper>

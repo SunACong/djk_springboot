@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.LmdpColdRecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpColdRecord">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="ts" column="ts" jdbcType="TIMESTAMP"/>
+            <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
+            <result property="mainOperator" column="main_operator" jdbcType="VARCHAR"/>
+            <result property="assistantOperator" column="assistant_operator" jdbcType="VARCHAR"/>
+            <result property="workShift" column="work_shift" jdbcType="VARCHAR"/>
+            <result property="recordDate" column="record_date" jdbcType="TIMESTAMP"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="brand" column="brand" jdbcType="VARCHAR"/>
+            <result property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
+            <result property="recordNum" column="record_num" jdbcType="INTEGER"/>
+            <result property="thickIn" column="thick_in" jdbcType="DECIMAL"/>
+            <result property="thickOut" column="thick_out" jdbcType="DECIMAL"/>
+            <result property="width" column="width" jdbcType="DECIMAL"/>
+            <result property="rollingSpeed" column="rolling_speed" jdbcType="DECIMAL"/>
+            <result property="rollingForce" column="rolling_force" jdbcType="DECIMAL"/>
+            <result property="decoilTensileStress" column="decoil_tensile_stress" jdbcType="DECIMAL"/>
+            <result property="reelingTensileStress" column="reeling_tensile_stress" jdbcType="DECIMAL"/>
+            <result property="curve" column="curve" jdbcType="DECIMAL"/>
+            <result property="oilTemperature" column="oil_temperature" jdbcType="DECIMAL"/>
+            <result property="oilPressure" column="oil_pressure" jdbcType="DECIMAL"/>
+            <result property="oilFlow" column="oil_flow" jdbcType="DECIMAL"/>
+            <result property="actioningWeight" column="actioning_weight" jdbcType="DECIMAL"/>
+            <result property="producingWeight" column="producing_weight" jdbcType="DECIMAL"/>
+            <result property="wasteWeight" column="waste_weight" jdbcType="DECIMAL"/>
+            <result property="quality" column="quality" jdbcType="VARCHAR"/>
+            <result property="workGroup" column="work_group" jdbcType="VARCHAR"/>
+            <result property="startTime" column="start_time" jdbcType="TIMESTAMP"/>
+            <result property="endTime" column="end_time" jdbcType="TIMESTAMP"/>
+            <result property="airSourcePress" column="air_source_press" jdbcType="DECIMAL"/>
+            <result property="blankWeight" column="blank_weight" jdbcType="DECIMAL"/>
+            <result property="customer" column="customer" jdbcType="VARCHAR"/>
+            <result property="produceOrder" column="produce_order" jdbcType="VARCHAR"/>
+            <result property="airTemperature" column="air_temperature" jdbcType="DECIMAL"/>
+            <result property="rollNum" column="roll_num" jdbcType="VARCHAR"/>
+            <result property="mainOperator2" column="main_operator2" jdbcType="VARCHAR"/>
+            <result property="workShift2" column="work_shift2" jdbcType="VARCHAR"/>
+            <result property="produceOrder2" column="produce_order2" jdbcType="VARCHAR"/>
+            <result property="thickIn2" column="thick_in2" jdbcType="DECIMAL"/>
+            <result property="thickOut2" column="thick_out2" jdbcType="DECIMAL"/>
+            <result property="width2" column="width2" jdbcType="DECIMAL"/>
+            <result property="decoilTensileStress2" column="decoil_tensile_stress2" jdbcType="DECIMAL"/>
+            <result property="reelingTensileStress2" column="reeling_tensile_stress2" jdbcType="DECIMAL"/>
+            <result property="rollingSpeed2" column="rolling_speed2" jdbcType="DECIMAL"/>
+            <result property="oilTemperature2" column="oil_temperature2" jdbcType="DECIMAL"/>
+            <result property="oilFlow2" column="oil_flow2" jdbcType="DECIMAL"/>
+            <result property="airTemperature2" column="air_temperature2" jdbcType="DECIMAL"/>
+            <result property="airSourcePress2" column="air_source_press2" jdbcType="DECIMAL"/>
+            <result property="curve2" column="curve2" jdbcType="DECIMAL"/>
+            <result property="rollingForce2" column="rolling_force2" jdbcType="DECIMAL"/>
+            <result property="actioningWeight2" column="actioning_weight2" jdbcType="DECIMAL"/>
+            <result property="producingWeight2" column="producing_weight2" jdbcType="DECIMAL"/>
+            <result property="rollNum2" column="roll_num2" jdbcType="VARCHAR"/>
+            <result property="mainOperator3" column="main_operator3" jdbcType="VARCHAR"/>
+            <result property="workShift3" column="work_shift3" jdbcType="VARCHAR"/>
+            <result property="produceOrder3" column="produce_order3" jdbcType="VARCHAR"/>
+            <result property="thickIn3" column="thick_in3" jdbcType="DECIMAL"/>
+            <result property="thickOut3" column="thick_out3" jdbcType="DECIMAL"/>
+            <result property="width3" column="width3" jdbcType="DECIMAL"/>
+            <result property="decoilTensileStress3" column="decoil_tensile_stress3" jdbcType="DECIMAL"/>
+            <result property="reelingTensileStress3" column="reeling_tensile_stress3" jdbcType="DECIMAL"/>
+            <result property="rollingSpeed3" column="rolling_speed3" jdbcType="DECIMAL"/>
+            <result property="oilTemperature3" column="oil_temperature3" jdbcType="DECIMAL"/>
+            <result property="oilFlow3" column="oil_flow3" jdbcType="DECIMAL"/>
+            <result property="airTemperature3" column="air_temperature3" jdbcType="DECIMAL"/>
+            <result property="airSourcePress3" column="air_source_press3" jdbcType="DECIMAL"/>
+            <result property="curve3" column="curve3" jdbcType="DECIMAL"/>
+            <result property="rollingForce3" column="rolling_force3" jdbcType="DECIMAL"/>
+            <result property="actioningWeight3" column="actioning_weight3" jdbcType="DECIMAL"/>
+            <result property="producingWeight3" column="producing_weight3" jdbcType="DECIMAL"/>
+            <result property="rollNum3" column="roll_num3" jdbcType="VARCHAR"/>
+            <result property="mainOperator4" column="main_operator4" jdbcType="VARCHAR"/>
+            <result property="workShift4" column="work_shift4" jdbcType="VARCHAR"/>
+            <result property="produceOrder4" column="produce_order4" jdbcType="VARCHAR"/>
+            <result property="thickIn4" column="thick_in4" jdbcType="DECIMAL"/>
+            <result property="thickOut4" column="thick_out4" jdbcType="DECIMAL"/>
+            <result property="width4" column="width4" jdbcType="DECIMAL"/>
+            <result property="decoilTensileStress4" column="decoil_tensile_stress4" jdbcType="DECIMAL"/>
+            <result property="reelingTensileStress4" column="reeling_tensile_stress4" jdbcType="DECIMAL"/>
+            <result property="rollingSpeed4" column="rolling_speed4" jdbcType="DECIMAL"/>
+            <result property="oilTemperature4" column="oil_temperature4" jdbcType="DECIMAL"/>
+            <result property="oilFlow4" column="oil_flow4" jdbcType="DECIMAL"/>
+            <result property="airTemperature4" column="air_temperature4" jdbcType="DECIMAL"/>
+            <result property="airSourcePress4" column="air_source_press4" jdbcType="DECIMAL"/>
+            <result property="curve4" column="curve4" jdbcType="DECIMAL"/>
+            <result property="rollingForce4" column="rolling_force4" jdbcType="DECIMAL"/>
+            <result property="actioningWeight4" column="actioning_weight4" jdbcType="DECIMAL"/>
+            <result property="producingWeight4" column="producing_weight4" jdbcType="DECIMAL"/>
+            <result property="rollNum4" column="roll_num4" jdbcType="VARCHAR"/>
+            <result property="mainOperator5" column="main_operator5" jdbcType="VARCHAR"/>
+            <result property="workShift5" column="work_shift5" jdbcType="VARCHAR"/>
+            <result property="produceOrder5" column="produce_order5" jdbcType="VARCHAR"/>
+            <result property="thickIn5" column="thick_in5" jdbcType="DECIMAL"/>
+            <result property="thickOut5" column="thick_out5" jdbcType="DECIMAL"/>
+            <result property="width5" column="width5" jdbcType="DECIMAL"/>
+            <result property="decoilTensileStress5" column="decoil_tensile_stress5" jdbcType="DECIMAL"/>
+            <result property="reelingTensileStress5" column="reeling_tensile_stress5" jdbcType="DECIMAL"/>
+            <result property="rollingSpeed5" column="rolling_speed5" jdbcType="DECIMAL"/>
+            <result property="oilTemperature5" column="oil_temperature5" jdbcType="DECIMAL"/>
+            <result property="oilFlow5" column="oil_flow5" jdbcType="DECIMAL"/>
+            <result property="airTemperature5" column="air_temperature5" jdbcType="DECIMAL"/>
+            <result property="airSourcePress5" column="air_source_press5" jdbcType="DECIMAL"/>
+            <result property="curve5" column="curve5" jdbcType="DECIMAL"/>
+            <result property="rollingForce5" column="rolling_force5" jdbcType="DECIMAL"/>
+            <result property="actioningWeight5" column="actioning_weight5" jdbcType="DECIMAL"/>
+            <result property="producingWeight5" column="producing_weight5" jdbcType="DECIMAL"/>
+            <result property="rollNum5" column="roll_num5" jdbcType="VARCHAR"/>
+            <result property="mainOperator6" column="main_operator6" jdbcType="VARCHAR"/>
+            <result property="workShift6" column="work_shift6" jdbcType="VARCHAR"/>
+            <result property="produceOrder6" column="produce_order6" jdbcType="VARCHAR"/>
+            <result property="thickIn6" column="thick_in6" jdbcType="DECIMAL"/>
+            <result property="thickOut6" column="thick_out6" jdbcType="DECIMAL"/>
+            <result property="width6" column="width6" jdbcType="DECIMAL"/>
+            <result property="decoilTensileStress6" column="decoil_tensile_stress6" jdbcType="DECIMAL"/>
+            <result property="reelingTensileStress6" column="reeling_tensile_stress6" jdbcType="DECIMAL"/>
+            <result property="rollingSpeed6" column="rolling_speed6" jdbcType="DECIMAL"/>
+            <result property="oilTemperature6" column="oil_temperature6" jdbcType="DECIMAL"/>
+            <result property="oilFlow6" column="oil_flow6" jdbcType="DECIMAL"/>
+            <result property="airTemperature6" column="air_temperature6" jdbcType="DECIMAL"/>
+            <result property="airSourcePress6" column="air_source_press6" jdbcType="DECIMAL"/>
+            <result property="curve6" column="curve6" jdbcType="DECIMAL"/>
+            <result property="rollingForce6" column="rolling_force6" jdbcType="DECIMAL"/>
+            <result property="actioningWeight6" column="actioning_weight6" jdbcType="DECIMAL"/>
+            <result property="producingWeight6" column="producing_weight6" jdbcType="DECIMAL"/>
+            <result property="rollNum6" column="roll_num6" jdbcType="VARCHAR"/>
+            <result property="produceNum" column="produce_num" jdbcType="INTEGER"/>
+            <result property="coldFinishedWeight" column="cold_finished_weight" jdbcType="DECIMAL"/>
+            <result property="workGroup2" column="work_group2" jdbcType="VARCHAR"/>
+            <result property="workGroup3" column="work_group3" jdbcType="VARCHAR"/>
+            <result property="workGroup4" column="work_group4" jdbcType="VARCHAR"/>
+            <result property="workGroup5" column="work_group5" jdbcType="VARCHAR"/>
+            <result property="workGroup6" column="work_group6" jdbcType="VARCHAR"/>
+            <result property="coldCardNumber" column="cold_card_number" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,ts,creator_id,
+        main_operator,assistant_operator,work_shift,
+        record_date,create_time,brand,
+        batch_num,record_num,thick_in,
+        thick_out,width,rolling_speed,
+        rolling_force,decoil_tensile_stress,reeling_tensile_stress,
+        curve,oil_temperature,oil_pressure,
+        oil_flow,actioning_weight,producing_weight,
+        waste_weight,quality,work_group,
+        start_time,end_time,air_source_press,
+        blank_weight,customer,produce_order,
+        air_temperature,roll_num,main_operator2,
+        work_shift2,produce_order2,thick_in2,
+        thick_out2,width2,decoil_tensile_stress2,
+        reeling_tensile_stress2,rolling_speed2,oil_temperature2,
+        oil_flow2,air_temperature2,air_source_press2,
+        curve2,rolling_force2,actioning_weight2,
+        producing_weight2,roll_num2,main_operator3,
+        work_shift3,produce_order3,thick_in3,
+        thick_out3,width3,decoil_tensile_stress3,
+        reeling_tensile_stress3,rolling_speed3,oil_temperature3,
+        oil_flow3,air_temperature3,air_source_press3,
+        curve3,rolling_force3,actioning_weight3,
+        producing_weight3,roll_num3,main_operator4,
+        work_shift4,produce_order4,thick_in4,
+        thick_out4,width4,decoil_tensile_stress4,
+        reeling_tensile_stress4,rolling_speed4,oil_temperature4,
+        oil_flow4,air_temperature4,air_source_press4,
+        curve4,rolling_force4,actioning_weight4,
+        producing_weight4,roll_num4,main_operator5,
+        work_shift5,produce_order5,thick_in5,
+        thick_out5,width5,decoil_tensile_stress5,
+        reeling_tensile_stress5,rolling_speed5,oil_temperature5,
+        oil_flow5,air_temperature5,air_source_press5,
+        curve5,rolling_force5,actioning_weight5,
+        producing_weight5,roll_num5,main_operator6,
+        work_shift6,produce_order6,thick_in6,
+        thick_out6,width6,decoil_tensile_stress6,
+        reeling_tensile_stress6,rolling_speed6,oil_temperature6,
+        oil_flow6,air_temperature6,air_source_press6,
+        curve6,rolling_force6,actioning_weight6,
+        producing_weight6,roll_num6,produce_num,
+        cold_finished_weight,work_group2,work_group3,
+        work_group4,work_group5,work_group6,
+        cold_card_number
+    </sql>
+</mapper>

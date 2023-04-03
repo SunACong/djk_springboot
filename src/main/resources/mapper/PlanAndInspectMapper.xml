@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.PlanAndInspectMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.vo.PlanAndInspect">
+            <id property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
+            <result property="planNum" column="plan_num" jdbcType="VARCHAR"/>
+            <result property="inspectCreateTime" column="inspect_create_time" jdbcType="TIMESTAMP"/>
+            <result property="ts" column="ts" jdbcType="TIMESTAMP"/>
+            <result property="plateTypeDetermination" column="plate_type_determination" jdbcType="INTEGER"/>
+            <result property="mechanicalPropertiesDetermination" column="mechanical_properties_determination" jdbcType="INTEGER"/>
+            <result property="dimensionalDeviationDetermination" column="dimensional_deviation_determination" jdbcType="INTEGER"/>
+            <result property="surfaceQualityDetermination" column="surface_quality_determination" jdbcType="INTEGER"/>
+            <result property="appearanceQualityDetermination" column="appearance_quality_determination" jdbcType="INTEGER"/>
+            <result property="allDetermination" column="all_determination" jdbcType="INTEGER"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        batch_num,plan_num,inspect_create_time,
+        ts,plate_type_determination,mechanical_properties_determination,
+        dimensional_deviation_determination,surface_quality_determination,appearance_quality_determination,all_determination,remark,
+        create_time,update_time
+    </sql>
+    <insert id="saveBatchOrUpdate">
+        insert into plan_and_inspect (<include refid="Base_Column_List" />)
+        VALUES
+            <foreach collection="list" item="item" index="index" separator=",">
+                (#{item.batchNum},#{item.planNum},#{item.inspectCreateTime},
+                #{item.ts},#{item.plateTypeDetermination},#{item.mechanicalPropertiesDetermination},
+                #{item.dimensionalDeviationDetermination},#{item.surfaceQualityDetermination},#{item.appearanceQualityDetermination},
+                #{item.allDetermination},#{item.remark},
+                 #{item.createTime},#{item.updateTime})
+            </foreach>
+        on duplicate key update
+            plan_num=values(plan_num),
+            inspect_create_time=values(inspect_create_time),
+            ts=values(ts),
+            plate_type_determination=values(plate_type_determination),
+            mechanical_properties_determination=values(mechanical_properties_determination),
+            dimensional_deviation_determination=values(dimensional_deviation_determination),
+            surface_quality_determination=values(surface_quality_determination),
+            appearance_quality_determination=values(appearance_quality_determination),
+            all_determination=values(all_determination),
+            remark=values(remark),
+            create_time=values(create_time),
+            update_time=values(update_time)
+    </insert>
+
+    <select id="getRecentTs" resultType="java.lang.String">
+        select ts from plan_and_inspect order by ts desc limit 1
+    </select>
+
+    <select id="getEveryDayInfo" resultType="java.util.Map">
+        select DATE_FORMAT( inspect_create_time, '%Y-%m-%d' ) inspectCreateTime, sum(all_determination=1) qualified, sum(all_determination=0) noQualified, sum(all_determination=2) tentativ from plan_and_inspect
+        where inspect_create_time BETWEEN #{startTime} and date_add(#{endTime},interval 1 day) GROUP BY inspect_create_time order by inspect_create_time
+    </select>
+
+    <select id="getRangeDayInfo" resultType="java.util.Map">
+        select sum(all_determination=1) qualified, sum(all_determination=0) noQualified, sum(all_determination=2) tentative from plan_and_inspect
+        where inspect_create_time BETWEEN #{startTime} and date_add(#{endTime},interval 1 day)
+    </select>
+
+</mapper>

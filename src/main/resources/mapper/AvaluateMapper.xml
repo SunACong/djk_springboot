@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.AvaluateMapper">
+    <resultMap type="com.szj.djk.entity.Avaluate" id="AvaluateResult">
+        <result property="id"    column="id"    />
+        <result property="name"    column="name"    />
+        <result property="danWei"    column="dan_wei"    />
+        <result property="minValue"    column="min_value"    />
+        <result property="maxValue"    column="max_value"    />
+    </resultMap>
+
+
+    <sql id="selectAvaluateVo">
+        select id, name, dan_wei, min_value, max_value ,device_id from avaluate
+    </sql>
+    <select id="selectAvaluateAndStandard" parameterType="com.szj.djk.entity.Avaluate" resultMap="AvaluateResult">
+        <include refid="selectAvaluateVo"/>
+        <where>
+            <if test="avaluate.name!= null  and avaluate.name != ''"> and name like concat('%', #{avaluate.name}, '%')</if>
+            <if test="avaluate.danWei != null  and avaluate.danWei != ''"> and dan_wei = #{avaluate.danWei}</if>
+            <if test="avaluate.minValue != null and avaluate.minValue != ''"> and min_value = #{avaluate.minValue}</if>
+            <if test="avaluate.maxValue != null and avaluate.maxValue != ''"> and max_value = #{avaluate.maxValue}</if>
+            <if test="avaluate.deviceId!= null  and avaluate.deviceId != ''"> and device_id like concat('%', #{avaluate.deviceId}, '%')</if>
+        </where>
+    </select>
+</mapper>

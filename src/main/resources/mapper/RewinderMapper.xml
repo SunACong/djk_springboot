@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.szj.djk.mapper.RewinderMapper">
+    <resultMap type="com.szj.djk.entity.Rewinder" id="RewinderResult">
+        <result property="rewinderId"    column="rewinder_id"    />
+        <result property="indicatorName"    column="indicator_name"    />
+        <result property="value"    column="value"    />
+        <result property="produceTime"    column="produce_time"    />
+        <result property="deviceId"    column="device_id"    />
+    </resultMap>
+
+    <sql id="selectRewinderVo">
+        select rewinder_id, indicator_name, value, produce_time, device_id from rewinder
+    </sql>
+
+    <select id="selectRewinderTen" resultType="com.szj.djk.entity.Rewinder" resultMap="RewinderResult">
+        SELECT * from(<include refid="selectRewinderVo"/>
+        <where>
+            <if test="indicatorName != null  and indicatorName != ''"> and indicator_name like concat('%', #{indicatorName}, '%')</if>
+            <if test="value != null  and value != ''"> and value = #{value}</if>
+            <if test="produceTime != null and produceTime !='' "> and produce_time = #{produceTime}</if>
+            <if test="deviceId != null and deviceId !='' "> and device_id = #{deviceId}</if>
+        </where>
+        order by produce_time desc limit 20) aa order by produce_time
+    </select>
+    <select id = "selectSpecial" resultType="com.szj.djk.entity.Rewinder" resultMap="RewinderResult">
+       select * from rewinder where indicator_name=#{rewinder.indicatorName} and produce_time between #{before} and #{after}
+    </select>
+</mapper>

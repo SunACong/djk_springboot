@@ -1,0 +1,48 @@
+package com.szj.djk.service;
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.szj.djk.entity.Rewinder;
+import com.szj.djk.entity.RollingMachine;
+import org.springframework.stereotype.Service;
+
+import java.util.Date;
+import java.util.List;
+
+/**
+* @ClassName roollingMachine
+* @Author 张高义
+* @Create 2022/10/20 0020 上午 11:07
+*/
+
+@Service
+public interface RollingMachineService extends IService<RollingMachine> {
+    /**
+     * 查询相应指标的十条最新数据
+     * @param rollingMachine
+     * @return
+     */
+    public List<RollingMachine> selectRollingMachineTen(RollingMachine rollingMachine);
+
+    /**
+     * 查询大于定义最大值的数据
+     * @param rollingName
+     * @param maxValue
+     * @return
+     */
+   public List<RollingMachine> selectWarnData(String rollingName,Integer maxValue);
+
+    /**查询特定警告数据时间前后的数据*/
+    public List<RollingMachine> selectSpecial(RollingMachine rollingMachine, Date before, Date after);
+
+    /**
+     *  查询一段时间内的报警数据
+     */
+    public List<RollingMachine> selectDuringData(RollingMachine rollingMachine,Date beginDate,Date endDate);
+
+    /**
+     * 插入数据（去重复）
+     * @return
+     */
+    public int saveData(RollingMachine rollingMachine);
+
+}

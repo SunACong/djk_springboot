@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.ErpCastingCheckRecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.ErpCastingCheckRecord">
+            <id property="dataId" column="data_id" jdbcType="VARCHAR"/>
+            <result property="datatype" column="datatype" jdbcType="VARCHAR"/>
+            <result property="enterTime" column="enter_time" jdbcType="TIMESTAMP"/>
+            <result property="datatime" column="datatime" jdbcType="TIMESTAMP"/>
+            <result property="importTaskId" column="_import_task_id" jdbcType="VARCHAR"/>
+            <result property="reason" column="reason" jdbcType="VARCHAR"/>
+            <result property="grain" column="Grain" jdbcType="VARCHAR"/>
+            <result property="exterior" column="exterior" jdbcType="VARCHAR"/>
+            <result property="h" column="H" jdbcType="VARCHAR"/>
+            <result property="reelPath" column="reel_path" jdbcType="DOUBLE"/>
+            <result property="tissue" column="tissue" jdbcType="VARCHAR"/>
+            <result property="checkNumber" column="check_number" jdbcType="VARCHAR"/>
+            <result property="customName" column="custom_name" jdbcType="VARCHAR"/>
+            <result property="goodsReel" column="goods_reel" jdbcType="VARCHAR"/>
+            <result property="siziBias" column="sizi_bias" jdbcType="VARCHAR"/>
+            <result property="ingredients" column="ingredients" jdbcType="VARCHAR"/>
+            <result property="grainRank" column="grain_rank" jdbcType="VARCHAR"/>
+            <result property="judge" column="judge" jdbcType="VARCHAR"/>
+            <result property="state" column="state" jdbcType="VARCHAR"/>
+            <result property="deleteFlag" column="delete_flag" jdbcType="VARCHAR"/>
+            <result property="height" column="height" jdbcType="DOUBLE"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="versionType" column="version_type" jdbcType="VARCHAR"/>
+            <result property="contract" column="contract" jdbcType="VARCHAR"/>
+            <result property="trademarkNumber" column="trademark_number" jdbcType="VARCHAR"/>
+            <result property="checkId" column="check_id" jdbcType="BIGINT"/>
+            <result property="h1" column="H1" jdbcType="VARCHAR"/>
+            <result property="signDate" column="sign_date" jdbcType="TIMESTAMP"/>
+            <result property="weight" column="weight" jdbcType="VARCHAR"/>
+            <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+            <result property="cardId" column="card_id" jdbcType="BIGINT"/>
+            <result property="lastmodifyUser" column="lastmodify_user" jdbcType="VARCHAR"/>
+            <result property="appearance" column="appearance" jdbcType="VARCHAR"/>
+            <result property="lastmodifyTime" column="lastmodify_time" jdbcType="TIMESTAMP"/>
+            <result property="width" column="width" jdbcType="DOUBLE"/>
+            <result property="checkUser" column="check_user" jdbcType="VARCHAR"/>
+            <result property="createUser" column="create_user" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        data_id,datatype,enter_time,
+        datatime,_import_task_id,reason,
+        Grain,exterior,H,
+        reel_path,tissue,check_number,
+        custom_name,goods_reel,sizi_bias,
+        ingredients,grain_rank,judge,
+        state,delete_flag,height,
+        create_time,version_type,contract,
+        trademark_number,check_id,H1,
+        sign_date,weight,product_name,
+        card_id,lastmodify_user,appearance,
+        lastmodify_time,width,check_user,
+        create_user
+    </sql>
+    <select id="getReelNum" resultType="java.lang.String">
+        select goods_reel from erp_plan_coldreductionstrip epc,erp_casting_check_record eccr
+        where FIND_IN_SET(eccr.card_id,epc.cardlds)!=0 and substring(eccr.goods_reel,1,8) = #{batch_num} limit 1
+    </select>
+</mapper>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.ProductQualityMapper">
+
+    <resultMap type="com.szj.djk.entity.ProductQuality" id="ProductQualityAndProcessStandardResult">
+        <result property="id"    column="id"    />
+        <result property="batchNum"    column="batch_num"    />
+        <result property="lqciTs"    column="lqci_ts"    />
+        <result property="lqcmrTs"    column="lqcmr_ts"    />
+        <result property="consumer"    column="consumer"    />
+        <result property="singleStraightness"    column="single_straightness"    />
+        <result property="singleMediumConvexity"    column="single_medium_convexity"    />
+        <result property="finishedThickness"    column="finished_thickness"    />
+        <result property="finishedWidth"    column="finished_width"    />
+        <result property="finishedRollDiameter"    column="finished_roll_diameter"    />
+        <result property="finishedWeight"    column="finished_weight"    />
+        <result property="surfaceQualityRemark"    column="surface_quality_remark"    />
+        <result property="correctStrength"    column="correct_strength"    />
+        <result property="correctExtension"    column="correct_extension"    />
+        <result property="plateType"    column="plate_type"    />
+        <result property="sizeDeviation"    column="size_deviation"    />
+        <result property="mechanicalProperties"    column="mechanical_properties"    />
+        <result property="surfaceQuality"    column="surface_quality"    />
+        <result property="appearanceQuality"    column="appearance_quality"    />
+        <result property="qualityJudgment"    column="quality_judgment"    />
+        <result property="remark"    column="remark"    />
+        <association property="processStandard"
+             column="consumer"
+             javaType="com.szj.djk.entity.ProcessStandard"
+             select="mySelectById"/>
+    </resultMap>
+
+    <sql id="selectProductQuality">
+        select id, batch_num, lqci_ts, lqcmr_ts, consumer, single_straightness, single_medium_convexity, finished_thickness, finished_width, finished_roll_diameter, finished_weight, surface_quality_remark, correct_strength, correct_extension, plate_type, size_deviation, mechanical_properties, surface_quality, appearance_quality, quality_judgment, remark from product_quality
+    </sql>
+
+    <!--批量插入 存在更新 不存在更新-->
+    <insert id="batchInsertOrUpdate" parameterType="java.util.List">
+        INSERT INTO product_quality(
+            batch_num, lqci_ts, lqcmr_ts, consumer,  single_straightness, single_medium_convexity, finished_thickness,
+            finished_width, finished_roll_diameter, finished_weight, surface_quality_remark, correct_strength,
+            correct_extension, plate_type, size_deviation, mechanical_properties, surface_quality, appearance_quality,
+            quality_judgment, remark
+        )VALUES
+            <foreach collection="list" item="item" index="index" separator="," >
+                (#{item.batchNum}, #{item.lqciTs}, #{item.lqcmrTs}, #{item.consumer},  #{item.singleStraightness}, #{item.singleMediumConvexity},
+                #{item.finishedThickness}, #{item.finishedWidth}, #{item.finishedRollDiameter}, #{item.finishedWeight}, #{item.surfaceQualityRemark},
+                 #{item.correctStrength}, #{item.correctExtension}, #{item.plateType}, #{item.sizeDeviation}, #{item.mechanicalProperties},
+                 #{item.surfaceQuality}, #{item.appearanceQuality}, #{item.qualityJudgment}, #{item.remark})
+            </foreach>
+        ON DUPLICATE KEY UPDATE
+        batch_num = values(batch_num),
+        lqci_ts = values(lqci_ts),
+        lqcmr_ts = values(lqcmr_ts),
+        consumer = values(consumer), single_straightness = values(single_straightness),
+        single_medium_convexity = values(single_medium_convexity), finished_width = values(finished_width), finished_roll_diameter = values(finished_roll_diameter),
+        finished_weight = values(finished_weight),
+        surface_quality_remark = values(surface_quality_remark),
+        correct_strength = values(correct_strength),
+        correct_extension = values(correct_extension),
+        plate_type = values(plate_type),
+        size_deviation = values(size_deviation),
+        mechanical_properties = values(mechanical_properties),
+        surface_quality = values(surface_quality),
+        appearance_quality = values(appearance_quality),
+        quality_judgment = values(quality_judgment),
+        remark = values(remark)
+    </insert>
+
+    <!--查询表中数据最近的更新时间-->
+    <select id="selectMaxDate" resultType="java.util.Date">
+        SELECT GREATEST((SELECT max(lqci_ts) lqci_ts  from product_quality), (SELECT max(lqcmr_ts) lqcmr_ts from product_quality))
+    </select>
+
+    <select id="selectProductQualityAndStandard" parameterType="com.szj.djk.entity.ProductQuality" resultMap="ProductQualityAndProcessStandardResult">
+        <include refid="selectProductQuality"/>
+        <where>
+            <if test="productQuality.batchNum != null  and productQuality.batchNum != ''"> and batch_num like CONCAT('%',#{productQuality.batchNum},'%')</if>
+            <if test="productQuality.lqciTs != null "> and lqci_ts = #{lqciTs}</if>
+            <if test="productQuality.lqcmrTs != null "> and lqcmr_ts = #{lqcmrTs}</if>
+            <if test="productQuality.consumer != null  and productQuality.consumer != ''"> and consumer = #{productQuality.consumer}</if>
+            <if test="productQuality.singleStraightness != null "> and single_straightness = #{productQuality.singleStraightness}</if>
+            <if test="productQuality.singleMediumConvexity != null "> and single_medium_convexity = #{productQuality.singleMediumConvexity}</if>
+            <if test="productQuality.finishedThickness != null "> and finished_thickness = #{productQuality.finishedThickness}</if>
+            <if test="productQuality.finishedWidth != null "> and finished_width = #{productQuality.finishedWidth}</if>
+            <if test="productQuality.finishedRollDiameter != null "> and finished_roll_diameter = #{productQuality.finishedRollDiameter}</if>
+            <if test="productQuality.finishedWeight != null "> and finished_weight = #{productQuality.finishedWeight}</if>
+            <if test="productQuality.surfaceQualityRemark != null  and productQuality.surfaceQualityRemark != ''"> and surface_quality_remark = #{productQuality.surfaceQualityRemark}</if>
+            <if test="productQuality.correctStrength != null "> and correct_strength = #{productQuality.correctStrength}</if>
+            <if test="productQuality.correctExtension != null "> and correct_extension = #{productQuality.correctExtension}</if>
+            <if test="productQuality.plateType != null "> and plate_type = #{productQuality.plateType}</if>
+            <if test="productQuality.sizeDeviation != null "> and size_deviation = #{productQuality.sizeDeviation}</if>
+            <if test="productQuality.mechanicalProperties != null "> and mechanical_properties = #{productQuality.mechanicalProperties}</if>
+            <if test="productQuality.surfaceQuality != null "> and surface_quality = #{productQuality.surfaceQuality}</if>
+            <if test="productQuality.appearanceQuality != null "> and appearance_quality = #{productQuality.appearanceQuality}</if>
+            <if test="productQuality.qualityJudgment != null "> and quality_judgment = #{productQuality.qualityJudgment}</if>
+            <if test="productQuality.startDateTime != null and productQuality.endDateTime != null"> and lqci_ts between #{productQuality.startDateTime} and #{productQuality.endDateTime}</if>
+        </where>
+    </select>
+
+    <select id="mySelectById" resultType="com.szj.djk.entity.ProcessStandard">
+        SELECT * FROM process_standard WHERE id = #{id}
+    </select>
+
+    <select id="selectLqciAndLqcmrToProductQuality" resultType="com.szj.djk.entity.ProductQuality">
+        SELECT lqci.batch_num , lqci_ts, consumer, single_straightness, single_medium_convexity, finished_thickness, finished_width, finished_roll_diameter, finished_weight, surface_quality_remark, lqcmr_ts, correct_strength, correct_extension
+        FROM lqci LEFT join lqcmr on lqci.batch_num = lqcmr.batch_num
+        where lqci_ts > #{param1}
+        or lqcmr_ts > #{param1}
+    </select>
+</mapper>

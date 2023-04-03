@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.LmdpQcComplaintHandleMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpQcComplaintHandle">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="ts" column="ts" jdbcType="TIMESTAMP"/>
+            <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
+            <result property="complaintTime" column="complaint_time" jdbcType="TIMESTAMP"/>
+            <result property="consumer" column="consumer" jdbcType="VARCHAR"/>
+            <result property="productType" column="product_type" jdbcType="VARCHAR"/>
+            <result property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
+            <result property="complaintDesc" column="complaint_desc" jdbcType="VARCHAR"/>
+            <result property="complaintWeight" column="complaint_weight" jdbcType="VARCHAR"/>
+            <result property="treatmentPlan" column="treatment_plan" jdbcType="VARCHAR"/>
+            <result property="siteTreatment" column="site_treatment" jdbcType="VARCHAR"/>
+            <result property="siteTreatmentResult" column="site_treatment_result" jdbcType="VARCHAR"/>
+            <result property="lossAmount" column="loss_amount" jdbcType="DECIMAL"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,create_time,ts,
+        creator_id,complaint_time,consumer,
+        product_type,batch_num,complaint_desc,
+        complaint_weight,treatment_plan,site_treatment,
+        site_treatment_result,loss_amount,remark
+    </sql>
+</mapper>

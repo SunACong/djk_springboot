@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.OneAnneaFurMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.OneAnneaFur">
+            <id property="ts" column="ts" jdbcType="TIMESTAMP"/>
+            <result property="zoneOneT" column="zone_one_t" jdbcType="DOUBLE"/>
+            <result property="zoneTwoT" column="zone_two_t" jdbcType="DOUBLE"/>
+            <result property="zoneThreeT" column="zone_three_t" jdbcType="DOUBLE"/>
+            <result property="meterialT" column="meterial_t" jdbcType="DOUBLE"/>
+            <result property="zoneOneHotOutput" column="zone_one_hot_output" jdbcType="DOUBLE"/>
+            <result property="zoneTwoHotOutput" column="zone_two_hot_output" jdbcType="DOUBLE"/>
+            <result property="zoneThreeHotOutput" column="zone_three_hot_output" jdbcType="DOUBLE"/>
+            <result property="setT" column="set_t" jdbcType="DOUBLE"/>
+            <result property="desiredT" column="desired_t" jdbcType="DOUBLE"/>
+            <result property="exhaustFanSetF" column="exhaust_fan_set_f" jdbcType="DOUBLE"/>
+            <result property="inFanSetF" column="in_fan_set_f" jdbcType="DOUBLE"/>
+            <result property="controlType" column="control_type" jdbcType="DOUBLE"/>
+            <result property="materialControlT" column="material_control_t" jdbcType="DOUBLE"/>
+            <result property="warnSetT" column="warn_set_t" jdbcType="DOUBLE"/>
+            <result property="crusherOperatingSideA" column="crusher_operating_side_a" jdbcType="DOUBLE"/>
+            <result property="furnaceDoorCoolWater" column="furnace_door_cool_water" jdbcType="TINYINT"/>
+            <result property="funCoolWater" column="fun_cool_water" jdbcType="TINYINT"/>
+            <result property="returnWaterHighT" column="return_water_high_t" jdbcType="TINYINT"/>
+            <result property="coolWaterUpLimit" column="cool_water_up_limit" jdbcType="TINYINT"/>
+            <result property="compressedAirOneLowPressure" column="compressed_air_one_low_pressure" jdbcType="TINYINT"/>
+            <result property="compressedAirTwoLowPressure" column="compressed_air_two_low_pressure" jdbcType="TINYINT"/>
+            <result property="upT" column="up_t" jdbcType="TINYINT"/>
+            <result property="maintainT" column="maintain_t" jdbcType="TINYINT"/>
+            <result property="downT" column="down_t" jdbcType="TINYINT"/>
+            <result property="annealingEnd" column="annealing_end" jdbcType="TINYINT"/>
+            <result property="purgeCoolValue" column="purge_cool_value" jdbcType="TINYINT"/>
+            <result property="smokeExhaustOutputValue" column="smoke_exhaust_output_value" jdbcType="TINYINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        ts,zone_one_t,zone_two_t,
+        zone_three_t,meterial_t,zone_one_hot_output,
+        zone_two_hot_output,zone_three_hot_output,set_t,
+        desired_t,exhaust_fan_set_f,in_fan_set_f,
+        control_type,material_control_t,warn_set_t,
+        crusher_operating_side_a,furnace_door_cool_water,fun_cool_water,
+        return_water_high_t,cool_water_up_limit,compressed_air_one_low_pressure,
+        compressed_air_two_low_pressure,up_t,maintain_t,
+        down_t,annealing_end,purge_cool_value,
+        smoke_exhaust_output_value,create_time
+    </sql>
+
+
+    <select id = "selectSpecial" resultType="com.szj.djk.entity.OneAnneaFur" >
+        select * from one_annea_fur where ts between  #{before} and #{after}
+    </select>
+</mapper>

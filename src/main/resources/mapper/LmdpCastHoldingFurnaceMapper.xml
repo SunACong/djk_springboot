@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.LmdpCastHoldingFurnaceMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpCastHoldingFurnace">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="smeltTimes" column="smelt_times" jdbcType="VARCHAR"/>
+            <result property="brand" column="brand" jdbcType="VARCHAR"/>
+            <result property="turndownBeforeBeginTime" column="turndown_before_begin_time" jdbcType="TIMESTAMP"/>
+            <result property="turndownBeforeGroupId" column="turndown_before_group_id" jdbcType="VARCHAR"/>
+            <result property="turndownBeforeTemp" column="turndown_before_temp" jdbcType="DECIMAL"/>
+            <result property="turndownBeforeRemainingHeight" column="turndown_before_remaining_height" jdbcType="DECIMAL"/>
+            <result property="turndownAfterTopTemp" column="turndown_after_top_temp" jdbcType="DECIMAL"/>
+            <result property="turndownAfterTemp" column="turndown_after_temp" jdbcType="DECIMAL"/>
+            <result property="turndownAfterEndTime" column="turndown_after_end_time" jdbcType="TIMESTAMP"/>
+            <result property="turndownAfterPeriodTime" column="turndown_after_period_time" jdbcType="DECIMAL"/>
+            <result property="holdRefine1BeginTime" column="hold_refine1_begin_time" jdbcType="TIMESTAMP"/>
+            <result property="holdRefine1EndTime" column="hold_refine1_end_time" jdbcType="TIMESTAMP"/>
+            <result property="holdRefine1Duration" column="hold_refine1_duration" jdbcType="DECIMAL"/>
+            <result property="holdRefine1Temp" column="hold_refine1_temp" jdbcType="DECIMAL"/>
+            <result property="holdRefine1Medium" column="hold_refine1_medium" jdbcType="VARCHAR"/>
+            <result property="holdRefine1Dose" column="hold_refine1_dose" jdbcType="DECIMAL"/>
+            <result property="holdRefine1ColdStuffDose" column="hold_refine1_cold_stuff_dose" jdbcType="DECIMAL"/>
+            <result property="holdRefine1GroupId" column="hold_refine1_group_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine1GroupName" column="hold_refine1_group_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine1CasterId" column="hold_refine1_caster_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine1CasterName" column="hold_refine1_caster_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine1SmelterId" column="hold_refine1_smelter_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine1SmelterName" column="hold_refine1_smelter_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine1SamplingTime" column="hold_refine1_sampling_time" jdbcType="TIMESTAMP"/>
+            <result property="holdRefine1SamplingTemp" column="hold_refine1_sampling_temp" jdbcType="DECIMAL"/>
+            <result property="holdRefine2FollowTime" column="hold_refine2_follow_time" jdbcType="DECIMAL"/>
+            <result property="holdRefine2BeginTime" column="hold_refine2_begin_time" jdbcType="TIMESTAMP"/>
+            <result property="holdRefine2EndTime" column="hold_refine2_end_time" jdbcType="TIMESTAMP"/>
+            <result property="holdRefine2Duration" column="hold_refine2_duration" jdbcType="DECIMAL"/>
+            <result property="holdRefine2Temp" column="hold_refine2_temp" jdbcType="DECIMAL"/>
+            <result property="holdRefine2Medium" column="hold_refine2_medium" jdbcType="VARCHAR"/>
+            <result property="holdRefine2Dose" column="hold_refine2_dose" jdbcType="DECIMAL"/>
+            <result property="holdRefine2ColdStuffDose" column="hold_refine2_cold_stuff_dose" jdbcType="DECIMAL"/>
+            <result property="holdRefine2GroupId" column="hold_refine2_group_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine2GroupName" column="hold_refine2_group_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine2CasterId" column="hold_refine2_caster_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine2CasterName" column="hold_refine2_caster_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine2SmelterId" column="hold_refine2_smelter_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine2SmelterName" column="hold_refine2_smelter_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine3FollowTime" column="hold_refine3_follow_time" jdbcType="DECIMAL"/>
+            <result property="holdRefine3BeginTime" column="hold_refine3_begin_time" jdbcType="TIMESTAMP"/>
+            <result property="holdRefine3EndTime" column="hold_refine3_end_time" jdbcType="TIMESTAMP"/>
+            <result property="holdRefine3Duration" column="hold_refine3_duration" jdbcType="DECIMAL"/>
+            <result property="holdRefine3Temp" column="hold_refine3_temp" jdbcType="DECIMAL"/>
+            <result property="holdRefine3Medium" column="hold_refine3_medium" jdbcType="VARCHAR"/>
+            <result property="holdRefine3Dose" column="hold_refine3_dose" jdbcType="DECIMAL"/>
+            <result property="holdRefine3ColdStuffDose" column="hold_refine3_cold_stuff_dose" jdbcType="DECIMAL"/>
+            <result property="holdRefine3GroupId" column="hold_refine3_group_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine3GroupName" column="hold_refine3_group_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine3CasterId" column="hold_refine3_caster_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine3CasterName" column="hold_refine3_caster_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine3SmelterId" column="hold_refine3_smelter_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine3SmelterName" column="hold_refine3_smelter_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine4FollowTime" column="hold_refine4_follow_time" jdbcType="DECIMAL"/>
+            <result property="holdRefine4BeginTime" column="hold_refine4_begin_time" jdbcType="TIMESTAMP"/>
+            <result property="holdRefine4EndTime" column="hold_refine4_end_time" jdbcType="TIMESTAMP"/>
+            <result property="holdRefine4Duration" column="hold_refine4_duration" jdbcType="DECIMAL"/>
+            <result property="holdRefine4Temp" column="hold_refine4_temp" jdbcType="DECIMAL"/>
+            <result property="holdRefine4Medium" column="hold_refine4_medium" jdbcType="VARCHAR"/>
+            <result property="holdRefine4Dose" column="hold_refine4_dose" jdbcType="DECIMAL"/>
+            <result property="holdRefine4ColdStuffDose" column="hold_refine4_cold_stuff_dose" jdbcType="DECIMAL"/>
+            <result property="holdRefine4GroupId" column="hold_refine4_group_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine4GroupName" column="hold_refine4_group_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine4CasterId" column="hold_refine4_caster_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine4CasterName" column="hold_refine4_caster_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine4SmelterId" column="hold_refine4_smelter_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine4SmelterName" column="hold_refine4_smelter_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine5FollowTime" column="hold_refine5_follow_time" jdbcType="DECIMAL"/>
+            <result property="holdRefine5BeginTime" column="hold_refine5_begin_time" jdbcType="TIMESTAMP"/>
+            <result property="holdRefine5EndTime" column="hold_refine5_end_time" jdbcType="TIMESTAMP"/>
+            <result property="holdRefine5Duration" column="hold_refine5_duration" jdbcType="DECIMAL"/>
+            <result property="holdRefine5Temp" column="hold_refine5_temp" jdbcType="DECIMAL"/>
+            <result property="holdRefine5Medium" column="hold_refine5_medium" jdbcType="VARCHAR"/>
+            <result property="holdRefine5Dose" column="hold_refine5_dose" jdbcType="DECIMAL"/>
+            <result property="holdRefine5ColdStuffDose" column="hold_refine5_cold_stuff_dose" jdbcType="DECIMAL"/>
+            <result property="holdRefine5GroupId" column="hold_refine5_group_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine5GroupName" column="hold_refine5_group_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine5CasterId" column="hold_refine5_caster_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine5CasterName" column="hold_refine5_caster_name" jdbcType="VARCHAR"/>
+            <result property="holdRefine5SmelterId" column="hold_refine5_smelter_id" jdbcType="VARCHAR"/>
+            <result property="holdRefine5SmelterName" column="hold_refine5_smelter_name" jdbcType="VARCHAR"/>
+            <result property="holdRemark" column="hold_remark" jdbcType="VARCHAR"/>
+            <result property="holdApprove" column="hold_approve" jdbcType="VARCHAR"/>
+            <result property="deleteFlag" column="delete_flag" jdbcType="INTEGER"/>
+            <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
+            <result property="creatorName" column="creator_name" jdbcType="VARCHAR"/>
+            <result property="reviserId" column="reviser_id" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="ts" column="ts" jdbcType="TIMESTAMP"/>
+            <result property="inspectionBroken" column="inspection_broken" jdbcType="INTEGER"/>
+            <result property="inspectionNotInstalled" column="inspection_not_installed" jdbcType="INTEGER"/>
+            <result property="inspectionReplace" column="inspection_replace" jdbcType="INTEGER"/>
+            <result property="turndownProcessOperation" column="turndown_process_operation" jdbcType="VARCHAR"/>
+            <result property="turndownType" column="turndown_type" jdbcType="VARCHAR"/>
+            <result property="heatNum" column="heat_num" jdbcType="VARCHAR"/>
+            <result property="turndownBeforeRemainingWeight" column="turndown_before_remaining_weight" jdbcType="DECIMAL"/>
+            <result property="produceStatus" column="produce_status" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,smelt_times,brand,
+        turndown_before_begin_time,turndown_before_group_id,turndown_before_temp,
+        turndown_before_remaining_height,turndown_after_top_temp,turndown_after_temp,
+        turndown_after_end_time,turndown_after_period_time,hold_refine1_begin_time,
+        hold_refine1_end_time,hold_refine1_duration,hold_refine1_temp,
+        hold_refine1_medium,hold_refine1_dose,hold_refine1_cold_stuff_dose,
+        hold_refine1_group_id,hold_refine1_group_name,hold_refine1_caster_id,
+        hold_refine1_caster_name,hold_refine1_smelter_id,hold_refine1_smelter_name,
+        hold_refine1_sampling_time,hold_refine1_sampling_temp,hold_refine2_follow_time,
+        hold_refine2_begin_time,hold_refine2_end_time,hold_refine2_duration,
+        hold_refine2_temp,hold_refine2_medium,hold_refine2_dose,
+        hold_refine2_cold_stuff_dose,hold_refine2_group_id,hold_refine2_group_name,
+        hold_refine2_caster_id,hold_refine2_caster_name,hold_refine2_smelter_id,
+        hold_refine2_smelter_name,hold_refine3_follow_time,hold_refine3_begin_time,
+        hold_refine3_end_time,hold_refine3_duration,hold_refine3_temp,
+        hold_refine3_medium,hold_refine3_dose,hold_refine3_cold_stuff_dose,
+        hold_refine3_group_id,hold_refine3_group_name,hold_refine3_caster_id,
+        hold_refine3_caster_name,hold_refine3_smelter_id,hold_refine3_smelter_name,
+        hold_refine4_follow_time,hold_refine4_begin_time,hold_refine4_end_time,
+        hold_refine4_duration,hold_refine4_temp,hold_refine4_medium,
+        hold_refine4_dose,hold_refine4_cold_stuff_dose,hold_refine4_group_id,
+        hold_refine4_group_name,hold_refine4_caster_id,hold_refine4_caster_name,
+        hold_refine4_smelter_id,hold_refine4_smelter_name,hold_refine5_follow_time,
+        hold_refine5_begin_time,hold_refine5_end_time,hold_refine5_duration,
+        hold_refine5_temp,hold_refine5_medium,hold_refine5_dose,
+        hold_refine5_cold_stuff_dose,hold_refine5_group_id,hold_refine5_group_name,
+        hold_refine5_caster_id,hold_refine5_caster_name,hold_refine5_smelter_id,
+        hold_refine5_smelter_name,hold_remark,hold_approve,
+        delete_flag,creator_id,creator_name,
+        reviser_id,create_time,ts,
+        inspection_broken,inspection_not_installed,inspection_replace,
+        turndown_process_operation,turndown_type,heat_num,
+        turndown_before_remaining_weight,produce_status
+    </sql>
+</mapper>

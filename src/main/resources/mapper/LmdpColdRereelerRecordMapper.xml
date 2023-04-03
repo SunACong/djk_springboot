@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.LmdpColdRereelerRecordMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpColdRereelerRecord">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="ts" column="ts" jdbcType="TIMESTAMP"/>
+            <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
+            <result property="mainOperator" column="main_operator" jdbcType="VARCHAR"/>
+            <result property="assistantOperator" column="assistant_operator" jdbcType="VARCHAR"/>
+            <result property="workShift" column="work_shift" jdbcType="VARCHAR"/>
+            <result property="recordDate" column="record_date" jdbcType="TIMESTAMP"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="brand" column="brand" jdbcType="VARCHAR"/>
+            <result property="productName" column="product_name" jdbcType="VARCHAR"/>
+            <result property="reelNum" column="reel_num" jdbcType="VARCHAR"/>
+            <result property="originRegular" column="origin_regular" jdbcType="VARCHAR"/>
+            <result property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
+            <result property="processedRegular" column="processed_regular" jdbcType="VARCHAR"/>
+            <result property="machineSpeed" column="machine_speed" jdbcType="DECIMAL"/>
+            <result property="reelingTensileStress" column="reeling_tensile_stress" jdbcType="DECIMAL"/>
+            <result property="knifeGap" column="knife_gap" jdbcType="DECIMAL"/>
+            <result property="originWeight" column="origin_weight" jdbcType="DECIMAL"/>
+            <result property="processedWeight" column="processed_weight" jdbcType="DECIMAL"/>
+            <result property="wasteMaterialHead" column="waste_material_head" jdbcType="DECIMAL"/>
+            <result property="wasteMaterialTail" column="waste_material_tail" jdbcType="DECIMAL"/>
+            <result property="wasteMaterialElse" column="waste_material_else" jdbcType="DECIMAL"/>
+            <result property="quality" column="quality" jdbcType="VARCHAR"/>
+            <result property="result" column="result" jdbcType="VARCHAR"/>
+            <result property="confirmer" column="confirmer" jdbcType="VARCHAR"/>
+            <result property="recordNum" column="record_num" jdbcType="INTEGER"/>
+            <result property="headTailWasteMeters" column="head_tail_waste_meters" jdbcType="DECIMAL"/>
+            <result property="abnormalWasteReason" column="abnormal_waste_reason" jdbcType="VARCHAR"/>
+            <result property="surfaceQualityDesc" column="surface_quality_desc" jdbcType="VARCHAR"/>
+            <result property="wasteTrimmingWeight" column="waste_trimming_weight" jdbcType="DECIMAL"/>
+            <result property="wasteOffLineWeight" column="waste_off_line_weight" jdbcType="DECIMAL"/>
+            <result property="wasteProductWeight" column="waste_product_weight" jdbcType="DECIMAL"/>
+            <result property="operateType" column="operate_type" jdbcType="VARCHAR"/>
+            <result property="trimmingTime" column="trimming_time" jdbcType="TIMESTAMP"/>
+            <result property="produceOrder" column="produce_order" jdbcType="VARCHAR"/>
+            <result property="originWidth" column="origin_width" jdbcType="DECIMAL"/>
+            <result property="finishedTrimmingWidth" column="finished_trimming_width" jdbcType="DECIMAL"/>
+            <result property="shearTension" column="shear_tension" jdbcType="DECIMAL"/>
+            <result property="shearSpeed" column="shear_speed" jdbcType="DECIMAL"/>
+            <result property="rereelerFinishedWeight" column="rereeler_finished_weight" jdbcType="DECIMAL"/>
+            <result property="headRejectReason" column="head_reject_reason" jdbcType="VARCHAR"/>
+            <result property="tailRejectReason" column="tail_reject_reason" jdbcType="VARCHAR"/>
+            <result property="sleeveSpecification" column="sleeve_specification" jdbcType="VARCHAR"/>
+            <result property="workGroup" column="work_group" jdbcType="VARCHAR"/>
+            <result property="rereelerCardNumber" column="rereeler_card_number" jdbcType="VARCHAR"/>
+            <result property="sleeveWeight" column="sleeve_weight" jdbcType="DECIMAL"/>
+            <result property="sleeveQuality" column="sleeve_quality" jdbcType="VARCHAR"/>
+            <result property="sleeveProduceDate" column="sleeve_produce_date" jdbcType="TIMESTAMP"/>
+            <result property="sleeveInspectorId" column="sleeve_inspector_id" jdbcType="VARCHAR"/>
+            <result property="sleeveCheckerId" column="sleeve_checker_id" jdbcType="VARCHAR"/>
+            <result property="supplier" column="supplier" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,ts,creator_id,
+        main_operator,assistant_operator,work_shift,
+        record_date,create_time,brand,
+        product_name,reel_num,origin_regular,
+        batch_num,processed_regular,machine_speed,
+        reeling_tensile_stress,knife_gap,origin_weight,
+        processed_weight,waste_material_head,waste_material_tail,
+        waste_material_else,quality,result,
+        confirmer,record_num,head_tail_waste_meters,
+        abnormal_waste_reason,surface_quality_desc,waste_trimming_weight,
+        waste_off_line_weight,waste_product_weight,operate_type,
+        trimming_time,produce_order,origin_width,
+        finished_trimming_width,shear_tension,shear_speed,
+        rereeler_finished_weight,head_reject_reason,tail_reject_reason,
+        sleeve_specification,work_group,rereeler_card_number,
+        sleeve_weight,sleeve_quality,sleeve_produce_date,
+        sleeve_inspector_id,sleeve_checker_id,supplier
+    </sql>
+</mapper>
