@@ -38,7 +38,7 @@ public class RewindRollController {
     private WarnTableService warnTableService;
 
     //查询重卷机最近的20条数据
-    @GetMapping("list")
+    @GetMapping("/list")
     public R<List<RewindRoll>> list(RewindRoll rewindRoll){
         LambdaQueryWrapper<RewindRoll> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.setEntity(rewindRoll)
@@ -52,7 +52,7 @@ public class RewindRollController {
     /**
      * 查询重卷机特定时间前后的警告数据
      */
-    @GetMapping("listSpecial")
+    @GetMapping("/listSpecial")
     public R<List<WarnTable>> listSpecial(RewindRoll rewindRoll, String rollingName)  {
 //        System.out.println("触发了+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         int amount = 10000;
@@ -116,6 +116,7 @@ public class RewindRollController {
                 warnTable.setRollingValue(i.getOpenRollA());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("重卷机1#");
+                warnTable.setPara("设备参数");
                 warnTableService.save(warnTable);
             }
             if(i.getRollWindA()>valueRange.getXiaDD()){
@@ -123,6 +124,7 @@ public class RewindRollController {
                 warnTable.setRollingValue(i.getRollWindA());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("重卷机1#");
+                warnTable.setPara("设备参数");
                 warnTableService.save(warnTable);
             }
         if(i.getMachineColsV()>valueRange.getShangDS()){
@@ -130,6 +132,7 @@ public class RewindRollController {
             warnTable.setRollingValue(i.getMachineColsV());
             warnTable.setRollingProduceTime(i.getTs());
             warnTable.setRollingDeviceNumber("重卷机1#");
+            warnTable.setPara("工艺参数");
             warnTableService.save(warnTable);
         }
 
@@ -138,6 +141,7 @@ public class RewindRollController {
             warnTable.setRollingValue(i.getRollWindD());
             warnTable.setRollingProduceTime(i.getTs());
             warnTable.setRollingDeviceNumber("重卷机1#");
+            warnTable.setPara("工艺参数");
             warnTableService.save(warnTable);
         }
 
@@ -146,6 +150,7 @@ public class RewindRollController {
             warnTable.setRollingValue(i.getActualTension());
             warnTable.setRollingProduceTime(i.getTs());
             warnTable.setRollingDeviceNumber("重卷机1#");
+            warnTable.setPara("工艺参数");
             warnTableService.save(warnTable);
         }
 
@@ -154,6 +159,7 @@ public class RewindRollController {
             warnTable.setRollingValue(i.getStripL());
             warnTable.setRollingProduceTime(i.getTs());
             warnTable.setRollingDeviceNumber("重卷机1#");
+            warnTable.setPara("工艺参数");
             warnTableService.save(warnTable);
         }
         });

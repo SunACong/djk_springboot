@@ -135,6 +135,7 @@ public class TwoCastrollController {
                 warnTable.setRollingValue(i.getUpRollMontorA());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机2#");
+                warnTable.setPara("设备参数");
                 warnTableService.save(warnTable);
             }
             if(i.getDownRollMontorA()>valueRange.getXiaDD()){
@@ -142,20 +143,25 @@ public class TwoCastrollController {
                 warnTable.setRollingValue(i.getDownRollMontorA());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机2#");
+                warnTable.setPara("设备参数");
                 warnTableService.save(warnTable);
             }
+
             if(i.getRollA()>valueRange.getJuanDD()){
                 warnTable.setRollingName("卷取电机电流");
                 warnTable.setRollingValue(i.getRollA());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机2#");
+                warnTable.setPara("设备参数");
                 warnTableService.save(warnTable);
             }
+
             if(i.getUpRollWaterFn()>valueRange.getShangSY()){
                 warnTable.setRollingName("上辊水压");
                 warnTable.setRollingValue(i.getUpRollWaterFn());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机2#");
+                warnTable.setPara("设备参数");
                 warnTableService.save(warnTable);
             }
             if(i.getUpRollWaterT()>valueRange.getShangSW()){
@@ -163,6 +169,7 @@ public class TwoCastrollController {
                 warnTable.setRollingValue(i.getUpRollWaterT());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机2#");
+                warnTable.setPara("设备参数");
                 warnTableService.save(warnTable);
             }
             if(i.getUpRollFlow()>valueRange.getShangLL()){
@@ -170,6 +177,7 @@ public class TwoCastrollController {
                 warnTable.setRollingValue(i.getUpRollFlow());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机2#");
+                warnTable.setPara("设备参数");
                 warnTableService.save(warnTable);
             }
             if(i.getDownRollMontorA()>valueRange.getXiaSY()){
@@ -177,6 +185,7 @@ public class TwoCastrollController {
                 warnTable.setRollingValue(i.getDownRollMontorA());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机2#");
+                warnTable.setPara("设备参数");
                 warnTableService.save(warnTable);
             }
             if(i.getDownRollWaterT()>valueRange.getXiaSW()){
@@ -184,6 +193,7 @@ public class TwoCastrollController {
                 warnTable.setRollingValue(i.getDownRollWaterT());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机2#");
+                warnTable.setPara("设备参数");
                 warnTableService.save(warnTable);
             }
             if(i.getDownRollFlow()>valueRange.getXiaLL()){
@@ -191,6 +201,7 @@ public class TwoCastrollController {
                 warnTable.setRollingValue(i.getDownRollFlow());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机2#");
+                warnTable.setPara("设备参数");
                 warnTableService.save(warnTable);
             }
             if(i.getOperationPreloadForce()>valueRange.getCaoZuoY()){
@@ -198,6 +209,7 @@ public class TwoCastrollController {
                 warnTable.setRollingValue(i.getOperationPreloadForce());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机2#");
+                warnTable.setPara("设备参数");
                 warnTableService.save(warnTable);
             }
             if(i.getTransPreloadForce()>valueRange.getDsDongY()){
@@ -205,6 +217,7 @@ public class TwoCastrollController {
                 warnTable.setRollingValue(i.getTransPreloadForce());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机2#");
+                warnTable.setPara("设备参数");
                 warnTableService.save(warnTable);
             }
 
@@ -213,6 +226,7 @@ public class TwoCastrollController {
                 warnTable.setRollingValue(i.getUpRollMontorLineV());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机2#");
+                warnTable.setPara("工艺参数");
                 warnTableService.save(warnTable);
             }
             if(i.getDownRollMontorLineV()>valueRange.getXiaDS()){
@@ -220,6 +234,7 @@ public class TwoCastrollController {
                 warnTable.setRollingValue(i.getDownRollMontorLineV());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机2#");
+                warnTable.setPara("工艺参数");
                 warnTableService.save(warnTable);
             }
             if(i.getRollV()>valueRange.getJuanDS()){
@@ -227,6 +242,7 @@ public class TwoCastrollController {
                 warnTable.setRollingValue(i.getRollA());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机2#");
+                warnTable.setPara("工艺参数");
                 warnTableService.save(warnTable);
             }
         });
