@@ -68,7 +68,6 @@ public class OneCastrollController {
      */
     @Scheduled(fixedRate = 20000)
     public R<ValueRange> addwarndata(){
-        log.warn("存入报警数据");
         Avaluate avaluate = new Avaluate();
         ValueRange valueRange = new ValueRange();
         LambdaQueryWrapper<Avaluate> queryWrapper = new LambdaQueryWrapper<>();

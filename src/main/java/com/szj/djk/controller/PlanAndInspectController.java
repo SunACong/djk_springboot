@@ -27,7 +27,7 @@ public class PlanAndInspectController {
 
     /**
      * 自动判定接口，ServiceImpl中实现了自动定时查询，流出接口提供手动判定
-     * @return
+     * @return 是否更新判定成功
      */
     @GetMapping("saveBatchOrUpdate")
     public R<String> saveBatchOrUpdate(){

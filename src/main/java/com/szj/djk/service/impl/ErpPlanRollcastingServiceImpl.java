@@ -126,7 +126,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
             queryWrapper.eq(LmdpCastProduce::getReelNum, reelNum);
         }
         List<LmdpCastProduce> list = lmdpCastProduceService.list(queryWrapper);
-        if (list.size() != 0 && list != null){
+        if (list.size() != 0){
             return list.get(0).getSmeltTimes();
         }
         throw new CustomException("未找熔次号");
@@ -139,7 +139,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         String planId = "";
         queryWrapper.eq(LmdpCastProduce::getReelNum, reelNum);
         List<LmdpCastProduce> list = lmdpCastProduceService.list(queryWrapper);
-        if (list.size() != 0 && list != null){
+        if (list.size() != 0){
             return list.get(0).getPlanId();
         }
         throw new CustomException("未找到冷轧计划标号");
@@ -158,7 +158,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         LambdaQueryWrapper<ErpPlanRollcasting> queryWrapper = new LambdaQueryWrapper<ErpPlanRollcasting>();
         queryWrapper.eq(ErpPlanRollcasting::getProduceId, planId);
         List<ErpPlanRollcasting> list = erpPlanRollcastingMapper.selectList(queryWrapper);
-        if (list.size() != 0 && list != null){
+        if (list.size() != 0){
             return list.get(0);
         }
         throw new CustomException("未找铸轧计划表");
@@ -170,7 +170,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         LambdaQueryWrapper<LmdpCastSmeltHold> queryWrapper = new LambdaQueryWrapper<LmdpCastSmeltHold>();
         queryWrapper.eq(LmdpCastSmeltHold::getSmeltTimes, smeltTimes);
         List<LmdpCastSmeltHold> list = lmdpCastSmeltHoldService.list(queryWrapper);
-        if (list.size() != 0 && list != null){
+        if (list.size() != 0){
             return list.get(0);
         }
         throw new CustomException("未找到熔炼工序");
@@ -182,7 +182,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         LambdaQueryWrapper<LmdpCastHoldingFurnace> queryWrapper = new LambdaQueryWrapper<LmdpCastHoldingFurnace>();
         queryWrapper.eq(LmdpCastHoldingFurnace::getSmeltTimes, smeltTimes);
         List<LmdpCastHoldingFurnace> list = lmdpCastHoldingFurnaceService.list(queryWrapper);
-        if (list.size() != 0 && list != null) {
+        if (list.size() != 0) {
             return list.get(0);
         }
         throw new CustomException("未找到保温工序");
@@ -195,7 +195,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         LambdaQueryWrapper<LmdpCastProduce> queryWrapper = new LambdaQueryWrapper<LmdpCastProduce>();
         queryWrapper.eq(LmdpCastProduce::getSmeltTimes, smeltTimes);
         List<LmdpCastProduce> list = lmdpCastProduceService.list(queryWrapper);
-        if (list.size() != 0 && list != null) {
+        if (list.size() != 0) {
             return list.get(0);
         }
         throw new CustomException("未找到铸轧工序");
@@ -207,7 +207,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         LambdaQueryWrapper<LmdpCastReelStoreRecord> queryWrapper = new LambdaQueryWrapper<LmdpCastReelStoreRecord>();
         queryWrapper.eq(LmdpCastReelStoreRecord::getReelNum, reelNum);
         List<LmdpCastReelStoreRecord> list = lmdpCastReelStoreRecordService.list(queryWrapper);
-        if (list.size() != 0 && list != null) {
+        if (list.size() != 0) {
             return list.get(0);
         }
         throw new CustomException("未找到铸轧出入库记录");
@@ -219,7 +219,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         LambdaQueryWrapper<LmdpQcCastReel> queryWrapper = new LambdaQueryWrapper<LmdpQcCastReel>();
         queryWrapper.eq(LmdpQcCastReel::getReelNum, reelNum);
         List<LmdpQcCastReel> list = lmdpQcCastReelService.list(queryWrapper);
-        if (list.size() != 0 && list != null) {
+        if (list.size() != 0) {
             return list.get(0);
         }
         throw new CustomException("未找到铸轧卷质检报告");
@@ -228,12 +228,11 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
      * 查询冷轧计划表
      */
     private ErpPlanColdreductionstrip getErpPlanColdreductionstrip(String reelNum) throws CustomException{
-        //ErpPlanColdreductionstrip coldPlan = erpPlanColdreductionstripService.getColdPlan(reelNum);
-        //if (coldPlan != null){
-        //    return coldPlan;
-        //}
-        //throw new CustomException("未找冷轧计划表");
-        return null;
+        ErpPlanColdreductionstrip coldPlan = erpPlanColdreductionstripService.getColdPlan(reelNum);
+        if (coldPlan != null){
+            return coldPlan;
+        }
+        throw new CustomException("未找冷轧计划表");
     }
 
     /**
@@ -244,7 +243,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         LambdaQueryWrapper<LmdpColdRecord> queryWrapper = new LambdaQueryWrapper<LmdpColdRecord>();
         queryWrapper.eq(LmdpColdRecord::getBatchNum, batchNum);
         List<LmdpColdRecord> list = lmdpColdRecordService.list(queryWrapper);
-        if (list.size() != 0 && list != null){
+        if (list.size() != 0){
             return list.get(0);
         }
         throw new CustomException("未找到冷轧工序");
@@ -258,7 +257,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         LambdaQueryWrapper<LmdpColdFurnaceRecord> queryWrapper = new LambdaQueryWrapper<LmdpColdFurnaceRecord>();
         queryWrapper.eq(LmdpColdFurnaceRecord::getBatchNum, batchNum);
         List<LmdpColdFurnaceRecord> list = lmdpColdFurnaceRecordService.list(queryWrapper);
-        if (list.size() != 0 && list != null){
+        if (list.size() != 0){
             return list.get(0);
         }
         throw new CustomException("未找到退火工序");
@@ -271,7 +270,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         LambdaQueryWrapper<LmdpColdRereelerRecord> queryWrapper = new LambdaQueryWrapper<LmdpColdRereelerRecord>();
         queryWrapper.eq(LmdpColdRereelerRecord::getBatchNum, batchNum);
         List<LmdpColdRereelerRecord> list = lmdpColdRereelerRecordService.list(queryWrapper);
-        if (list.size() != 0 && list != null){
+        if (list.size() != 0){
             return list.get(0);
         }
         throw new CustomException("未找到重卷工序");
@@ -284,7 +283,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         LambdaQueryWrapper<LmdpColdStoreRecord> queryWrapper = new LambdaQueryWrapper<LmdpColdStoreRecord>();
         queryWrapper.eq(LmdpColdStoreRecord::getReelNum, batchNum);
         List<LmdpColdStoreRecord> list = lmdpColdStoreRecordService.list(queryWrapper);
-        if (list.size() != 0 && list != null){
+        if (list.size() != 0){
             return list.get(0);
         }
         throw new CustomException("未找到冷轧入库");
@@ -297,7 +296,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         LambdaQueryWrapper<LmdpQcColdInspect> queryWrapper = new LambdaQueryWrapper<LmdpQcColdInspect>();
         queryWrapper.eq(LmdpQcColdInspect::getBatchNum, batchNum);
         List<LmdpQcColdInspect> list = lmdpQcColdInspectService.list(queryWrapper);
-        if (list.size() != 0 && list != null){
+        if (list.size() != 0){
             return list.get(0);
         }
         throw new CustomException("未找到冷轧工序质检");
@@ -310,7 +309,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         LambdaQueryWrapper<LmdpQcColdReelReport> queryWrapper = new LambdaQueryWrapper<LmdpQcColdReelReport>();
         queryWrapper.eq(LmdpQcColdReelReport::getBatchNum, batchNum);
         List<LmdpQcColdReelReport> list = lmdpQcColdReelReportService.list(queryWrapper);
-        if (list.size() != 0 && list != null){
+        if (list.size() != 0){
             return list.get(0);
         }
         throw new CustomException("未找到冷轧质检报告");
@@ -323,7 +322,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         LambdaQueryWrapper<LmdpQcComplaintDetail> queryWrapper = new LambdaQueryWrapper<LmdpQcComplaintDetail>();
         queryWrapper.eq(LmdpQcComplaintDetail::getBatchNum, batchNum);
         List<LmdpQcComplaintDetail> list = lmdpQcComplaintDetailService.list(queryWrapper);
-        if (list.size() != 0 && list != null){
+        if (list.size() != 0){
             return list.get(0);
         }
         throw new CustomException("未找到投诉处理");

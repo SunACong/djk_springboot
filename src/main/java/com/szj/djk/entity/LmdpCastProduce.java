@@ -1,13 +1,13 @@
 package com.szj.djk.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 铸轧工序
@@ -599,7 +599,7 @@ public class LmdpCastProduce implements Serializable {
     private Date createTime;
 
     /**
-     * 
+     *
      */
     @TableField(value = "ts")
     private Date ts;
@@ -673,14 +673,14 @@ public class LmdpCastProduce implements Serializable {
     /**
      * 铸轧辊编号#上辊
      */
-    @TableField(value = "roll1_number")
-    private String roll1Number;
+    @TableField(value = "roll_number")
+    private String rollNumber;
 
     /**
      * 铸轧辊凸度#上辊
      */
-    @TableField(value = "convexity1")
-    private BigDecimal convexity1;
+    @TableField(value = "convexity")
+    private BigDecimal convexity;
 
     /**
      * 铸轧辊编号#下辊

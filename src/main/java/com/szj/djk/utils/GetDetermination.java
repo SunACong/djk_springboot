@@ -12,7 +12,6 @@ import com.szj.djk.vo.PlanAndInspect;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -61,17 +60,16 @@ public class GetDetermination {
 
     /**
      * 获取最近一次巡检表更新时间 主库 planandinspect
-     * @return
+     * @return 最后一次更新时间
      */
     private String getRecentTsFromPlanAndInspect(){
-        String ts = planAndInspectService.getRecentTs();
-        return ts;
+        return planAndInspectService.getRecentTs();
     }
 
     /**
      * 查询迅巡检记录表中上一次到现在为止更新过的卷号 从库 lmdp_qc_cold_inspect
-     * @param ts
-     * @return
+     * @param ts 上一次更新时间
+     * @return 返回冷轧巡检的列表
      */
     private List<LmdpQcColdInspect> getLmdpQcColdInspectList(String ts){
         DynamicDataSourceContextHolder.push("slave");
@@ -84,8 +82,6 @@ public class GetDetermination {
 
     /**
      * 通过冷轧计划查询冷轧计划表  从库 lmdb_cold_plan
-     * @param coldreductionstripNum
-     * @return
      */
     private SlaveErpPlanColdreductionstrip getSlaveErpPlanColdreductionstripByPlanNum(String coldreductionstripNum){
         DynamicDataSourceContextHolder.push("slave");
@@ -109,55 +105,83 @@ public class GetDetermination {
 
     /**
      * 板型判定
-     * @return
+     * @return  0 不合格  1 合格 2 暂未判定
      */
     private static int doPlateTypeDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
+        if (lmdpQcColdInspect.getSingleMediumConvexity() == null || lmdpQcColdInspect.getSingleStraightness() == null){
+            return 2;
+        }
         // 巡检表中凸度
-        BigDecimal singleMediumConvexity = lmdpQcColdInspect.getSingleMediumConvexity();
+        double singleMediumConvexity = lmdpQcColdInspect.getSingleMediumConvexity().doubleValue();
         // 巡检表平直度
-        BigDecimal singleStraightness = lmdpQcColdInspect.getSingleStraightness();
+        double singleStraightness = lmdpQcColdInspect.getSingleStraightness().doubleValue();
         // 计划表平直度 暂时废弃
         String flatness = slaveErpPlanColdreductionstrip.getFlatness();
-
-        return 1;
+        // 计划表凸面率
+        String convexRate = slaveErpPlanColdreductionstrip.getConvexRate();
+        double[] doubles = strToDouble(convexRate);
+        // 暂时只判断凸度
+        if (singleMediumConvexity >= doubles[0] && singleMediumConvexity <= doubles[1]){
+            return 1;
+        }
+        return 0;
     }
 
     /**
      * 力学性能判定
-     * @return
+     * @return 0 不合格  1 合格 2 暂未判定
      */
     private static int doMechanicalPropertiesDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
         // 判断singleExtensionRe是否为空
-        if (lmdpQcColdInspect.getSingleExtensionRe() == null || lmdpQcColdInspect.getSingleStrengthRe() == null || lmdpQcColdInspect.getBendingPerformanceRe() == null){
+        if (lmdpQcColdInspect.getSingleExtension() == null || lmdpQcColdInspect.getSingleStrength() == null || lmdpQcColdInspect.getBendingPerformanceRequirements() == null){
             return 2;
         }
-        // 巡检表延伸率 抗拉强度 弯折性能
-        double singleExtensionRe = lmdpQcColdInspect.getSingleExtensionRe().doubleValue();
-        double singleStrengthRe = lmdpQcColdInspect.getSingleStrengthRe().doubleValue();
-        String bendingPerformanceRe = lmdpQcColdInspect.getBendingPerformanceRe();
-        // 计划表延伸率 抗拉强度 弯折性能
+        // 巡检表延伸率 抗拉强度 弯折性能————————第一次检测
+        double singleExtension = lmdpQcColdInspect.getSingleExtension().doubleValue();
+        double singleStrength = lmdpQcColdInspect.getSingleStrength().doubleValue();
+        String bendingPerformance = lmdpQcColdInspect.getBendingPerformanceRequirements();
+        // 计划表延伸率 抗拉强度 弯折性能————————标准
         String elongation = slaveErpPlanColdreductionstrip.getElongation();
         double[] elongations = strToDouble(elongation);
         String tensileStrength = slaveErpPlanColdreductionstrip.getTensileStrength();
         double[] tensileStrengths = strToDouble(tensileStrength);
-        String bendingPerformance = slaveErpPlanColdreductionstrip.getBendingPerformance();
-
-        if (singleExtensionRe < elongations[0]){
-            return 0;
+        String bendingPerformanceS = slaveErpPlanColdreductionstrip.getBendingPerformance();
+        int flag = 0;
+        if (singleExtension < elongations[0]){
+            flag++;
         }
-        if (singleStrengthRe < tensileStrengths[0] || singleStrengthRe > tensileStrengths[1]){
-            return 0;
+        if (singleStrength < tensileStrengths[0] || singleStrength > tensileStrengths[1]){
+            flag++;
         }
-        String str = "90°折弯有裂痕";
-        if (str.equals(bendingPerformanceRe)){
-            return 0;
+        String str = "cracked";
+        if (str.equals(bendingPerformance)){
+            flag++;
+        }
+        if (flag != 0){
+            if (lmdpQcColdInspect.getSingleExtensionRe() == null || lmdpQcColdInspect.getSingleStrengthRe() == null || lmdpQcColdInspect.getBendingPerformanceRe() == null){
+                return 2;
+            }
+            // 巡检表延伸率 抗拉强度 弯折性能————————复检
+            double singleExtensionRe = lmdpQcColdInspect.getSingleExtensionRe().doubleValue();
+            double singleStrengthRe = lmdpQcColdInspect.getSingleStrengthRe().doubleValue();
+            String bendingPerformanceRe = lmdpQcColdInspect.getBendingPerformanceRe();
+            if (singleExtensionRe < elongations[0]){
+                return 0;
+            }
+            if (singleStrengthRe < tensileStrengths[0] || singleStrengthRe > tensileStrengths[1]){
+                return 0;
+            }
+            str = "cracked";
+            if (str.equals(bendingPerformanceRe)){
+                return 0;
+            }
         }
         return 1;
     }
 
     /**
      * 尺寸偏差判定
-     * @return
+     * @return 0 不合格  1 合格 2 暂未判定
      */
     private static int doDimensionalDeviationDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
         if (lmdpQcColdInspect.getFinishedThickness() == null || lmdpQcColdInspect.getFinishedWidth() == null){
@@ -188,7 +212,7 @@ public class GetDetermination {
 
     /**
      * 表面质量判定
-     * @return
+     * @return 0 不合格  1 合格 2 暂未判定
      */
     private static int doSurfaceQualityDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
         if (lmdpQcColdInspect.getSurfaceQuality() == null){
@@ -203,7 +227,7 @@ public class GetDetermination {
 
     /**
      * 外观质量判定
-     * @return
+     * @return  0 不合格  1 合格 2 暂未判定
      */
     private static int doAppearanceQualityDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
         if (lmdpQcColdInspect.getAppearanceQuality() == null){
@@ -217,7 +241,7 @@ public class GetDetermination {
     }
 
     /**
-     * 总判定
+     * 总判定  0 不合格  1 合格 2 暂未判定
      */
     public static PlanAndInspect doAllDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
         PlanAndInspect planAndInspect = mergePlanAndInspect(slaveErpPlanColdreductionstrip, lmdpQcColdInspect);
@@ -246,16 +270,18 @@ public class GetDetermination {
     /**
     * 正则匹配字符串中的数字转换成double类型的数组并且存入double数组中
     */
-    private static double[] strToDouble(String str){
-        String regEx="[^0-9]";
-        Pattern p = Pattern.compile(regEx);
-        Matcher m = p.matcher(str);
-        String[] str1 = m.replaceAll(" ").trim().split(" ");
-        double[] d = new double[str1.length];
-        for (int i = 0; i < str1.length; i++) {
-            d[i] = Double.parseDouble(str1[i]);
+// 帮我写一个函数正则匹配字符串中的double类型的数字
+    public static double[] strToDouble(String str){
+        double[] doubles = new double[2];
+        String regex = "\\d+(\\.\\d+)?";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(str);
+        int i = 0;
+        while (matcher.find()){
+            doubles[i] = Double.parseDouble(matcher.group());
+            i++;
         }
-        return d;
+        return doubles;
     }
 
 }

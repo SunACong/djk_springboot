@@ -19,3 +19,4 @@ public class BaseEntity implements Serializable {
     @TableField(exist = false)
     private String endDateTime;
 }
+
