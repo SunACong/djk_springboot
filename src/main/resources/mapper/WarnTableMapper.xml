@@ -11,11 +11,12 @@
             <result property="rollingValue" column="rolling_value" jdbcType="INTEGER"/>
             <result property="rollingDeviceNumber" column="rolling_device_number" jdbcType="VARCHAR"/>
             <result property="yd" column="yd" jdbcType="VARCHAR"></result>
+            <result property="para"  column="para" jdbcType="VARCHAR"></result>
     </resultMap>
 
     <sql id="Base_Column_List">
         id_number,rolling_name,rolling_produce_time,
-        rolling_value,rolling_device_number,yd
+        rolling_value,rolling_device_number,yd,para
     </sql>
     <sql id="selectWarnTableVo">
         select * from warn_table

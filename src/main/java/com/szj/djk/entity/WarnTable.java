@@ -41,4 +41,9 @@ public class WarnTable {
      */
     private String yd;
 
+    /**
+     * 判断是设备参数还是工艺参数
+     */
+    private  String para;
+
 }

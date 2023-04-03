@@ -1,6 +1,8 @@
 package com.szj.djk.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.szj.djk.common.R;
+import com.szj.djk.entity.RewindRoll;
 import com.szj.djk.entity.WarnTable;
 import com.szj.djk.service.WarnTableService;
 import org.apache.ibatis.annotations.Param;
@@ -24,6 +26,36 @@ import java.util.List;
 public class WarnTableController {
     @Autowired
     private WarnTableService warnTableService;
+
+    /**
+     * 获取设备参数
+     */
+    @GetMapping("/getDevice")
+    public R<List<WarnTable>> Devicelist(WarnTable warnTable){
+        LambdaQueryWrapper<WarnTable> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.setEntity(warnTable)
+//               .orderByDesc(true, false, RewindRoll::getTs)
+                .eq(WarnTable::getPara,"设备参数")
+                .orderByDesc(true,WarnTable::getRollingProduceTime)
+                .last("limit 50");
+        List<WarnTable> list = warnTableService.list(queryWrapper);
+        return R.success(list);
+    }
+
+    /**
+     * 获取工艺参数
+     */
+    @GetMapping("/getTec")
+    public R<List<WarnTable>> Teclist(WarnTable warnTable){
+        LambdaQueryWrapper<WarnTable> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.setEntity(warnTable)
+//               .orderByDesc(true, false, RewindRoll::getTs)
+                .eq(WarnTable::getPara,"工艺参数")
+                .orderByDesc(true,WarnTable::getRollingProduceTime)
+                .last("limit 50");
+        List<WarnTable> list = warnTableService.list(queryWrapper);
+        return R.success(list);
+    }
 
     /**
      * 将已读标记插入数据库
