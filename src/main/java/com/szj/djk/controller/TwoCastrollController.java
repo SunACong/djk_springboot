@@ -147,6 +147,15 @@ public class TwoCastrollController {
         queryWrapperR.setEntity(twoCastroll);
         List<TwoCastroll> newlist = twoCastrollService.selectRollingNewData();
         newlist.forEach(i->{
+            if(i.getPumpA()>valueRange.getZhuDD() || i.getPumpA()<valueRange.getZhuDD1()){
+                warnTable.setRollingName("主水泵电机电流");
+                warnTable.setRollingValue(i.getPumpA());
+                warnTable.setRollingProduceTime(i.getTs());
+                warnTable.setRollingDeviceNumber("铸轧机2#");
+                warnTable.setPara("设备参数");
+                warnTableService.save(warnTable);
+            }
+
             if(i.getUpRollMontorA()>valueRange.getShangDD() || i.getUpRollMontorA()<valueRange.getShangDD1()){
                 warnTable.setRollingName("上辊电机电流");
                 warnTable.setRollingValue(i.getUpRollMontorA());

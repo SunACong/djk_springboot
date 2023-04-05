@@ -54,7 +54,7 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
     }
 
     @Override
-    @Scheduled(cron = "0/5 * * * * ?")
+//    @Scheduled(cron = "0/5 * * * * ?")
     @DS("master")
     public String saveBatchOrUpdate() {
         // 获取主数据库plan_and_inspect最近一次的时间戳
