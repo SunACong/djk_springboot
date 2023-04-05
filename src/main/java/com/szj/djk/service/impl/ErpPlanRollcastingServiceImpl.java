@@ -12,6 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -57,9 +58,10 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
     private LmdpQcComplaintDetailService lmdpQcComplaintDetailService;
 
     @Override
-    public ProcessMonitor getProcessMonitor(String number, String type) {
+    public ProcessMonitor getProcessMonitor(String number, Integer type) {
         String smeltTime = getSmeltTime(number, type);
         ProcessMonitor processMonitor = new ProcessMonitor();
+        HashMap<String, String> map = new HashMap<String, String>();
         try {
             LmdpCastSmeltHold lmdpCastSmeltHold = getLmdpCastSmeltHold(smeltTime);
             processMonitor.setLmdpCastSmeltHold(lmdpCastSmeltHold);
@@ -67,19 +69,21 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
             ErpPlanRollcasting erpPlanRollcasting = getErpPlanRollcasting(lmdpCastSmeltHold.getPlanId());
             processMonitor.setErpPlanRollcasting(erpPlanRollcasting);
 
+            // 是否合格 甲乙班组
             LmdpCastHoldingFurnace lmdpCastHoldingFurnace = getLmdpCastHoldingFurnace(smeltTime);
             processMonitor.setLmdpCastHoldingFurnace(lmdpCastHoldingFurnace);
 
             LmdpCastProduce lmdpCastProduce = getLmdpCastProduce(smeltTime);
             processMonitor.setLmdpCastProduce(lmdpCastProduce);
 
+            // 冷轧卷号获取
             String reelNum = lmdpCastProduce.getReelNum();
             LmdpCastReelStoreRecord lmdpCastReelStoreRecord = getLmdpCastReelStoreRecord(reelNum);
             processMonitor.setLmdpCastReelStoreRecord(lmdpCastReelStoreRecord);
 
             LmdpQcCastReel lmdpQcCastReel = getLmdpQcCastReel(reelNum);
             processMonitor.setLmdpQcCastReel(lmdpQcCastReel);
-
+            System.out.println(reelNum);
             ErpPlanColdreductionstrip erpPlanColdreductionstrip = getErpPlanColdreductionstrip(reelNum);
             processMonitor.setErpPlanColdreductionstrip(erpPlanColdreductionstrip);
 
@@ -115,13 +119,13 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
     /**
      * 无论输入什么输出熔次号
      */
-    private String getSmeltTime(String number, String type)  throws CustomException{
+    private String getSmeltTime(String number, Integer type)  throws CustomException{
         LambdaQueryWrapper<LmdpCastProduce> queryWrapper = new LambdaQueryWrapper<>();
-        if ("1".equals(type)){
+        if (type == 0){
             return number;
-        }else if ("2".equals(type)){
+        }else if (type == 1){
             queryWrapper.eq(LmdpCastProduce::getReelNum, number);
-        }else if ("3".equals(type)){
+        }else if (type == 2){
             String reelNum = erpCastingCheckRecordService.getReelNum(number);
             queryWrapper.eq(LmdpCastProduce::getReelNum, reelNum);
         }

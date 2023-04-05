@@ -38,7 +38,6 @@ public class GetDetermination {
      * 质量判定流程
      * @return
      */
-    //@Scheduled(cron = "*/1 * * * * ?")
     @DS("master")
     public List<PlanAndInspect> doDetermination(){
         String ts = getRecentTsFromPlanAndInspect();

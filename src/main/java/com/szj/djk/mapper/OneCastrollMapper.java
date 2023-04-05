@@ -1,11 +1,9 @@
 package com.szj.djk.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.szj.djk.entity.OneCastroll;
-import com.szj.djk.entity.RollingMachine;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 
 /**

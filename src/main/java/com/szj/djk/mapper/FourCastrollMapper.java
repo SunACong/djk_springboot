@@ -1,8 +1,7 @@
 package com.szj.djk.mapper;
 
-import com.szj.djk.entity.FourCastroll;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.szj.djk.entity.OneCastroll;
+import com.szj.djk.entity.FourCastroll;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.time.LocalDateTime;

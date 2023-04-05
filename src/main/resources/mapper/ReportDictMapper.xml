@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.ReportDictMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.ReportDict">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="ts" column="ts" jdbcType="TIMESTAMP"/>
+            <result property="typeName" column="type_name" jdbcType="VARCHAR"/>
+            <result property="type" column="type" jdbcType="VARCHAR"/>
+            <result property="value" column="value" jdbcType="VARCHAR"/>
+            <result property="chdesc" column="chdesc" jdbcType="VARCHAR"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="sortOrder" column="sort_order" jdbcType="INTEGER"/>
+            <result property="modifyFlag" column="modify_flag" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,ts,type_name,
+        type,value,chdesc,
+        remark,sort_order,modify_flag
+    </sql>
+</mapper>

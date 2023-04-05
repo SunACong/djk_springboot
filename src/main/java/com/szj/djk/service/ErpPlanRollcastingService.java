@@ -10,5 +10,5 @@ import com.szj.djk.vo.ProcessMonitor;
 * @createDate 2023-03-25 13:22:39
 */
 public interface ErpPlanRollcastingService extends IService<ErpPlanRollcasting> {
-    ProcessMonitor getProcessMonitor(String number, String type);
+    ProcessMonitor getProcessMonitor(String number, Integer type);
 }
