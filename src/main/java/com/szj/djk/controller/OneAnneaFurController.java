@@ -163,15 +163,13 @@ public class OneAnneaFurController {
      */
     @GetMapping("listSpecial")
     public R<List<WarnTable>> listSpecial(OneAnneaFur oneAnneaFur, String rollingName)  {
-//        System.out.println("触发了+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        int amount = 10000;
         LocalDateTime ts = oneAnneaFur.getTs();
-        long beforeTime = Timestamp.valueOf(ts).getTime()-amount;
-        long afterTime = Timestamp.valueOf(ts).getTime()+amount;
-        LocalDateTime before = new Date(beforeTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
-        LocalDateTime after = new Date(afterTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
+        LocalDateTime before = ts.minusMinutes(15);
+        LocalDateTime after = ts;
         List<WarnTable> specialList = oneAnneaFurService.selectSpecial(before,after,rollingName);
         return R.success(specialList);
+
+
     }
 
 }

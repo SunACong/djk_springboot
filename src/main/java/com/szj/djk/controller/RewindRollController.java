@@ -54,13 +54,9 @@ public class RewindRollController {
      */
     @GetMapping("/listSpecial")
     public R<List<WarnTable>> listSpecial(RewindRoll rewindRoll, String rollingName)  {
-//        System.out.println("触发了+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        int amount = 10000;
         LocalDateTime ts = rewindRoll.getTs();
-        long beforeTime = Timestamp.valueOf(ts).getTime()-amount;
-        long afterTime = Timestamp.valueOf(ts).getTime()+amount;
-        LocalDateTime before = new Date(beforeTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
-        LocalDateTime after = new Date(afterTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
+        LocalDateTime before = ts.minusMinutes(15);
+        LocalDateTime after = ts;
         List<WarnTable> specialList = rewindRollService.selectSpecial(before,after,rollingName);
         return R.success(specialList);
     }
@@ -103,7 +99,6 @@ public class RewindRollController {
                     break;
             }
         });
-//        System.out.println("打印++++" + valueRange);
         WarnTable warnTable = new WarnTable();
         RewindRoll rewindRoll = new RewindRoll();
         LambdaQueryWrapper<RewindRoll> queryWrapperR = new LambdaQueryWrapper<>();
@@ -111,7 +106,6 @@ public class RewindRollController {
                 .orderByDesc(true,RewindRoll::getTs)
                 .last("limit 20");
         List<RewindRoll> newlist = rewindRollService.list(queryWrapperR);
-//            System.out.println("新的数据"+ newlist.size());
 /**
  * 开卷机电流曲线:setShangDD  卷取机电流曲线:setXiaDD    机列速度:setShangDS 卷取卷径:setXiaDS
  * 实际张力:setZhuDD   带材长度:setBeiDD

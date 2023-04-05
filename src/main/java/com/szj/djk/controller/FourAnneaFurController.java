@@ -164,12 +164,18 @@ public class FourAnneaFurController {
     @GetMapping("listSpecial")
     public R<List<WarnTable>> listSpecial(FourAnneaFur fourAnneaFur, String rollingName)  {
 //        System.out.println("触发了+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        int amount = 10000;
+//        int amount = 10000;
+//        LocalDateTime ts = fourAnneaFur.getTs();
+//        long beforeTime = Timestamp.valueOf(ts).getTime()-amount;
+//        long afterTime = Timestamp.valueOf(ts).getTime()+amount;
+//        LocalDateTime before = new Date(beforeTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
+//        LocalDateTime after = new Date(afterTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
+//        List<WarnTable> specialList = fourAnneaFurService.selectSpecial(before,after,rollingName);
+//        return R.success(specialList);
+
         LocalDateTime ts = fourAnneaFur.getTs();
-        long beforeTime = Timestamp.valueOf(ts).getTime()-amount;
-        long afterTime = Timestamp.valueOf(ts).getTime()+amount;
-        LocalDateTime before = new Date(beforeTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
-        LocalDateTime after = new Date(afterTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
+        LocalDateTime before = ts.minusMinutes(15);
+        LocalDateTime after = ts;
         List<WarnTable> specialList = fourAnneaFurService.selectSpecial(before,after,rollingName);
         return R.success(specialList);
     }
