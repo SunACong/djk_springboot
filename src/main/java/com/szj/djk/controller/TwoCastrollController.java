@@ -52,13 +52,9 @@ public class TwoCastrollController {
      */
     @GetMapping("listSpecial")
     public R<List<WarnTable>> listSpecial(TwoCastroll twoCastroll, String rollingName)  {
-//        System.out.println("出发了");
-        int amount = 10000;
         LocalDateTime ts = twoCastroll.getTs();
-        long beforeTime = Timestamp.valueOf(ts).getTime()-amount;
-        long afterTime = Timestamp.valueOf(ts).getTime()+amount;
-        LocalDateTime before = new Date(beforeTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
-        LocalDateTime after = new Date(afterTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
+        LocalDateTime before = ts.minusMinutes(15);
+        LocalDateTime after = ts;
         List<WarnTable> specialList = twoCastrollService.selectSpecial(before,after,rollingName);
         return R.success(specialList);
     }

@@ -53,14 +53,11 @@ public class ThreeCastrollController {
      */
     @GetMapping("listSpecial")
     public R<List<WarnTable>> listSpecial(ThreeCastroll threeCastroll, String rollingName)  {
-        int amount = 10000;
-        LocalDateTime ts = threeCastroll.getTs();
-        long beforeTime = Timestamp.valueOf(ts).getTime()-amount;
-        long afterTime = Timestamp.valueOf(ts).getTime()+amount;
-        LocalDateTime before = new Date(beforeTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
-        LocalDateTime after = new Date(afterTime).toInstant().atOffset(ZoneOffset.of("+8")).toLocalDateTime();
-        List<WarnTable> specialList = threeCastrollService.selectSpecial(before,after,rollingName);
 
+        LocalDateTime ts = threeCastroll.getTs();
+        LocalDateTime before = ts.minusMinutes(15);
+        LocalDateTime after = ts;
+        List<WarnTable> specialList = threeCastrollService.selectSpecial(before,after,rollingName);
         return R.success(specialList);
     }
 
