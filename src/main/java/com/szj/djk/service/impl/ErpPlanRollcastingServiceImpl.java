@@ -59,10 +59,10 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
 
     @Override
     public ProcessMonitor getProcessMonitor(String number, Integer type) {
-        String smeltTime = getSmeltTime(number, type);
         ProcessMonitor processMonitor = new ProcessMonitor();
         HashMap<String, String> map = new HashMap<String, String>();
         try {
+            String smeltTime = getSmeltTime(number, type);
             LmdpCastSmeltHold lmdpCastSmeltHold = getLmdpCastSmeltHold(smeltTime);
             processMonitor.setLmdpCastSmeltHold(lmdpCastSmeltHold);
 
