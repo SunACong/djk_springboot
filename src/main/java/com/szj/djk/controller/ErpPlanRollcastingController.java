@@ -31,7 +31,7 @@ public class ErpPlanRollcastingController {
     }
 
     @GetMapping("processMonitor")
-    public R<ProcessMonitor> processMonitor(String number, String type){
+    public R<ProcessMonitor> processMonitor(String number, Integer type){
         ProcessMonitor processMonitor = erpPlanRollcastingService.getProcessMonitor(number, type);
         return R.success(processMonitor);
     }

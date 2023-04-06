@@ -22,8 +22,7 @@ public class ErpPlanColdreductionstripServiceImpl extends ServiceImpl<ErpPlanCol
 
     @Override
     public ErpPlanColdreductionstrip getColdPlan(String reelNum) {
-        ErpPlanColdreductionstrip erpPlanColdreductionstrip = erpPlanColdreductionstripMapper.getColdPlan(reelNum);
-        return erpPlanColdreductionstrip;
+        return erpPlanColdreductionstripMapper.getColdPlan(reelNum);
     }
 }
 

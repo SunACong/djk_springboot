@@ -5,7 +5,6 @@ import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.szj.djk.common.CustomException;
 import com.szj.djk.entity.LmdpQcColdInspect;
 import com.szj.djk.entity.SlaveErpPlanColdreductionstrip;
 import com.szj.djk.mapper.PlanAndInspectMapper;
@@ -54,7 +53,7 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
     }
 
     @Override
-//    @Scheduled(cron = "0/5 * * * * ?")
+    @Scheduled(cron = "0/5 * * * * ?")
     @DS("master")
     public String saveBatchOrUpdate() {
         // 获取主数据库plan_and_inspect最近一次的时间戳
@@ -65,8 +64,7 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
         LambdaQueryWrapper<LmdpQcColdInspect> wrapper = new LambdaQueryWrapper<>();
         wrapper.gt(LmdpQcColdInspect::getTs, ts);
         List<LmdpQcColdInspect> list = lmdpQcColdInspectService.list(wrapper);
-        if (list.size() == 0 || list == null) {
-            log.info("暂无更新数据");
+        if (list.size() == 0) {
             return "没有需要更新的数据";
         }
         List<PlanAndInspect> list1 = new ArrayList<>();
@@ -86,10 +84,11 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
             return "判定成功";
         }
         log.info("判定失败");
-        throw new CustomException("判定失败");
+        return "判定失败";
     }
 
     @Override
+    @DS("master")
     public Page<PlanAndInspect> pageList(Page<PlanAndInspect> pageInfo, PlanAndInspect planAndInspect) {
         LambdaQueryWrapper<PlanAndInspect> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.setEntity(planAndInspect)
@@ -116,14 +115,12 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
 
     @Override
     public List<Map<String, Integer>> getEveryDayInfo(String startTime, String endTime) {
-        List<Map<String, Integer>> list = planAndInspectMapper.getEveryDayInfo(startTime, endTime);
-        return list;
+        return planAndInspectMapper.getEveryDayInfo(startTime, endTime);
     }
 
     @Override
     public List<Map<String, Integer>> getRangeDayInfo(String startTime, String endTime) {
-        List<Map<String, Integer>> list = planAndInspectMapper.getRangeDayInfo(startTime, endTime);
-        return list;
+        return planAndInspectMapper.getRangeDayInfo(startTime, endTime);
     }
 }
 

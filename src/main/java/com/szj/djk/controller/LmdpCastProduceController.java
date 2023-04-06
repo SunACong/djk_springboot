@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -38,10 +37,10 @@ public class LmdpCastProduceController{
         return R.success(list);
     }
 
-    @GetMapping("getALlReelNum")
-    public R<List<Map<String, String>>> getALlReelNum(){
-        List<Map<String, String>> list = lmdpCastProduceService.getALlReelNum();
-        return R.success(list);
-    }
+    //@GetMapping("getALlReelNum")
+    //public R<List<Map<String, String>>> getALlReelNum(){
+    //    List<Map<String, String>> list = lmdpCastProduceService.getALlReelNum();
+    //    return R.success(list);
+    //}
 
 }
