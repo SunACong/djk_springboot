@@ -42,7 +42,7 @@
         ti_wire_speed,with_material_speed,create_time
     </sql>
     <sql id="selectRollingMachineVo">
-        select * from four_castroll
+        select * from four_castroll WHERE ts>=SYSDATE()-20
     </sql>
     <select id="selectRollingNewData" resultType="com.szj.djk.entity.FourCastroll" resultMap="BaseResultMap">
         SELECT * from(<include refid="selectRollingMachineVo"/>
