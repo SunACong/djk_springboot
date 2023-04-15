@@ -266,7 +266,7 @@ public class OneCastrollController {
             }
             if(i.getRollV()>valueRange.getJuanDS() || i.getRollV()<valueRange.getJuanDS1()){
                 warnTable.setRollingName("卷取电机速度");
-                warnTable.setRollingValue(i.getRollA());
+                warnTable.setRollingValue(i.getRollV());
                 warnTable.setRollingProduceTime(i.getTs());
                 warnTable.setRollingDeviceNumber("铸轧机1#");
                 warnTable.setPara("工艺参数");
