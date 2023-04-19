@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import com.szj.djk.utils.TimeStr;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -25,6 +26,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/anneaf1")
 public class OneAnneaFurController {
+
+//    TimeStr timeStr = new TimeStr();
     @Autowired
     OneAnneaFurService oneAnneaFurService;
     @Autowired
@@ -38,9 +41,12 @@ public class OneAnneaFurController {
     @GetMapping("/list")
     public R<List<OneAnneaFur>> list(OneAnneaFur oneAnneaFur){
         LambdaQueryWrapper<OneAnneaFur> queryWrapper = new LambdaQueryWrapper<>();
+//        System.out.println(timeStr.getTimeStr1());
         queryWrapper.setEntity(oneAnneaFur)
-                .orderByDesc(true,OneAnneaFur::getTs)
-                .last("limit 20");
+                .between(OneAnneaFur::getTs,TimeStr.getTimeStr1(),TimeStr.getTimeStr2())
+//                .between(oneAnneaFur::getTs,timeStr.getTimeStr1(),timeStr.getTimeStr2())
+                .orderByDesc(true,OneAnneaFur::getTs);
+//                .last("limit 20");
         List<OneAnneaFur> list = oneAnneaFurService.list(queryWrapper);
         return R.success(list);
     }
@@ -90,10 +96,13 @@ public class OneAnneaFurController {
 //        System.out.println("打印++++" + valueRange.getXiaDD());
         WarnTable warnTable = new WarnTable();
         OneAnneaFur oneAnneaFur = new OneAnneaFur();
+//        System.out.println(TimeStr.getTimeStr1());
+//        System.out.println(TimeStr.getTimeStr2());
         LambdaQueryWrapper<OneAnneaFur> queryWrapperR = new LambdaQueryWrapper<>();
                 queryWrapperR.setEntity(oneAnneaFur)
-                .orderByDesc(true,OneAnneaFur::getTs)
-                .last("limit 20");
+                        .between(OneAnneaFur::getTs,TimeStr.getTimeStr1(),TimeStr.getTimeStr2())
+                .orderByDesc(true,OneAnneaFur::getTs);
+//                .last("limit 20");
                 List<OneAnneaFur> newlist = oneAnneaFurService.list(queryWrapperR);
 //            System.out.println("新的数据"+ newlist);
         /**

@@ -10,6 +10,8 @@ import com.szj.djk.service.AvaluateService;
 import com.szj.djk.service.RewindRollService;
 import com.szj.djk.service.RewinderService;
 import com.szj.djk.service.WarnTableService;
+import com.szj.djk.utils.TimeStr.*;
+import com.szj.djk.utils.TimeStr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -19,8 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 @Component
@@ -41,10 +45,11 @@ public class RewindRollController {
     @GetMapping("/list")
     public R<List<RewindRoll>> list(RewindRoll rewindRoll){
         LambdaQueryWrapper<RewindRoll> queryWrapper = new LambdaQueryWrapper<>();
+        String timeStr1=LocalDateTime.now().minusSeconds(20).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        String timeStr2=LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         queryWrapper.setEntity(rewindRoll)
-//               .orderByDesc(true, false, RewindRoll::getTs)
-                .orderByDesc(true,RewindRoll::getTs)
-                .last("limit 20");
+                .between(RewindRoll::getTs,timeStr1,timeStr2)
+                .orderByDesc(true,RewindRoll::getTs);
         List<RewindRoll> list = rewindRollService.list(queryWrapper);
         return R.success(list);
     }
@@ -101,11 +106,12 @@ public class RewindRollController {
         });
         WarnTable warnTable = new WarnTable();
         RewindRoll rewindRoll = new RewindRoll();
+
         LambdaQueryWrapper<RewindRoll> queryWrapperR = new LambdaQueryWrapper<>();
         queryWrapperR.setEntity(rewindRoll)
-                .orderByDesc(true,RewindRoll::getTs)
-                .last("limit 20");
+                .between(RewindRoll::getTs,TimeStr.getTimeStr1(),TimeStr.getTimeStr2());
         List<RewindRoll> newlist = rewindRollService.list(queryWrapperR);
+//        System.out.println("长度"+newlist.size());
 /**
  * 开卷机电流曲线:setShangDD  卷取机电流曲线:setXiaDD    机列速度:setShangDS 卷取卷径:setXiaDS
  * 实际张力:setZhuDD   带材长度:setBeiDD

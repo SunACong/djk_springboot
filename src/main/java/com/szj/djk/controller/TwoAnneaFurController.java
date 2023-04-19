@@ -6,6 +6,7 @@ import com.szj.djk.common.R;
 import com.szj.djk.entity.*;
 import com.szj.djk.mapper.WarnTableMapper;
 import com.szj.djk.service.*;
+import com.szj.djk.utils.TimeStr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -23,6 +24,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/anneaf2")
 public class TwoAnneaFurController {
+
+//    TimeStr timeStr = new TimeStr();
     @Autowired
     TwoAnneaFurService twoAnneaFurService;
     @Autowired
@@ -37,8 +40,8 @@ public class TwoAnneaFurController {
     public R<List<TwoAnneaFur>> list(TwoAnneaFur twoAnneaFur){
         LambdaQueryWrapper<TwoAnneaFur> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.setEntity(twoAnneaFur)
-                .orderByDesc(true,TwoAnneaFur::getTs)
-                .last("limit 20");
+                .between(TwoAnneaFur::getTs,TimeStr.getTimeStr1(),TimeStr.getTimeStr2())
+                .orderByDesc(true,TwoAnneaFur::getTs);
         List<TwoAnneaFur> list = twoAnneaFurService.list(queryWrapper);
         return R.success(list);
     }
@@ -90,8 +93,9 @@ public class TwoAnneaFurController {
         TwoAnneaFur twoAnneaFur = new TwoAnneaFur();
         LambdaQueryWrapper<TwoAnneaFur> queryWrapperR = new LambdaQueryWrapper<>();
                 queryWrapperR.setEntity(twoAnneaFur)
-                .orderByDesc(true,TwoAnneaFur::getTs)
-                .last("limit 20");
+                        .between(TwoAnneaFur::getTs,TimeStr.getTimeStr1(),TimeStr.getTimeStr2())
+                .orderByDesc(true,TwoAnneaFur::getTs);
+//                .last("limit 20");
                 List<TwoAnneaFur> newlist = twoAnneaFurService.list(queryWrapperR);
 //            System.out.println("新的数据"+ newlist);
         /**

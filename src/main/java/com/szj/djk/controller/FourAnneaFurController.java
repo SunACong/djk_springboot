@@ -9,6 +9,7 @@ import com.szj.djk.service.AvaluateService;
 import com.szj.djk.service.FourAnneaFurService;
 import com.szj.djk.service.ThreeAnneaFurService;
 import com.szj.djk.service.WarnTableService;
+import com.szj.djk.utils.TimeStr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -40,8 +41,8 @@ public class FourAnneaFurController {
     public R<List<FourAnneaFur>> list(FourAnneaFur fourAnneaFur){
         LambdaQueryWrapper<FourAnneaFur> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.setEntity(fourAnneaFur)
-                .orderByDesc(true,FourAnneaFur::getTs)
-                .last("limit 20");
+                .between(FourAnneaFur::getTs, TimeStr.getTimeStr1(),TimeStr.getTimeStr2())
+                .orderByDesc(true,FourAnneaFur::getTs);
         List<FourAnneaFur> list = fourAnneaFurService.list(queryWrapper);
         return R.success(list);
     }
@@ -93,8 +94,9 @@ public class FourAnneaFurController {
         FourAnneaFur fourAnneaFur = new FourAnneaFur();
         LambdaQueryWrapper<FourAnneaFur> queryWrapperR = new LambdaQueryWrapper<>();
                 queryWrapperR.setEntity(fourAnneaFur)
-                .orderByDesc(true,FourAnneaFur::getTs)
-                .last("limit 20");
+                        .between(FourAnneaFur::getTs, TimeStr.getTimeStr1(),TimeStr.getTimeStr2())
+                .orderByDesc(true,FourAnneaFur::getTs);
+
                 List<FourAnneaFur> newlist = fourAnneaFurService.list(queryWrapperR);
 //            System.out.println("新的数据"+ newlist);
         /**
