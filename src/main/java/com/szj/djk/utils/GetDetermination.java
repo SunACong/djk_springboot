@@ -190,7 +190,8 @@ public class GetDetermination {
         double finishedThickness = lmdpQcColdInspect.getFinishedThickness().doubleValue();
         double finishedWidth = lmdpQcColdInspect.getFinishedWidth().doubleValue();
         // 成品规格
-        String model = lmdpQcColdInspect.getModel();
+        String model = slaveErpPlanColdreductionstrip.getProductSpec();
+
         // 0 厚度 1 宽度
         double[] doubles = strToDouble(model);
 
