@@ -100,7 +100,7 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
             // 根据planNum从计划表中获取数据
             LambdaQueryWrapper<SlaveErpPlanColdreductionstrip> wrapper1 = new LambdaQueryWrapper<>();
             wrapper1.eq(SlaveErpPlanColdreductionstrip::getColdreductionstripNum, item.getPlanNum());
-            SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip = slaveErpPlanColdreductionstripService.getOne(wrapper1);
+                SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip = slaveErpPlanColdreductionstripService.getOne(wrapper1);
             // 根据batchNum从巡检表中获取数据
             LambdaQueryWrapper<LmdpQcColdInspect> wrapper2 = new LambdaQueryWrapper<>();
             wrapper2.eq(LmdpQcColdInspect::getBatchNum, item.getBatchNum());
