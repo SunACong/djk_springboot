@@ -30,6 +30,7 @@
             <result property="withMaterialSpeed" column="with_material_speed" jdbcType="INTEGER"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
 
+
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -43,7 +44,7 @@
         ti_wire_speed,with_material_speed,create_time
     </sql>
     <sql id="selectRollingMachineVo">
-        select * from one_castroll
+        select * from one_castroll WHERE ts>=SYSDATE()-20
     </sql>
     <select id="selectRollingNewData" resultType="com.szj.djk.entity.OneCastroll" resultMap="BaseResultMap">
         SELECT * from(<include refid="selectRollingMachineVo"/>

@@ -9,6 +9,7 @@ import com.szj.djk.service.AvaluateService;
 import com.szj.djk.service.SevenAnneaFurService;
 import com.szj.djk.service.SixAnneaFurService;
 import com.szj.djk.service.WarnTableService;
+import com.szj.djk.utils.TimeStr;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -40,8 +41,8 @@ public class SevenAnneaFurController {
     public R<List<SevenAnneaFur>> list(SevenAnneaFur sevenAnneaFur){
         LambdaQueryWrapper<SevenAnneaFur> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.setEntity(sevenAnneaFur)
-                .orderByDesc(true,SevenAnneaFur::getTs)
-                .last("limit 20");
+                .between(SevenAnneaFur::getTs, TimeStr.getTimeStr1(),TimeStr.getTimeStr2())
+                .orderByDesc(true,SevenAnneaFur::getTs);
         List<SevenAnneaFur> list = sevenAnneaFurService.list(queryWrapper);
         return R.success(list);
     }
@@ -93,10 +94,9 @@ public class SevenAnneaFurController {
         SevenAnneaFur sevenAnneaFur = new SevenAnneaFur();
         LambdaQueryWrapper<SevenAnneaFur> queryWrapperR = new LambdaQueryWrapper<>();
                 queryWrapperR.setEntity(sevenAnneaFur)
-                .orderByDesc(true,SevenAnneaFur::getTs)
-                .last("limit 20");
+                        .between(SevenAnneaFur::getTs, TimeStr.getTimeStr1(),TimeStr.getTimeStr2())
+                .orderByDesc(true,SevenAnneaFur::getTs);
                 List<SevenAnneaFur> newlist = sevenAnneaFurService.list(queryWrapperR);
-//            System.out.println("新的数据"+ newlist);
         /**
          * 炉冷却水:ShangDD  炉压缩空气:XiaDD    金属料温温度曲线:ShangDS 一区炉气温度曲线:XiaDS
          * 二区炉气温度曲线:ZhuDD   三区炉气温度曲线:BeiDD  炉气设定温度:BeiDS
