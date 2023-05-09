@@ -107,15 +107,21 @@ public class GetDetermination {
      * @return  0 不合格  1 合格 2 暂未判定
      */
     private static int doPlateTypeDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
-        if (lmdpQcColdInspect.getSingleMediumConvexity() == null || lmdpQcColdInspect.getSingleStraightness() == null){
+//        if (lmdpQcColdInspect.getSingleMediumConvexity() == null || lmdpQcColdInspect.getSingleStraightness() == null){
+        if (lmdpQcColdInspect.getSingleMediumConvexity() == null){
             return 2;
         }
+
         // 巡检表中凸度
         double singleMediumConvexity = lmdpQcColdInspect.getSingleMediumConvexity().doubleValue();
-        // 巡检表平直度
+        /** // 巡检表平直度
         double singleStraightness = lmdpQcColdInspect.getSingleStraightness().doubleValue();
         // 计划表平直度 暂时废弃
         String flatness = slaveErpPlanColdreductionstrip.getFlatness();
+         */
+        if (slaveErpPlanColdreductionstrip.getConvexRate() == null){
+            return 1;
+        }
         // 计划表凸面率
         String convexRate = slaveErpPlanColdreductionstrip.getConvexRate();
         double[] doubles = strToDouble(convexRate);
@@ -144,13 +150,19 @@ public class GetDetermination {
         double[] elongations = strToDouble(elongation);
         String tensileStrength = slaveErpPlanColdreductionstrip.getTensileStrength();
         double[] tensileStrengths = strToDouble(tensileStrength);
-        String bendingPerformanceS = slaveErpPlanColdreductionstrip.getBendingPerformance();
+        // String bendingPerformanceS = slaveErpPlanColdreductionstrip.getBendingPerformance();
         int flag = 0;
         if (singleExtension < elongations[0]){
             flag++;
         }
-        if (singleStrength < tensileStrengths[0] || singleStrength > tensileStrengths[1]){
-            flag++;
+        if (tensileStrengths[1] == 0){
+            if (singleStrength < tensileStrengths[0]){
+                flag++;
+            }
+        }else {
+            if (singleStrength < tensileStrengths[0] || singleStrength > tensileStrengths[1]){
+                flag++;
+            }
         }
         String str = "cracked";
         if (str.equals(bendingPerformance)){
@@ -167,8 +179,14 @@ public class GetDetermination {
             if (singleExtensionRe < elongations[0]){
                 return 0;
             }
-            if (singleStrengthRe < tensileStrengths[0] || singleStrengthRe > tensileStrengths[1]){
-                return 0;
+            if (tensileStrengths[1] == 0){
+                if (singleStrengthRe < tensileStrengths[0]){
+                    return 0;
+                }
+            }else {
+                if (singleStrengthRe < tensileStrengths[0] || singleStrengthRe > tensileStrengths[1]){
+                    return 0;
+                }
             }
             str = "cracked";
             if (str.equals(bendingPerformanceRe)){
@@ -191,7 +209,6 @@ public class GetDetermination {
         double finishedWidth = lmdpQcColdInspect.getFinishedWidth().doubleValue();
         // 成品规格
         String model = lmdpQcColdInspect.getModel();
-        // String model = slaveErpPlanColdreductionstrip.getProductSpec();
         // 0 厚度 1 宽度
         double[] doubles = strToDouble(model);
 
@@ -200,9 +217,14 @@ public class GetDetermination {
         double[] wrapWidths = strToDouble(warpWidth);
         String endwiseHeight = slaveErpPlanColdreductionstrip.getEndwiseHeight();
         double[] endwiseHeights = strToDouble(endwiseHeight);
-
-        if(finishedWidth < doubles[1] - wrapWidths[0] || finishedWidth > doubles[1] + wrapWidths[0]){
-            return 0;
+        if (wrapWidths[1] == 0){
+            if(finishedWidth < doubles[0] || finishedWidth > doubles[1]){
+                return 0;
+            }
+        }else{
+            if(finishedWidth < doubles[1] - wrapWidths[0] || finishedWidth > doubles[1] + wrapWidths[0]){
+                return 0;
+            }
         }
         if(finishedThickness < doubles[0]*(1-endwiseHeights[0]*0.01) || finishedThickness > doubles[0]*(1+endwiseHeights[0]*0.01)){
             return 0;
@@ -270,7 +292,6 @@ public class GetDetermination {
     /**
     * 正则匹配字符串中的数字转换成double类型的数组并且存入double数组中
     */
-// 帮我写一个函数正则匹配字符串中的double类型的数字
     public static double[] strToDouble(String str){
         double[] doubles = new double[2];
         String regex = "\\d+(\\.\\d+)?";

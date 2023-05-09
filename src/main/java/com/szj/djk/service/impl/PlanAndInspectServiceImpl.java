@@ -73,6 +73,9 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
             LambdaQueryWrapper<SlaveErpPlanColdreductionstrip> wrapper1 = new LambdaQueryWrapper<>();
             wrapper1.eq(SlaveErpPlanColdreductionstrip::getColdreductionstripNum, lmdpQcColdInspect.getPlanNum());
             SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip = slaveErpPlanColdreductionstripService.getOne(wrapper1);
+            if (slaveErpPlanColdreductionstrip == null) {
+                return;
+            }
             // 判定
             PlanAndInspect planAndInspect = GetDetermination.doAllDetermination(slaveErpPlanColdreductionstrip, lmdpQcColdInspect);
             list1.add(planAndInspect);
