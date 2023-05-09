@@ -138,7 +138,7 @@ public class GetDetermination {
      */
     private static int doMechanicalPropertiesDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
         // 判断singleExtensionRe是否为空
-        if (lmdpQcColdInspect.getSingleExtension() == null || lmdpQcColdInspect.getSingleStrength() == null || lmdpQcColdInspect.getBendingPerformanceRequirements() == null){
+        if (lmdpQcColdInspect.getSingleExtension() == null || lmdpQcColdInspect.getSingleStrength() == null){
             return 2;
         }
         // 巡检表延伸率 抗拉强度 弯折性能————————第一次检测
@@ -169,7 +169,7 @@ public class GetDetermination {
             flag++;
         }
         if (flag != 0){
-            if (lmdpQcColdInspect.getSingleExtensionRe() == null || lmdpQcColdInspect.getSingleStrengthRe() == null || lmdpQcColdInspect.getBendingPerformanceRe() == null){
+            if (lmdpQcColdInspect.getSingleExtensionRe() == null || lmdpQcColdInspect.getSingleStrengthRe() == null){
                 return 2;
             }
             // 巡检表延伸率 抗拉强度 弯折性能————————复检
