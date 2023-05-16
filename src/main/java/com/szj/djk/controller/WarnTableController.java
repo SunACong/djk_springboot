@@ -34,10 +34,9 @@ public class WarnTableController {
     public R<List<WarnTable>> Devicelist(WarnTable warnTable){
         LambdaQueryWrapper<WarnTable> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.setEntity(warnTable)
-//               .orderByDesc(true, false, RewindRoll::getTs)
                 .eq(WarnTable::getPara,"设备参数")
                 .orderByDesc(true,WarnTable::getRollingProduceTime)
-                .last("limit 50");
+                .last("limit 30");
         List<WarnTable> list = warnTableService.list(queryWrapper);
         return R.success(list);
     }
@@ -52,7 +51,7 @@ public class WarnTableController {
 //               .orderByDesc(true, false, RewindRoll::getTs)
                 .eq(WarnTable::getPara,"工艺参数")
                 .orderByDesc(true,WarnTable::getRollingProduceTime)
-                .last("limit 50");
+                .last("limit 30");
         List<WarnTable> list = warnTableService.list(queryWrapper);
         return R.success(list);
     }
