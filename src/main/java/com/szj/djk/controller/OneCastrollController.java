@@ -49,7 +49,6 @@ public class OneCastrollController {
      * 查询铸轧机特定时间前后的警告数据
      */
     @GetMapping("/listSpecial")
-    //5.16开始修改
     public R<List<WarnTable>> listSpecial(OneCastroll oneCastroll, String rollingName)  {
         int amount = 10000;
         LocalDateTime ts = oneCastroll.getTs();
