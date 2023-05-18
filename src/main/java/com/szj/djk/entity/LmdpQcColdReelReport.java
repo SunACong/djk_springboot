@@ -1,13 +1,15 @@
 package com.szj.djk.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.szj.djk.common.BaseEntity;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 冷轧卷质检报告
@@ -15,7 +17,7 @@ import lombok.Data;
  */
 @TableName(value ="lmdp_qc_cold_reel_report")
 @Data
-public class LmdpQcColdReelReport implements Serializable {
+public class LmdpQcColdReelReport extends BaseEntity implements Serializable {
     /**
      * 主键
      */
@@ -26,6 +28,10 @@ public class LmdpQcColdReelReport implements Serializable {
      * 创建时间
      */
     @TableField(value = "create_time")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm:ss",
+            timezone = "GMT+8"
+    )
     private Date createTime;
 
     /**
@@ -39,6 +45,12 @@ public class LmdpQcColdReelReport implements Serializable {
      */
     @TableField(value = "creator_id")
     private String creatorId;
+
+    /**
+     * 质检员判定
+     */
+    @TableField(value = "inspector_judge")
+    private String inspectorJudge;
 
     /**
      * 序号
@@ -163,6 +175,10 @@ public class LmdpQcColdReelReport implements Serializable {
     /**
      * 日期时间
      */
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm:ss",
+            timezone = "GMT+8"
+    )
     @TableField(value = "report_time")
     private Date reportTime;
 
@@ -261,6 +277,18 @@ public class LmdpQcColdReelReport implements Serializable {
      */
     @TableField(value = "hydrogen_content")
     private String hydrogenContent;
+
+    /**
+     * 计划表
+     */
+    @TableField(exist = false)
+    private SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip;
+
+    /**
+     * 巡检表
+     */
+    @TableField(exist = false)
+    private LmdpQcColdInspect lmdpQcColdInspect;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

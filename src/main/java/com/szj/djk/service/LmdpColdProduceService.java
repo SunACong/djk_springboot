@@ -1,16 +1,13 @@
 package com.szj.djk.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
 import com.szj.djk.entity.LmdpColdProduce;
-
-import java.util.List;
-import java.util.Map;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
-* @author JH-Sparrow
-* @description 针对表【lmdp_cold_produce】的数据库操作Service
-* @createDate 2022-10-18 16:19:09
+* @author ACongSun
+* @description 针对表【lmdp_cold_produce(冷轧工序)】的数据库操作Service
+* @createDate 2023-05-18 14:23:51
 */
 public interface LmdpColdProduceService extends IService<LmdpColdProduce> {
-    List<Map<String, String>> getALlBatchNum();
+
 }

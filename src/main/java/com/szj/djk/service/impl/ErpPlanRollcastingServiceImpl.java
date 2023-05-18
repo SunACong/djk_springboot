@@ -60,93 +60,200 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
     @Override
     public ProcessMonitor getProcessMonitor(String number, Integer type) {
         ProcessMonitor processMonitor = new ProcessMonitor();
+        Boolean[] status = {false, false, false, false, false, false, false, false, false, false, false, false, false};
+        processMonitor.setLength(null);
         HashMap<String, String> map = new HashMap<String, String>();
         try {
-            String smeltTime = getSmeltTime(number, type);
+            // 获取熔次号 铸轧卷号 冷轧卷号
+            getSmeltTime(number, type);
+
+            // 获取熔炼工序 熔次号
             LmdpCastSmeltHold lmdpCastSmeltHold = getLmdpCastSmeltHold(smeltTime);
+            if (lmdpCastSmeltHold != null){
+                status[1] = true;
+                processMonitor.setLength(1);
+                processMonitor.setStatus(status);
+            }
             processMonitor.setLmdpCastSmeltHold(lmdpCastSmeltHold);
 
+            // 铸轧生产计划 lmdpCastSmeltHold.getPlanId()铸轧计划ID
             ErpPlanRollcasting erpPlanRollcasting = getErpPlanRollcasting(lmdpCastSmeltHold.getPlanId());
+            if (erpPlanRollcasting != null){
+                status[0] = true;
+                processMonitor.setLength(2);
+                processMonitor.setStatus(status);
+            }
             processMonitor.setErpPlanRollcasting(erpPlanRollcasting);
 
-            // 是否合格 甲乙班组
+            // 保温工序 熔次号
             LmdpCastHoldingFurnace lmdpCastHoldingFurnace = getLmdpCastHoldingFurnace(smeltTime);
+            if (lmdpCastHoldingFurnace != null){
+                status[2] = true;
+                processMonitor.setLength(3);
+                processMonitor.setStatus(status);
+            }
             processMonitor.setLmdpCastHoldingFurnace(lmdpCastHoldingFurnace);
 
-            LmdpCastProduce lmdpCastProduce = getLmdpCastProduce(smeltTime);
+            if (type == 0){
+                return processMonitor;
+            }
+
+            // 铸轧工序 铸轧卷号
+            LmdpCastProduce lmdpCastProduce = getLmdpCastProduce(reelNum);
+            if (lmdpCastProduce != null){
+                status[3] = true;
+                processMonitor.setLength(4);
+                processMonitor.setStatus(status);
+            }
             processMonitor.setLmdpCastProduce(lmdpCastProduce);
 
-            // 冷轧卷号获取
-            String reelNum = lmdpCastProduce.getReelNum();
-            LmdpCastReelStoreRecord lmdpCastReelStoreRecord = getLmdpCastReelStoreRecord(reelNum);
+            // 铸轧质检 铸轧卷号
+            LmdpQcCastReel lmdpQcCastReel = getLmdpQcCastReel(reelNum);
+            if (lmdpQcCastReel != null){
+                status[4] = true;
+                processMonitor.setLength(5);
+                processMonitor.setStatus(status);
+            }
+            processMonitor.setLmdpQcCastReel(lmdpQcCastReel);
+
+            LmdpCastReelStoreRecord lmdpCastReelStoreRecord = getLmdpCastReelStoreRecord(reelNum);//铸轧出入库
+            if (lmdpCastReelStoreRecord != null){
+                status[5] = true;
+                processMonitor.setLength(6);
+                processMonitor.setStatus(status);
+            }
             processMonitor.setLmdpCastReelStoreRecord(lmdpCastReelStoreRecord);
 
-            LmdpQcCastReel lmdpQcCastReel = getLmdpQcCastReel(reelNum);
-            processMonitor.setLmdpQcCastReel(lmdpQcCastReel);
-            System.out.println(reelNum);
-            ErpPlanColdreductionstrip erpPlanColdreductionstrip = getErpPlanColdreductionstrip(reelNum);
-            processMonitor.setErpPlanColdreductionstrip(erpPlanColdreductionstrip);
+            if (type == 1){
+                return processMonitor;
+            }
 
-            LmdpColdRecord lmdpColdRecord = getLmdpColdRecord(reelNum);
+            // 冷轧计划通过铸轧卷号获取
+            ErpPlanColdreductionstrip erpPlanColdreductionstrip = getErpPlanColdreductionstrip(reelNum);
+            if (erpPlanColdreductionstrip != null){
+                status[6] = true;
+                processMonitor.setLength(7);
+                processMonitor.setStatus(status);
+            }
+            processMonitor.setErpPlanColdreductionstrip(erpPlanColdreductionstrip);//冷轧计划
+
+            LmdpColdRecord lmdpColdRecord = getLmdpColdRecord(batchNum);
+            if (lmdpColdRecord != null){
+                status[7] = true;
+                processMonitor.setLength(8);
+                processMonitor.setStatus(status);
+            }
             processMonitor.setLmdpColdRecord(lmdpColdRecord);
 
-            LmdpColdFurnaceRecord lmdpColdFurnaceRecord = getLmdpColdFurnaceRecord(reelNum);
-            processMonitor.setLmdpColdFurnaceRecord(lmdpColdFurnaceRecord);
+            LmdpColdFurnaceRecord lmdpColdFurnaceRecord = getLmdpColdFurnaceRecord(batchNum);
+            if (lmdpColdFurnaceRecord != null){
+                status[8] = true;
+                processMonitor.setLength(9);
+                processMonitor.setStatus(status);
+            }
+            processMonitor.setLmdpColdFurnaceRecord(lmdpColdFurnaceRecord);//退火工序
 
-            LmdpColdRereelerRecord lmdpColdRereelerRecord = getLmdpColdRereelerRecord(reelNum);
-            processMonitor.setLmdpColdRereelerRecord(lmdpColdRereelerRecord);
+            LmdpColdRereelerRecord lmdpColdRereelerRecord = getLmdpColdRereelerRecord(batchNum);
+            if (lmdpColdRereelerRecord != null){
+                status[9] = true;
+                processMonitor.setLength(10);
+                processMonitor.setStatus(status);
+            }
+            processMonitor.setLmdpColdRereelerRecord(lmdpColdRereelerRecord);//重卷工序
 
-            LmdpColdStoreRecord lmdpColdStoreRecord = getLmdpColdStoreRecord(reelNum);
-            processMonitor.setLmdpColdStoreRecord(lmdpColdStoreRecord);
+            LmdpQcColdReelReport lmdpQcColdReelReport = getLmdpQcColdReelReport(batchNum);
+            if (lmdpQcColdReelReport != null){
+                status[10] = true;
+                processMonitor.setLength(11);
+                processMonitor.setStatus(status);
+            }
+            processMonitor.setLmdpQcColdReelReport(lmdpQcColdReelReport);//冷轧质检
 
-            LmdpQcColdInspect lmdpQcColdInspect = getLmdpQcColdInspect(reelNum);
-            processMonitor.setLmdpQcColdInspect(lmdpQcColdInspect);
+//            LmdpQcColdInspect lmdpQcColdInspect = getLmdpQcColdInspect(batchNum);
+//            if (lmdpQcColdInspect != null){
+//                status[10] = true;
+//                processMonitor.setLength(11);
+//                processMonitor.setStatus(status);
+//            }
+//            processMonitor.setLmdpQcColdInspect(lmdpQcColdInspect);//冷轧工序质量巡检
 
-            LmdpQcColdReelReport lmdpQcColdReelReport = getLmdpQcColdReelReport(reelNum);
-            processMonitor.setLmdpQcColdReelReport(lmdpQcColdReelReport);
+            LmdpColdStoreRecord lmdpColdStoreRecord = getLmdpColdStoreRecord(batchNum);
+            if (lmdpColdStoreRecord != null){
+                status[11] = true;
+                processMonitor.setLength(12);
+                processMonitor.setStatus(status);
+            }
+            processMonitor.setLmdpColdStoreRecord(lmdpColdStoreRecord);//冷轧出入库
 
-            LmdpQcComplaintDetail lmdpQcComplaintDetail = getLmdpQcComplaintDetail(reelNum);
-            processMonitor.setLmdpQcComplaintDetail(lmdpQcComplaintDetail);
+//            LmdpQcColdReelReport lmdpQcColdReelReport = getLmdpQcColdReelReport(batchNum);
+//            processMonitor.setLmdpQcColdReelReport(lmdpQcColdReelReport);//冷轧质检
+
+            LmdpQcComplaintDetail lmdpQcComplaintDetail = getLmdpQcComplaintDetail(batchNum);
+            if (lmdpQcComplaintDetail != null){
+                status[12] = true;
+                processMonitor.setLength(13);
+                processMonitor.setStatus(status);
+            }
+            processMonitor.setLmdpQcComplaintDetail(lmdpQcComplaintDetail);//投诉及处理信息
+
 
         } catch (CustomException e) {
             log.error(e.getMessage());
             return processMonitor;
         }
-
         return processMonitor;
     }
+
+    // 熔次号
+    private String smeltTime;
+    // 铸轧卷号
+    private String reelNum;
+    // 冷轧卷号
+    private String batchNum;
 
     /**
      * 无论输入什么输出熔次号
      */
-    private String getSmeltTime(String number, Integer type)  throws CustomException{
+    private void getSmeltTime(String number, Integer type)  throws CustomException{
         LambdaQueryWrapper<LmdpCastProduce> queryWrapper = new LambdaQueryWrapper<>();
         if (type == 0){
-            return number;
+            smeltTime = number;
+            reelNum = null;
+            batchNum = null;
         }else if (type == 1){
+            reelNum = number;
             queryWrapper.eq(LmdpCastProduce::getReelNum, number);
+            List<LmdpCastProduce> list = lmdpCastProduceService.list(queryWrapper);
+            if (list.size() != 0){
+                smeltTime = list.get(0).getSmeltTimes();
+            }
+            batchNum = null;
         }else if (type == 2){
-            String reelNum = erpCastingCheckRecordService.getReelNum(number);
+            batchNum = number;
+            String reelNum1 = erpCastingCheckRecordService.getReelNum(number);
+            reelNum = reelNum1;
             queryWrapper.eq(LmdpCastProduce::getReelNum, reelNum);
+            List<LmdpCastProduce> list = lmdpCastProduceService.list(queryWrapper);
+            if (list.size() != 0){
+                smeltTime = list.get(0).getSmeltTimes();
+            }
         }
-        List<LmdpCastProduce> list = lmdpCastProduceService.list(queryWrapper);
-        if (list.size() != 0){
-            return list.get(0).getSmeltTimes();
-        }
-        throw new CustomException("未找熔次号");
+        System.out.println("熔次号:"+smeltTime+","+"铸轧卷号:"+reelNum+","+"冷轧卷号:"+batchNum);
     }
+
     /**
      * 根据铸轧卷号获取冷轧计划标号
      */
-    private String getLZPlanId(String reelNum)  throws CustomException{
+    private String getLZPlanId(String reelNum)  throws CustomException {
         LambdaQueryWrapper<LmdpCastProduce> queryWrapper = new LambdaQueryWrapper<LmdpCastProduce>();
         String planId = "";
         queryWrapper.eq(LmdpCastProduce::getReelNum, reelNum);
         List<LmdpCastProduce> list = lmdpCastProduceService.list(queryWrapper);
-        if (list.size() != 0){
+        if (list.size() != 0) {
             return list.get(0).getPlanId();
         }
-        throw new CustomException("未找到冷轧计划标号");
+        log.info("未找到冷轧计划标号");
+        return null;
     }
     /**
      * 根据铸轧卷号获取冷轧卷号
@@ -165,8 +272,10 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         if (list.size() != 0){
             return list.get(0);
         }
-        throw new CustomException("未找铸轧计划表");
+        log.info("未找铸轧计划表");
+        return null;
     }
+
     /**
      * 获取熔炼工序
      */
@@ -177,7 +286,8 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         if (list.size() != 0){
             return list.get(0);
         }
-        throw new CustomException("未找到熔炼工序");
+        log.info("未找到熔炼工序");
+        return null;
     }
     /**
      * 获取保温工序
@@ -189,20 +299,22 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         if (list.size() != 0) {
             return list.get(0);
         }
-        throw new CustomException("未找到保温工序");
+        log.info("未找到保温工序");
+        return null;
     }
 
     /**
      * 获取铸轧工序
      */
-    private LmdpCastProduce getLmdpCastProduce(String smeltTimes) throws CustomException {
+    private LmdpCastProduce getLmdpCastProduce(String reelNum) throws CustomException {
         LambdaQueryWrapper<LmdpCastProduce> queryWrapper = new LambdaQueryWrapper<LmdpCastProduce>();
-        queryWrapper.eq(LmdpCastProduce::getSmeltTimes, smeltTimes);
+        queryWrapper.eq(LmdpCastProduce::getReelNum, reelNum);
         List<LmdpCastProduce> list = lmdpCastProduceService.list(queryWrapper);
         if (list.size() != 0) {
             return list.get(0);
         }
-        throw new CustomException("未找到铸轧工序");
+        log.info("未找到铸轧工序");
+        return null;
     }
     /**
      * 获取铸轧出入库记录
@@ -214,7 +326,8 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         if (list.size() != 0) {
             return list.get(0);
         }
-        throw new CustomException("未找到铸轧出入库记录");
+        log.info("未找到铸轧出入库记录");
+        return null;
     }
     /**
      * 铸轧卷质检报告
@@ -226,7 +339,8 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         if (list.size() != 0) {
             return list.get(0);
         }
-        throw new CustomException("未找到铸轧卷质检报告");
+        log.info("未找到铸轧卷质检报告");
+        return null;
     }
     /**
      * 查询冷轧计划表
@@ -236,100 +350,101 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         if (coldPlan != null){
             return coldPlan;
         }
-        throw new CustomException("未找冷轧计划表");
+        log.info("未找到冷轧计划表");
+        return null;
     }
 
     /**
      * 冷轧工序
      */
-    private LmdpColdRecord getLmdpColdRecord(String reelNum) throws CustomException{
-        String batchNum = getBatchNum(reelNum);
+    private LmdpColdRecord getLmdpColdRecord(String batchNum) throws CustomException{
         LambdaQueryWrapper<LmdpColdRecord> queryWrapper = new LambdaQueryWrapper<LmdpColdRecord>();
         queryWrapper.eq(LmdpColdRecord::getBatchNum, batchNum);
         List<LmdpColdRecord> list = lmdpColdRecordService.list(queryWrapper);
         if (list.size() != 0){
             return list.get(0);
         }
-        throw new CustomException("未找到冷轧工序");
+        log.info("未找到冷轧工序");
+        return null;
     }
 
     /**
      * 退火工序
      */
-    private LmdpColdFurnaceRecord getLmdpColdFurnaceRecord(String reelNum) throws CustomException{
-        String batchNum = getBatchNum(reelNum);
+    private LmdpColdFurnaceRecord getLmdpColdFurnaceRecord(String batchNum) throws CustomException{
         LambdaQueryWrapper<LmdpColdFurnaceRecord> queryWrapper = new LambdaQueryWrapper<LmdpColdFurnaceRecord>();
-        queryWrapper.eq(LmdpColdFurnaceRecord::getBatchNum, batchNum);
+        queryWrapper.like(LmdpColdFurnaceRecord::getBatchNum, batchNum);
         List<LmdpColdFurnaceRecord> list = lmdpColdFurnaceRecordService.list(queryWrapper);
         if (list.size() != 0){
             return list.get(0);
         }
-        throw new CustomException("未找到退火工序");
+        log.info("未找到退火工序");
+        return null;
     }
     /**
      * 重卷工序
      */
-    private LmdpColdRereelerRecord getLmdpColdRereelerRecord(String reelNum) throws CustomException{
-        String batchNum = getBatchNum(reelNum);
+    private LmdpColdRereelerRecord getLmdpColdRereelerRecord(String batchNum) throws CustomException{
         LambdaQueryWrapper<LmdpColdRereelerRecord> queryWrapper = new LambdaQueryWrapper<LmdpColdRereelerRecord>();
         queryWrapper.eq(LmdpColdRereelerRecord::getBatchNum, batchNum);
         List<LmdpColdRereelerRecord> list = lmdpColdRereelerRecordService.list(queryWrapper);
         if (list.size() != 0){
             return list.get(0);
         }
-        throw new CustomException("未找到重卷工序");
+        log.info("未找到重卷工序");
+        return null;
     }
     /**
      * 冷轧入库
      */
-    private LmdpColdStoreRecord getLmdpColdStoreRecord(String reelNum) throws CustomException{
-        String batchNum = getBatchNum(reelNum);
+    private LmdpColdStoreRecord getLmdpColdStoreRecord(String batchNum) throws CustomException{
         LambdaQueryWrapper<LmdpColdStoreRecord> queryWrapper = new LambdaQueryWrapper<LmdpColdStoreRecord>();
         queryWrapper.eq(LmdpColdStoreRecord::getReelNum, batchNum);
         List<LmdpColdStoreRecord> list = lmdpColdStoreRecordService.list(queryWrapper);
         if (list.size() != 0){
             return list.get(0);
         }
-        throw new CustomException("未找到冷轧入库");
+        log.info("未找到冷轧入库");
+        return null;
     }
     /**
      * 冷轧工序质检
      */
-    private LmdpQcColdInspect getLmdpQcColdInspect(String reelNum) throws CustomException{
-        String batchNum = getBatchNum(reelNum);
+    private LmdpQcColdInspect getLmdpQcColdInspect(String batchNum) throws CustomException{
         LambdaQueryWrapper<LmdpQcColdInspect> queryWrapper = new LambdaQueryWrapper<LmdpQcColdInspect>();
         queryWrapper.eq(LmdpQcColdInspect::getBatchNum, batchNum);
         List<LmdpQcColdInspect> list = lmdpQcColdInspectService.list(queryWrapper);
         if (list.size() != 0){
             return list.get(0);
         }
-        throw new CustomException("未找到冷轧工序质检");
+        log.info("未找到冷轧工序质检");
+        return null;
     }
     /**
      * 冷轧质检报告
      */
-    private LmdpQcColdReelReport getLmdpQcColdReelReport(String reelNum) throws CustomException{
-        String batchNum = getBatchNum(reelNum);
+    private LmdpQcColdReelReport getLmdpQcColdReelReport(String batchNum) throws CustomException{
         LambdaQueryWrapper<LmdpQcColdReelReport> queryWrapper = new LambdaQueryWrapper<LmdpQcColdReelReport>();
         queryWrapper.eq(LmdpQcColdReelReport::getBatchNum, batchNum);
         List<LmdpQcColdReelReport> list = lmdpQcColdReelReportService.list(queryWrapper);
         if (list.size() != 0){
             return list.get(0);
         }
-        throw new CustomException("未找到冷轧质检报告");
+        log.info("未找到冷轧质检报告");
+        return null;
     }
     /**
      * 投诉处理
      */
-    private LmdpQcComplaintDetail getLmdpQcComplaintDetail(String reelNum) throws CustomException{
-        String batchNum = getBatchNum(reelNum);
+    private LmdpQcComplaintDetail getLmdpQcComplaintDetail(String batchNum) throws CustomException{
         LambdaQueryWrapper<LmdpQcComplaintDetail> queryWrapper = new LambdaQueryWrapper<LmdpQcComplaintDetail>();
         queryWrapper.eq(LmdpQcComplaintDetail::getBatchNum, batchNum);
         List<LmdpQcComplaintDetail> list = lmdpQcComplaintDetailService.list(queryWrapper);
         if (list.size() != 0){
             return list.get(0);
         }
-        throw new CustomException("未找到投诉处理");
+        log.info("未找到投诉处理");
+        return null;
     }
 }
 

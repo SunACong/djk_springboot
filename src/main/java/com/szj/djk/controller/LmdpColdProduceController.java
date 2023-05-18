@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
-import java.util.Map;
 
 
 /**
@@ -37,9 +36,9 @@ public class LmdpColdProduceController
         return R.success(list);
     }
 
-    @GetMapping("getALlBatchNum")
-    public R<List<Map<String, String>>> getALlBatchNum(){
-        List<Map<String, String>> list = lmdpColdProduceService.getALlBatchNum();
-        return R.success(list);
-    }
+//    @GetMapping("getALlBatchNum")
+//    public R<List<Map<String, String>>> getALlBatchNum(){
+//        List<Map<String, String>> list = lmdpColdProduceService.getALlBatchNum();
+//        return R.success(list);
+//    }
 }

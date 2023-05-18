@@ -25,4 +25,6 @@ public class ProcessMonitor {
     private LmdpQcColdReelReport lmdpQcColdReelReport;
     private LmdpQcComplaintHandle lmdpQcComplaintHandle;
     private LmdpQcComplaintDetail  lmdpQcComplaintDetail;
+    private Boolean[] status = {false,false, false, false, false, false, false, false, false, false, false, false, false};
+    private Integer length;
 }

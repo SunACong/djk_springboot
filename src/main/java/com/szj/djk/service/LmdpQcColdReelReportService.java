@@ -1,7 +1,11 @@
 package com.szj.djk.service;
 
-import com.szj.djk.entity.LmdpQcColdReelReport;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.szj.djk.entity.LmdpQcColdReelReport;
+
+import java.util.List;
+import java.util.Map;
 
 /**
 * @author Admin
@@ -9,5 +13,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2023-03-25 13:22:39
 */
 public interface LmdpQcColdReelReportService extends IService<LmdpQcColdReelReport> {
+    Page<LmdpQcColdReelReport> pageList(Page<LmdpQcColdReelReport> pageInfo, LmdpQcColdReelReport lmdpQcColdReelReport);
 
+    List<Map<String, Integer>> getEveryDayInfo(String startTime, String endTime);
+
+
+    List<Map<String, Integer>> getRangeDayInfo(String startTime, String endTime);
 }

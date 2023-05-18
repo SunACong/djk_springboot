@@ -201,12 +201,12 @@ public class GetDetermination {
      * @return 0 不合格  1 合格 2 暂未判定
      */
     private static int doDimensionalDeviationDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
-        if (lmdpQcColdInspect.getFinishedThickness() == null || lmdpQcColdInspect.getFinishedWidth() == null || lmdpQcColdInspect.getModel() == null){
+        if (lmdpQcColdInspect.getFinishedThickness() == null || lmdpQcColdInspect.getSingleWidth() == null || lmdpQcColdInspect.getModel() == null){
             return 2;
         }
         // 巡检表中厚度 宽度
         double finishedThickness = lmdpQcColdInspect.getFinishedThickness().doubleValue();
-        double finishedWidth = lmdpQcColdInspect.getFinishedWidth().doubleValue();
+        double finishedWidth = lmdpQcColdInspect.getSingleWidth().doubleValue();
         // 成品规格
         String model = lmdpQcColdInspect.getModel();
         // 0 厚度 1 宽度
