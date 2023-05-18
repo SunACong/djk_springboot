@@ -44,10 +44,16 @@
     <sql id="selectRollingMachineVo">
         select * from five_castroll WHERE ts>=SYSDATE()-20
     </sql>
+
+    <!--修改实时数据更新方式-->
+    <sql id="selectRollingMachineVoNow">
+        select * from five_castroll
+    </sql>
     <select id="selectRollingNewData" resultType="com.szj.djk.entity.FiveCastroll" resultMap="BaseResultMap">
-        SELECT * from(<include refid="selectRollingMachineVo"/>
+        SELECT * from(<include refid="selectRollingMachineVoNow"/>
         order by ts desc limit 20) aa order by ts
     </select>
+
     <select id="selectSpecial" resultType="com.szj.djk.entity.FiveCastroll">
         select * from five_castroll where  ts between #{before} and #{after}
     </select>

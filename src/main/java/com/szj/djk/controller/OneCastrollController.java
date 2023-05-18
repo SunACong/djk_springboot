@@ -49,7 +49,6 @@ public class OneCastrollController {
      * 查询铸轧机特定时间前后的警告数据
      */
     @GetMapping("/listSpecial")
-
     public R<List<WarnTable>> listSpecial(OneCastroll oneCastroll, String rollingName)  {
         int amount = 10000;
         LocalDateTime ts = oneCastroll.getTs();
@@ -64,6 +63,7 @@ public class OneCastrollController {
      */
     @Scheduled(fixedRate = 20000)
     public R<ValueRange> addwarndata(){
+//        log.warn("存入报警数据");
         Avaluate avaluate = new Avaluate();
         ValueRange valueRange = new ValueRange();
         LambdaQueryWrapper<Avaluate> queryWrapper = new LambdaQueryWrapper<>();
@@ -154,7 +154,6 @@ public class OneCastrollController {
                 warnTableService.save(warnTable);
             }
 
-
             if(i.getUpRollMontorA()>valueRange.getShangDD() || i.getUpRollMontorA()<valueRange.getShangDD1()){
                 warnTable.setRollingName("上辊电机电流");
                 warnTable.setRollingValue(i.getUpRollMontorA());
@@ -205,6 +204,7 @@ public class OneCastrollController {
                 warnTable.setRollingDeviceNumber("铸轧机1#");
                 warnTable.setPara("设备参数");
                 warnTableService.save(warnTable);
+
             }
             if(i.getDownRollMontorA()>valueRange.getXiaSY() || i.getDownRollMontorA()<valueRange.getXiaSY1()){
                 warnTable.setRollingName("下辊水压");
@@ -263,6 +263,8 @@ public class OneCastrollController {
                 warnTable.setPara("工艺参数");
                 warnTableService.save(warnTable);
             }
+//            System.out.println("最大值"+valueRange.getJuanDS());
+//            System.out.println("最小值"+valueRange.getJuanDS1());
             if(i.getRollV()>valueRange.getJuanDS() || i.getRollV()<valueRange.getJuanDS1()){
                 warnTable.setRollingName("卷取电机速度");
                 warnTable.setRollingValue(i.getRollV());
