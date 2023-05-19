@@ -62,6 +62,7 @@ public class OneAnneaFurController {
         LambdaQueryWrapper<Avaluate> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.setEntity(avaluate);
         avaluateService.list(queryWrapper).forEach(i ->{
+
             switch (i.getName()){
                 case "炉冷却水":
                     valueRange.setShangDD(i.getMaxValue());
@@ -110,13 +111,14 @@ public class OneAnneaFurController {
          * 二区炉气温度曲线:ZhuDD   三区炉气温度曲线:BeiDD  炉气设定温度:BeiDS
          */
                 newlist.forEach(i->{
-            if(i.getCoolWaterUpLimit()>valueRange.getShangDD() || i.getCoolWaterUpLimit()<valueRange.getShangDD1() ){
-                warnTable.setRollingName("炉冷却水");
-                warnTable.setRollingValue(i.getCoolWaterUpLimit());
-                warnTable.setRollingProduceTime(i.getTs());
-                warnTable.setRollingDeviceNumber("退火炉1#");
-                warnTableService.save(warnTable);
-            }
+                    if(i.getZoneOneT() > 100){
+                        if(i.getCoolWaterUpLimit()>valueRange.getShangDD() || i.getCoolWaterUpLimit()<valueRange.getShangDD1() ){
+                            warnTable.setRollingName("炉冷却水");
+                            warnTable.setRollingValue(i.getCoolWaterUpLimit());
+                            warnTable.setRollingProduceTime(i.getTs());
+                            warnTable.setRollingDeviceNumber("退火炉1#");
+                            warnTableService.save(warnTable);
+                        }
 //            if(i.getCompressedAirOneLowPressure()>valueRange.getXiaDD()){
 //                warnTable.setRollingName("炉压缩空气");
 //                warnTable.setRollingValue(i.getCompressedAirOneLowPressure());
@@ -124,44 +126,46 @@ public class OneAnneaFurController {
 //                warnTable.setRollingDeviceNumber("退火炉1#");
 //                warnTableService.save(warnTable);
 //            }
-            if(i.getMeterialT()>valueRange.getShangDS() || i.getMeterialT()<valueRange.getShangDS1()){
-                warnTable.setRollingName("金属料温温度曲线");
-                warnTable.setRollingValue(i.getMeterialT());
-                warnTable.setRollingProduceTime(i.getTs());
-                warnTable.setRollingDeviceNumber("退火炉1#");
-                warnTableService.save(warnTable);
-            }
+                        if(i.getMeterialT()>valueRange.getShangDS() || i.getMeterialT()<valueRange.getShangDS1()){
+                            warnTable.setRollingName("金属料温温度曲线");
+                            warnTable.setRollingValue(i.getMeterialT());
+                            warnTable.setRollingProduceTime(i.getTs());
+                            warnTable.setRollingDeviceNumber("退火炉1#");
+                            warnTableService.save(warnTable);
+                        }
 
-            if(i.getZoneOneT()>valueRange.getXiaDS() || i.getZoneOneT()<valueRange.getXiaDS1()){
-                warnTable.setRollingName("一区炉气温度曲线");
-                warnTable.setRollingValue(i.getZoneOneT());
-                warnTable.setRollingProduceTime(i.getTs());
-                warnTable.setRollingDeviceNumber("退火炉1#");
-                warnTableService.save(warnTable);
-            }
+                        if(i.getZoneOneT()>valueRange.getXiaDS() || i.getZoneOneT()<valueRange.getXiaDS1()){
+                            warnTable.setRollingName("一区炉气温度曲线");
+                            warnTable.setRollingValue(i.getZoneOneT());
+                            warnTable.setRollingProduceTime(i.getTs());
+                            warnTable.setRollingDeviceNumber("退火炉1#");
+                            warnTableService.save(warnTable);
+                        }
 
-            if(i.getZoneTwoT()>valueRange.getZhuDD() ||i.getZoneTwoT()<valueRange.getZhuDD1()){
-                warnTable.setRollingName("二区炉气温度曲线");
-                warnTable.setRollingValue(i.getZoneTwoT());
-                warnTable.setRollingProduceTime(i.getTs());
-                warnTable.setRollingDeviceNumber("退火炉1#");
-                warnTableService.save(warnTable);
-            }
+                        if(i.getZoneTwoT()>valueRange.getZhuDD() ||i.getZoneTwoT()<valueRange.getZhuDD1()){
+                            warnTable.setRollingName("二区炉气温度曲线");
+                            warnTable.setRollingValue(i.getZoneTwoT());
+                            warnTable.setRollingProduceTime(i.getTs());
+                            warnTable.setRollingDeviceNumber("退火炉1#");
+                            warnTableService.save(warnTable);
+                        }
 
-            if(i.getZoneThreeT()>valueRange.getBeiDD() || i.getZoneThreeT()<valueRange.getBeiDD1() ){
-                warnTable.setRollingName("三区炉气温度曲线");
-                warnTable.setRollingValue(i.getZoneThreeT());
-                warnTable.setRollingProduceTime(i.getTs());
-                warnTable.setRollingDeviceNumber("退火炉1#");
-                warnTableService.save(warnTable);
-            }
-                    if(i.getSetT()>valueRange.getBeiDD() || i.getSetT()<valueRange.getBeiDD1()){
-                        warnTable.setRollingName("炉气设定温度");
-                        warnTable.setRollingValue(i.getSetT());
-                        warnTable.setRollingProduceTime(i.getTs());
-                        warnTable.setRollingDeviceNumber("退火炉1#");
-                        warnTableService.save(warnTable);
+                        if(i.getZoneThreeT()>valueRange.getBeiDD() || i.getZoneThreeT()<valueRange.getBeiDD1() ){
+                            warnTable.setRollingName("三区炉气温度曲线");
+                            warnTable.setRollingValue(i.getZoneThreeT());
+                            warnTable.setRollingProduceTime(i.getTs());
+                            warnTable.setRollingDeviceNumber("退火炉1#");
+                            warnTableService.save(warnTable);
+                        }
+                        if(i.getSetT()>valueRange.getBeiDD() || i.getSetT()<valueRange.getBeiDD1()){
+                            warnTable.setRollingName("炉气设定温度");
+                            warnTable.setRollingValue(i.getSetT());
+                            warnTable.setRollingProduceTime(i.getTs());
+                            warnTable.setRollingDeviceNumber("退火炉1#");
+                            warnTableService.save(warnTable);
+                        }
                     }
+
         });
         return  R.success(valueRange);
     }
