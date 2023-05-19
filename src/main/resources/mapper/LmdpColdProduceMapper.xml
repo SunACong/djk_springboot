@@ -5,7 +5,7 @@
 <mapper namespace="com.szj.djk.mapper.LmdpColdProduceMapper">
 
     <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpColdProduce">
-            <result property="id" column="id" jdbcType="VARCHAR"/>
+            <id property="id" column="id" jdbcType="VARCHAR"/>
             <result property="planId" column="plan_id" jdbcType="VARCHAR"/>
             <result property="consumerName" column="consumer_name" jdbcType="VARCHAR"/>
             <result property="reelNum" column="reel_num" jdbcType="VARCHAR"/>
@@ -13,57 +13,57 @@
             <result property="brand" column="brand" jdbcType="VARCHAR"/>
             <result property="productUse" column="product_use" jdbcType="VARCHAR"/>
             <result property="blankSize" column="blank_size" jdbcType="VARCHAR"/>
-            <result property="blankWeight" column="blank_weight" jdbcType="VARCHAR"/>
-            <result property="deliveryDate" column="delivery_date" jdbcType="VARCHAR"/>
-            <result property="productThick" column="product_thick" jdbcType="VARCHAR"/>
+            <result property="blankWeight" column="blank_weight" jdbcType="DECIMAL"/>
+            <result property="deliveryDate" column="delivery_date" jdbcType="TIMESTAMP"/>
+            <result property="productThick" column="product_thick" jdbcType="DECIMAL"/>
             <result property="productWidth" column="product_width" jdbcType="VARCHAR"/>
             <result property="productStatus" column="product_status" jdbcType="VARCHAR"/>
-            <result property="annealingThick" column="annealing_thick" jdbcType="VARCHAR"/>
-            <result property="coggingTime" column="cogging_time" jdbcType="VARCHAR"/>
+            <result property="annealingThick" column="annealing_thick" jdbcType="DECIMAL"/>
+            <result property="coggingTime" column="cogging_time" jdbcType="TIMESTAMP"/>
             <result property="coggingGroupId" column="cogging_group_id" jdbcType="VARCHAR"/>
             <result property="coggingGroupName" column="cogging_group_name" jdbcType="VARCHAR"/>
             <result property="coggingWorkShift" column="cogging_work_shift" jdbcType="VARCHAR"/>
-            <result property="coggingOrder" column="cogging_order" jdbcType="VARCHAR"/>
-            <result property="midRollTime" column="mid_roll_time" jdbcType="VARCHAR"/>
+            <result property="coggingOrder" column="cogging_order" jdbcType="INTEGER"/>
+            <result property="midRollTime" column="mid_roll_time" jdbcType="TIMESTAMP"/>
             <result property="midRollGroupId" column="mid_roll_group_id" jdbcType="VARCHAR"/>
             <result property="midRollGroupName" column="mid_roll_group_name" jdbcType="VARCHAR"/>
             <result property="midRollWorkShift" column="mid_roll_work_shift" jdbcType="VARCHAR"/>
-            <result property="midRollOrder" column="mid_roll_order" jdbcType="VARCHAR"/>
-            <result property="midRollWeight" column="mid_roll_weight" jdbcType="VARCHAR"/>
-            <result property="planishTime" column="planish_time" jdbcType="VARCHAR"/>
+            <result property="midRollOrder" column="mid_roll_order" jdbcType="INTEGER"/>
+            <result property="midRollWeight" column="mid_roll_weight" jdbcType="DECIMAL"/>
+            <result property="planishTime" column="planish_time" jdbcType="TIMESTAMP"/>
             <result property="planishGroupId" column="planish_group_id" jdbcType="VARCHAR"/>
             <result property="planishGroupName" column="planish_group_name" jdbcType="VARCHAR"/>
             <result property="planishWorkShift" column="planish_work_shift" jdbcType="VARCHAR"/>
-            <result property="planishOrder" column="planish_order" jdbcType="VARCHAR"/>
-            <result property="coldProductWeight" column="cold_product_weight" jdbcType="VARCHAR"/>
+            <result property="planishOrder" column="planish_order" jdbcType="INTEGER"/>
+            <result property="coldProductWeight" column="cold_product_weight" jdbcType="DECIMAL"/>
             <result property="plateCut" column="plate_cut" jdbcType="VARCHAR"/>
-            <result property="coldTailing26" column="cold_tailing26" jdbcType="VARCHAR"/>
-            <result property="coldTailing6" column="cold_tailing6" jdbcType="VARCHAR"/>
+            <result property="coldTailing26" column="cold_tailing26" jdbcType="DECIMAL"/>
+            <result property="coldTailing6" column="cold_tailing6" jdbcType="DECIMAL"/>
             <result property="cutSpeed" column="cut_speed" jdbcType="VARCHAR"/>
-            <result property="cutTime" column="cut_time" jdbcType="VARCHAR"/>
+            <result property="cutTime" column="cut_time" jdbcType="TIMESTAMP"/>
             <result property="cutWorkShift" column="cut_work_shift" jdbcType="VARCHAR"/>
             <result property="cutGroupId" column="cut_group_id" jdbcType="VARCHAR"/>
             <result property="cutGroupName" column="cut_group_name" jdbcType="VARCHAR"/>
-            <result property="cutSizeH" column="cut_size_h" jdbcType="VARCHAR"/>
-            <result property="cutSizeW" column="cut_size_w" jdbcType="VARCHAR"/>
-            <result property="recoilingWeight" column="recoiling_weight" jdbcType="VARCHAR"/>
+            <result property="cutSizeH" column="cut_size_h" jdbcType="DECIMAL"/>
+            <result property="cutSizeW" column="cut_size_w" jdbcType="DECIMAL"/>
+            <result property="recoilingWeight" column="recoiling_weight" jdbcType="DECIMAL"/>
             <result property="modelDesc" column="model_desc" jdbcType="VARCHAR"/>
             <result property="produceStatus" column="produce_status" jdbcType="VARCHAR"/>
-            <result property="storageInTime" column="storage_in_time" jdbcType="VARCHAR"/>
-            <result property="storageInWeight" column="storage_in_weight" jdbcType="VARCHAR"/>
+            <result property="storageInTime" column="storage_in_time" jdbcType="TIMESTAMP"/>
+            <result property="storageInWeight" column="storage_in_weight" jdbcType="DECIMAL"/>
             <result property="reformPlanNum" column="reform_plan_num" jdbcType="VARCHAR"/>
             <result property="coldYield" column="cold_yield" jdbcType="VARCHAR"/>
             <result property="rereelYield" column="rereel_yield" jdbcType="VARCHAR"/>
             <result property="offLineYield" column="off_line_yield" jdbcType="VARCHAR"/>
             <result property="storageInYield" column="storage_in_yield" jdbcType="VARCHAR"/>
-            <result property="rereelHeading" column="rereel_heading" jdbcType="VARCHAR"/>
-            <result property="rereelTailing" column="rereel_tailing" jdbcType="VARCHAR"/>
-            <result property="heading" column="heading" jdbcType="VARCHAR"/>
+            <result property="rereelHeading" column="rereel_heading" jdbcType="DECIMAL"/>
+            <result property="rereelTailing" column="rereel_tailing" jdbcType="DECIMAL"/>
+            <result property="heading" column="heading" jdbcType="DECIMAL"/>
             <result property="headingReason" column="heading_reason" jdbcType="VARCHAR"/>
-            <result property="tailing" column="tailing" jdbcType="VARCHAR"/>
+            <result property="tailing" column="tailing" jdbcType="DECIMAL"/>
             <result property="tailingReason" column="tailing_reason" jdbcType="VARCHAR"/>
-            <result property="headingWeight" column="heading_weight" jdbcType="VARCHAR"/>
-            <result property="tailingWeight" column="tailing_weight" jdbcType="VARCHAR"/>
+            <result property="headingWeight" column="heading_weight" jdbcType="DECIMAL"/>
+            <result property="tailingWeight" column="tailing_weight" jdbcType="DECIMAL"/>
             <result property="qcDesc" column="qc_desc" jdbcType="VARCHAR"/>
             <result property="qcId" column="qc_id" jdbcType="VARCHAR"/>
             <result property="qcName" column="qc_name" jdbcType="VARCHAR"/>
@@ -71,9 +71,11 @@
             <result property="hotRoll" column="hot_roll" jdbcType="VARCHAR"/>
             <result property="remark" column="remark" jdbcType="VARCHAR"/>
             <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
+            <result property="creatorName" column="creator_name" jdbcType="VARCHAR"/>
             <result property="reviserId" column="reviser_id" jdbcType="VARCHAR"/>
-            <result property="createTime" column="create_time" jdbcType="VARCHAR"/>
-            <result property="ts" column="ts" jdbcType="VARCHAR"/>
+            <result property="deleteFlag" column="delete_flag" jdbcType="INTEGER"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="ts" column="ts" jdbcType="TIMESTAMP"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -99,9 +101,7 @@
         heading_weight,tailing_weight,qc_desc,
         qc_id,qc_name,sleeve,
         hot_roll,remark,creator_id,
-        reviser_id,create_time,ts
+        creator_name,reviser_id,delete_flag,
+        create_time,ts
     </sql>
-    <select id="getALlBatchNum" resultType="java.util.Map">
-        select batch_num label, batch_num value from lmdp_cold_produce
-    </select>
 </mapper>

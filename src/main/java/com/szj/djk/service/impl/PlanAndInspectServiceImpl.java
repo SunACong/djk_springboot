@@ -74,6 +74,7 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
             wrapper1.eq(SlaveErpPlanColdreductionstrip::getColdreductionstripNum, lmdpQcColdInspect.getPlanNum());
             SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip = slaveErpPlanColdreductionstripService.getOne(wrapper1);
             if (slaveErpPlanColdreductionstrip == null) {
+                log.info("没找到对应的冷轧");
                 return;
             }
             // 判定

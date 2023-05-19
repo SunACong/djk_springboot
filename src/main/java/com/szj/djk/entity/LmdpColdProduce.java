@@ -75,7 +75,7 @@ public class LmdpColdProduce implements Serializable {
     /**
      * 成品宽度
      */
-    private BigDecimal productWidth;
+    private String productWidth;
 
     /**
      * 成品状态
