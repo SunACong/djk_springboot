@@ -117,6 +117,7 @@ public class RewindRollController {
  * 实际张力:setZhuDD   带材长度:setBeiDD
   */
     newlist.forEach(i->{
+        if(i.getMachineColsV() > 10){
             if(i.getOpenRollA()>valueRange.getShangDD() || i.getOpenRollA()<valueRange.getShangDD1()){
                 warnTable.setRollingName("开卷机电流曲线");
                 warnTable.setRollingValue(i.getOpenRollA());
@@ -133,41 +134,43 @@ public class RewindRollController {
                 warnTable.setPara("设备参数");
                 warnTableService.save(warnTable);
             }
-        if(i.getMachineColsV()>valueRange.getShangDS() || i.getOpenRollA()<valueRange.getShangDD1()){
-            warnTable.setRollingName("机列速度");
-            warnTable.setRollingValue(i.getMachineColsV());
-            warnTable.setRollingProduceTime(i.getTs());
-            warnTable.setRollingDeviceNumber("重卷机1#");
-            warnTable.setPara("工艺参数");
-            warnTableService.save(warnTable);
+            if(i.getMachineColsV()>valueRange.getShangDS() || i.getOpenRollA()<valueRange.getShangDD1()){
+                warnTable.setRollingName("机列速度");
+                warnTable.setRollingValue(i.getMachineColsV());
+                warnTable.setRollingProduceTime(i.getTs());
+                warnTable.setRollingDeviceNumber("重卷机1#");
+                warnTable.setPara("工艺参数");
+                warnTableService.save(warnTable);
+            }
+
+            if(i.getRollWindD()>valueRange.getXiaDS() || i.getRollWindD()<valueRange.getXiaDS1()){
+                warnTable.setRollingName("卷取卷径");
+                warnTable.setRollingValue(i.getRollWindD());
+                warnTable.setRollingProduceTime(i.getTs());
+                warnTable.setRollingDeviceNumber("重卷机1#");
+                warnTable.setPara("工艺参数");
+                warnTableService.save(warnTable);
+            }
+
+            if(i.getActualTension()>valueRange.getZhuDD() || i.getActualTension()<valueRange.getZhuDD1()){
+                warnTable.setRollingName("实际张力");
+                warnTable.setRollingValue(i.getActualTension());
+                warnTable.setRollingProduceTime(i.getTs());
+                warnTable.setRollingDeviceNumber("重卷机1#");
+                warnTable.setPara("工艺参数");
+                warnTableService.save(warnTable);
+            }
+
+            if(i.getStripL()>valueRange.getBeiDD() || i.getStripL()<valueRange.getBeiDD1()){
+                warnTable.setRollingName("带材长度");
+                warnTable.setRollingValue(i.getStripL());
+                warnTable.setRollingProduceTime(i.getTs());
+                warnTable.setRollingDeviceNumber("重卷机1#");
+                warnTable.setPara("工艺参数");
+                warnTableService.save(warnTable);
+            }
         }
 
-        if(i.getRollWindD()>valueRange.getXiaDS() || i.getRollWindD()<valueRange.getXiaDS1()){
-            warnTable.setRollingName("卷取卷径");
-            warnTable.setRollingValue(i.getRollWindD());
-            warnTable.setRollingProduceTime(i.getTs());
-            warnTable.setRollingDeviceNumber("重卷机1#");
-            warnTable.setPara("工艺参数");
-            warnTableService.save(warnTable);
-        }
-
-        if(i.getActualTension()>valueRange.getZhuDD() || i.getActualTension()<valueRange.getZhuDD1()){
-            warnTable.setRollingName("实际张力");
-            warnTable.setRollingValue(i.getActualTension());
-            warnTable.setRollingProduceTime(i.getTs());
-            warnTable.setRollingDeviceNumber("重卷机1#");
-            warnTable.setPara("工艺参数");
-            warnTableService.save(warnTable);
-        }
-
-        if(i.getStripL()>valueRange.getBeiDD() || i.getStripL()<valueRange.getBeiDD1()){
-            warnTable.setRollingName("带材长度");
-            warnTable.setRollingValue(i.getStripL());
-            warnTable.setRollingProduceTime(i.getTs());
-            warnTable.setRollingDeviceNumber("重卷机1#");
-            warnTable.setPara("工艺参数");
-            warnTableService.save(warnTable);
-        }
         });
         return  R.success(valueRange);
     }

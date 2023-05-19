@@ -29,8 +29,6 @@
             <result property="tiWireSpeed" column="ti_wire_speed" jdbcType="INTEGER"/>
             <result property="withMaterialSpeed" column="with_material_speed" jdbcType="INTEGER"/>
             <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-
-
     </resultMap>
 
     <sql id="Base_Column_List">
