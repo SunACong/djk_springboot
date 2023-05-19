@@ -201,13 +201,15 @@ public class GetDetermination {
      * @return 0 不合格  1 合格 2 暂未判定
      */
     private static int doDimensionalDeviationDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
-        if (lmdpQcColdInspect.getFinishedThickness() == null || lmdpQcColdInspect.getSingleWidth() == null || lmdpQcColdInspect.getModel() == null){
+        if (lmdpQcColdInspect.getSingleHeight() == null || lmdpQcColdInspect.getSingleWidth() == null || lmdpQcColdInspect.getModel() == null){
             return 2;
         }
+
         // 巡检表中厚度 宽度
-        double finishedThickness = lmdpQcColdInspect.getFinishedThickness().doubleValue();
+        double finishedThickness = lmdpQcColdInspect.getSingleHeight().doubleValue();
         double finishedWidth = lmdpQcColdInspect.getSingleWidth().doubleValue();
-        // 成品规格
+
+        // 成品规格标准
         String model = lmdpQcColdInspect.getModel();
         // 0 厚度 1 宽度
         double[] doubles = strToDouble(model);
@@ -217,12 +219,13 @@ public class GetDetermination {
         double[] wrapWidths = strToDouble(warpWidth);
         String endwiseHeight = slaveErpPlanColdreductionstrip.getEndwiseHeight();
         double[] endwiseHeights = strToDouble(endwiseHeight);
+
         if (wrapWidths[1] == 0){
-            if(finishedWidth < doubles[0] || finishedWidth > doubles[1]){
+            if(finishedWidth < doubles[1]-wrapWidths[0] || finishedWidth > doubles[1]+wrapWidths[0]){
                 return 0;
             }
         }else{
-            if(finishedWidth < doubles[1] - wrapWidths[0] || finishedWidth > doubles[1] + wrapWidths[0]){
+            if(finishedWidth < doubles[1] + wrapWidths[0] || finishedWidth > doubles[1] + wrapWidths[1]){
                 return 0;
             }
         }
