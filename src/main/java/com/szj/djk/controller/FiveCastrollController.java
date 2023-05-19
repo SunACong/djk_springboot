@@ -141,7 +141,7 @@ public class FiveCastrollController {
         queryWrapperR.setEntity(fiveCastroll);
         List<FiveCastroll> newlist = fiveCastrollService.selectRollingNewData();
         newlist.forEach(i->{
-            if(i.getRollV() > 200) {
+            if(i.getRollV() > 0) {
                 if (i.getPumpA() > valueRange.getZhuDD() || i.getPumpA() < valueRange.getZhuDD1()) {
                     warnTable.setRollingName("主水泵电机电流");
                     warnTable.setRollingValue(i.getPumpA());

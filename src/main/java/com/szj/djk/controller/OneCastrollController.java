@@ -149,7 +149,7 @@ public class OneCastrollController {
 //        System.out.println(newlist.get(19).getRollV());
 
             newlist.forEach(i->{
-                if(i.getRollV() > 200){
+                if(i.getRollV() > 0){
                     if(i.getPumpA()>valueRange.getZhuDD() || i.getPumpA()<valueRange.getZhuDD1()){
                         warnTable.setRollingName("主水泵电机电流");
                         warnTable.setRollingValue(i.getPumpA());
