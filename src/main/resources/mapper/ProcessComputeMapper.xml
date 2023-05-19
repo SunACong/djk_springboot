@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.ProcessComputeMapper">
+
+    <select id="getComputeTime" resultType="java.util.Map">
+        SELECT pingjun as time from (
+            SELECT flow, AVG(DATEDIFF(turndown_end_time, feed_time)) as pingjun from
+            (
+            SELECT 0 as flow, feed_time, turndown_end_time from lmdp_cast_smelt_hold where feed_time is NOT NULL and turndown_end_time is NOT NULL
+            ) as a
+            UNION
+            SELECT flow, AVG(DATEDIFF(proc_lower_remove_time, proc_upper_time)) as pingjun from
+            (
+            SELECT 1 as flow, proc_upper_time, proc_lower_remove_time from lmdp_cast_produce where proc_upper_time is NOT NULL and proc_lower_remove_time is NOT NULL
+            ) as a
+            UNION
+            SELECT flow, AVG(DATEDIFF(proc_lower_remove_time, proc_upper_time)) as pingjun from
+            (
+            SELECT 2 as flow, proc_upper_time, proc_lower_remove_time from lmdp_cast_produce where proc_upper_time is NOT NULL and proc_lower_remove_time is NOT NULL
+            ) as a
+            UNION
+            SELECT flow, AVG(DATEDIFF(pingjun, produce_date1)) as pingjun
+            from (
+            SELECT 3 as flow, batch_num, produce_date1,
+            (CASE WHEN produce_date8 is NOT NULL THEN produce_date8
+            WHEN produce_date7 is NOT NULL THEN produce_date7
+            WHEN produce_date6 is NOT NULL THEN produce_date6
+            WHEN produce_date5 is NOT NULL THEN produce_date5
+            WHEN produce_date4 is NOT NULL THEN produce_date4
+            WHEN produce_date3 is NOT NULL THEN produce_date3
+            WHEN produce_date2 is NOT NULL THEN produce_date2
+            else date_add(produce_date1, interval 15 minute) END
+            ) as pingjun
+            FROM lmdp_cold_record where produce_date1 is NOT NUll
+            ) as a
+            UNION
+            SELECT flow, AVG(DATEDIFF(end_time, start_time))  as pingjun from
+            (
+            SELECT '退火工序' as flow, start_time, end_time from lmdp_cold_furnace_record where end_time is NOT NULL and start_time is NOT NULL
+            ) as a
+            UNION
+            SELECT flow, AVG(DATEDIFF(sleeve_end_date, trimming_time)) as pingjun from
+            (
+            SELECT '重卷工序' as flow, trimming_time , sleeve_end_date from lmdp_cold_rereeler_record where trimming_time is NOT NULL and sleeve_end_date is NOT NULL
+            ) as a
+            ) a
+    </select>
+</mapper>
