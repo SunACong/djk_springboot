@@ -6,22 +6,22 @@
 
     <select id="getComputeTime" resultType="java.util.Map">
         SELECT pingjun as time from (
-            SELECT flow, AVG(DATEDIFF(turndown_end_time, feed_time)) as pingjun from
+            SELECT flow, AVG(TIMESTAMPDIFF(hour, feed_time , turndown_end_time)) as pingjun from
             (
             SELECT 0 as flow, feed_time, turndown_end_time from lmdp_cast_smelt_hold where feed_time is NOT NULL and turndown_end_time is NOT NULL
             ) as a
             UNION
-            SELECT flow, AVG(DATEDIFF(proc_lower_remove_time, proc_upper_time)) as pingjun from
+            SELECT flow, AVG(TIMESTAMPDIFF(hour, proc_upper_time , proc_lower_remove_time)) as pingjun from
             (
             SELECT 1 as flow, proc_upper_time, proc_lower_remove_time from lmdp_cast_produce where proc_upper_time is NOT NULL and proc_lower_remove_time is NOT NULL
             ) as a
             UNION
-            SELECT flow, AVG(DATEDIFF(proc_lower_remove_time, proc_upper_time)) as pingjun from
+            SELECT flow, AVG(TIMESTAMPDIFF(hour, proc_upper_time , proc_lower_remove_time)) as pingjun from
             (
             SELECT 2 as flow, proc_upper_time, proc_lower_remove_time from lmdp_cast_produce where proc_upper_time is NOT NULL and proc_lower_remove_time is NOT NULL
             ) as a
             UNION
-            SELECT flow, AVG(DATEDIFF(pingjun, produce_date1)) as pingjun
+            SELECT flow, AVG(TIMESTAMPDIFF(hour, produce_date1, pingjun )) as pingjun
             from (
             SELECT 3 as flow, batch_num, produce_date1,
             (CASE WHEN produce_date8 is NOT NULL THEN produce_date8
@@ -36,12 +36,12 @@
             FROM lmdp_cold_record where produce_date1 is NOT NUll
             ) as a
             UNION
-            SELECT flow, AVG(DATEDIFF(end_time, start_time))  as pingjun from
+            SELECT flow, AVG(TIMESTAMPDIFF(hour, start_time, end_time))  as pingjun from
             (
             SELECT '退火工序' as flow, start_time, end_time from lmdp_cold_furnace_record where end_time is NOT NULL and start_time is NOT NULL
             ) as a
             UNION
-            SELECT flow, AVG(DATEDIFF(sleeve_end_date, trimming_time)) as pingjun from
+            SELECT flow, TRUNCATE(AVG(TIMESTAMPDIFF(MINUTE, trimming_time, sleeve_end_date)/60), 4)as pingjun from
             (
             SELECT '重卷工序' as flow, trimming_time , sleeve_end_date from lmdp_cold_rereeler_record where trimming_time is NOT NULL and sleeve_end_date is NOT NULL
             ) as a
