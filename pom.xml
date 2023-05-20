@@ -12,7 +12,7 @@
 
     <groupId>com.szj</groupId>
     <artifactId>djk</artifactId>
-    <version>0.1.0-4.24-fix</version>
+    <version>5.19</version>
     <name>djk_springboot</name>
 
     <properties>

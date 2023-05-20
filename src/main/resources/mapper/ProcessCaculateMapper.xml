@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.ProcessCaculateMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.ProcessCaculate">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="rongLian" column="rong_lian" jdbcType="DOUBLE"/>
+            <result property="baoWen" column="bao_wen" jdbcType="DOUBLE"/>
+            <result property="zhuZha" column="zhu_zha" jdbcType="DOUBLE"/>
+            <result property="lengZha" column="leng_zha" jdbcType="DOUBLE"/>
+            <result property="tuiHuo" column="tui_huo" jdbcType="DOUBLE"/>
+            <result property="chongJuan" column="chong_juan" jdbcType="DOUBLE"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,rong_lian,bao_wen,
+        zhu_zha,leng_zha,tui_huo,
+        chong_juan
+    </sql>
+</mapper>
