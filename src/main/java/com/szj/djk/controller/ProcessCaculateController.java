@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/processCaculate")
@@ -28,5 +30,10 @@ public class ProcessCaculateController {
     @PutMapping("update")
     public R<Boolean> update(ProcessCaculate processCaculate){
         return R.success(processCaculateService.updateById(processCaculate));
+    }
+
+    @GetMapping("/historyException")
+    public R<List<Map<String, Integer>>> historyException(){
+        return R.success(processCaculateService.historyException());
     }
 }

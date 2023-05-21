@@ -9,4 +9,6 @@ import java.util.Map;
 @Mapper
 public interface ProcessComputeMapper {
     List<Map<String, BigDecimal>> getComputeTime();
+
+    List<Map<String, Integer>> historyException();
 }
