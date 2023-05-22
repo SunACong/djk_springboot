@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(SQLException.class)
     public R<String> sqlExceptionHandler(Exception exception){
         log.error(exception.getMessage());
-        return R.error("SQL异常");
+        return R.error("SQL异常:====================="+exception.getMessage());
     }
 
     /**
@@ -49,7 +49,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler()
     public R<String> allExceptionHandler(Exception exception){
         log.error("未知异常:",exception);
-        return R.error("未知异常");
+        return R.error("其他异常:====================="+exception.getMessage());
     }
 
     /**
