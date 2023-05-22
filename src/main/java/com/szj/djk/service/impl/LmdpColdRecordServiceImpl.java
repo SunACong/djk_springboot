@@ -27,6 +27,7 @@ public class LmdpColdRecordServiceImpl extends ServiceImpl<LmdpColdRecordMapper,
     public Page<LmdpColdRecord> pageList(Page<LmdpColdRecord> pageInfo, LambdaQueryWrapper<LmdpColdRecord> queryWrapper, Double lengZha) {
         Page<LmdpColdRecord> page = lmdpColdRecordMapper.selectPage(pageInfo, queryWrapper);
         page.getRecords().forEach(lmdpColdRecord->{
+            lmdpColdRecord.setNumberID(lmdpColdRecord.getBatchNum());
             lmdpColdRecord.setBeginTime(lmdpColdRecord.getProduceDate1());
             Double gapTime = TimeStr.getGapTime(lmdpColdRecord.getProduceDate1());
             lmdpColdRecord.setRunningTime(gapTime);

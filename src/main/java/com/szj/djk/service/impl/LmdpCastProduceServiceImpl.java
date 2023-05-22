@@ -27,6 +27,7 @@ public class LmdpCastProduceServiceImpl extends ServiceImpl<LmdpCastProduceMappe
     public Page<LmdpCastProduce> pageList(Page<LmdpCastProduce> pageInfo, LambdaQueryWrapper<LmdpCastProduce> queryWrapper, Double zhuZha) {
         Page<LmdpCastProduce> page = lmdpCastProduceMapper.selectPage(pageInfo, queryWrapper);
         page.getRecords().forEach(lmdpCastProduce->{
+            lmdpCastProduce.setNumberID(lmdpCastProduce.getReelNum());
             lmdpCastProduce.setBeginTime(lmdpCastProduce.getProcUpperTime());
             Double gapTime = TimeStr.getGapTime(lmdpCastProduce.getProcUpperTime());
             lmdpCastProduce.setRunningTime(gapTime);

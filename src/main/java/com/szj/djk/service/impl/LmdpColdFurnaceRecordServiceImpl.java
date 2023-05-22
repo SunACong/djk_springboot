@@ -27,6 +27,7 @@ public class LmdpColdFurnaceRecordServiceImpl extends ServiceImpl<LmdpColdFurnac
     public Page<LmdpColdFurnaceRecord> pageList(Page<LmdpColdFurnaceRecord> pageInfo, LambdaQueryWrapper<LmdpColdFurnaceRecord> queryWrapper, Double tuiHuo) {
         Page<LmdpColdFurnaceRecord> page = lmdpColdFurnaceRecordMapper.selectPage(pageInfo, queryWrapper);
         page.getRecords().forEach(lmdpColdFurnaceRecord->{
+            lmdpColdFurnaceRecord.setNumberID(lmdpColdFurnaceRecord.getBatchNum());
             lmdpColdFurnaceRecord.setBeginTime(lmdpColdFurnaceRecord.getStartTime());
             Double gapTime = TimeStr.getGapTime(lmdpColdFurnaceRecord.getStartTime());
             lmdpColdFurnaceRecord.setRunningTime(gapTime);

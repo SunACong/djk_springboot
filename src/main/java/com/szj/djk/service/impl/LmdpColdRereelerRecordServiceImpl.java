@@ -26,6 +26,7 @@ public class LmdpColdRereelerRecordServiceImpl extends ServiceImpl<LmdpColdReree
     public Page<LmdpColdRereelerRecord> pageList(Page<LmdpColdRereelerRecord> pageInfo, LambdaQueryWrapper<LmdpColdRereelerRecord> queryWrapper, Double chongJuan) {
         Page<LmdpColdRereelerRecord> page = lmdpColdRereelerRecordMapper.selectPage(pageInfo, queryWrapper);
         page.getRecords().forEach(lmdpColdRereelerRecord->{
+            lmdpColdRereelerRecord.setNumberID(lmdpColdRereelerRecord.getBatchNum());
             lmdpColdRereelerRecord.setBeginTime(lmdpColdRereelerRecord.getTrimmingTime());
             Double gapTime = TimeStr.getGapTime(lmdpColdRereelerRecord.getTrimmingTime());
             lmdpColdRereelerRecord.setRunningTime(gapTime);

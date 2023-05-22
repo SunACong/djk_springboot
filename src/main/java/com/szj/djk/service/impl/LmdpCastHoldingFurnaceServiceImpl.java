@@ -27,6 +27,7 @@ public class LmdpCastHoldingFurnaceServiceImpl extends ServiceImpl<LmdpCastHoldi
     public Page<LmdpCastHoldingFurnace> pageList(Page<LmdpCastHoldingFurnace> pageInfo, LambdaQueryWrapper<LmdpCastHoldingFurnace> queryWrapper, Double baoWen) {
         Page<LmdpCastHoldingFurnace> page = lmdpCastHoldingFurnaceMapper.selectPage(pageInfo, queryWrapper);
         page.getRecords().forEach(lmdpCastHoldingFurnace -> {
+            lmdpCastHoldingFurnace.setNumberID(lmdpCastHoldingFurnace.getSmeltTimes());
             lmdpCastHoldingFurnace.setBeginTime(lmdpCastHoldingFurnace.getTurndownAfterEndTime());
             Double gapTime = TimeStr.getGapTime(lmdpCastHoldingFurnace.getTurndownAfterEndTime());
             lmdpCastHoldingFurnace.setRunningTime(gapTime);

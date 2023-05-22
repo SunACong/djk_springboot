@@ -34,4 +34,7 @@ public class BaseEntity implements Serializable {
     )
     private Date beginTime;
 
+    @TableField(exist = false)
+    private String numberID;
+
 }

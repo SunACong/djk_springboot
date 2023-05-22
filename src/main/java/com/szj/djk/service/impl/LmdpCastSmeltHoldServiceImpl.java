@@ -27,6 +27,7 @@ public class LmdpCastSmeltHoldServiceImpl extends ServiceImpl<LmdpCastSmeltHoldM
     public Page<LmdpCastSmeltHold> pageList(Page<LmdpCastSmeltHold> pageInfo, LambdaQueryWrapper<LmdpCastSmeltHold> queryWrapper, Double rongLian) {
         Page<LmdpCastSmeltHold> page = lmdpCastSmeltHoldMapper.selectPage(pageInfo, queryWrapper);
         page.getRecords().forEach(lmdpCastSmeltHold->{
+            lmdpCastSmeltHold.setNumberID(lmdpCastSmeltHold.getSmeltTimes());
             lmdpCastSmeltHold.setBeginTime(lmdpCastSmeltHold.getFeedTime());
             Double gapTime = TimeStr.getGapTime(lmdpCastSmeltHold.getFeedTime());
             lmdpCastSmeltHold.setRunningTime(gapTime);
