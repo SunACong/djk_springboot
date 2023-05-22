@@ -1,10 +1,15 @@
 package com.szj.djk.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.szj.djk.entity.LmdpCastSmeltHold;
-import com.szj.djk.service.LmdpCastSmeltHoldService;
 import com.szj.djk.mapper.LmdpCastSmeltHoldMapper;
+import com.szj.djk.service.LmdpCastSmeltHoldService;
+import com.szj.djk.utils.TimeStr;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
 * @author Admin
@@ -15,6 +20,20 @@ import org.springframework.stereotype.Service;
 public class LmdpCastSmeltHoldServiceImpl extends ServiceImpl<LmdpCastSmeltHoldMapper, LmdpCastSmeltHold>
     implements LmdpCastSmeltHoldService{
 
+    @Resource
+    LmdpCastSmeltHoldMapper lmdpCastSmeltHoldMapper;
+
+    @Override
+    public Page<LmdpCastSmeltHold> pageList(Page<LmdpCastSmeltHold> pageInfo, LambdaQueryWrapper<LmdpCastSmeltHold> queryWrapper, Double rongLian) {
+        Page<LmdpCastSmeltHold> page = lmdpCastSmeltHoldMapper.selectPage(pageInfo, queryWrapper);
+        page.getRecords().forEach(lmdpCastSmeltHold->{
+            lmdpCastSmeltHold.setBeginTime(lmdpCastSmeltHold.getFeedTime());
+            Double gapTime = TimeStr.getGapTime(lmdpCastSmeltHold.getFeedTime());
+            lmdpCastSmeltHold.setRunningTime(gapTime);
+            lmdpCastSmeltHold.setExceedTime(gapTime-rongLian);
+        });
+        return page;
+    }
 }
 
 

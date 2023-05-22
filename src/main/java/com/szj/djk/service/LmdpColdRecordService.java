@@ -1,7 +1,9 @@
 package com.szj.djk.service;
 
-import com.szj.djk.entity.LmdpColdRecord;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.szj.djk.entity.LmdpColdRecord;
 
 /**
 * @author Admin
@@ -9,5 +11,5 @@ import com.baomidou.mybatisplus.extension.service.IService;
 * @createDate 2023-03-25 13:22:39
 */
 public interface LmdpColdRecordService extends IService<LmdpColdRecord> {
-
+    Page<LmdpColdRecord> pageList(Page<LmdpColdRecord> pageInfo, LambdaQueryWrapper<LmdpColdRecord> queryWrapper, Double lengZha );
 }

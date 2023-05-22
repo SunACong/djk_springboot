@@ -1,9 +1,11 @@
 package com.szj.djk.common;
 
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @ClassName BaseEntity
@@ -18,4 +20,18 @@ public class BaseEntity implements Serializable {
 
     @TableField(exist = false)
     private String endDateTime;
+
+    @TableField(exist = false)
+    private Double exceedTime;
+
+    @TableField(exist = false)
+    private Double runningTime;
+
+    @TableField(exist = false)
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm:ss",
+            timezone = "GMT+8"
+    )
+    private Date beginTime;
+
 }

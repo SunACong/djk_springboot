@@ -1,6 +1,6 @@
 package com.szj.djk.utils;
 
-import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -20,6 +20,23 @@ public class TimeStr{
 //        Date date = new Date();
         return LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS"));
     }
+
+    public static Double getGapTime(Date date) {
+        // 将Date对象转换为LocalDateTime对象，以便进行计算
+        LocalDateTime localDateTime = LocalDateTime.ofInstant(date.toInstant(), java.time.ZoneId.systemDefault());
+
+        // 获取当前时间的LocalDateTime对象
+        LocalDateTime now = LocalDateTime.now();
+
+        // 计算时间差异
+        Duration duration = Duration.between(localDateTime, now);
+
+        // 计算时间差异的小时数
+        long diffInHours = duration.toHours();
+
+        return (double) diffInHours;
+    }
+
  }
 
 

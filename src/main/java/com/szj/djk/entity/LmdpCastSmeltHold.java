@@ -1,13 +1,14 @@
 package com.szj.djk.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.szj.djk.common.BaseEntity;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 熔炼工序
@@ -15,7 +16,7 @@ import lombok.Data;
  */
 @TableName(value ="lmdp_cast_smelt_hold")
 @Data
-public class LmdpCastSmeltHold implements Serializable {
+public class LmdpCastSmeltHold extends BaseEntity implements Serializable {
     /**
      * 主键
      */

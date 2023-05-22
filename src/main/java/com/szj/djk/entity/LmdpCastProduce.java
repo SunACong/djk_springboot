@@ -3,6 +3,7 @@ package com.szj.djk.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.szj.djk.common.BaseEntity;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,7 +16,7 @@ import java.util.Date;
  */
 @TableName(value ="lmdp_cast_produce")
 @Data
-public class LmdpCastProduce implements Serializable {
+public class LmdpCastProduce extends BaseEntity implements Serializable {
     /**
      * 主键
      */
