@@ -42,7 +42,7 @@ public class LmdpColdFurnaceRecordController
     }
 
     @GetMapping("pageList")
-    public R<Page<LmdpColdFurnaceRecord>> pageList(int pageNum, int pageSize, String batchNum){
+    public R<Page<LmdpColdFurnaceRecord>> pageList(int pageNum, int pageSize, String id){
 
         DynamicDataSourceContextHolder.push("master");
         Double tuiHuo= processCaculateService.getById(1).getTuiHuo();
@@ -51,7 +51,7 @@ public class LmdpColdFurnaceRecordController
         Page<LmdpColdFurnaceRecord> pageInfo = new Page<>(pageNum, pageSize);
 
         LambdaQueryWrapper<LmdpColdFurnaceRecord> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(batchNum != null, LmdpColdFurnaceRecord::getBatchNum, batchNum)
+        queryWrapper.like(id != null, LmdpColdFurnaceRecord::getBatchNum, id)
                 .isNotNull(LmdpColdFurnaceRecord::getStartTime)
                 .isNull(LmdpColdFurnaceRecord::getEndTime)
                 .apply("TIMESTAMPDIFF(HOUR, start_time, SYSDATE()) > {0}", tuiHuo)

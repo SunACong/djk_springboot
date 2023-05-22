@@ -17,7 +17,7 @@ import java.sql.SQLException;
  */
 
 @ControllerAdvice(annotations = {RestController.class, Controller.class})
-@ResponseBody // 返回json数据
+@ResponseBody
 @Slf4j
 public class GlobalExceptionHandler {
 

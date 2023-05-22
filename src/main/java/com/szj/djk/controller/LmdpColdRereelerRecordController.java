@@ -43,14 +43,14 @@ public class LmdpColdRereelerRecordController
     }
 
     @GetMapping("pageList")
-    public R<Page<LmdpColdRereelerRecord>> pageList(int pageNum, int pageSize, String batchNum){
+    public R<Page<LmdpColdRereelerRecord>> pageList(int pageNum, int pageSize, String id){
         DynamicDataSourceContextHolder.push("master");
         Double chongJuan = processCaculateService.getById(1).getChongJuan();
         DynamicDataSourceContextHolder.poll();
 
         Page<LmdpColdRereelerRecord> pageInfo = new Page<>(pageNum, pageSize);
         LambdaQueryWrapper<LmdpColdRereelerRecord> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(batchNum != null, LmdpColdRereelerRecord::getBatchNum,batchNum)
+        queryWrapper.like(id != null, LmdpColdRereelerRecord::getBatchNum,id)
                 .isNotNull(LmdpColdRereelerRecord::getTrimmingTime)
                 .isNull(LmdpColdRereelerRecord::getSleeveEndDate)
                 .apply("TIMESTAMPDIFF(HOUR, trimming_time, SYSDATE()) > {0}", chongJuan)

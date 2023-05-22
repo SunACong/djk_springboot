@@ -44,7 +44,7 @@ public class LmdpCastProduceController{
     }
 
     @GetMapping("pageList")
-    public R<Page<LmdpCastProduce>> pageList(int pageNum, int pageSize, String reelNum){
+    public R<Page<LmdpCastProduce>> pageList(int pageNum, int pageSize, String id){
         DynamicDataSourceContextHolder.push("master");
         Double zhuZha= processCaculateService.getById(1).getZhuZha();
         DynamicDataSourceContextHolder.poll();
@@ -52,7 +52,7 @@ public class LmdpCastProduceController{
         Page<LmdpCastProduce> pageInfo = new Page<>(pageNum, pageSize);
 
         LambdaQueryWrapper<LmdpCastProduce> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(reelNum != null, LmdpCastProduce::getReelNum,reelNum)
+        queryWrapper.like(id != null, LmdpCastProduce::getReelNum,id)
                 .isNotNull(LmdpCastProduce::getProcUpperTime)
                 .isNull(LmdpCastProduce::getProcLowerRemoveTime)
                 .apply("TIMESTAMPDIFF(HOUR, proc_upper_time, SYSDATE()) > {0}", zhuZha)

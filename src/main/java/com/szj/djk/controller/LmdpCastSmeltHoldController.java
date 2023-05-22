@@ -43,14 +43,14 @@ public class LmdpCastSmeltHoldController
     }
 
     @GetMapping("pageList")
-    public R<Page<LmdpCastSmeltHold>> pageList(int pageNum, int pageSize, String smeltTimes){
+    public R<Page<LmdpCastSmeltHold>> pageList(int pageNum, int pageSize, String id){
         DynamicDataSourceContextHolder.push("master");
         Double rongLian = processCaculateService.getById(1).getRongLian();
         DynamicDataSourceContextHolder.poll();
 
         Page<LmdpCastSmeltHold> pageInfo = new Page<>(pageNum, pageSize);
         LambdaQueryWrapper<LmdpCastSmeltHold> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(smeltTimes != null, LmdpCastSmeltHold::getSmeltTimes,smeltTimes)
+        queryWrapper.like(id != null, LmdpCastSmeltHold::getSmeltTimes,id)
                 .isNotNull(LmdpCastSmeltHold::getFeedTime)
                 .isNull(LmdpCastSmeltHold::getTurndownEndTime)
                 .apply("TIMESTAMPDIFF(HOUR, feed_time, SYSDATE()) > {0}", rongLian)

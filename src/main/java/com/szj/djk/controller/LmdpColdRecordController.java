@@ -5,7 +5,6 @@ import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.szj.djk.common.R;
-import com.szj.djk.entity.LmdpColdFurnaceRecord;
 import com.szj.djk.entity.LmdpColdRecord;
 import com.szj.djk.service.LmdpColdFurnaceRecordService;
 import com.szj.djk.service.LmdpColdRecordService;
@@ -45,21 +44,18 @@ public class LmdpColdRecordController {
 
 
     @GetMapping("pageList")
-    public R<Page<LmdpColdRecord>> pageList(int pageNum, int pageSize, String batchNum){
+    public R<Page<LmdpColdRecord>> pageList(int pageNum, int pageSize, String id){
 
         DynamicDataSourceContextHolder.push("master");
         Double lengZha = processCaculateService.getById(1).getLengZha();
         DynamicDataSourceContextHolder.poll();
 
-        LambdaQueryWrapper<LmdpColdFurnaceRecord> queryWrapper1 = new LambdaQueryWrapper<>();
-        queryWrapper1.eq(batchNum!=null, LmdpColdFurnaceRecord::getBatchNum, batchNum);
-        List<LmdpColdFurnaceRecord> list = lmdpColdFurnaceRecordService.list(queryWrapper1);
-
         Page<LmdpColdRecord> pageInfo = new Page<>(pageNum, pageSize);
         LambdaQueryWrapper<LmdpColdRecord> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(batchNum != null && list.size() == 0, LmdpColdRecord::getBatchNum,batchNum)
+        queryWrapper.like(id != null, LmdpColdRecord::getBatchNum, id)
                 .isNotNull(LmdpColdRecord::getProduceDate1)
-                .apply("TIMESTAMPDIFF(HOUR, produce_date1, SYSDATE()) > {0}", lengZha)
+                .apply("TIMESTAMPDIFF(HOUR, produce_date1, SYSDATE()) > {0} AND NOT EXISTS (SELECT batch_num FROM lmdp_cold_furnace_record lcfr\n" +
+                        "  WHERE FIND_IN_SET(lmdp_cold_record.batch_num,lcfr.batch_num))", lengZha)
                 .orderByAsc(LmdpColdRecord::getProduceDate1);
         Page<LmdpColdRecord> page = lmdpColdRecordService.pageList(pageInfo, queryWrapper, lengZha);
         return R.success(page);
