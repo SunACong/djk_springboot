@@ -58,4 +58,14 @@ public class LmdpCastSmeltHoldController
         Page<LmdpCastSmeltHold> page = lmdpCastSmeltHoldService.pageList(pageInfo, queryWrapper, rongLian);
         return R.success(page);
     }
+
+
+    @GetMapping("listLimit")
+    public R<List<LmdpCastSmeltHold>> listone(LmdpCastSmeltHold lmdpCastSmeltHold){
+        LambdaQueryWrapper<LmdpCastSmeltHold> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.setEntity(lmdpCastSmeltHold);
+        List<LmdpCastSmeltHold> list = lmdpCastSmeltHoldService.list(queryWrapper);
+        return R.success(list);
+    }
+
 }

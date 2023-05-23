@@ -15,7 +15,7 @@ spring:
       datasource:
         master:
           driverClassName: com.mysql.cj.jdbc.Driver
-          url: jdbc:mysql://192.168.100.208:3306/db_djk?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
+          url: jdbc:mysql://10.82.23.246:3306/db_djk?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true
           username: root
           password: 123456
         slave:

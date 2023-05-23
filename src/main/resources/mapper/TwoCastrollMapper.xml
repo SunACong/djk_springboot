@@ -46,7 +46,7 @@
     </sql>
 
     <sql id="selectRollingMachineVoNow">
-        select * from two_castroll WHERE ts>=SYSDATE()-20
+        select * from two_castroll
     </sql>
 
     <!--修改实时数据更新方式-->
