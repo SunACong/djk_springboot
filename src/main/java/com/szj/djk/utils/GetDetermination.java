@@ -307,4 +307,61 @@ public class GetDetermination {
         }
         return doubles;
     }
+
+//    public static void main(String[] args) {
+//
+//            double singleExtension =
+//            double singleStrength = .doubleValue();
+//            String bendingPerformance = "cracked";
+//            // 计划表延伸率 抗拉强度 弯折性能————————标准
+//            String elongation = slaveErpPlanColdreductionstrip.getElongation();
+//            double[] elongations = strToDouble(elongation);
+//            String tensileStrength = slaveErpPlanColdreductionstrip.getTensileStrength();
+//            double[] tensileStrengths = strToDouble(tensileStrength);
+//            // String bendingPerformanceS = slaveErpPlanColdreductionstrip.getBendingPerformance();
+//            int flag = 0;
+//            if (singleExtension < elongations[0]){
+//                flag++;
+//            }
+//            if (tensileStrengths[1] == 0){
+//                if (singleStrength < tensileStrengths[0]){
+//                    flag++;
+//                }
+//            }else {
+//                if (singleStrength < tensileStrengths[0] || singleStrength > tensileStrengths[1]){
+//                    flag++;
+//                }
+//            }
+//            String str = "cracked";
+//            if (str.equals(bendingPerformance)){
+//                flag++;
+//            }
+////            if (flag != 0){
+////                if (lmdpQcColdInspect.getSingleExtensionRe() == null || lmdpQcColdInspect.getSingleStrengthRe() == null){
+////                    return 2;
+////                }
+////                // 巡检表延伸率 抗拉强度 弯折性能————————复检
+////                double singleExtensionRe = lmdpQcColdInspect.getSingleExtensionRe().doubleValue();
+////                double singleStrengthRe = lmdpQcColdInspect.getSingleStrengthRe().doubleValue();
+////                String bendingPerformanceRe = lmdpQcColdInspect.getBendingPerformanceRe();
+////                if (singleExtensionRe < elongations[0]){
+////                    return 0;
+////                }
+////                if (tensileStrengths[1] == 0){
+////                    if (singleStrengthRe < tensileStrengths[0]){
+////                        return 0;
+////                    }
+////                }else {
+////                    if (singleStrengthRe < tensileStrengths[0] || singleStrengthRe > tensileStrengths[1]){
+////                        return 0;
+////                    }
+////                }
+////                str = "cracked";
+////                if (str.equals(bendingPerformanceRe)){
+////                    return 0;
+////                }
+////            }
+//            System.out.println("合格");
+//        }
+//    }
 }

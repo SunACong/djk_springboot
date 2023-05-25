@@ -230,7 +230,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
             batchNum = null;
         }else if (type == 2){
             batchNum = number;
-            String reelNum1 = erpCastingCheckRecordService.getReelNum(number);
+            String reelNum1 = erpCastingCheckRecordService.getReelNum(number.substring(0, 8));
             reelNum = reelNum1;
             queryWrapper.eq(LmdpCastProduce::getReelNum, reelNum);
             List<LmdpCastProduce> list = lmdpCastProduceService.list(queryWrapper);
@@ -359,7 +359,7 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
      */
     private LmdpColdRecord getLmdpColdRecord(String batchNum) throws CustomException{
         LambdaQueryWrapper<LmdpColdRecord> queryWrapper = new LambdaQueryWrapper<LmdpColdRecord>();
-        queryWrapper.eq(LmdpColdRecord::getBatchNum, batchNum);
+        queryWrapper.eq(LmdpColdRecord::getBatchNum, batchNum.substring(0, 8));
         List<LmdpColdRecord> list = lmdpColdRecordService.list(queryWrapper);
         if (list.size() != 0){
             return list.get(0);
@@ -373,7 +373,9 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
      */
     private LmdpColdFurnaceRecord getLmdpColdFurnaceRecord(String batchNum) throws CustomException{
         LambdaQueryWrapper<LmdpColdFurnaceRecord> queryWrapper = new LambdaQueryWrapper<LmdpColdFurnaceRecord>();
-        queryWrapper.like(LmdpColdFurnaceRecord::getBatchNum, batchNum);
+        queryWrapper.apply("FIND_IN_SET( {0}, batch_num) or {1} in (batch_num,batch_num2,batch_num3,batch_num4)", batchNum.substring(0, 8), batchNum.substring(0, 8))
+                .orderByDesc(LmdpColdFurnaceRecord::getTs)
+                .last("limit 1");
         List<LmdpColdFurnaceRecord> list = lmdpColdFurnaceRecordService.list(queryWrapper);
         if (list.size() != 0){
             return list.get(0);
