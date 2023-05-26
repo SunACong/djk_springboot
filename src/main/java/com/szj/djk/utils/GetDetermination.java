@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -150,6 +151,8 @@ public class GetDetermination {
         double[] elongations = strToDouble(elongation);
         String tensileStrength = slaveErpPlanColdreductionstrip.getTensileStrength();
         double[] tensileStrengths = strToDouble(tensileStrength);
+
+//        System.out.println("巡检表延伸率:" + singleExtension);
         // String bendingPerformanceS = slaveErpPlanColdreductionstrip.getBendingPerformance();
         int flag = 0;
         if (singleExtension < elongations[0]){
@@ -172,10 +175,17 @@ public class GetDetermination {
             if (lmdpQcColdInspect.getSingleExtensionRe() == null || lmdpQcColdInspect.getSingleStrengthRe() == null){
                 return 2;
             }
+
             // 巡检表延伸率 抗拉强度 弯折性能————————复检
             double singleExtensionRe = lmdpQcColdInspect.getSingleExtensionRe().doubleValue();
             double singleStrengthRe = lmdpQcColdInspect.getSingleStrengthRe().doubleValue();
             String bendingPerformanceRe = lmdpQcColdInspect.getBendingPerformanceRe();
+            System.out.println("巡检表延伸率:" + singleExtension);
+            System.out.println("抗拉强度:" + singleStrength);
+            System.out.println("巡检表延伸率复检:" + singleExtensionRe);
+            System.out.println("抗拉强度复检:" + singleStrengthRe);
+            System.out.println("抗拉强度标准:"+Arrays.toString(tensileStrengths));
+            System.out.println("延伸率标准:"+Arrays.toString(elongations));
             if (singleExtensionRe < elongations[0]){
                 return 0;
             }
@@ -308,60 +318,4 @@ public class GetDetermination {
         return doubles;
     }
 
-//    public static void main(String[] args) {
-//
-//            double singleExtension =
-//            double singleStrength = .doubleValue();
-//            String bendingPerformance = "cracked";
-//            // 计划表延伸率 抗拉强度 弯折性能————————标准
-//            String elongation = slaveErpPlanColdreductionstrip.getElongation();
-//            double[] elongations = strToDouble(elongation);
-//            String tensileStrength = slaveErpPlanColdreductionstrip.getTensileStrength();
-//            double[] tensileStrengths = strToDouble(tensileStrength);
-//            // String bendingPerformanceS = slaveErpPlanColdreductionstrip.getBendingPerformance();
-//            int flag = 0;
-//            if (singleExtension < elongations[0]){
-//                flag++;
-//            }
-//            if (tensileStrengths[1] == 0){
-//                if (singleStrength < tensileStrengths[0]){
-//                    flag++;
-//                }
-//            }else {
-//                if (singleStrength < tensileStrengths[0] || singleStrength > tensileStrengths[1]){
-//                    flag++;
-//                }
-//            }
-//            String str = "cracked";
-//            if (str.equals(bendingPerformance)){
-//                flag++;
-//            }
-////            if (flag != 0){
-////                if (lmdpQcColdInspect.getSingleExtensionRe() == null || lmdpQcColdInspect.getSingleStrengthRe() == null){
-////                    return 2;
-////                }
-////                // 巡检表延伸率 抗拉强度 弯折性能————————复检
-////                double singleExtensionRe = lmdpQcColdInspect.getSingleExtensionRe().doubleValue();
-////                double singleStrengthRe = lmdpQcColdInspect.getSingleStrengthRe().doubleValue();
-////                String bendingPerformanceRe = lmdpQcColdInspect.getBendingPerformanceRe();
-////                if (singleExtensionRe < elongations[0]){
-////                    return 0;
-////                }
-////                if (tensileStrengths[1] == 0){
-////                    if (singleStrengthRe < tensileStrengths[0]){
-////                        return 0;
-////                    }
-////                }else {
-////                    if (singleStrengthRe < tensileStrengths[0] || singleStrengthRe > tensileStrengths[1]){
-////                        return 0;
-////                    }
-////                }
-////                str = "cracked";
-////                if (str.equals(bendingPerformanceRe)){
-////                    return 0;
-////                }
-////            }
-//            System.out.println("合格");
-//        }
-//    }
 }

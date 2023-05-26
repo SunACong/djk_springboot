@@ -23,6 +23,7 @@ import java.util.Map;
 * @createDate 2023-03-25 13:22:39
 */
 @Service
+@DS("slave")
 public class LmdpQcColdReelReportServiceImpl extends ServiceImpl<LmdpQcColdReelReportMapper, LmdpQcColdReelReport>
     implements LmdpQcColdReelReportService{
 
@@ -36,15 +37,16 @@ public class LmdpQcColdReelReportServiceImpl extends ServiceImpl<LmdpQcColdReelR
     @Override
     @DS("slave")
     public Page<LmdpQcColdReelReport> pageList(Page<LmdpQcColdReelReport> pageInfo, LmdpQcColdReelReport lmdpQcColdReelReport) {
+//        System.out.println(lmdpQcColdReelReport);
         LambdaQueryWrapper<LmdpQcColdReelReport> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.setEntity(lmdpQcColdReelReport)
+        queryWrapper.like(LmdpQcColdReelReport::getBatchNum, lmdpQcColdReelReport.getBatchNum())
                 .between(lmdpQcColdReelReport.getStartDateTime()!=null && lmdpQcColdReelReport.getEndDateTime()!=null, LmdpQcColdReelReport::getReportTime, lmdpQcColdReelReport.getStartDateTime(), lmdpQcColdReelReport.getEndDateTime())
                 .orderByDesc(LmdpQcColdReelReport::getReportTime);
         Page<LmdpQcColdReelReport> page = lmdpQcColdReelReportMapper.selectPage(pageInfo, queryWrapper);
         page.getRecords().forEach(item->{
 
             LambdaQueryWrapper<LmdpQcColdInspect> queryWrapper1 = new LambdaQueryWrapper<>();
-            queryWrapper1.eq(LmdpQcColdInspect::getBatchNum, item.getBatchNum());
+            queryWrapper1.eq(LmdpQcColdInspect::getBatchNum, item.getBatchNum().substring(0, 8));
             LmdpQcColdInspect lmdpQcColdInspect = lmdpQcColdInspectMapper.selectOne(queryWrapper1);
             if (lmdpQcColdInspect == null){
                 LmdpQcColdInspect lmdpQcColdInspect1 = new LmdpQcColdInspect();
