@@ -42,11 +42,11 @@ public class LmdpQcColdReelReportServiceImpl extends ServiceImpl<LmdpQcColdReelR
         queryWrapper.like(lmdpQcColdReelReport.getBatchNum() != null, LmdpQcColdReelReport::getBatchNum, lmdpQcColdReelReport.getBatchNum())
                 .between(lmdpQcColdReelReport.getStartDateTime()!=null && lmdpQcColdReelReport.getEndDateTime()!=null, LmdpQcColdReelReport::getReportTime, lmdpQcColdReelReport.getStartDateTime(), lmdpQcColdReelReport.getEndDateTime())
                 .orderByDesc(LmdpQcColdReelReport::getReportTime);
+
         Page<LmdpQcColdReelReport> page = lmdpQcColdReelReportMapper.selectPage(pageInfo, queryWrapper);
         page.getRecords().forEach(item->{
-
             LambdaQueryWrapper<LmdpQcColdInspect> queryWrapper1 = new LambdaQueryWrapper<>();
-            queryWrapper1.eq(LmdpQcColdInspect::getBatchNum, item.getBatchNum().substring(0, 8));
+            queryWrapper1.eq(LmdpQcColdInspect::getBatchNum, item.getBatchNum());
             LmdpQcColdInspect lmdpQcColdInspect = lmdpQcColdInspectMapper.selectOne(queryWrapper1);
             if (lmdpQcColdInspect == null){
                 LmdpQcColdInspect lmdpQcColdInspect1 = new LmdpQcColdInspect();
