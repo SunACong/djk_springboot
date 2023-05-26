@@ -37,9 +37,9 @@ public class LmdpQcColdReelReportServiceImpl extends ServiceImpl<LmdpQcColdReelR
     @Override
     @DS("slave")
     public Page<LmdpQcColdReelReport> pageList(Page<LmdpQcColdReelReport> pageInfo, LmdpQcColdReelReport lmdpQcColdReelReport) {
-//        System.out.println(lmdpQcColdReelReport);
+        System.out.println(lmdpQcColdReelReport.getBatchNum() == null);
         LambdaQueryWrapper<LmdpQcColdReelReport> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.like(LmdpQcColdReelReport::getBatchNum, lmdpQcColdReelReport.getBatchNum())
+        queryWrapper.like(lmdpQcColdReelReport.getBatchNum() != null, LmdpQcColdReelReport::getBatchNum, lmdpQcColdReelReport.getBatchNum())
                 .between(lmdpQcColdReelReport.getStartDateTime()!=null && lmdpQcColdReelReport.getEndDateTime()!=null, LmdpQcColdReelReport::getReportTime, lmdpQcColdReelReport.getStartDateTime(), lmdpQcColdReelReport.getEndDateTime())
                 .orderByDesc(LmdpQcColdReelReport::getReportTime);
         Page<LmdpQcColdReelReport> page = lmdpQcColdReelReportMapper.selectPage(pageInfo, queryWrapper);
