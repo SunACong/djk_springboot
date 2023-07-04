@@ -4,15 +4,16 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 可视化字典
  * @TableName report_dict
  */
-@TableName(value ="report_dict")
+@TableName(value ="report_dict_1")
 @Data
 public class ReportDict implements Serializable {
     /**
@@ -60,14 +61,18 @@ public class ReportDict implements Serializable {
     /**
      * 
      */
-    @TableField(value = "sort_order")
+//    @TableField(value = "sort_order")
+    @TableField(exist = false)
     private Integer sortOrder;
+
 
     /**
      * 
      */
-    @TableField(value = "modify_flag")
+//    @TableField(value = "modify_flag")
+    @TableField(exist = false)
     private Integer modifyFlag;
+
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

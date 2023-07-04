@@ -12,7 +12,7 @@
 
     <groupId>com.szj</groupId>
     <artifactId>djk</artifactId>
-    <version>5.26-14:22</version>
+    <version>5.26.1424</version>
     <name>djk_springboot</name>
 
     <properties>
