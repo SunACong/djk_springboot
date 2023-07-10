@@ -13,7 +13,7 @@ import java.util.Date;
  * 可视化字典
  * @TableName report_dict
  */
-@TableName(value ="report_dict_1")
+@TableName(value ="report_dict")
 @Data
 public class ReportDict implements Serializable {
     /**
@@ -61,16 +61,14 @@ public class ReportDict implements Serializable {
     /**
      * 
      */
-//    @TableField(value = "sort_order")
-    @TableField(exist = false)
+    @TableField(value = "sort_order")
     private Integer sortOrder;
 
 
     /**
      * 
      */
-//    @TableField(value = "modify_flag")
-    @TableField(exist = false)
+    @TableField(value = "modify_flag")
     private Integer modifyFlag;
 
 

@@ -12,13 +12,13 @@
             <result property="value" column="value" jdbcType="VARCHAR"/>
             <result property="chdesc" column="chdesc" jdbcType="VARCHAR"/>
             <result property="remark" column="remark" jdbcType="VARCHAR"/>
-<!--            <result property="sortOrder" column="sort_order" jdbcType="INTEGER"/>-->
-<!--            <result property="modifyFlag" column="modify_flag" jdbcType="INTEGER"/>-->
+            <result property="sortOrder" column="sort_order" jdbcType="INTEGER"/>
+            <result property="modifyFlag" column="modify_flag" jdbcType="INTEGER"/>
     </resultMap>
 
     <sql id="Base_Column_List">
         id,ts,type_name,
         type,value,chdesc,
-        remark
+        remark,sortOrder,modifyFlag
     </sql>
 </mapper>

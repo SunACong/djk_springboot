@@ -1,13 +1,14 @@
 package com.szj.djk.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 铸轧卷质检报告单
@@ -26,12 +27,20 @@ public class LmdpQcCastReel implements Serializable {
      * 创建时间
      */
     @TableField(value = "create_time")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm:ss",
+            timezone = "GMT+8"
+    )
     private Date createTime;
 
     /**
      * 
      */
     @TableField(value = "ts")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm:ss",
+            timezone = "GMT+8"
+    )
     private Date ts;
 
     /**
@@ -165,6 +174,10 @@ public class LmdpQcCastReel implements Serializable {
      * 下卷时间
      */
     @TableField(value = "next_reel_time")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm:ss",
+            timezone = "GMT+8"
+    )
     private Date nextReelTime;
 
     /**
@@ -183,6 +196,10 @@ public class LmdpQcCastReel implements Serializable {
      * 日期及时间
      */
     @TableField(value = "report_time")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm:ss",
+            timezone = "GMT+8"
+    )
     private Date reportTime;
 
     /**
