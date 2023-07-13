@@ -303,7 +303,8 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         queryWrapper.eq(ErpPlanRollcasting::getProduceId, planId);
         List<ErpPlanRollcasting> list = erpPlanRollcastingMapper.selectList(queryWrapper);
         if (list.size() != 0){
-            return list.get(0);
+            ErpPlanRollcasting erpPlanRollcasting = list.get(0);
+            return erpPlanRollcasting;
         }
         log.info("未找铸轧计划表");
         return null;
@@ -317,6 +318,20 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         queryWrapper.eq(LmdpCastSmeltHold::getSmeltTimes, smeltTimes);
         List<LmdpCastSmeltHold> list = lmdpCastSmeltHoldService.list(queryWrapper);
         if (list.size() != 0){
+            LmdpCastSmeltHold lmdpCastSmeltHold = list.get(0);
+            lmdpCastSmeltHold.setForkliftDriverId(userMap.get(lmdpCastSmeltHold.getForkliftDriverId()));
+            lmdpCastSmeltHold.setForkliftDriverId2(userMap.get(lmdpCastSmeltHold.getForkliftDriverId2()));
+            lmdpCastSmeltHold.setForkliftDriverId3(userMap.get(lmdpCastSmeltHold.getForkliftDriverId3()));
+            lmdpCastSmeltHold.setGrainRefine1SmelterId(userMap.get(lmdpCastSmeltHold.getGrainRefine1SmelterId()));
+            lmdpCastSmeltHold.setGrainRefine2SmelterId(userMap.get(lmdpCastSmeltHold.getGrainRefine2SmelterId()));
+            lmdpCastSmeltHold.setGrainRefine1OperatorId(userMap.get(lmdpCastSmeltHold.getGrainRefine1OperatorId()));
+            lmdpCastSmeltHold.setGrainRefine2OperatorId(userMap.get(lmdpCastSmeltHold.getGrainRefine2OperatorId()));
+            lmdpCastSmeltHold.setAlloyRefine1SmelterId(userMap.get(lmdpCastSmeltHold.getAlloyRefine1SmelterId()));
+            lmdpCastSmeltHold.setAlloyRefine2SmelterId(userMap.get(lmdpCastSmeltHold.getAlloyRefine2SmelterId()));
+            lmdpCastSmeltHold.setMimRefine1SmelterId(userMap.get(lmdpCastSmeltHold.getMimRefine1SmelterId()));
+            lmdpCastSmeltHold.setTurndownSmelterId(userMap.get(lmdpCastSmeltHold.getTurndownSmelterId()));
+            lmdpCastSmeltHold.setTurndownCleanerId(userMap.get(lmdpCastSmeltHold.getTurndownCleanerId()));
+
             return list.get(0);
         }
         log.info("未找到熔炼工序");
@@ -330,7 +345,23 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         queryWrapper.eq(LmdpCastHoldingFurnace::getSmeltTimes, smeltTimes);
         List<LmdpCastHoldingFurnace> list = lmdpCastHoldingFurnaceService.list(queryWrapper);
         if (list.size() != 0) {
-            return list.get(0);
+            LmdpCastHoldingFurnace lmdpCastHoldingFurnace = list.get(0);
+            lmdpCastHoldingFurnace.setHoldRefine1CasterId(userMap.get(lmdpCastHoldingFurnace.getHoldRefine1CasterId()));
+            lmdpCastHoldingFurnace.setHoldRefine2CasterId(userMap.get(lmdpCastHoldingFurnace.getHoldRefine2CasterId()));
+            lmdpCastHoldingFurnace.setHoldRefine3CasterId(userMap.get(lmdpCastHoldingFurnace.getHoldRefine3CasterId()));
+            lmdpCastHoldingFurnace.setHoldRefine4CasterId(userMap.get(lmdpCastHoldingFurnace.getHoldRefine4CasterId()));
+            lmdpCastHoldingFurnace.setHoldRefine5CasterId(userMap.get(lmdpCastHoldingFurnace.getHoldRefine5CasterId()));
+            lmdpCastHoldingFurnace.setHoldRefine6CasterId(userMap.get(lmdpCastHoldingFurnace.getHoldRefine6CasterId()));
+            lmdpCastHoldingFurnace.setHoldRefine7CasterId(userMap.get(lmdpCastHoldingFurnace.getHoldRefine7CasterId()));
+
+            lmdpCastHoldingFurnace.setHoldRefine1SmelterId(userMap.get(lmdpCastHoldingFurnace.getHoldRefine1SmelterId()));
+            lmdpCastHoldingFurnace.setHoldRefine2SmelterId(userMap.get(lmdpCastHoldingFurnace.getHoldRefine2SmelterId()));
+            lmdpCastHoldingFurnace.setHoldRefine3SmelterId(userMap.get(lmdpCastHoldingFurnace.getHoldRefine3SmelterId()));
+            lmdpCastHoldingFurnace.setHoldRefine4SmelterId(userMap.get(lmdpCastHoldingFurnace.getHoldRefine4SmelterId()));
+            lmdpCastHoldingFurnace.setHoldRefine5SmelterId(userMap.get(lmdpCastHoldingFurnace.getHoldRefine5SmelterId()));
+            lmdpCastHoldingFurnace.setHoldRefine6SmelterId(userMap.get(lmdpCastHoldingFurnace.getHoldRefine6SmelterId()));
+            lmdpCastHoldingFurnace.setHoldRefine7SmelterId(userMap.get(lmdpCastHoldingFurnace.getHoldRefine7SmelterId()));
+            return lmdpCastHoldingFurnace;
         }
         log.info("未找到保温工序");
         return null;
@@ -345,14 +376,6 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         List<LmdpCastProduce> list = lmdpCastProduceService.list(queryWrapper);
         if (list.size() != 0) {
             LmdpCastProduce lmdpCastProduce = list.get(0);
-//            lmdpCastProduce.setParamCastTiBrand(dictMap.get("cast_ti_brand_"+lmdpCastProduce.getParamCastTiBrand()));
-//            lmdpCastProduce.setProcUpperGroupId(dictMap.get("work_group_"+lmdpCastProduce.getProcUpperGroupId()));
-//            lmdpCastProduce.setProcBigGroupId(dictMap.get("work_group_"+lmdpCastProduce.getProcBigGroupId()));
-//            lmdpCastProduce.setProcLowerGroupId(dictMap.get("work_group_"+lmdpCastProduce.getProcLowerGroupId()));
-//            lmdpCastProduce.setProcessQcDutyGroupId(dictMap.get("work_group_"+lmdpCastProduce.getProcessQcDutyGroupId()));
-//            lmdpCastProduce.setProcBeforeStabilizerCheck(dictMap.get("device_inspect_status_"+lmdpCastProduce.getProcBeforeStabilizerCheck()));
-//            lmdpCastProduce.setProcAfterStabilizerCheck(dictMap.get("device_inspect_status_"+lmdpCastProduce.getProcAfterStabilizerCheck()));
-//            lmdpCastProduce.setProcStabilizerStatus(dictMap.get("device_inspect_status_"+lmdpCastProduce.getProcStabilizerStatus()));
 
             lmdpCastProduce.setProcUpperCasterId(userMap.get(lmdpCastProduce.getProcUpperCasterId()));
             lmdpCastProduce.setProcBigCasterId(userMap.get(lmdpCastProduce.getProcBigCasterId()));
@@ -384,7 +407,10 @@ public class ErpPlanRollcastingServiceImpl extends ServiceImpl<ErpPlanRollcastin
         queryWrapper.eq(LmdpQcCastReel::getReelNum, reelNum);
         List<LmdpQcCastReel> list = lmdpQcCastReelService.list(queryWrapper);
         if (list.size() != 0) {
-            return list.get(0);
+            LmdpQcCastReel lmdpQcCastReel = list.get(0);
+            lmdpQcCastReel.setInspectorId(userMap.get(lmdpQcCastReel.getInspectorId()));
+            lmdpQcCastReel.setInspectMonitorCheck(userMap.get(lmdpQcCastReel.getInspectMonitorCheck()));
+            return lmdpQcCastReel;
         }
         log.info("未找到铸轧卷质检报告");
         return null;
