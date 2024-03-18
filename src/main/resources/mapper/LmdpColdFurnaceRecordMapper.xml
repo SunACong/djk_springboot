@@ -46,6 +46,17 @@
             <result property="perPowerLoss" column="per_power_loss" jdbcType="DECIMAL"/>
             <result property="furnaceOperator1Id" column="furnace_operator1_id" jdbcType="VARCHAR"/>
             <result property="furnaceOperator2Id" column="furnace_operator2_id" jdbcType="VARCHAR"/>
+            <result property="startPower" column="start_power" jdbcType="DECIMAL"/>
+            <result property="endPower" column="end_power" jdbcType="DECIMAL"/>
+            <result property="furnacePosition2" column="furnace_position2" jdbcType="VARCHAR"/>
+            <result property="furnacePosition3" column="furnace_position3" jdbcType="VARCHAR"/>
+            <result property="furnacePosition4" column="furnace_position4" jdbcType="VARCHAR"/>
+            <result property="batchNum2" column="batch_num2" jdbcType="VARCHAR"/>
+            <result property="batchNum3" column="batch_num3" jdbcType="VARCHAR"/>
+            <result property="batchNum4" column="batch_num4" jdbcType="VARCHAR"/>
+            <result property="coolTime" column="cool_time" jdbcType="VARCHAR"/>
+            <result property="chargeShift" column="charge_shift" jdbcType="VARCHAR"/>
+            <result property="dischargeShift" column="discharge_shift" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -62,6 +73,10 @@
         furnace_position,furnace_operator1,furnace_operator2,
         temp_power_control,power_before,power_after,
         running_during,power_loss,per_power_loss,
-        furnace_operator1_id,furnace_operator2_id
+        furnace_operator1_id,furnace_operator2_id,start_power,
+        end_power,furnace_position2,furnace_position3,
+        furnace_position4,batch_num2,batch_num3,
+        batch_num4,cool_time,charge_shift,
+        discharge_shift
     </sql>
 </mapper>

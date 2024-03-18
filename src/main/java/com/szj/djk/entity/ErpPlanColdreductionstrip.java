@@ -1,12 +1,13 @@
 package com.szj.djk.entity;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 冷轧生产计划表
@@ -103,12 +104,20 @@ public class ErpPlanColdreductionstrip implements Serializable {
      * 交付时间_A2
      */
     @TableField(value = "delivered_time_a2")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm:ss",
+            timezone = "GMT+8"
+    )
     private Date deliveredTimeA2;
 
     /**
      * 交付时间_B2
      */
     @TableField(value = "delivered_time_b2")
+    @JsonFormat(
+            pattern = "yyyy-MM-dd HH:mm:ss",
+            timezone = "GMT+8"
+    )
     private Date deliveredTimeB2;
 
     /**

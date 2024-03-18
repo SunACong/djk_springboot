@@ -4,9 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 可视化字典
@@ -63,11 +64,13 @@ public class ReportDict implements Serializable {
     @TableField(value = "sort_order")
     private Integer sortOrder;
 
+
     /**
      * 
      */
     @TableField(value = "modify_flag")
     private Integer modifyFlag;
+
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

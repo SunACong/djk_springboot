@@ -19,6 +19,6 @@
     <sql id="Base_Column_List">
         id,ts,type_name,
         type,value,chdesc,
-        remark,sort_order,modify_flag
+        remark,sortOrder,modifyFlag
     </sql>
 </mapper>

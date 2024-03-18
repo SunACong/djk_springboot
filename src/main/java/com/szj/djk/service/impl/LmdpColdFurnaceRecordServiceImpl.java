@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.szj.djk.entity.LmdpColdFurnaceRecord;
 import com.szj.djk.mapper.LmdpColdFurnaceRecordMapper;
 import com.szj.djk.service.LmdpColdFurnaceRecordService;
-import com.szj.djk.utils.TimeStr;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,13 +25,13 @@ public class LmdpColdFurnaceRecordServiceImpl extends ServiceImpl<LmdpColdFurnac
     @Override
     public Page<LmdpColdFurnaceRecord> pageList(Page<LmdpColdFurnaceRecord> pageInfo, LambdaQueryWrapper<LmdpColdFurnaceRecord> queryWrapper, Double tuiHuo) {
         Page<LmdpColdFurnaceRecord> page = lmdpColdFurnaceRecordMapper.selectPage(pageInfo, queryWrapper);
-        page.getRecords().forEach(lmdpColdFurnaceRecord->{
-            lmdpColdFurnaceRecord.setNumberID(lmdpColdFurnaceRecord.getBatchNum());
-            lmdpColdFurnaceRecord.setBeginTime(lmdpColdFurnaceRecord.getStartTime());
-            Double gapTime = TimeStr.getGapTime(lmdpColdFurnaceRecord.getStartTime());
-            lmdpColdFurnaceRecord.setRunningTime(gapTime);
-            lmdpColdFurnaceRecord.setExceedTime(gapTime-tuiHuo);
-        });
+//        page.getRecords().forEach(lmdpColdFurnaceRecord->{
+//            lmdpColdFurnaceRecord.setNumberID(lmdpColdFurnaceRecord.getBatchNum());
+//            lmdpColdFurnaceRecord.setBeginTime(lmdpColdFurnaceRecord.getStartTime());
+//            Double gapTime = TimeStr.getGapTime(lmdpColdFurnaceRecord.getStartTime());
+//            lmdpColdFurnaceRecord.setRunningTime(gapTime);
+//            lmdpColdFurnaceRecord.setExceedTime(gapTime-tuiHuo);
+//        });
         return page;
     }
 }

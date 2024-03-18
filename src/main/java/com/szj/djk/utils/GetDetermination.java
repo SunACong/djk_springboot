@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -150,6 +151,8 @@ public class GetDetermination {
         double[] elongations = strToDouble(elongation);
         String tensileStrength = slaveErpPlanColdreductionstrip.getTensileStrength();
         double[] tensileStrengths = strToDouble(tensileStrength);
+
+//        System.out.println("巡检表延伸率:" + singleExtension);
         // String bendingPerformanceS = slaveErpPlanColdreductionstrip.getBendingPerformance();
         int flag = 0;
         if (singleExtension < elongations[0]){
@@ -172,10 +175,17 @@ public class GetDetermination {
             if (lmdpQcColdInspect.getSingleExtensionRe() == null || lmdpQcColdInspect.getSingleStrengthRe() == null){
                 return 2;
             }
+
             // 巡检表延伸率 抗拉强度 弯折性能————————复检
             double singleExtensionRe = lmdpQcColdInspect.getSingleExtensionRe().doubleValue();
             double singleStrengthRe = lmdpQcColdInspect.getSingleStrengthRe().doubleValue();
             String bendingPerformanceRe = lmdpQcColdInspect.getBendingPerformanceRe();
+            System.out.println("巡检表延伸率:" + singleExtension);
+            System.out.println("抗拉强度:" + singleStrength);
+            System.out.println("巡检表延伸率复检:" + singleExtensionRe);
+            System.out.println("抗拉强度复检:" + singleStrengthRe);
+            System.out.println("抗拉强度标准:"+Arrays.toString(tensileStrengths));
+            System.out.println("延伸率标准:"+Arrays.toString(elongations));
             if (singleExtensionRe < elongations[0]){
                 return 0;
             }
@@ -307,4 +317,5 @@ public class GetDetermination {
         }
         return doubles;
     }
+
 }
