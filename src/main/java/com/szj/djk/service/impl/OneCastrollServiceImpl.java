@@ -21,6 +21,11 @@ import java.util.List;
 public class OneCastrollServiceImpl extends ServiceImpl<OneCastrollMapper, OneCastroll> implements OneCastrollService {
     @Autowired
     private OneCastrollMapper oneCastrollMapper;
+
+    @Override
+    public List<OneCastroll> selectRollingMachineVo() {
+        return oneCastrollMapper.selectRollingMachineVo();
+    }
     @Override
     public List<OneCastroll> selectRollingNewData() {
         return oneCastrollMapper.selectRollingNewData();

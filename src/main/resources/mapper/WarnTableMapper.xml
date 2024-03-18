@@ -8,7 +8,7 @@
             <id property="idNumber" column="id_number" jdbcType="INTEGER"/>
             <result property="rollingName" column="rolling_name" jdbcType="VARCHAR"/>
             <result property="rollingProduceTime" column="rolling_produce_time" jdbcType="TIMESTAMP"/>
-            <result property="rollingValue" column="rolling_value" jdbcType="INTEGER"/>
+            <result property="rollingValue" column="rolling_value" jdbcType="DOUBLE"/>
             <result property="rollingDeviceNumber" column="rolling_device_number" jdbcType="VARCHAR"/>
             <result property="yd" column="yd" jdbcType="VARCHAR"></result>
             <result property="para"  column="para" jdbcType="VARCHAR"></result>
@@ -18,13 +18,20 @@
         id_number,rolling_name,rolling_produce_time,
         rolling_value,rolling_device_number,yd,para
     </sql>
+
     <sql id="selectWarnTableVo">
         select * from warn_table
     </sql>
+
     <select id="selectWarnTableNewData" resultType="com.szj.djk.entity.WarnTable" resultMap="BaseResultMap">
-        SELECT * from(<include refid="selectWarnTableVo"/> where rolling_device_number=#{rollingDeviceNumber}
-        order by rolling_produce_time desc limit 20) aa order by rolling_produce_time
+        SELECT * from
+        (<include refid="selectWarnTableVo"/>
+        WHERE (rolling_produce_time BETWEEN DATE_SUB(CURRENT_DATE(), INTERVAL 7 DAY) AND CURRENT_DATE())
+        and rolling_device_number=#{rollingDeviceNumber}
+        order by rolling_produce_time desc limit 20)
+        aa order by rolling_produce_time
     </select>
+
     <select id="selectWarnTableHistoryData" resultType="com.szj.djk.entity.WarnTable" resultMap="BaseResultMap">
         SELECT * from(<include refid="selectWarnTableVo"/> where rolling_device_number=#{rollingDeviceNumber}
         order by rolling_produce_time desc limit 50) aa order by rolling_produce_time

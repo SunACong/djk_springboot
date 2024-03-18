@@ -13,6 +13,12 @@ import java.util.List;
 * @createDate 2023-02-23 14:51:15
 */
 public interface OneCastrollService extends IService<OneCastroll> {
+
+    /**
+     * 测试最大数据量
+     */
+    public List<OneCastroll> selectRollingMachineVo();
+
     /**
      * 查询最新数据
      */

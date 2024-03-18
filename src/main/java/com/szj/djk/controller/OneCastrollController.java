@@ -37,6 +37,17 @@ public class OneCastrollController {
     @Autowired
     private WarnTableService warnTableService;
 
+
+    /**
+     * 查询铸轧机最新数据
+     */
+    @GetMapping("/testmoreMsg")
+    public R<List<OneCastroll>> testmoreMsg(){
+        List<OneCastroll> rollingMachines = oneCastrollService.selectRollingMachineVo();
+        return  R.success(rollingMachines);
+    }
+
+
     /**
      * 查询铸轧机最新数据
      */
@@ -252,30 +263,30 @@ public class OneCastrollController {
                         warnTableService.save(warnTable);
                     }
 
-                    if(i.getUpRollMontorLineV()>valueRange.getShangDS() || i.getUpRollMontorLineV()<valueRange.getShangDS1() ){
-                        warnTable.setRollingName("上辊电机速度");
-                        warnTable.setRollingValue(i.getUpRollMontorLineV());
-                        warnTable.setRollingProduceTime(i.getTs());
-                        warnTable.setRollingDeviceNumber("铸轧机1#");
-                        warnTable.setPara("工艺参数");
-                        warnTableService.save(warnTable);
-                    }
-                    if(i.getDownRollMontorLineV()>valueRange.getXiaDS() || i.getUpRollMontorLineV()<valueRange.getShangDS1()){
-                        warnTable.setRollingName("下辊电机速度");
-                        warnTable.setRollingValue(i.getDownRollMontorLineV());
-                        warnTable.setRollingProduceTime(i.getTs());
-                        warnTable.setRollingDeviceNumber("铸轧机1#");
-                        warnTable.setPara("工艺参数");
-                        warnTableService.save(warnTable);
-                    }
-                    if(i.getRollV()>valueRange.getJuanDS() || i.getRollV()<valueRange.getJuanDS1()){
-                        warnTable.setRollingName("卷取电机速度");
-                        warnTable.setRollingValue(i.getRollV());
-                        warnTable.setRollingProduceTime(i.getTs());
-                        warnTable.setRollingDeviceNumber("铸轧机1#");
-                        warnTable.setPara("工艺参数");
-                        warnTableService.save(warnTable);
-                    }
+//                    if(i.getUpRollMontorLineV()>valueRange.getShangDS() || i.getUpRollMontorLineV()<valueRange.getShangDS1() ){
+//                        warnTable.setRollingName("上辊电机速度");
+//                        warnTable.setRollingValue(i.getUpRollMontorLineV());
+//                        warnTable.setRollingProduceTime(i.getTs());
+//                        warnTable.setRollingDeviceNumber("铸轧机1#");
+//                        warnTable.setPara("工艺参数");
+//                        warnTableService.save(warnTable);
+//                    }
+//                    if(i.getDownRollMontorLineV()>valueRange.getXiaDS() || i.getUpRollMontorLineV()<valueRange.getShangDS1()){
+//                        warnTable.setRollingName("下辊电机速度");
+//                        warnTable.setRollingValue(i.getDownRollMontorLineV());
+//                        warnTable.setRollingProduceTime(i.getTs());
+//                        warnTable.setRollingDeviceNumber("铸轧机1#");
+//                        warnTable.setPara("工艺参数");
+//                        warnTableService.save(warnTable);
+//                    }
+//                    if(i.getRollV()>valueRange.getJuanDS() || i.getRollV()<valueRange.getJuanDS1()){
+//                        warnTable.setRollingName("卷取电机速度");
+//                        warnTable.setRollingValue(i.getRollV());
+//                        warnTable.setRollingProduceTime(i.getTs());
+//                        warnTable.setRollingDeviceNumber("铸轧机1#");
+//                        warnTable.setPara("工艺参数");
+//                        warnTableService.save(warnTable);
+//                    }
                 }
 
             });
