@@ -170,7 +170,6 @@ public class LmdpQcColdReelReportServiceImpl extends ServiceImpl<LmdpQcColdReelR
         } else if ("unqualified".equals(lmdpQcColdReelReport.getFacadeQc())) {
             unqualifiedCount++;
         }
-        logger.info("qualifiedCount:{},unqualifiedCount:{}", qualifiedCount, unqualifiedCount);
 
         // 根据合格和不合格的数量判断最终质量
         if (qualifiedCount == 5) {

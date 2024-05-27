@@ -22,5 +22,4 @@ logging:
   level:
     root: info
   pattern:
-#    console: "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
     console: "%clr(%d{HH:mm:ss.SSS}){gray} %clr(%-6level) %clr(${PID:- }){magenta} %clr(---){gray} %clr([%15.15t]){blue} %clr(%logger{39}){cyan} %clr(:){green} %m%n%wEx"
