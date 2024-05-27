@@ -1,6 +1,5 @@
 package com.szj.djk.service.impl;
 
-import com.alibaba.fastjson.JSON;
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -18,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,33 +49,29 @@ public class LmdpQcColdReelReportServiceImpl extends ServiceImpl<LmdpQcColdReelR
         queryWrapper.like(lmdpQcColdReelReport.getBatchNum() != null, LmdpQcColdReelReport::getBatchNum, lmdpQcColdReelReport.getBatchNum())
                 .between(lmdpQcColdReelReport.getStartDateTime()!=null && lmdpQcColdReelReport.getEndDateTime()!=null, LmdpQcColdReelReport::getReportTime, lmdpQcColdReelReport.getStartDateTime(), lmdpQcColdReelReport.getEndDateTime())
                 .orderByDesc(LmdpQcColdReelReport::getReportTime);
-
         Page<LmdpQcColdReelReport> page = lmdpQcColdReelReportMapper.selectPage(pageInfo, queryWrapper);
-        page.getRecords().forEach(item->{
-            LambdaQueryWrapper<LmdpQcColdInspect> queryWrapper1 = new LambdaQueryWrapper<>();
-            queryWrapper1.eq(LmdpQcColdInspect::getBatchNum, item.getBatchNum());
-            LmdpQcColdInspect lmdpQcColdInspect = lmdpQcColdInspectMapper.selectOne(queryWrapper1);
-            if (lmdpQcColdInspect == null){
-                LmdpQcColdInspect lmdpQcColdInspect1 = new LmdpQcColdInspect();
-                item.setLmdpQcColdInspect(lmdpQcColdInspect1);
-                SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip1 = new SlaveErpPlanColdreductionstrip();
-                item.setSlaveErpPlanColdreductionstrip(slaveErpPlanColdreductionstrip1);
-                return;
-            }else{
-                item.setLmdpQcColdInspect(lmdpQcColdInspect);
-            }
 
+        List<LmdpQcColdReelReport> qcColdReelReports = page.getRecords();
+
+        for (LmdpQcColdReelReport qcColdReelReport : qcColdReelReports) {
+
+            convertDbFieldToText(qcColdReelReport);
+
+            LambdaQueryWrapper<LmdpQcColdInspect> queryWrapper1 = new LambdaQueryWrapper<>();
+            queryWrapper1.eq(LmdpQcColdInspect::getBatchNum, qcColdReelReport.getBatchNum());
+            LmdpQcColdInspect lmdpQcColdInspect = lmdpQcColdInspectMapper.selectOne(queryWrapper1);
+            if (null == lmdpQcColdInspect) {
+                qcColdReelReport.setLmdpQcColdInspect(null);
+                qcColdReelReport.setSlaveErpPlanColdreductionstrip(null);
+                continue;
+            }
+            qcColdReelReport.setLmdpQcColdInspect(lmdpQcColdInspect);
 
             LambdaQueryWrapper<SlaveErpPlanColdreductionstrip> queryWrapper2 = new LambdaQueryWrapper<>();
             queryWrapper2.eq(SlaveErpPlanColdreductionstrip::getColdreductionstripNum, lmdpQcColdInspect.getPlanNum());
             SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip = slaveErpPlanColdreductionstripMapper.selectOne(queryWrapper2);
-            if (slaveErpPlanColdreductionstrip == null) {
-                SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip1 = new SlaveErpPlanColdreductionstrip();
-                item.setSlaveErpPlanColdreductionstrip(slaveErpPlanColdreductionstrip1);
-            }else {
-                item.setSlaveErpPlanColdreductionstrip(slaveErpPlanColdreductionstrip);
-            }
-        });
+            qcColdReelReport.setSlaveErpPlanColdreductionstrip(slaveErpPlanColdreductionstrip);
+        }
         return page;
     }
 
@@ -83,17 +79,31 @@ public class LmdpQcColdReelReportServiceImpl extends ServiceImpl<LmdpQcColdReelR
     @DS("slave")
     public List<Map<String, Integer>> getEveryDayInfo(String startTime, String endTime) {
 
-        List<Map<String, Integer>> everyDayInfo = lmdpQcColdReelReportMapper.getEveryDayInfo(startTime, endTime);
-
-        logger.info("查询每日质检报告单：{}", JSON.toJSONString(everyDayInfo));
-
-        return everyDayInfo;
+        return lmdpQcColdReelReportMapper.getEveryDayInfo(startTime, endTime);
     }
 
     @Override
     @DS("slave")
     public List<Map<String, Integer>> getRangeDayInfo(String startTime, String endTime) {
         return lmdpQcColdReelReportMapper.getRangeDayInfo(startTime, endTime);
+    }
+
+
+    private LmdpQcColdReelReport convertDbFieldToText(LmdpQcColdReelReport lmdpQcColdReelReport) {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("qualified", "合格");
+        map.put("unqualified", "异常");
+        map.put(null, "暂未判定");
+        lmdpQcColdReelReport.setShapeQc(map.get(lmdpQcColdReelReport.getShapeQc()));
+        lmdpQcColdReelReport.setDimensionalDeviation(map.get(lmdpQcColdReelReport.getDimensionalDeviation()));
+        lmdpQcColdReelReport.setSurfaceQc(map.get(lmdpQcColdReelReport.getSurfaceQc()));
+        lmdpQcColdReelReport.setFacadeQc(map.get(lmdpQcColdReelReport.getFacadeQc()));
+        lmdpQcColdReelReport.setMechanicalProperty(map.get(lmdpQcColdReelReport.getMechanicalProperty()));
+        return lmdpQcColdReelReport;
+    }
+
+    private String assessColdRolledCoilQuality(LmdpQcColdReelReport lmdpQcColdReelReport) {
+        return "";
     }
 }
 
