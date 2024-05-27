@@ -112,6 +112,9 @@ public class LmdpQcColdReelReport extends BaseEntity implements Serializable {
     @TableField(value = "shape_qc")
     private String shapeQc;
 
+    @TableField(value = "comprehensive_judge")
+    private String comprehensiveJudge;
+
     /**
      * 尺寸偏差
      */
