@@ -112,13 +112,13 @@ public class OneAnneaFurController {
          */
                 newlist.forEach(i->{
                     if(i.getZoneOneT() > 100){
-                        if(i.getCoolWaterUpLimit()>valueRange.getShangDD() || i.getCoolWaterUpLimit()<valueRange.getShangDD1() ){
-                            warnTable.setRollingName("炉冷却水");
-                            warnTable.setRollingValue(i.getCoolWaterUpLimit());
-                            warnTable.setRollingProduceTime(i.getTs());
-                            warnTable.setRollingDeviceNumber("退火炉1#");
-                            warnTableService.save(warnTable);
-                        }
+//                        if(i.getCoolWaterUpLimit()>valueRange.getShangDD() || i.getCoolWaterUpLimit()<valueRange.getShangDD1() ){
+//                            warnTable.setRollingName("炉冷却水");
+//                            warnTable.setRollingValue(i.getCoolWaterUpLimit());
+//                            warnTable.setRollingProduceTime(i.getTs());
+//                            warnTable.setRollingDeviceNumber("退火炉1#");
+//                            warnTableService.save(warnTable);
+//                        }
 //            if(i.getCompressedAirOneLowPressure()>valueRange.getXiaDD()){
 //                warnTable.setRollingName("炉压缩空气");
 //                warnTable.setRollingValue(i.getCompressedAirOneLowPressure());

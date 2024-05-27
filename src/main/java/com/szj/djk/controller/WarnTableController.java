@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -28,19 +29,30 @@ public class WarnTableController {
     private WarnTableService warnTableService;
 
     /**
-     * 获取设备参数
+     * 获取设备参数（20240423）
      */
+//    @GetMapping("/getDevice")
+//    public R<List<WarnTable>> Devicelist(WarnTable warnTable){
+//        LambdaQueryWrapper<WarnTable> queryWrapper = new LambdaQueryWrapper<>();
+//        queryWrapper.setEntity(warnTable)
+//                .eq(WarnTable::getPara,"设备参数")
+//                .orderByDesc(true,WarnTable::getRollingProduceTime)
+//                .last("limit 30");
+//        List<WarnTable> list = warnTableService.list(queryWrapper);
+//        return R.success(list);
+//    }
+
     @GetMapping("/getDevice")
     public R<List<WarnTable>> Devicelist(WarnTable warnTable){
         LambdaQueryWrapper<WarnTable> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.setEntity(warnTable)
                 .eq(WarnTable::getPara,"设备参数")
+                .between(WarnTable::getRollingProduceTime, LocalDate.now().minusDays(7),LocalDate.now())
                 .orderByDesc(true,WarnTable::getRollingProduceTime)
                 .last("limit 30");
         List<WarnTable> list = warnTableService.list(queryWrapper);
         return R.success(list);
     }
-
     /**
      * 获取工艺参数
      */

@@ -41,11 +41,14 @@
         trans_preload_force,roll_tension,roll_diameter,
         ti_wire_speed,with_material_speed,create_time
     </sql>
-    <sql id="selectRollingMachineVo">
-        select * from one_castroll WHERE ts>=SYSDATE()-20
-    </sql>
+
+
+    <select id="selectRollingMachineVo" resultType="com.szj.djk.entity.OneCastroll" resultMap="BaseResultMap" >
+        select ts,up_roll_montor_a from one_castroll limit 3670
+    </select>
+
     <!--修改实时数据更新方式-->
-    <sql id="selectRollingMachineVoNow">
+    <sql id="selectRollingMachineVoNow" >
         select * from one_castroll
     </sql>
 

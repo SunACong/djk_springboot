@@ -37,6 +37,17 @@ public class OneCastrollController {
     @Autowired
     private WarnTableService warnTableService;
 
+
+    /**
+     * 查询铸轧机最新数据
+     */
+    @GetMapping("/testmoreMsg")
+    public R<List<OneCastroll>> testmoreMsg(){
+        List<OneCastroll> rollingMachines = oneCastrollService.selectRollingMachineVo();
+        return  R.success(rollingMachines);
+    }
+
+
     /**
      * 查询铸轧机最新数据
      */

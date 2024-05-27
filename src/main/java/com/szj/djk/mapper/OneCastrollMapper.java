@@ -16,6 +16,12 @@ import java.util.List;
 */
 @Mapper
 public interface OneCastrollMapper extends BaseMapper<OneCastroll> {
+
+
+    /**
+     * 测试最大数据量
+     */
+    public List<OneCastroll> selectRollingMachineVo();
     /**
      * 查询最新20条数据
      */
