@@ -66,12 +66,12 @@
     </sql>
 
     <select id="getEveryDayInfo" resultType="java.util.Map">
-        select DATE_FORMAT( report_time, '%Y-%m-%d' ) inspectCreateTime, sum(inspector_judge='qualified') qualified, sum(inspector_judge='unqualified') noQualified, sum(inspector_judge is NULL) tentativ from lmdp_qc_cold_reel_report
+        select DATE_FORMAT( report_time, '%Y-%m-%d' ) inspectCreateTime, sum(judge_result='qualifieda') qualified, sum(judge_result='release') noQualified, sum(judge_result is NULL) tentativ from lmdp_qc_cold_reel_report
         where report_time BETWEEN #{startTime} and date_add(#{endTime},interval 1 day) GROUP BY DATE_FORMAT( report_time, '%Y-%m-%d' ) order by DATE_FORMAT( report_time, '%Y-%m-%d' )
     </select>
 
     <select id="getRangeDayInfo" resultType="java.util.Map">
-        select sum(inspector_judge='qualified') qualified, sum(inspector_judge='unqualified') noQualified, sum(inspector_judge is NULL) tentative from lmdp_qc_cold_reel_report
+        select sum(judge_result='qualifieda') qualified, sum(judge_result='release') noQualified, sum(judge_result is NULL) tentative from lmdp_qc_cold_reel_report
         where report_time BETWEEN #{startTime} and date_add(#{endTime},interval 1 day)
     </select>
 </mapper>

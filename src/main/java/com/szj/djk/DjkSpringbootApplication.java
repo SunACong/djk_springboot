@@ -2,13 +2,14 @@ package com.szj.djk;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 
 /**
  * @author Admin
  */
-//@EnableScheduling
+@EnableScheduling
 @SpringBootApplication
 @EnableTransactionManagement
 public class DjkSpringbootApplication {
@@ -23,7 +24,4 @@ public class DjkSpringbootApplication {
                 " |_____/ \\____/|_|\\_\\\n");
     }
 
-    static {
-        System.setProperty("druid.mysql.usePingMethod","false");
-    }
 }

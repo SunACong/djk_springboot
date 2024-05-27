@@ -15,7 +15,7 @@ import java.util.Map;
 public interface PlanAndInspectService extends IService<PlanAndInspect> {
     String getRecentTs();
 
-    String saveBatchOrUpdate();
+    Boolean saveBatchOrUpdate();
 
     Page<PlanAndInspect> pageList(Page<PlanAndInspect> pageInfo, PlanAndInspect planAndInspect);
 

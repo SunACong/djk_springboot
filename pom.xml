@@ -12,7 +12,7 @@
 
     <groupId>com.szj</groupId>
     <artifactId>djk</artifactId>
-    <version>5.26.1424</version>
+    <version>7.13.1722</version>
     <name>djk_springboot</name>
 
     <properties>
@@ -53,7 +53,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.76</version>
+            <version>2.0.49</version>
         </dependency>
 
         <dependency>

@@ -1,5 +1,7 @@
 package com.szj.djk.service.impl;
 
+
+import com.alibaba.fastjson.JSON;
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
@@ -14,7 +16,8 @@ import com.szj.djk.service.SlaveErpPlanColdreductionstripService;
 import com.szj.djk.utils.GetDetermination;
 import com.szj.djk.vo.PlanAndInspect;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -31,6 +34,8 @@ import java.util.Map;
 @Service
 public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper, PlanAndInspect>
     implements PlanAndInspectService{
+
+    private final Logger logger = LoggerFactory.getLogger(PlanAndInspectServiceImpl.class);
 
     @Resource
     private PlanAndInspectMapper planAndInspectMapper;
@@ -50,10 +55,14 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
         return ts;
     }
 
+    /**
+     * 自动判定版本
+     * 根据主数据库中的最新的时间取拉去，该时间的后面的数据
+     * 经过判定后再更新至数据库
+     */
     @Override
-    @Scheduled(cron = "0/5 * * * * ?")
     @DS("master")
-    public String saveBatchOrUpdate() {
+    public Boolean saveBatchOrUpdate() {
         // 获取主数据库plan_and_inspect最近一次的时间戳
         String ts = getRecentTs();
         // 切换数据源
@@ -62,8 +71,9 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
         LambdaQueryWrapper<LmdpQcColdInspect> wrapper = new LambdaQueryWrapper<>();
         wrapper.gt(LmdpQcColdInspect::getTs, ts);
         List<LmdpQcColdInspect> list = lmdpQcColdInspectService.list(wrapper);
-        if (list.size() == 0) {
-            return "没有需要更新的数据";
+        if (list.isEmpty()) {
+            logger.info("没有要更新的数据！！");
+            return true;
         }
         List<PlanAndInspect> list1 = new ArrayList<>();
         // 合并数据并判断是否需要更新
@@ -72,7 +82,7 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
             wrapper1.eq(SlaveErpPlanColdreductionstrip::getColdreductionstripNum, lmdpQcColdInspect.getPlanNum());
             SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip = slaveErpPlanColdreductionstripService.getOne(wrapper1);
             if (slaveErpPlanColdreductionstrip == null) {
-                log.info("没找到对应的冷轧");
+                logger.info("没找到对应的冷轧");
                 return;
             }
             // 判定
@@ -80,24 +90,29 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
             list1.add(planAndInspect);
         });
         DynamicDataSourceContextHolder.poll();
-        Boolean isSucc = planAndInspectMapper.saveBatchOrUpdate(list1);
-        if (isSucc) {
-            log.info("判定成功");
-            return "判定成功";
+        if ( planAndInspectMapper.saveBatchOrUpdate(list1) ) {
+            logger.info("更新成功");
+            return true;
         }
-        log.info("判定失败");
-        return "判定失败";
+        logger.info("更新失败");
+        return false;
     }
 
     @Override
     @DS("master")
     public Page<PlanAndInspect> pageList(Page<PlanAndInspect> pageInfo, PlanAndInspect planAndInspect) {
+
+        logger.info("质量判定信息列表：pageInfo:{}, planAndInspect:{}", JSON.toJSONString(pageInfo), JSON.toJSONString(planAndInspect));
+
         LambdaQueryWrapper<PlanAndInspect> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.setEntity(planAndInspect)
                 .between(planAndInspect.getStartDateTime()!=null && planAndInspect.getEndDateTime()!=null, PlanAndInspect::getInspectCreateTime, planAndInspect.getStartDateTime(), planAndInspect.getEndDateTime())
                 .orderByDesc(PlanAndInspect::getInspectCreateTime);
         Page<PlanAndInspect> page = planAndInspectMapper.selectPage(pageInfo, queryWrapper);
+
+        // 获取从数据库中数据
         DynamicDataSourceContextHolder.push("slave");
+
         page.getRecords().forEach( item -> {
             // 根据planNum从计划表中获取数据
             LambdaQueryWrapper<SlaveErpPlanColdreductionstrip> wrapper1 = new LambdaQueryWrapper<>();
@@ -111,7 +126,10 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
             item.setSlaveErpPlanColdreductionstrip(slaveErpPlanColdreductionstrip);
             item.setLmdpQcColdInspect(lmdpQcColdInspect);
         });
+
+        // 切换回主数据库
         DynamicDataSourceContextHolder.poll();
+
         return page;
     }
 

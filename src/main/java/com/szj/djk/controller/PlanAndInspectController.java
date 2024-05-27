@@ -31,16 +31,14 @@ public class PlanAndInspectController {
      */
     @GetMapping("saveBatchOrUpdate")
     public R<String> saveBatchOrUpdate(){
-        String str = planAndInspectService.saveBatchOrUpdate();
-        return R.success(str);
+        if ( planAndInspectService.saveBatchOrUpdate() ){
+            return R.success("更新成功");
+        }
+        return R.error("更新失败");
     }
 
     /**
      * 分页查询质量合格判定表格数据
-     * @param pageNum
-     * @param pageSize
-     * @param planAndInspect
-     * @return
      */
     @GetMapping("list")
     public R<Page> list(int pageNum, int pageSize, PlanAndInspect planAndInspect){
@@ -51,9 +49,6 @@ public class PlanAndInspectController {
 
     /**
      * 统计一段时间内每天的合格率信息 用于生成折线图
-     * @param startTime
-     * @param endTime
-     * @return
      */
     @GetMapping("everyDayInfo")
     public R<List<Map<String, Integer>>> getEveryDayInfo(@RequestParam("startTime") String startTime, @RequestParam("endTime") String endTime){
@@ -63,9 +58,6 @@ public class PlanAndInspectController {
 
     /**
      * 统计一段时间内的合格率信息 用于折线图上部的信息展示
-     * @param startTime
-     * @param endTime
-     * @return
      */
     @GetMapping("rangeDayInfo")
     public R<List<Map<String, Integer>>> getRangeDayInfo(@RequestParam("startTime") String startTime, @RequestParam("endTime") String endTime){
