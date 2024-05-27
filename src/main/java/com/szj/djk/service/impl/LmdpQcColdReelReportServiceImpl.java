@@ -85,7 +85,7 @@ public class LmdpQcColdReelReportServiceImpl extends ServiceImpl<LmdpQcColdReelR
 
         List<Map<String, Integer>> everyDayInfo = lmdpQcColdReelReportMapper.getEveryDayInfo(startTime, endTime);
 
-        logger.info("查询每日质检报告单信息：{}", JSON.toJSONString(everyDayInfo));
+        logger.info("查询每日质检报告单：{}", JSON.toJSONString(everyDayInfo));
 
         return everyDayInfo;
     }

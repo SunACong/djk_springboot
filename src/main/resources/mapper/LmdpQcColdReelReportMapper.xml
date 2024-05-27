@@ -66,12 +66,30 @@
     </sql>
 
     <select id="getEveryDayInfo" resultType="java.util.Map">
-        select DATE_FORMAT( report_time, '%Y-%m-%d' ) inspectCreateTime, sum(judge_result='qualifieda') qualified, sum(judge_result='release') noQualified, sum(judge_result is NULL) tentativ from lmdp_qc_cold_reel_report
-        where report_time BETWEEN #{startTime} and date_add(#{endTime},interval 1 day) GROUP BY DATE_FORMAT( report_time, '%Y-%m-%d' ) order by DATE_FORMAT( report_time, '%Y-%m-%d' )
+        SELECT
+            DATE_FORMAT(report_time, '%Y-%m-%d') AS inspectCreateTime,
+            IFNULL(SUM(judge_result = 'qualifieda'), 0) AS qualified,
+            IFNULL(SUM(judge_result = 'release'), 0) AS noQualified,
+            SUM(judge_result IS NULL) AS tentative
+        FROM
+            lmdp_qc_cold_reel_report
+        WHERE
+            report_time BETWEEN #{startTime} AND DATE_ADD(#{endTime}, INTERVAL 1 DAY)
+        GROUP BY
+            DATE_FORMAT(report_time, '%Y-%m-%d')
+        ORDER BY
+            DATE_FORMAT(report_time, '%Y-%m-%d');
     </select>
 
     <select id="getRangeDayInfo" resultType="java.util.Map">
-        select sum(judge_result='qualifieda') qualified, sum(judge_result='release') noQualified, sum(judge_result is NULL) tentative from lmdp_qc_cold_reel_report
-        where report_time BETWEEN #{startTime} and date_add(#{endTime},interval 1 day)
+        SELECT
+            SUM(judge_result = 'qualifieda') qualified,
+            SUM(judge_result = 'release') noQualified,
+            SUM(judge_result IS NULL) tentative
+        FROM
+            lmdp_qc_cold_reel_report
+        WHERE
+            report_time BETWEEN #{ startTime }
+          AND date_add( #{ endTime }, INTERVAL 1 DAY)
     </select>
 </mapper>
