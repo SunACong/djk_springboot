@@ -4,9 +4,6 @@ server:
 spring:
   profiles:
     active: dev
-  devtools:
-    restart:
-      enabled: true
 
 mybatis-plus:
   configuration:
