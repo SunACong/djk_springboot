@@ -6,8 +6,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.szj.djk.common.BaseEntity;
+import com.szj.djk.entity.ErpPlanColdreductionstrip;
 import com.szj.djk.entity.LmdpQcColdInspect;
-import com.szj.djk.entity.SlaveErpPlanColdreductionstrip;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -110,7 +110,7 @@ public class PlanAndInspect extends BaseEntity implements Serializable {
      * 计划表
      */
     @TableField(exist = false)
-    private SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip;
+    private ErpPlanColdreductionstrip erpPlanColdreductionstrip;
 
     /**
      * 巡检表

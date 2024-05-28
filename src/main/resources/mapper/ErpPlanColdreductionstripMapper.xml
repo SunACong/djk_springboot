@@ -40,7 +40,6 @@
             <result property="endwiseHeight" column="endwise_height" jdbcType="VARCHAR"/>
             <result property="warpWidth" column="warp_width" jdbcType="VARCHAR"/>
             <result property="convexRate" column="convex_rate" jdbcType="VARCHAR"/>
-            <result property="appearanceReq" column="appearance_req" jdbcType="VARCHAR"/>
             <result property="productCheck" column="product_check" jdbcType="VARCHAR"/>
             <result property="type" column="type" jdbcType="BIGINT"/>
             <result property="finished" column="finished" jdbcType="BIGINT"/>
@@ -67,7 +66,6 @@
             <result property="datatype" column="datatype" jdbcType="VARCHAR"/>
             <result property="enterTime" column="enter_time" jdbcType="TIMESTAMP"/>
             <result property="datatime" column="datatime" jdbcType="TIMESTAMP"/>
-            <result property="importTaskId" column="_import_task_id" jdbcType="VARCHAR"/>
             <result property="erpDataId" column="erp_data_id" jdbcType="BIGINT"/>
     </resultMap>
 

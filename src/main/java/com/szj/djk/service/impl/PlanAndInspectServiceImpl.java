@@ -7,12 +7,12 @@ import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.szj.djk.entity.ErpPlanColdreductionstrip;
 import com.szj.djk.entity.LmdpQcColdInspect;
-import com.szj.djk.entity.SlaveErpPlanColdreductionstrip;
+import com.szj.djk.mapper.ErpPlanColdreductionstripMapper;
+import com.szj.djk.mapper.LmdpQcColdInspectMapper;
 import com.szj.djk.mapper.PlanAndInspectMapper;
-import com.szj.djk.service.LmdpQcColdInspectService;
 import com.szj.djk.service.PlanAndInspectService;
-import com.szj.djk.service.SlaveErpPlanColdreductionstripService;
 import com.szj.djk.utils.GetDetermination;
 import com.szj.djk.vo.PlanAndInspect;
 import lombok.extern.slf4j.Slf4j;
@@ -41,10 +41,10 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
     private PlanAndInspectMapper planAndInspectMapper;
 
     @Resource
-    private SlaveErpPlanColdreductionstripService slaveErpPlanColdreductionstripService;
+    private ErpPlanColdreductionstripMapper erpPlanColdreductionstripMapper;
 
     @Resource
-    private LmdpQcColdInspectService lmdpQcColdInspectService;
+    private LmdpQcColdInspectMapper lmdpQcColdInspectMapper;
 
     @Override
     public String getRecentTs() {
@@ -70,7 +70,7 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
         // 获取从数据库lmdp_qc_cold_inspect中时间戳大于plan_and_inspect中的时间戳的数据
         LambdaQueryWrapper<LmdpQcColdInspect> wrapper = new LambdaQueryWrapper<>();
         wrapper.gt(LmdpQcColdInspect::getTs, ts);
-        List<LmdpQcColdInspect> list = lmdpQcColdInspectService.list(wrapper);
+        List<LmdpQcColdInspect> list = lmdpQcColdInspectMapper.selectList(wrapper);
         if (list.isEmpty()) {
             logger.info("没有要更新的数据！！");
             return true;
@@ -78,15 +78,15 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
         List<PlanAndInspect> list1 = new ArrayList<>();
         // 合并数据并判断是否需要更新
         list.forEach(lmdpQcColdInspect ->{
-            LambdaQueryWrapper<SlaveErpPlanColdreductionstrip> wrapper1 = new LambdaQueryWrapper<>();
-            wrapper1.eq(SlaveErpPlanColdreductionstrip::getColdreductionstripNum, lmdpQcColdInspect.getPlanNum());
-            SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip = slaveErpPlanColdreductionstripService.getOne(wrapper1);
-            if (slaveErpPlanColdreductionstrip == null) {
+            LambdaQueryWrapper<ErpPlanColdreductionstrip> wrapper1 = new LambdaQueryWrapper<>();
+            wrapper1.eq(ErpPlanColdreductionstrip::getColdreductionstripNum, lmdpQcColdInspect.getPlanNum());
+            ErpPlanColdreductionstrip ErpPlanColdreductionstrip = erpPlanColdreductionstripMapper.selectOne(wrapper1);
+            if (ErpPlanColdreductionstrip == null) {
                 logger.info("没找到对应的冷轧");
                 return;
             }
             // 判定
-            PlanAndInspect planAndInspect = GetDetermination.doAllDetermination(slaveErpPlanColdreductionstrip, lmdpQcColdInspect);
+            PlanAndInspect planAndInspect = GetDetermination.doAllDetermination(ErpPlanColdreductionstrip, lmdpQcColdInspect);
             list1.add(planAndInspect);
         });
         DynamicDataSourceContextHolder.poll();
@@ -115,15 +115,15 @@ public class PlanAndInspectServiceImpl extends ServiceImpl<PlanAndInspectMapper,
 
         page.getRecords().forEach( item -> {
             // 根据planNum从计划表中获取数据
-            LambdaQueryWrapper<SlaveErpPlanColdreductionstrip> wrapper1 = new LambdaQueryWrapper<>();
-            wrapper1.eq(SlaveErpPlanColdreductionstrip::getColdreductionstripNum, item.getPlanNum());
-                SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip = slaveErpPlanColdreductionstripService.getOne(wrapper1);
+            LambdaQueryWrapper<ErpPlanColdreductionstrip> wrapper1 = new LambdaQueryWrapper<>();
+            wrapper1.eq(ErpPlanColdreductionstrip::getColdreductionstripNum, item.getPlanNum());
+                ErpPlanColdreductionstrip ErpPlanColdreductionstrip = erpPlanColdreductionstripMapper.selectOne(wrapper1);
             // 根据batchNum从巡检表中获取数据
             LambdaQueryWrapper<LmdpQcColdInspect> wrapper2 = new LambdaQueryWrapper<>();
             wrapper2.eq(LmdpQcColdInspect::getBatchNum, item.getBatchNum().substring(0, 8));
-            LmdpQcColdInspect lmdpQcColdInspect = lmdpQcColdInspectService.getOne(wrapper2);
+            LmdpQcColdInspect lmdpQcColdInspect = lmdpQcColdInspectMapper.selectOne(wrapper2);
             // 塞进record中
-            item.setSlaveErpPlanColdreductionstrip(slaveErpPlanColdreductionstrip);
+            item.setErpPlanColdreductionstrip(ErpPlanColdreductionstrip);
             item.setLmdpQcColdInspect(lmdpQcColdInspect);
         });
 

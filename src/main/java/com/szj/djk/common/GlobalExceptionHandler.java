@@ -28,7 +28,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BadSqlGrammarException.class)
     public R<String> sqlGrammarExceptionHandler(Exception exception){
         log.error(exception.getMessage());
-        return R.error("SQL参数异常");
+        return R.error("后台表已经更新，请及时更新");
     }
 
     /**

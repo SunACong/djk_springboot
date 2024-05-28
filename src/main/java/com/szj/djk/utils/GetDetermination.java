@@ -3,11 +3,11 @@ package com.szj.djk.utils;
 import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.dynamic.datasource.toolkit.DynamicDataSourceContextHolder;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.szj.djk.entity.ErpPlanColdreductionstrip;
 import com.szj.djk.entity.LmdpQcColdInspect;
-import com.szj.djk.entity.SlaveErpPlanColdreductionstrip;
+import com.szj.djk.service.ErpPlanColdreductionstripService;
 import com.szj.djk.service.LmdpQcColdInspectService;
 import com.szj.djk.service.PlanAndInspectService;
-import com.szj.djk.service.SlaveErpPlanColdreductionstripService;
 import com.szj.djk.vo.PlanAndInspect;
 import org.springframework.stereotype.Component;
 
@@ -30,7 +30,7 @@ public class GetDetermination {
     private LmdpQcColdInspectService lmdpQcColdInspectService;
 
     @Resource
-    private SlaveErpPlanColdreductionstripService slaveErpPlanColdreductionstripService;
+    private ErpPlanColdreductionstripService ErpPlanColdreductionstripService;
 
     @Resource
     private PlanAndInspectService planAndInspectService;
@@ -46,8 +46,8 @@ public class GetDetermination {
         System.out.println(ts);
         List<PlanAndInspect> list1 = new ArrayList<>();
         list.forEach(lmdpQcColdInspect ->{
-            SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip = getSlaveErpPlanColdreductionstripByPlanNum(lmdpQcColdInspect.getPlanNum());
-            PlanAndInspect planAndInspect = mergePlanAndInspect(slaveErpPlanColdreductionstrip, lmdpQcColdInspect);
+            ErpPlanColdreductionstrip ErpPlanColdreductionstrip = getErpPlanColdreductionstripByPlanNum(lmdpQcColdInspect.getPlanNum());
+            PlanAndInspect planAndInspect = mergePlanAndInspect(ErpPlanColdreductionstrip, lmdpQcColdInspect);
             list1.add(planAndInspect);
         });
         list1.forEach(
@@ -83,22 +83,22 @@ public class GetDetermination {
     /**
      * 通过冷轧计划查询冷轧计划表  从库 lmdb_cold_plan
      */
-    private SlaveErpPlanColdreductionstrip getSlaveErpPlanColdreductionstripByPlanNum(String coldreductionstripNum){
+    private ErpPlanColdreductionstrip getErpPlanColdreductionstripByPlanNum(String coldreductionstripNum){
         DynamicDataSourceContextHolder.push("slave");
-        LambdaQueryWrapper<SlaveErpPlanColdreductionstrip> wrapper = new LambdaQueryWrapper<>();
-        wrapper.eq(SlaveErpPlanColdreductionstrip::getColdreductionstripNum, coldreductionstripNum);
-        SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip = slaveErpPlanColdreductionstripService.getOne(wrapper);
+        LambdaQueryWrapper<ErpPlanColdreductionstrip> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(ErpPlanColdreductionstrip::getColdreductionstripNum, coldreductionstripNum);
+        ErpPlanColdreductionstrip ErpPlanColdreductionstrip = ErpPlanColdreductionstripService.getOne(wrapper);
         DynamicDataSourceContextHolder.poll();
-        return slaveErpPlanColdreductionstrip;
+        return ErpPlanColdreductionstrip;
     }
 
-    private static PlanAndInspect mergePlanAndInspect(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
+    private static PlanAndInspect mergePlanAndInspect(ErpPlanColdreductionstrip ErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
         PlanAndInspect planAndInspect = new PlanAndInspect();
         planAndInspect.setBatchNum(lmdpQcColdInspect.getBatchNum());
         planAndInspect.setPlanNum(lmdpQcColdInspect.getPlanNum());
         planAndInspect.setInspectCreateTime(lmdpQcColdInspect.getCreateTime());
         planAndInspect.setTs(lmdpQcColdInspect.getTs());
-        planAndInspect.setSlaveErpPlanColdreductionstrip(slaveErpPlanColdreductionstrip);
+        planAndInspect.setErpPlanColdreductionstrip(ErpPlanColdreductionstrip);
         planAndInspect.setLmdpQcColdInspect(lmdpQcColdInspect);
         return planAndInspect;
     }
@@ -107,7 +107,7 @@ public class GetDetermination {
      * 板型判定
      * @return  0 不合格  1 合格 2 暂未判定
      */
-    private static int doPlateTypeDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
+    private static int doPlateTypeDetermination(ErpPlanColdreductionstrip ErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
 //        if (lmdpQcColdInspect.getSingleMediumConvexity() == null || lmdpQcColdInspect.getSingleStraightness() == null){
         if (lmdpQcColdInspect.getSingleMediumConvexity() == null){
             return 2;
@@ -118,13 +118,13 @@ public class GetDetermination {
         /** // 巡检表平直度
         double singleStraightness = lmdpQcColdInspect.getSingleStraightness().doubleValue();
         // 计划表平直度 暂时废弃
-        String flatness = slaveErpPlanColdreductionstrip.getFlatness();
+        String flatness = ErpPlanColdreductionstrip.getFlatness();
          */
-        if (slaveErpPlanColdreductionstrip.getConvexRate() == null){
+        if (ErpPlanColdreductionstrip.getConvexRate() == null){
             return 1;
         }
         // 计划表凸面率
-        String convexRate = slaveErpPlanColdreductionstrip.getConvexRate();
+        String convexRate = ErpPlanColdreductionstrip.getConvexRate();
         double[] doubles = strToDouble(convexRate);
         // 暂时只判断凸度
         if (singleMediumConvexity >= doubles[0] && singleMediumConvexity <= doubles[1]){
@@ -137,7 +137,7 @@ public class GetDetermination {
      * 力学性能判定
      * @return 0 不合格  1 合格 2 暂未判定
      */
-    private static int doMechanicalPropertiesDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
+    private static int doMechanicalPropertiesDetermination(ErpPlanColdreductionstrip ErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
         // 判断singleExtensionRe是否为空
         if (lmdpQcColdInspect.getSingleExtension() == null || lmdpQcColdInspect.getSingleStrength() == null){
             return 2;
@@ -147,13 +147,13 @@ public class GetDetermination {
         double singleStrength = lmdpQcColdInspect.getSingleStrength().doubleValue();
         String bendingPerformance = lmdpQcColdInspect.getBendingPerformanceRequirements();
         // 计划表延伸率 抗拉强度 弯折性能————————标准
-        String elongation = slaveErpPlanColdreductionstrip.getElongation();
+        String elongation = ErpPlanColdreductionstrip.getElongation();
         double[] elongations = strToDouble(elongation);
-        String tensileStrength = slaveErpPlanColdreductionstrip.getTensileStrength();
+        String tensileStrength = ErpPlanColdreductionstrip.getTensileStrength();
         double[] tensileStrengths = strToDouble(tensileStrength);
 
 //        System.out.println("巡检表延伸率:" + singleExtension);
-        // String bendingPerformanceS = slaveErpPlanColdreductionstrip.getBendingPerformance();
+        // String bendingPerformanceS = ErpPlanColdreductionstrip.getBendingPerformance();
         int flag = 0;
         if (singleExtension < elongations[0]){
             flag++;
@@ -210,7 +210,7 @@ public class GetDetermination {
      * 尺寸偏差判定
      * @return 0 不合格  1 合格 2 暂未判定
      */
-    private static int doDimensionalDeviationDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
+    private static int doDimensionalDeviationDetermination(ErpPlanColdreductionstrip ErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
         if (lmdpQcColdInspect.getSingleHeight() == null || lmdpQcColdInspect.getSingleWidth() == null || lmdpQcColdInspect.getModel() == null){
             return 2;
         }
@@ -225,9 +225,9 @@ public class GetDetermination {
         double[] doubles = strToDouble(model);
 
         // 计划表 宽度偏度范围±1 纵向厚度偏差范围≥2.5%
-        String warpWidth = slaveErpPlanColdreductionstrip.getWarpWidth();
+        String warpWidth = ErpPlanColdreductionstrip.getWarpWidth();
         double[] wrapWidths = strToDouble(warpWidth);
-        String endwiseHeight = slaveErpPlanColdreductionstrip.getEndwiseHeight();
+        String endwiseHeight = ErpPlanColdreductionstrip.getEndwiseHeight();
         double[] endwiseHeights = strToDouble(endwiseHeight);
 
         if (wrapWidths[1] == 0){
@@ -249,7 +249,7 @@ public class GetDetermination {
      * 表面质量判定
      * @return 0 不合格  1 合格 2 暂未判定
      */
-    private static int doSurfaceQualityDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
+    private static int doSurfaceQualityDetermination(ErpPlanColdreductionstrip ErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
         if (lmdpQcColdInspect.getSurfaceQuality() == null){
             return 2;
         }
@@ -264,7 +264,7 @@ public class GetDetermination {
      * 外观质量判定
      * @return  0 不合格  1 合格 2 暂未判定
      */
-    private static int doAppearanceQualityDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
+    private static int doAppearanceQualityDetermination(ErpPlanColdreductionstrip ErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
         if (lmdpQcColdInspect.getAppearanceQuality() == null){
             return 2;
         }
@@ -278,13 +278,13 @@ public class GetDetermination {
     /**
      * 总判定  0 不合格  1 合格 2 暂未判定
      */
-    public static PlanAndInspect doAllDetermination(SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
-        PlanAndInspect planAndInspect = mergePlanAndInspect(slaveErpPlanColdreductionstrip, lmdpQcColdInspect);
-        int one = doPlateTypeDetermination(slaveErpPlanColdreductionstrip, lmdpQcColdInspect);
-        int two = doSurfaceQualityDetermination(slaveErpPlanColdreductionstrip, lmdpQcColdInspect);
-        int three = doAppearanceQualityDetermination(slaveErpPlanColdreductionstrip, lmdpQcColdInspect);
-        int four = doDimensionalDeviationDetermination(slaveErpPlanColdreductionstrip, lmdpQcColdInspect);
-        int five = doMechanicalPropertiesDetermination(slaveErpPlanColdreductionstrip, lmdpQcColdInspect);
+    public static PlanAndInspect doAllDetermination(ErpPlanColdreductionstrip ErpPlanColdreductionstrip, LmdpQcColdInspect lmdpQcColdInspect){
+        PlanAndInspect planAndInspect = mergePlanAndInspect(ErpPlanColdreductionstrip, lmdpQcColdInspect);
+        int one = doPlateTypeDetermination(ErpPlanColdreductionstrip, lmdpQcColdInspect);
+        int two = doSurfaceQualityDetermination(ErpPlanColdreductionstrip, lmdpQcColdInspect);
+        int three = doAppearanceQualityDetermination(ErpPlanColdreductionstrip, lmdpQcColdInspect);
+        int four = doDimensionalDeviationDetermination(ErpPlanColdreductionstrip, lmdpQcColdInspect);
+        int five = doMechanicalPropertiesDetermination(ErpPlanColdreductionstrip, lmdpQcColdInspect);
         planAndInspect.setPlateTypeDetermination(one);
         planAndInspect.setSurfaceQualityDetermination(two);
         planAndInspect.setAppearanceQualityDetermination(three);

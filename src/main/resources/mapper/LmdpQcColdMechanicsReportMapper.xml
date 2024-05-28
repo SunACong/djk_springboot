@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.szj.djk.mapper.LmdpQcColdMechanicsReportMapper">
+
+    <resultMap id="BaseResultMap" type="com.szj.djk.entity.LmdpQcColdMechanicsReport">
+            <id property="id" column="id" jdbcType="VARCHAR"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="ts" column="ts" jdbcType="TIMESTAMP"/>
+            <result property="creatorId" column="creator_id" jdbcType="VARCHAR"/>
+            <result property="entrustOrder" column="entrust_order" jdbcType="VARCHAR"/>
+            <result property="sampleName" column="sample_name" jdbcType="VARCHAR"/>
+            <result property="sampleProject" column="sample_project" jdbcType="VARCHAR"/>
+            <result property="entrustOrg" column="entrust_org" jdbcType="VARCHAR"/>
+            <result property="entrustTime" column="entrust_time" jdbcType="TIMESTAMP"/>
+            <result property="batchNum" column="batch_num" jdbcType="VARCHAR"/>
+            <result property="model" column="model" jdbcType="VARCHAR"/>
+            <result property="sample1Num" column="sample1_num" jdbcType="VARCHAR"/>
+            <result property="sample1Width" column="sample1_width" jdbcType="DECIMAL"/>
+            <result property="sample1Thickness" column="sample1_thickness" jdbcType="DECIMAL"/>
+            <result property="sample1Strength" column="sample1_strength" jdbcType="DECIMAL"/>
+            <result property="sample1Extension" column="sample1_extension" jdbcType="DECIMAL"/>
+            <result property="sample2Num" column="sample2_num" jdbcType="VARCHAR"/>
+            <result property="sample2Width" column="sample2_width" jdbcType="DECIMAL"/>
+            <result property="sample2Thickness" column="sample2_thickness" jdbcType="DECIMAL"/>
+            <result property="sample2Strength" column="sample2_strength" jdbcType="DECIMAL"/>
+            <result property="sample2Extension" column="sample2_extension" jdbcType="DECIMAL"/>
+            <result property="sample3Num" column="sample3_num" jdbcType="VARCHAR"/>
+            <result property="sample3Width" column="sample3_width" jdbcType="DECIMAL"/>
+            <result property="sample3Thickness" column="sample3_thickness" jdbcType="DECIMAL"/>
+            <result property="sample3Strength" column="sample3_strength" jdbcType="DECIMAL"/>
+            <result property="sample3Extension" column="sample3_extension" jdbcType="DECIMAL"/>
+            <result property="avgStrength" column="avg_strength" jdbcType="DECIMAL"/>
+            <result property="avgExtension" column="avg_extension" jdbcType="DECIMAL"/>
+            <result property="correctStrength" column="correct_strength" jdbcType="VARCHAR"/>
+            <result property="correctExtension" column="correct_extension" jdbcType="VARCHAR"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+            <result property="analyst" column="analyst" jdbcType="VARCHAR"/>
+            <result property="reportTime" column="report_time" jdbcType="TIMESTAMP"/>
+            <result property="sampleType" column="sample_type" jdbcType="VARCHAR"/>
+            <result property="recheckClassification" column="recheck_classification" jdbcType="VARCHAR"/>
+            <result property="judgeResult" column="judge_result" jdbcType="VARCHAR"/>
+            <result property="grainSize1Up" column="grain_size1_up" jdbcType="VARCHAR"/>
+            <result property="grainSize1Down" column="grain_size1_down" jdbcType="VARCHAR"/>
+            <result property="sample4Width" column="sample4_width" jdbcType="DECIMAL"/>
+            <result property="sample4Thickness" column="sample4_thickness" jdbcType="DECIMAL"/>
+            <result property="sample4Strength" column="sample4_strength" jdbcType="DECIMAL"/>
+            <result property="sample4Extension" column="sample4_extension" jdbcType="DECIMAL"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,create_time,ts,
+        creator_id,entrust_order,sample_name,
+        sample_project,entrust_org,entrust_time,
+        batch_num,model,sample1_num,
+        sample1_width,sample1_thickness,sample1_strength,
+        sample1_extension,sample2_num,sample2_width,
+        sample2_thickness,sample2_strength,sample2_extension,
+        sample3_num,sample3_width,sample3_thickness,
+        sample3_strength,sample3_extension,avg_strength,
+        avg_extension,correct_strength,correct_extension,
+        remark,analyst,report_time,
+        sample_type,recheck_classification,judge_result,
+        grain_size1_up,grain_size1_down,sample4_width,
+        sample4_thickness,sample4_strength,sample4_extension
+    </sql>
+</mapper>

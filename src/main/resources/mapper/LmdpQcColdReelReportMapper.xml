@@ -43,6 +43,8 @@
             <result property="facadeQcRemark" column="facade_qc_remark" jdbcType="VARCHAR"/>
             <result property="sampleLevelRemark" column="sample_level_remark" jdbcType="VARCHAR"/>
             <result property="reviewAdvice" column="review_advice" jdbcType="VARCHAR"/>
+            <result property="thicknessDiff" column="thickness_diff" jdbcType="VARCHAR"/>
+            <result property="centralCrown" column="central_crown" jdbcType="VARCHAR"/>
             <result property="coldDate" column="cold_date" jdbcType="TIMESTAMP"/>
             <result property="productType" column="product_type" jdbcType="VARCHAR"/>
             <result property="hydrogenContent" column="hydrogen_content" jdbcType="VARCHAR"/>

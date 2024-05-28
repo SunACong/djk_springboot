@@ -4,12 +4,13 @@ import com.baomidou.dynamic.datasource.annotation.DS;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.szj.djk.entity.ErpPlanColdreductionstrip;
 import com.szj.djk.entity.LmdpQcColdInspect;
 import com.szj.djk.entity.LmdpQcColdReelReport;
-import com.szj.djk.entity.SlaveErpPlanColdreductionstrip;
+import com.szj.djk.mapper.ErpPlanColdreductionstripMapper;
 import com.szj.djk.mapper.LmdpQcColdInspectMapper;
+import com.szj.djk.mapper.LmdpQcColdMechanicsReportMapper;
 import com.szj.djk.mapper.LmdpQcColdReelReportMapper;
-import com.szj.djk.mapper.SlaveErpPlanColdreductionstripMapper;
 import com.szj.djk.service.LmdpQcColdReelReportService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -39,7 +40,9 @@ public class LmdpQcColdReelReportServiceImpl extends ServiceImpl<LmdpQcColdReelR
     @Resource
     private LmdpQcColdInspectMapper lmdpQcColdInspectMapper;
     @Resource
-    private SlaveErpPlanColdreductionstripMapper slaveErpPlanColdreductionstripMapper;
+    private ErpPlanColdreductionstripMapper erpPlanColdreductionstripMapper;
+    @Resource
+    private LmdpQcColdMechanicsReportMapper lmdpQcColdMechanicsReportMapper;
 
     @Override
     @DS("slave")
@@ -64,15 +67,15 @@ public class LmdpQcColdReelReportServiceImpl extends ServiceImpl<LmdpQcColdReelR
             LmdpQcColdInspect lmdpQcColdInspect = lmdpQcColdInspectMapper.selectOne(queryWrapper1);
             if (null == lmdpQcColdInspect) {
                 qcColdReelReport.setLmdpQcColdInspect(null);
-                qcColdReelReport.setSlaveErpPlanColdreductionstrip(null);
+                qcColdReelReport.setErpPlanColdreductionstrip(null);
                 continue;
             }
             qcColdReelReport.setLmdpQcColdInspect(lmdpQcColdInspect);
 
-            LambdaQueryWrapper<SlaveErpPlanColdreductionstrip> queryWrapper2 = new LambdaQueryWrapper<>();
-            queryWrapper2.eq(SlaveErpPlanColdreductionstrip::getColdreductionstripNum, lmdpQcColdInspect.getPlanNum());
-            SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip = slaveErpPlanColdreductionstripMapper.selectOne(queryWrapper2);
-            qcColdReelReport.setSlaveErpPlanColdreductionstrip(slaveErpPlanColdreductionstrip);
+            LambdaQueryWrapper<ErpPlanColdreductionstrip> queryWrapper2 = new LambdaQueryWrapper<>();
+            queryWrapper2.eq(ErpPlanColdreductionstrip::getColdreductionstripNum, lmdpQcColdInspect.getPlanNum());
+            ErpPlanColdreductionstrip erpPlanColdreductionstrip =  erpPlanColdreductionstripMapper.selectOne(queryWrapper2);
+            qcColdReelReport.setErpPlanColdreductionstrip(erpPlanColdreductionstrip);
         }
         return page;
     }

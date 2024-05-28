@@ -222,6 +222,19 @@ public class LmdpQcColdReelReport extends BaseEntity implements Serializable {
     private BigDecimal weighingConvexity;
 
     /**
+     * 厚差判定
+     */
+    @TableField(value = "thickness_diff")
+    private String thicknessDiff;
+
+    /**
+     * 中凸度判定
+     */
+    @TableField(value = "central_crown")
+    private String centralCrown;
+
+
+    /**
      * 板形质量备注
      */
     @TableField(value = "shape_qc_remark")
@@ -285,13 +298,16 @@ public class LmdpQcColdReelReport extends BaseEntity implements Serializable {
      * 计划表
      */
     @TableField(exist = false)
-    private SlaveErpPlanColdreductionstrip slaveErpPlanColdreductionstrip;
+    private ErpPlanColdreductionstrip erpPlanColdreductionstrip;
 
     /**
      * 巡检表
      */
     @TableField(exist = false)
     private LmdpQcColdInspect lmdpQcColdInspect;
+
+    @TableField(exist = false)
+    private LmdpQcColdMechanicsReport lmdpQcColdMechanicsReport;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
