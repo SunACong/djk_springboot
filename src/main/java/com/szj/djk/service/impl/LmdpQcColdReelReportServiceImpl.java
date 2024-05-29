@@ -9,7 +9,6 @@ import com.szj.djk.entity.LmdpQcColdInspect;
 import com.szj.djk.entity.LmdpQcColdReelReport;
 import com.szj.djk.mapper.ErpPlanColdreductionstripMapper;
 import com.szj.djk.mapper.LmdpQcColdInspectMapper;
-import com.szj.djk.mapper.LmdpQcColdMechanicsReportMapper;
 import com.szj.djk.mapper.LmdpQcColdReelReportMapper;
 import com.szj.djk.service.LmdpQcColdReelReportService;
 import lombok.extern.slf4j.Slf4j;
@@ -41,13 +40,12 @@ public class LmdpQcColdReelReportServiceImpl extends ServiceImpl<LmdpQcColdReelR
     private LmdpQcColdInspectMapper lmdpQcColdInspectMapper;
     @Resource
     private ErpPlanColdreductionstripMapper erpPlanColdreductionstripMapper;
-    @Resource
-    private LmdpQcColdMechanicsReportMapper lmdpQcColdMechanicsReportMapper;
 
     @Override
     @DS("slave")
     public Page<LmdpQcColdReelReport> pageList(Page<LmdpQcColdReelReport> pageInfo, LmdpQcColdReelReport lmdpQcColdReelReport) {
 
+        // -----------------------查询冷轧质检报告
         LambdaQueryWrapper<LmdpQcColdReelReport> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.like(lmdpQcColdReelReport.getBatchNum() != null, LmdpQcColdReelReport::getBatchNum, lmdpQcColdReelReport.getBatchNum())
                 .between(lmdpQcColdReelReport.getStartDateTime() != null && lmdpQcColdReelReport.getEndDateTime() != null, LmdpQcColdReelReport::getReportTime, lmdpQcColdReelReport.getStartDateTime(), lmdpQcColdReelReport.getEndDateTime())
@@ -56,12 +54,15 @@ public class LmdpQcColdReelReportServiceImpl extends ServiceImpl<LmdpQcColdReelR
 
         List<LmdpQcColdReelReport> qcColdReelReports = page.getRecords();
 
+        // ---------循环遍历查询 冷轧计划 & 查询冷轧巡检 塞进返回的对象中
         for (LmdpQcColdReelReport qcColdReelReport : qcColdReelReports) {
 
             assessColdRolledCoilQuality(qcColdReelReport);
 
+            // ----------------将判定指标的字典转换为文字形式
             convertDbFieldToText(qcColdReelReport);
 
+            // ---------------------------查询冷轧巡检表
             LambdaQueryWrapper<LmdpQcColdInspect> queryWrapper1 = new LambdaQueryWrapper<>();
             queryWrapper1.eq(LmdpQcColdInspect::getBatchNum, qcColdReelReport.getBatchNum());
             LmdpQcColdInspect lmdpQcColdInspect = lmdpQcColdInspectMapper.selectOne(queryWrapper1);
@@ -72,6 +73,7 @@ public class LmdpQcColdReelReportServiceImpl extends ServiceImpl<LmdpQcColdReelR
             }
             qcColdReelReport.setLmdpQcColdInspect(lmdpQcColdInspect);
 
+            // -------------------------------查询冷轧计划表
             LambdaQueryWrapper<ErpPlanColdreductionstrip> queryWrapper2 = new LambdaQueryWrapper<>();
             queryWrapper2.eq(ErpPlanColdreductionstrip::getColdreductionstripNum, lmdpQcColdInspect.getPlanNum());
             ErpPlanColdreductionstrip erpPlanColdreductionstrip =  erpPlanColdreductionstripMapper.selectOne(queryWrapper2);
@@ -111,6 +113,9 @@ public class LmdpQcColdReelReportServiceImpl extends ServiceImpl<LmdpQcColdReelR
         lmdpQcColdReelReport.setMechanicalProperty(map.get(lmdpQcColdReelReport.getMechanicalProperty()));
     }
 
+    /**
+     * 评估冷轧卷质量
+     */
     private void assessColdRolledCoilQuality(LmdpQcColdReelReport lmdpQcColdReelReport) {
         HashMap<String, String> map = new HashMap<>();
         map.put("qualifieda", "合格A");
@@ -134,7 +139,8 @@ public class LmdpQcColdReelReportServiceImpl extends ServiceImpl<LmdpQcColdReelR
     }
 
     /**
-     * 根据五个方面的质量检查结果来判断冷卷的质量等级。
+     * 无法根据综合判定和判定结果时执行该方法
+     * 仅根据五个方面的质量检查结果来判断冷卷的质量等级。
      *
      * @param lmdpQcColdReelReport 包含五个质量检查方面（形状、表面、尺寸偏差、机械性能、表面）的报告对象。
      * @return 返回冷卷的质量等级，可能的返回值包括："合格A"、"待确定"、"合格B"、"改制"。
