@@ -38,7 +38,9 @@ public class LmdpCastProduceController{
     @GetMapping("list")
     public R<List<LmdpCastProduce>> list(LmdpCastProduce lmdpCastProduce){
         LambdaQueryWrapper<LmdpCastProduce> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.setEntity(lmdpCastProduce);
+        queryWrapper.setEntity(lmdpCastProduce)
+                .orderByDesc(LmdpCastProduce::getCreateTime)
+                .last("LIMIT 10");
         List<LmdpCastProduce> list = lmdpCastProduceService.list(queryWrapper);
         return R.success(list);
     }

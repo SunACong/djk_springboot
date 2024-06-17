@@ -37,7 +37,9 @@ public class LmdpCastSmeltHoldController
     @GetMapping("list")
     public R<List<LmdpCastSmeltHold>> list(LmdpCastSmeltHold lmdpCastSmeltHold){
         LambdaQueryWrapper<LmdpCastSmeltHold> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.setEntity(lmdpCastSmeltHold);
+        queryWrapper.setEntity(lmdpCastSmeltHold)
+                .orderByDesc(LmdpCastSmeltHold::getCreateTime)
+                .last("LIMIT 10");
         List<LmdpCastSmeltHold> list = lmdpCastSmeltHoldService.list(queryWrapper);
         return R.success(list);
     }

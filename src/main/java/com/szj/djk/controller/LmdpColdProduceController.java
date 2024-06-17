@@ -31,7 +31,9 @@ public class LmdpColdProduceController
     @GetMapping("list")
     public R<List<LmdpColdProduce>> list(LmdpColdProduce lmdpColdProduce){
         LambdaQueryWrapper<LmdpColdProduce> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.setEntity(lmdpColdProduce);
+        queryWrapper.setEntity(lmdpColdProduce)
+                .orderByDesc(LmdpColdProduce::getCreateTime)
+                .last("LIMIT 10");
         List<LmdpColdProduce> list = lmdpColdProduceService.list(queryWrapper);
         return R.success(list);
     }
