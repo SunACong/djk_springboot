@@ -47,7 +47,6 @@ public class OneCastrollController {
         return  R.success(rollingMachines);
     }
 
-
     /**
      * 查询铸轧机最新数据
      */
